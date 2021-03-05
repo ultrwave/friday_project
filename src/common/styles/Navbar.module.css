@@ -1,0 +1,12 @@
+.navbar {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 40px;
+    margin: 5px auto;
+    background-color: wheat;
+}
+
+.navbarItem {
+
+}

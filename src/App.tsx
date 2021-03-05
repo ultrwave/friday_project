@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import style from './App.module.css';
+import {HashRouter, Route} from 'react-router-dom';
+import Login from './content/Login';
+import Password from './content/Password';
+import Profile from './content/Profile';
+import Recover from './content/Recover';
+import Registration from './content/Registration';
+import {Navbar} from './common/Navbar';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <HashRouter>
+            <div className="App">
+                <Navbar/>
+                <div className={style.content}>
+                    <Route path='/login' render={() => <Login/>}/>
+                    <Route path='/password' render={() => <Password/>}/>
+                    <Route path='/profile' render={() => <Profile/>}/>
+                    <Route path='/recover' render={() => <Recover/>}/>
+                    <Route path='/registration' render={() => <Registration/>}/>
+                </div>
+            </div>
+        </HashRouter>
+    );
 }
 
 export default App;

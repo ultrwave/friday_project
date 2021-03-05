@@ -1,0 +1,14 @@
+.App {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    width: 50%;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: darkgray;
+}
