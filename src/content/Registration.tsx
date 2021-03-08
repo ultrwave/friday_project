@@ -8,21 +8,45 @@ type RegistrationPropsType = {
     error?: string
 }
 
+type StateType = {
+    email: string
+    password1: string
+    password2: string
+}
+const initialState: StateType = {
+    email:"",
+    password1: "",
+    password2: ""
+}
+
 function Registration() {
-    const [text, setText] = useState<string>("");
-    const error = text ? "" : "Field can't be empty";
+    const [state, setState] = useState<StateType>( initialState );
+    const emailError = state.email ? "" : "Field can't be empty";
+
+    const pw1Error = state.password1 ? "" : "Field can't be empty";
+
+    const pw2Error = state.password2 ? "" : "Field can't be empty";
 
     const showAlert = () => {
-        if (error) {
+        if (emailError) {
             alert("Введите текст");
         } else {
-            alert(text); // если нет ошибки показать текст
+            alert(`${state.email}\n${state.password1}\n${state.password2}\n`); // если нет ошибки показать текст
         }
     };
 
-    const [checked, setChecked] = useState<boolean>(false);
-    // const testOnChange = (e: ChangeEvent<HTMLInputElement>) =>
-    //     setChecked(e.currentTarget.checked);
+    const handleEmail = (val:any) => {
+        //alert(val)
+        setState({...state, email: val})
+    }
+    const handlePw1 = (val:any) => {
+        //alert(val)
+        setState({...state, password1: val})
+    }
+    const handlePw2 = (val:any) => {
+       // alert(val)
+        setState({...state, password2: val})
+    }
 
 
 
@@ -34,23 +58,35 @@ function Registration() {
             </div>
             <div>
                 <SuperInputText
-                    value={text}
-                    onChangeText={setText}
+                    value={state.email}
+                    onChangeText={handleEmail}
                     onEnter={showAlert}
-                    error={error}
-                    className={s.green} // проверьте, рабоет ли смешивание классов
+                    error={emailError}
+                    className={s.green}
                     />
+                <SuperInputText
+                    value={state.password1}
+                    onChangeText={handlePw1}
+                    onEnter={showAlert}
+                    error={pw1Error}
+                    className={s.green}
+                />
+                <SuperInputText
+                    value={state.password2}
+                    onChangeText={handlePw2}
+                    onEnter={showAlert}
+                    error={pw2Error}
+                    className={s.green}
+                />
 
                 <SuperButton
-                    red={text===''} // пропсу с булевым значением не обязательно указывать true
+                    red={false} // пропсу с булевым значением не обязательно указывать true
                     onClick={showAlert}
                 >
                     Button {/*// название кнопки попадёт в children*/}
                 </SuperButton>
 
-                <SuperCheckbox checked={checked} onChangeChecked={setChecked}>
-                    CheckboxText {/*// этот текст попадёт в children*/}
-                </SuperCheckbox>
+
             </div>
         </>
     )

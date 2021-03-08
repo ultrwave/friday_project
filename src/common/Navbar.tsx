@@ -10,6 +10,7 @@ export function Navbar() {
             <NavbarItem to='/password' title='Password'/>
             <NavbarItem to='/recover' title='Recover'/>
             <NavbarItem to='/registration' title='Registration'/>
+            <NavbarItem to='/demo' title='Demo'/>
         </nav>
     )
 }
