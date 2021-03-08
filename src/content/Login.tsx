@@ -3,12 +3,16 @@ import style from './styles/Login.module.css'
 import SuperInputText from '../common/SuperInputText/SuperInputText';
 import SuperCheckbox from '../common/SuperCheckbox/SuperCheckbox';
 import SuperButton from '../common/SuperButton/SuperButton';
+import { NavLink } from 'react-router-dom';
 
 type LoginPropsType = {
     error?: string
 }
 
 function Login(props: any) {
+
+
+
 
     return (
         <div className={style.form}>
@@ -23,9 +27,9 @@ function Login(props: any) {
                 type='password'
             />
             <div>
-                <span>Forgot password?</span>
+                <NavLink to={'/recover'}><span>Forgot password?</span></NavLink>
             </div>
-            <div>
+            <div className={style.rememberMe}>
                 <SuperCheckbox/>
                 <span>Remember me</span>
             </div>
@@ -33,7 +37,7 @@ function Login(props: any) {
                 <SuperButton>Sign in</SuperButton>
             </div>
             <div>
-                <span>Registration</span>
+                <NavLink to={'/registration'}><span>Registration</span></NavLink>
             </div>
         </div>
     )

@@ -7,7 +7,16 @@
 }
 
 .form * {
-    margin: 5px;
+    margin: 5px 0;
+}
+
+.rememberMe {
+    display: flex;
+    align-items: baseline;
+}
+
+.rememberMe span {
+    margin-left: 4px;
 }
 
 .textInput {
