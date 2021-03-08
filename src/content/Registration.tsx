@@ -4,6 +4,10 @@ import SuperInputText from "../common/SuperInputText/SuperInputText";
 import SuperCheckbox from "../common/SuperCheckbox/SuperCheckbox";
 import s from './styles/Registration.module.css'
 
+type RegistrationPropsType = {
+    error?: string
+}
+
 function Registration() {
     const [text, setText] = useState<string>("");
     const error = text ? "" : "Field can't be empty";
@@ -24,6 +28,7 @@ function Registration() {
 
     return (
         <>
+
             <div>
                 Registration
             </div>
