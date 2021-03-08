@@ -1,15 +1,19 @@
-type PageStateType = {}
+type PageStateType = {
+    isLoggedIn: boolean
+}
 
-const initialState: PageStateType = {}
+const initialState: PageStateType = {
+    isLoggedIn: false
+}
 
 type ActionTypes =
-    | ReturnType<typeof someAC>
+    | ReturnType<typeof logInAC>
 
 export const loginReducer = (state: PageStateType = initialState, action: ActionTypes): PageStateType => {
 
     switch (action.type) {
 
-        case 'SOME-ACTION':
+        case 'LOG-IN':
             return {
                 ...state,
             }
@@ -20,9 +24,19 @@ export const loginReducer = (state: PageStateType = initialState, action: Action
 }
 
 
-const SOME_ACTION = 'SOME-ACTION'
+const LOG_IN = 'LOG-IN'
 
-const someAC = () => ({
-        type: SOME_ACTION
+const logInAC = (login: string, password: string, rememberMe: boolean) => ({
+        type: LOG_IN,
+        login, password, rememberMe
     } as const
 )
+
+// const SET_AUTH = 'LOG-IN'
+//
+// const logInAC = (login: string, password: string, rememberMe: boolean) => ({
+//         type: LOG_IN,
+//         login, password, rememberMe
+//     } as const
+// )
+
