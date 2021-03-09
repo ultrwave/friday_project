@@ -4,71 +4,96 @@ import SuperInputText from '../common/SuperInputText/SuperInputText';
 import SuperCheckbox from '../common/SuperCheckbox/SuperCheckbox';
 import SuperButton from '../common/SuperButton/SuperButton';
 import {NavLink} from 'react-router-dom';
+import SuperInputPassword from '../common/SuperInputPassword/SuperInputPassword';
 
-type LoginPropsType = {
-    error?: string
+type LoginFormStateType = {
+    email: InputStateType
+    password: InputStateType
+    rememberMe: boolean
+    globalFormError: string
 }
 
-function Login(props: any) {
+type InputStateType = {
+    value: string
+    error: string
+    touched: boolean
+}
+
+function Login() {
 
     console.log('Login called')
-    let [error, setError] = useState({email: '', password: ''})
-    let [email, setEmail] = useState('')
-    let [password, setPassword] = useState('')
-    let [rememberMe, setRM] = useState(false)
+    let [state, setState] = useState<LoginFormStateType>(
+        {
+            email: {value: '', error: '', touched: false},
+            password: {value: '', error: '', touched: false},
+            rememberMe: false,
+            globalFormError: ''
+        })
 
-    const validateEmail = () => {
-        const valid = (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email))
-        setError({...error, email: valid ? '' : 'Invalid email format'})
+    const validate = (value: string, type: 'email' | 'password'): string => {
+        switch (type) {
+            case 'email':
+                return (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) ? '' : 'Invalid email'
+            case 'password':
+                return /^[a-zA-Z0-9!@#$%^&*]{6,16}$/i.test(value) ? '' : 'Invalid password'
+            default:
+                return ''
+        }
     }
 
-    const validatePass = () => {
-        // const valid = (/^[a-zA-Z0-9!@#$%^&*]{6,16}$/i.test(password))
-        const valid = password.length > 2
-        setError({...error, password: valid ? '' : 'Invalid password'})
+    const onChangeHandler = (field: 'email' | 'password') => (value: string) => {
+        setState({
+            ...state, [field]:
+                {
+                    ...state[field],
+                    value: value.trim(),
+                    error: state[field].touched ? validate(value, field) : ''
+                }
+        })
     }
 
-    const emailOnChangeHandler = (value: string) => {
-        setEmail(value)
-        validateEmail()
+    const onBlurHandler = (field: 'email' | 'password') => (e: React.FocusEvent<HTMLInputElement>) => {
+        setState({
+            ...state, [field]:
+                {
+                    ...state[field],
+                    error: state[field].value ? validate(e.target.value, field) : 'Required field',
+                    touched: true
+                }
+        })
     }
 
-    const passwordOnChangeHandler = (value: string) => {
-        setPassword(value)
-        validatePass()
+    const checkBoxHandler = (rememberMe: boolean) => {
+        setState({...state, rememberMe}
+        )
     }
 
-    console.log(`email: ${email}; password: ${password}; errorE: ${error.email}; errorP: ${error.password}`)
+    const disableSubmit = !!(state.email.error || state.password.error || state.globalFormError)
+
+    console.log(state)
 
     return (
         <form className={style.form}>
             <h1>Sign in</h1>
             <SuperInputText
-                className={style.login}
-                value={email}
-                onChangeText={emailOnChangeHandler}
-                error={error.email}
+                value={state.email.value}
+                error={state.email.error}
+                onChangeText={onChangeHandler('email')}
+                onBlur={onBlurHandler('email')}
             />
-            <SuperInputText
-                className={style.pass}
-                value={password}
-                onChangeText={passwordOnChangeHandler}
-                type='password'
-                error={error.password}
+            <SuperInputPassword
+                value={state.password.value}
+                error={state.password.error}
+                onChangeText={onChangeHandler('password')}
+                onBlur={onBlurHandler('password')}
             />
-            <div>
-                <NavLink to={'/recover'}><span>Forgot password?</span></NavLink>
-            </div>
+            <NavLink to={'/recover'}><span>Forgot password?</span></NavLink>
             <div className={style.rememberMe}>
-                <SuperCheckbox/>
+                <SuperCheckbox onChangeChecked={checkBoxHandler} checked={state.rememberMe}/>
                 <span>Remember me</span>
             </div>
-            <div>
-                <SuperButton disabled={true}>Sign in</SuperButton>
-            </div>
-            <div>
-                <NavLink to={'/registration'}><span>Registration</span></NavLink>
-            </div>
+            <SuperButton disabled={disableSubmit}>Sign in</SuperButton>
+            <NavLink to={'/registration'}><span>Registration</span></NavLink>
         </form>
     )
 }
