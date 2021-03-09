@@ -3,6 +3,7 @@ import SuperButton from "../common/SuperButton/SuperButton";
 import SuperInputText from "../common/SuperInputText/SuperInputText";
 import SuperCheckbox from "../common/SuperCheckbox/SuperCheckbox";
 import s from './styles/Registration.module.css'
+import {LoginAPI} from "../registrationAPI";
 
 type RegistrationPropsType = {
     error?: string
@@ -31,19 +32,23 @@ function Registration() {
         if (emailError) {
             alert("Введите текст");
         } else {
-            alert(`${state.email}\n${state.password1}\n${state.password2}\n`); // если нет ошибки показать текст
+            //alert(`${state.email}\n${state.password1}\n${state.password2}\n`); // если нет ошибки показать текст
+            LoginAPI.registerUser(state.email,state.password1)
+                .then((res:any)=>{
+                    console.log(res)
+                })
         }
     };
 
-    const handleEmail = (val:any) => {
+    const handleEmail = (val:string) => {
         //alert(val)
         setState({...state, email: val})
     }
-    const handlePw1 = (val:any) => {
+    const handlePw1 = (val:string) => {
         //alert(val)
         setState({...state, password1: val})
     }
-    const handlePw2 = (val:any) => {
+    const handlePw2 = (val:string) => {
        // alert(val)
         setState({...state, password2: val})
     }
