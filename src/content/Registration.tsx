@@ -2,8 +2,9 @@ import React, { useState} from 'react';
 import SuperButton from "../common/SuperButton/SuperButton";
 import SuperInputText from "../common/SuperInputText/SuperInputText";
 import SuperCheckbox from "../common/SuperCheckbox/SuperCheckbox";
-import s from './styles/Registration.module.css'
+import style from './styles/Registration.module.css'
 import {LoginAPI} from "../registrationAPI";
+import { Redirect } from 'react-router-dom';
 
 type RegistrationPropsType = {
     error?: string
@@ -13,11 +14,13 @@ type StateType = {
     email: string
     password1: string
     password2: string
+    errorResponse: string
 }
 const initialState: StateType = {
-    email:"",
+    email: "",
     password1: "",
-    password2: ""
+    password2: "",
+    errorResponse: ""
 }
 
 function Registration() {
@@ -28,72 +31,83 @@ function Registration() {
 
     const pw2Error = state.password2 ? "" : "Field can't be empty";
 
-    const showAlert = () => {
+    const handleSignUp = () => {
         if (emailError) {
             alert("Введите текст");
         } else {
-            //alert(`${state.email}\n${state.password1}\n${state.password2}\n`); // если нет ошибки показать текст
             LoginAPI.registerUser(state.email,state.password1)
                 .then((res:any)=>{
-                    console.log(res)
+                    console.log(`User ${res.data.addedUser.email} successfully signed up`)
+                    //setState({...state, errorResponse: error.response.data.error})
+                    return <Redirect to={'/friday_project#/login/'}/>
+
+                })
+                .catch((error)=>{
+                    setState({...state, errorResponse: error.response.data.error})
                 })
         }
     };
 
     const handleEmail = (val:string) => {
         //alert(val)
-        setState({...state, email: val})
+        setState({...state, email: val, errorResponse:""})
     }
     const handlePw1 = (val:string) => {
         //alert(val)
-        setState({...state, password1: val})
+        setState({...state, password1: val, errorResponse:""})
     }
     const handlePw2 = (val:string) => {
        // alert(val)
-        setState({...state, password2: val})
+        setState({...state, password2: val, errorResponse:""})
     }
 
 
 
     return (
-        <>
+        <div className={style.form}>
 
-            <div>
+            <div >
                 Registration
             </div>
-            <div>
+            <div className={style.registrationErrorMessage}>
+                {state.errorResponse}
+            </div>
+            <div >
                 <SuperInputText
+                    title={'Email'}
                     value={state.email}
                     onChangeText={handleEmail}
-                    onEnter={showAlert}
+                    onEnter={handleSignUp}
                     error={emailError}
-                    className={s.green}
+                    className={style.green}
                     />
                 <SuperInputText
+                    title={'Password'}
                     value={state.password1}
                     onChangeText={handlePw1}
-                    onEnter={showAlert}
+                    onEnter={handleSignUp}
                     error={pw1Error}
-                    className={s.green}
+                    className={style.green}
                 />
                 <SuperInputText
+                    title={'Password confirmation'}
                     value={state.password2}
                     onChangeText={handlePw2}
-                    onEnter={showAlert}
+                    onEnter={handleSignUp}
                     error={pw2Error}
-                    className={s.green}
+                    className={style.green}
                 />
 
                 <SuperButton
                     red={false} // пропсу с булевым значением не обязательно указывать true
-                    onClick={showAlert}
+                    onClick={handleSignUp}
                 >
-                    Button {/*// название кнопки попадёт в children*/}
+                    Sign up {/*// название кнопки попадёт в children*/}
                 </SuperButton>
 
 
             </div>
-        </>
+        </div>
     )
 }
 

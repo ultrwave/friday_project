@@ -1,3 +1,24 @@
-.green {
-    border-bottom: 5px solid forestgreen;
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.form * {
+    margin: 5px;
+}
+
+/*.green {*/
+/*    border-bottom: 5px solid forestgreen;*/
+/*}*/
+
+.registrationErrorMessage {
+    height: 1em;
+    color: darkred;
+    font-size: 0.8em;
+    text-align: left;
+    margin: 10px 5px 0 5px;
+    /*width: 100%*/
 }
