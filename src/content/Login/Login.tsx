@@ -36,12 +36,14 @@ function Login({formState, onChangeHandler, onBlurHandler, checkBoxHandler, onSu
                 error={email.error}
                 onChangeText={onChangeHandler('email')}
                 onBlur={onBlurHandler('email')}
+                placeholder={'Email'}
             />
             <SuperInputPassword
                 value={password.value}
                 error={password.error}
                 onChangeText={onChangeHandler('password')}
                 onBlur={onBlurHandler('password')}
+                placeholder={'Password'}
             />
             <NavLink to={'/recover'}><span>Forgot password?</span></NavLink>
             <div className={style.rememberMe}>

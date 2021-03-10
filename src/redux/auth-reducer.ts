@@ -1,5 +1,5 @@
 import store from './store';
-import {loginAPI} from '../loginAPI';
+import {authAPI} from '../authAPI';
 
 type PageStateType = {
     isLoggedIn: boolean
@@ -65,7 +65,7 @@ const setProfileAC = (profile: AuthProfileType) => ({
 // Thunks
 
 export const logInTC = (login: string, password: string, rememberMe: boolean) => (dispatch: DispatchType) => {
-    loginAPI.login(login, password, rememberMe)
+    authAPI.login(login, password, rememberMe)
         .then((response) => {
             dispatch(setProfileAC(response as unknown as AuthProfileType)) // todo - wtf ?!
             dispatch(setIsLoggedInAC(true))

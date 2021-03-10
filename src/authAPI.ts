@@ -8,9 +8,13 @@ const instance = axios.create({
     }
 })
 
-export const loginAPI = {
+export const authAPI = {
     login(email: string, password: string, rememberMe: boolean = false) {
         return instance.post('/auth/login', {email, password, rememberMe})
+            .then(response => response)
+    },
+    forgot(email: string, from: string, message: string) {
+        return instance.post('/auth/forgot', {email, from, message})
             .then(response => response)
     },
 }

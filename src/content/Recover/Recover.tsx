@@ -3,22 +3,19 @@ import style from '../styles/Recover.module.css'
 import SuperInputText from '../../common/SuperInputText/SuperInputText';
 import {NavLink} from 'react-router-dom';
 import SuperButton from '../../common/SuperButton/SuperButton';
-import {LoginFormStateType} from '../Login/LoginContainer';
-import {ValidatorFieldType} from '../../common/inputValidator';
 import {RecoverFormStateType} from './RecoverContainer';
 
 type RecoverPropsType = {
+    timeTillNextLink: string
     formState: RecoverFormStateType
     onChangeHandler(value: string): void
     onBlurHandler(e: React.FocusEvent<HTMLInputElement>): void
     onSubmitHandler(email: string): void
 }
 
-function Recover({formState, onChangeHandler, onBlurHandler, onSubmitHandler}: RecoverPropsType) {
+function Recover({formState, onChangeHandler, onBlurHandler, onSubmitHandler, timeTillNextLink}: RecoverPropsType) {
 
     const submitForm = () => onSubmitHandler(formState.value)
-
-    const disableSubmit = false
 
     return (
         <form className={style.form}>
@@ -28,9 +25,11 @@ function Recover({formState, onChangeHandler, onBlurHandler, onSubmitHandler}: R
                 error={formState.error}
                 onChangeText={onChangeHandler}
                 onBlur={onBlurHandler}
+                placeholder={'Email'}
             />
-            <SuperButton disabled={disableSubmit} onClick={submitForm}>Send</SuperButton>
-            <NavLink to={'/login'}><span>Login</span></NavLink>
+            <SuperButton disabled={!!formState.error} onClick={submitForm}>Send</SuperButton>
+            {timeTillNextLink}
+            <NavLink to={'/login'}><span>Login page</span></NavLink>
         </form>
     )
 }
