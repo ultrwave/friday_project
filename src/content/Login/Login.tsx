@@ -13,7 +13,7 @@ type LoginPropsType = {
     onChangeHandler(field: ValidatorFieldType): (value: string) => void
     onBlurHandler(field: ValidatorFieldType): (e: React.FocusEvent<HTMLInputElement>) => void
     checkBoxHandler(rememberMe: boolean): void
-    onSubmitHandler(): void
+    onSubmitHandler(email: string, password: string, rememberMe: boolean): void
 }
 
 function Login({formState, onChangeHandler, onBlurHandler, checkBoxHandler, onSubmitHandler}:LoginPropsType) {
@@ -23,6 +23,8 @@ function Login({formState, onChangeHandler, onBlurHandler, checkBoxHandler, onSu
     const email = formState.email
     const password = formState.password
     const rememberMe = formState.rememberMe
+
+    const submitForm = () => {onSubmitHandler(email.value, password.value, rememberMe)}
 
     const disableSubmit = !!(email.error || password.error || formState.globalFormError)
 
@@ -46,7 +48,7 @@ function Login({formState, onChangeHandler, onBlurHandler, checkBoxHandler, onSu
                 <SuperCheckbox onChangeChecked={checkBoxHandler} checked={rememberMe}/>
                 <span>Remember me</span>
             </div>
-            <SuperButton disabled={disableSubmit}>Sign in</SuperButton>
+            <SuperButton disabled={disableSubmit} onClick={submitForm}>Sign in</SuperButton>
             <NavLink to={'/registration'}><span>Registration</span></NavLink>
         </form>
     )

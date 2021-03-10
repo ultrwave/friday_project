@@ -7,10 +7,13 @@ import Recover from './content/Recover';
 import Registration from './content/Registration';
 import {Navbar} from './common/Navbar';
 import LoginContainer from './content/Login/LoginContainer';
+import {Provider} from 'react-redux';
+import store from './redux/store';
 
 function App() {
     return (
         <HashRouter>
+            <Provider store={store}>
             <div className="App">
                 <Navbar/>
                 <div className={style.content}>
@@ -21,6 +24,7 @@ function App() {
                     <Route path='/registration' render={() => <Registration/>}/>
                 </div>
             </div>
+            </Provider>
         </HashRouter>
     );
 }
