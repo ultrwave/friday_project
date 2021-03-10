@@ -13,4 +13,7 @@ export const loginAPI = {
         return instance.post('/auth/login', {email, password, rememberMe})
             .then(response => response)
     },
+    registerUser(email:string,password:string) {
+        return  instance.post('/auth/register', {'email':email,'password':password})
+    },
 }
