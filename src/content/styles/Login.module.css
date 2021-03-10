@@ -7,13 +7,16 @@
 }
 
 .form * {
-    margin: 5px;
+    margin: 4px 0;
 }
 
-.textInput {
-
+.rememberMe {
+    display: flex;
+    align-items: baseline;
 }
 
-.login {
-
+.rememberMe span {
+    margin-left: 4px;
 }
+
+

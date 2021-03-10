@@ -1,13 +1,13 @@
 import { applyMiddleware, combineReducers, createStore } from "redux"
 import thunkMiddleware from 'redux-thunk';
-import {loginReducer} from './login-reducer';
+import {authReducer} from './auth-reducer';
 import {passwordReducer} from './password-reducer';
 import {profileReducer} from './profile-reducer';
 import {recoverReducer} from './recover-reducer';
 import {registrationReducer} from './registration-reducer';
 
 export const rootReducer = combineReducers({
-    pageLogin: loginReducer,
+    auth: authReducer,
     pagePassword: passwordReducer,
     pageProfile: profileReducer,
     pageRecover: recoverReducer,
@@ -15,6 +15,8 @@ export const rootReducer = combineReducers({
 })
 
 let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
+
+export type RootStateType = ReturnType<typeof rootReducer>
 
 // @ts-ignore
 window.store = store
