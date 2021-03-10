@@ -1,12 +1,36 @@
+.inputItem{
+  margin: 0;
+}
 .superInput {
-  border: 2px solid black;
+  border: 1px solid black;
+  margin-bottom: 0 !important;
+  margin-left: 0 !important;
 }
 
 .errorInput {
   border: 1px solid red;
   background: pink;
+  margin-bottom: 0 !important;
+  margin-left: 0 !important;
+
 }
 
 .error {
-  color: red;
+  color: darkred;
+  font-size: 0.7em;
+  margin: 0 !important;
+}
+
+.inputErrorMessageArea{
+  margin-top: 0 !important;
+  line-height: 0.9em;
+  height: 1em;
+}
+
+.title {
+  color: black;
+  font-size: 0.8em;
+  /*margin-bottom: 0;*/
+  /*margin-left: 0;*/
+  margin: 8px 0 0 0 !important;
 }

@@ -14,6 +14,7 @@ export const registrationReducer = (state: PageStateType = initialState, action:
                 ...state,
             }
 
+
         default:
             return state
     }

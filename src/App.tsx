@@ -7,6 +7,7 @@ import Profile from './content/Profile';
 import Recover from './content/Recover';
 import Registration from './content/Registration';
 import {Navbar} from './common/Navbar';
+import SuperInputsDemo from "./content/SuperInputsDemo";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                     <Route path='/profile' render={() => <Profile/>}/>
                     <Route path='/recover' render={() => <Recover/>}/>
                     <Route path='/registration' render={() => <Registration/>}/>
+                    <Route path='/demo' render={() => <SuperInputsDemo/>}/>
                 </div>
             </div>
         </HashRouter>
