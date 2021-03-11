@@ -1,21 +1,35 @@
-import React from 'react';
+import React, {useState} from 'react';
 import style from '../styles/Recover.module.css'
 import SuperInputText from '../../common/SuperInputText/SuperInputText';
 import {NavLink} from 'react-router-dom';
 import SuperButton from '../../common/SuperButton/SuperButton';
 import {RecoverFormStateType} from './RecoverContainer';
+import RecoverTimer from './RecoverTimer';
 
 type RecoverPropsType = {
-    timeTillNextLink: string
     formState: RecoverFormStateType
+    getTime(): number
     onChangeHandler(value: string): void
     onBlurHandler(e: React.FocusEvent<HTMLInputElement>): void
     onSubmitHandler(email: string): void
 }
 
-function Recover({formState, onChangeHandler, onBlurHandler, onSubmitHandler, timeTillNextLink}: RecoverPropsType) {
+const Recover = ({
+                     formState,
+                     onChangeHandler,
+                     onBlurHandler,
+                     onSubmitHandler,
+                     getTime
+                 }: RecoverPropsType) => {
 
-    const submitForm = () => onSubmitHandler(formState.value)
+    console.log('Recover called')
+
+    let [timerIsActive, showTimer] = useState(true)
+
+    const submitForm = () => {
+        onSubmitHandler(formState.value)
+        showTimer(true)
+    }
 
     return (
         <form className={style.form}>
@@ -27,8 +41,12 @@ function Recover({formState, onChangeHandler, onBlurHandler, onSubmitHandler, ti
                 onBlur={onBlurHandler}
                 placeholder={'Email'}
             />
-            <SuperButton disabled={!!formState.error} onClick={submitForm}>Send</SuperButton>
-            {timeTillNextLink}
+            <div className={style.timerContainer}>
+                {timerIsActive
+                    ? <RecoverTimer getTime={getTime} showTimer={showTimer}/>
+                    : <SuperButton disabled={!!formState.error} onClick={submitForm}>Send</SuperButton>
+                }
+            </div>
             <NavLink to={'/login'}><span>Login page</span></NavLink>
         </form>
     )

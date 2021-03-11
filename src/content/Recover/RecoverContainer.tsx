@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import inputValidator from '../../common/inputValidator';
 import Recover from './Recover';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
-import {recoverPasswordTC} from '../../redux/recover-reducer';
+import {recoverPasswordTC, setRecoverLinkTimestampAC} from '../../redux/recover-reducer';
 
 export type RecoverFormStateType = {
     value: string
@@ -11,17 +11,23 @@ export type RecoverFormStateType = {
     touched: boolean
 }
 
-
+!localStorage.timerData && localStorage.setItem('timerData', '0')
 
 function RecoverContainer() {
-    console.log('Recover called')
+    console.log('RecoverContainer called')
+
     const dispatch = useDispatch()
     const isLoggedIn = useSelector((state: RootStateType): boolean => state.auth.isLoggedIn)
-    const lastLinkTime =
-        useSelector((state: RootStateType): number => state.pageRecover.lastLinkTimestamp)
-    let [formState, setFormState] = useState<RecoverFormStateType>(
-        {value: '', error: '', touched: false})
-    console.log(lastLinkTime)
+    let [formState, setFormState] =
+        useState<RecoverFormStateType>({value: '', error: '', touched: false})
+
+    // Timer
+
+    const timerValueMs = 10000
+    dispatch(setRecoverLinkTimestampAC(Number(localStorage.timerData)))
+    const getTime = () => (Number(localStorage.timerData) + timerValueMs - (new Date).valueOf())
+
+    // Handlers
 
     const onChangeHandler = (value: string) => {
         setFormState({
@@ -43,16 +49,7 @@ function RecoverContainer() {
         dispatch(recoverPasswordTC(email))
     }
 
-    let timeTillNextLink = (lastLinkTime + 60000 - (new Date()).getTime())
-    if (timeTillNextLink < 0) timeTillNextLink = 0
-
-    function msToTime(ms: number) {
-        let minutes = Math.floor(ms / 60000);
-        let seconds = ((ms % 60000) / 1000);
-        console.log(minutes, seconds)
-        return minutes + ":" + (seconds < 10 ? '0' : '') + Math.floor(seconds)
-    }
-
+    // Render
 
     return (
         isLoggedIn ?
@@ -60,7 +57,7 @@ function RecoverContainer() {
             :
             <Recover
                 formState={formState}
-                timeTillNextLink={msToTime(timeTillNextLink)}
+                getTime={getTime}
                 onChangeHandler={onChangeHandler}
                 onBlurHandler={onBlurHandler}
                 onSubmitHandler={onSubmitHandler}

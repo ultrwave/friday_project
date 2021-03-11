@@ -6,37 +6,32 @@ type PageStateType = {
 }
 
 const initialState: PageStateType = {
-    lastLinkTimestamp: 0
+    lastLinkTimestamp: 0,
 }
 
 type ActionTypes =
-    | ReturnType<typeof setRecoverLinkSentAC>
+    | ReturnType<typeof setRecoverLinkTimestampAC>
 
 export const recoverReducer = (state: PageStateType = initialState, action: ActionTypes): PageStateType => {
 
     switch (action.type) {
 
-        case 'SET-RECOVER-LINK-SENT':
-            console.log(state)
-            return {
-                ...state,
-                lastLinkTimestamp: action.time
-            }
+        case 'SET-RECOVER-LINK-TIMESTAMP':
+            state.lastLinkTimestamp = action.timeMs
+            return state
 
         default:
             return state
     }
 }
 
+const SET_RECOVER_LINK_TIMESTAMP = 'SET-RECOVER-LINK-TIMESTAMP'
 
-const SET_RECOVER_LINK_SENT = 'SET-RECOVER-LINK-SENT'
-
-const setRecoverLinkSentAC = (time: number) => ({
-        type: SET_RECOVER_LINK_SENT,
-        time
+export const setRecoverLinkTimestampAC = (timeMs: number) => ({
+        type: SET_RECOVER_LINK_TIMESTAMP,
+        timeMs
     } as const
 )
-
 
 // Thunks
 // todo - url heroku
@@ -47,10 +42,12 @@ export const recoverPasswordTC = (email: string) => (dispatch: DispatchType) => 
          <a href='http://localhost:3000/#/set-new-password/$token$'>link</a></div>`
     authAPI.forgot(email, from, message)
         .then(response => {
-            dispatch(setRecoverLinkSentAC((new Date).valueOf()))
+            // dispatch(setRecoverLinkTimestampAC(localStorage.timerData = (new Date).valueOf()))
         })
         .catch(e => {
-            dispatch(setRecoverLinkSentAC((new Date).valueOf()))
             console.log('Recover Error', e)
+        })
+        .finally(() => {
+            dispatch(setRecoverLinkTimestampAC(localStorage.timerData = (new Date).valueOf()))
         })
 }

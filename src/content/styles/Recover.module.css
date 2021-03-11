@@ -9,3 +9,14 @@
 .form * {
     margin: 4px 0;
 }
+
+.timer {
+    color: darkgreen;
+}
+
+.timerContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
