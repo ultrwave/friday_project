@@ -7,6 +7,7 @@ import {NavLink} from 'react-router-dom';
 import SuperInputPassword from '../../common/SuperInputPassword/SuperInputPassword';
 import {LoginFormStateType} from './LoginContainer';
 import {ValidatorFieldType} from '../../common/inputValidator';
+import {Loader} from '../../common/loader/loader';
 
 type LoginPropsType = {
     formState: LoginFormStateType

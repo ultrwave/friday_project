@@ -1,9 +1,7 @@
 import React from 'react';
 import style from './App.module.css';
 import {HashRouter, Route} from 'react-router-dom';
-import Password from './content/Password';
 import Profile from './content/Profile';
-import Recover from './content/Recover/Recover';
 import Registration from './content/Registration';
 import {Navbar} from './common/Navbar';
 import SuperInputsDemo from './content/SuperInputsDemo';
