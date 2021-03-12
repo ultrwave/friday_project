@@ -7,8 +7,8 @@ import SuperInputPassword from '../../common/SuperInputPassword/SuperInputPasswo
 
 type RecoverPropsType = {
     formState: NewPasswordFormStateType
-    onChangeHandler(value: string): void
-    onBlurHandler(e: React.FocusEvent<HTMLInputElement>): void
+    onChangeHandler(field: 'password' | 'confirm'): (value: string) => void
+    onBlurHandler(field: 'password' | 'confirm'): (e: React.FocusEvent<HTMLInputElement>) => void
     onSubmitHandler(password: string): void
 }
 
@@ -22,20 +22,29 @@ const NewPassword = ({
     console.log('NewPassword called')
 
     const submitForm = () => {
-        onSubmitHandler(formState.value)
+        onSubmitHandler(formState.password.value)
     }
+
+    const formError = !!(formState.password.error || formState.confirm.error)
 
     return (
         <form className={style.form}>
             <h1>New password</h1>
             <SuperInputPassword
-                value={formState.value}
-                error={formState.error}
-                onChangeText={onChangeHandler}
-                onBlur={onBlurHandler}
+                value={formState.password.value}
+                error={formState.password.error}
+                onChangeText={onChangeHandler('password')}
+                onBlur={onBlurHandler('password')}
                 placeholder={'Enter new password'}
             />
-            <SuperButton disabled={!!formState.error} onClick={submitForm}>Send</SuperButton>
+            <SuperInputPassword
+                value={formState.confirm.value}
+                error={formState.confirm.error}
+                onChangeText={onChangeHandler('confirm')}
+                onBlur={onBlurHandler('confirm')}
+                placeholder={'Confirm'}
+            />
+            <SuperButton disabled={formError} onClick={submitForm}>Send</SuperButton>
             <NavLink to={'/login'}><span>Login page</span></NavLink>
         </form>
     )

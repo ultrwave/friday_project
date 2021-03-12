@@ -7,6 +7,11 @@ import {setNewPasswordTC} from '../../redux/auth-reducer';
 import {Redirect, useParams} from 'react-router-dom';
 
 export type NewPasswordFormStateType = {
+    password: InputType
+    confirm: InputType
+}
+
+type InputType = {
     value: string
     error: string
     touched: boolean
@@ -20,43 +25,57 @@ function NewPasswordContainer() {
     console.log('NewPasswordContainer called')
 
     const dispatch = useDispatch()
-    const isLoggedIn = useSelector((state: RootStateType):boolean => state.auth.isLoggedIn)
+    const isLoggedIn = useSelector((state: RootStateType): boolean => state.auth.isLoggedIn)
     const params: ParamsType = useParams()
     const token = params.token ? params.token : ''
 
     let [formState, setFormState] = useState<NewPasswordFormStateType>(
-        {value: '', error: '', touched: false})
+        {
+            password: {value: '', error: '', touched: false},
+            confirm: {value: '', error: '', touched: false}
+        })
 
-    const onChangeHandler = (value: string) => {
+    const onChangeHandler = (field: 'password' | 'confirm') => (value: string) => {
         setFormState({
-            ...formState,
-            value: value.trim(),
-            error: formState.touched ? inputValidator(value, 'password') : ''
+            ...formState, [field]:
+                {
+                    ...formState[field],
+                    value: value.trim(),
+                    error: formState[field].touched ? inputValidator(value, 'password') : ''
+                }
         })
     }
 
-    const onBlurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
+    const onBlurHandler = (field: 'password' | 'confirm') => (e: React.FocusEvent<HTMLInputElement>) => {
         setFormState({
-            ...formState,
-            error: formState.value ? inputValidator(e.target.value, 'password') : 'Required field',
-            touched: true
+            ...formState, [field]:
+                {
+                    ...formState[field],
+                    error: formState[field].value ?
+                        inputValidator(e.target.value, 'password') : 'Required field',
+                    touched: true
+                }
         })
     }
 
     const onSubmitHandler = (password: string) => {
-        dispatch(setNewPasswordTC(password, token))
+        if (formState.password.value !== formState.confirm.value) {
+            setFormState({...formState, confirm: {...formState.confirm, error: 'Passwords do not match'}})
+        } else {
+            dispatch(setNewPasswordTC(password, token))
+        }
     }
 
     return (
-        !isLoggedIn && !token
+        !(!isLoggedIn && !token) //todo
             ? <Redirect to={'/profile'}/>
             :
             <NewPassword
-            formState={formState}
-            onChangeHandler={onChangeHandler}
-            onBlurHandler={onBlurHandler}
-            onSubmitHandler={onSubmitHandler}
-        />
+                formState={formState}
+                onChangeHandler={onChangeHandler}
+                onBlurHandler={onBlurHandler}
+                onSubmitHandler={onSubmitHandler}
+            />
     )
 }
 
