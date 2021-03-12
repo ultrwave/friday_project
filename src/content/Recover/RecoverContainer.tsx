@@ -4,6 +4,7 @@ import Recover from './Recover';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
 import {recoverPasswordTC, setRecoverLinkTimestampAC} from '../../redux/recover-reducer';
+import {Redirect} from 'react-router-dom';
 
 export type RecoverFormStateType = {
     value: string
@@ -52,8 +53,8 @@ function RecoverContainer() {
     // Render
 
     return (
-        isLoggedIn ?
-            <h1>redirect to profile</h1>
+        !isLoggedIn
+            ? <Redirect to={'/login'}/>
             :
             <Recover
                 formState={formState}

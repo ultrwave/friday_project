@@ -11,6 +11,7 @@ import LoginContainer from './content/Login/LoginContainer';
 import {Provider} from 'react-redux';
 import store from './redux/store';
 import RecoverContainer from './content/Recover/RecoverContainer';
+import NewPasswordContainer from './content/NewPassword/NewPasswordContainer';
 
 function App() {
     return (
@@ -20,10 +21,10 @@ function App() {
                     <Navbar/>
                     <div className={style.content}>
                         <Route path='/login' render={() => <LoginContainer/>}/>
-                        <Route path='/password' render={() => <Password/>}/>
+                        <Route path='/registration' render={() => <Registration/>}/>
                         <Route path='/profile' render={() => <Profile/>}/>
                         <Route path='/recover' render={() => <RecoverContainer/>}/>
-                        <Route path='/registration' render={() => <Registration/>}/>
+                        <Route path='/password/:token?' render={() => <NewPasswordContainer/>}/>
                         <Route path='/demo' render={() => <SuperInputsDemo/>}/>
                     </div>
                 </div>

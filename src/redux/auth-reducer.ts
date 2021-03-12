@@ -86,4 +86,18 @@ export const logInTC = (login: string, password: string, rememberMe: boolean) =>
         .catch(e => console.log('Error: ', {...e}))
 }
 
+export const logOutTC = () => (dispatch: DispatchType) => {
+    authAPI.logout()
+        .then(response => {
+            dispatch(setIsLoggedInAC(false))
+        })
+        .catch(e => console.log('Error: ', {...e}))
+}
 
+export const setNewPasswordTC = (password: string, resetPasswordToken: string) => (dispatch: DispatchType) => {
+    authAPI.setNewPassword(password, resetPasswordToken)
+        .then(response => {
+            dispatch(setIsLoggedInAC(false))
+        })
+        .catch(e => console.log('Error: ', {...e}))
+}

@@ -17,7 +17,6 @@ type LoginPropsType = {
 }
 
 function Login({formState, onChangeHandler, onBlurHandler, checkBoxHandler, onSubmitHandler}:LoginPropsType) {
-
     console.log('Login called')
 
     const email = formState.email
