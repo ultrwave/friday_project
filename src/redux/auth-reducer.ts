@@ -65,11 +65,11 @@ const setProfileAC = (profile: AuthProfileType) => ({
 
 // Thunks
 
-export const setAuthTC = () => (dispatch: DispatchType) => { // todo
+export const setAuthTC = () => (dispatch: DispatchType) => {
     dispatch(setAppStatusAC('loading'))
     authAPI.me()
         .then((response) => {
-            dispatch(setProfileAC(response as unknown as AuthProfileType))
+            dispatch(setProfileAC(response))
             dispatch(setIsLoggedInAC(true))
         })
         .catch(e => {
@@ -83,7 +83,7 @@ export const logInTC = (login: string, password: string, rememberMe: boolean) =>
     dispatch(setAppStatusAC('loading'))
     authAPI.login(login, password, rememberMe)
         .then((response) => {
-            dispatch(setProfileAC(response as unknown as AuthProfileType)) // todo - wtf ?!
+            dispatch(setProfileAC(response))
             dispatch(setIsLoggedInAC(true))
         })
         .catch(e => console.log('Error: ', {...e}))

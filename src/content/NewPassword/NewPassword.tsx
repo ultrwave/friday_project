@@ -12,12 +12,7 @@ type RecoverPropsType = {
     onSubmitHandler(password: string): void
 }
 
-const NewPassword = ({
-                         formState,
-                         onChangeHandler,
-                         onBlurHandler,
-                         onSubmitHandler,
-                     }: RecoverPropsType) => {
+const NewPassword = ({formState, onChangeHandler, onBlurHandler, onSubmitHandler,}: RecoverPropsType) => {
 
     console.log('NewPassword called')
 

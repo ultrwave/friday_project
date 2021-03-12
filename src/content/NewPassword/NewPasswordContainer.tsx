@@ -4,7 +4,7 @@ import NewPassword from './NewPassword';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
 import {setNewPasswordTC} from '../../redux/auth-reducer';
-import {Redirect, useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 
 export type NewPasswordFormStateType = {
     password: InputType
@@ -67,9 +67,6 @@ function NewPasswordContainer() {
     }
 
     return (
-        !isLoggedIn
-            ? <Redirect to={'/login'}/>
-            :
             <NewPassword
                 formState={formState}
                 onChangeHandler={onChangeHandler}

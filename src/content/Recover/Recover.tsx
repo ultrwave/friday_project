@@ -14,13 +14,7 @@ type RecoverPropsType = {
     onSubmitHandler(email: string): void
 }
 
-const Recover = ({
-                     formState,
-                     onChangeHandler,
-                     onBlurHandler,
-                     onSubmitHandler,
-                     getTime
-                 }: RecoverPropsType) => {
+const Recover = ({formState, onChangeHandler, onBlurHandler, onSubmitHandler, getTime}: RecoverPropsType) => {
 
     console.log('Recover called')
 
