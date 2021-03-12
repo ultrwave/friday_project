@@ -64,6 +64,19 @@ const setProfileAC = (profile: AuthProfileType) => ({
 
 // Thunks
 
+export const checkCookiesTC = () => (dispatch: DispatchType) => {
+    authAPI.me()
+        .then((response) => {
+            dispatch(setProfileAC(response as unknown as AuthProfileType))
+            dispatch(setIsLoggedInAC(true))
+        })
+        .catch(e => {
+            console.log('Error: ', {...e})
+            dispatch(setIsLoggedInAC(false))
+        })
+}
+
+
 export const logInTC = (login: string, password: string, rememberMe: boolean) => (dispatch: DispatchType) => {
     authAPI.login(login, password, rememberMe)
         .then((response) => {

@@ -17,4 +17,8 @@ export const authAPI = {
         return instance.post('/auth/forgot', {email, from, message})
             .then(response => response)
     },
+    me(){
+        return instance.post('/auth/me', {})
+            .then(response => response)
+    }
 }

@@ -23,7 +23,7 @@ function RecoverContainer() {
 
     // Timer
 
-    const timerValueMs = 10000
+    const timerValueMs = 11000
     dispatch(setRecoverLinkTimestampAC(Number(localStorage.timerData)))
     const getTime = () => (Number(localStorage.timerData) + timerValueMs - (new Date).valueOf())
 
