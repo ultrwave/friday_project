@@ -4,6 +4,7 @@ import Login from './Login';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
 import {logInTC} from '../../redux/auth-reducer';
+import { Redirect } from 'react-router-dom';
 
 export type LoginFormStateType = {
     email: InputStateType
@@ -64,7 +65,8 @@ function LoginContainer() {
 
     return (
         isLoggedIn ?
-            <h1>redirect to profile</h1>
+            // <h1>redirect to profile</h1>
+            <Redirect to={'profile'}/>
             :
             <Login
             formState={formState}

@@ -1,4 +1,4 @@
-type PageStateType = {}
+type PageStateType = any
 
 const initialState: PageStateType = {}
 
