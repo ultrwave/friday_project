@@ -23,5 +23,8 @@ export const authAPI = {
     },
     setNewPassword(password: string, resetPasswordToken: string) {
         return instance.post('/auth/set-new-password', {password, resetPasswordToken})
-    }
+    },
+    registerUser(email:string,password:string) {
+        return  instance.post('/auth/register', {email, password})
+    },
 }

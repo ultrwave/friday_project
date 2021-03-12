@@ -1,9 +1,8 @@
-import React, { useState} from 'react';
-import SuperButton from "../common/SuperButton/SuperButton";
-import SuperInputText from "../common/SuperInputText/SuperInputText";
-import SuperCheckbox from "../common/SuperCheckbox/SuperCheckbox";
+import React, {useState} from 'react';
+import SuperButton from '../common/SuperButton/SuperButton';
+import SuperInputText from '../common/SuperInputText/SuperInputText';
+import SuperCheckbox from '../common/SuperCheckbox/SuperCheckbox';
 import s from './styles/Registration.module.css'
-import {LoginAPI} from "../registrationAPI";
 
 type RegistrationPropsType = {
     error?: string
@@ -29,11 +28,10 @@ function SuperInputsDemo() {
 
 
     return (
-        <>
-
-            <div>
+        <div className={s.demoContainer}>
+            <h1>
                 SuperInputs Demo
-            </div>
+            </h1>
             <div>
                 <SuperInputText
                     value={text}
@@ -54,7 +52,7 @@ function SuperInputsDemo() {
                     CheckboxText {/*// этот текст попадёт в children*/}
                 </SuperCheckbox>
             </div>
-        </>
+        </div>
     )
 }
 

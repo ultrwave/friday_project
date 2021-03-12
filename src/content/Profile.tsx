@@ -1,12 +1,13 @@
 import React from 'react';
-import {useSelector} from "react-redux";
-import {RootStateType} from "../redux/store";
-import {NavLink} from "react-router-dom";
+import {useDispatch, useSelector} from 'react-redux';
+import {RootStateType} from '../redux/store';
+import {Redirect} from 'react-router-dom';
 import style from './styles/Profile.module.css'
-import defaultAvatar from './images/default_avatar.png';
+import defaultAvatar from '../common/images/default_avatar.png';
+import {logOutTC} from '../redux/auth-reducer';
 
 function Profile() {
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
     const isLoggedIn = useSelector((state: RootStateType): boolean => state.auth.isLoggedIn)
 
     const auth = useSelector((state: RootStateType): any => state.auth)
@@ -14,12 +15,15 @@ function Profile() {
 // debugger
     let profileData = null
 
+    // const p = isLoggedIn && auth.profile? auth.profile.data : null
 
     if (isLoggedIn) {
         profileData = auth.profile.data
         // const [userName] = auth.profile.data
 
     }
+
+    const logoutHandler = () => dispatch(logOutTC())
 
     // debugger
     return (
@@ -28,8 +32,9 @@ function Profile() {
                 Profile
             </h1>
             {
-                isLoggedIn ?
-                    <div className={style.profileData}>
+                !isLoggedIn
+                    ? <Redirect to={'/login'}/>
+                    : <div className={style.profileData}>
                         {profileData.avatar ?
                             <div>
                             <img src={profileData.avatar} alt="" width="400" height="400" ></img>
@@ -45,17 +50,17 @@ function Profile() {
 
                         {/*<div className={style.name}>{profile.data.name}</div>*/}
                         {/*<div className={style.name}>{userName}</div>*/}
-                        <button>Log out</button>
+                        <button onClick={logoutHandler}>Log out</button>
                     </div>
-                    : <div>
-                        <div>You are not logged in</div>
-                        <NavLink to={'/login'}>
-                            <div>Sign in</div>
-                        </NavLink>
-                        <NavLink to={'/registration'}>
-                            <div>Sign up</div>
-                        </NavLink>
-                    </div>
+                    // : <div>
+                    //     <div>You are not logged in</div>
+                    //     <NavLink to={'/login'}>
+                    //         <div>Sign in</div>
+                    //     </NavLink>
+                    //     <NavLink to={'/registration'}>
+                    //         <div>Sign up</div>
+                    //     </NavLink>
+                    // </div>
             }
         </div>
     )
