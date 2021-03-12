@@ -1,5 +1,5 @@
 import {DispatchType} from './auth-reducer';
-import {authAPI} from '../authAPI';
+import {authAPI} from '../api/authAPI';
 
 type PageStateType = {
     lastLinkTimestamp: number
@@ -42,12 +42,9 @@ export const recoverPasswordTC = (email: string) => (dispatch: DispatchType) => 
          <a href='http://localhost:3000/#/set-new-password/$token$'>link</a></div>`
     authAPI.forgot(email, from, message)
         .then(response => {
-            // dispatch(setRecoverLinkTimestampAC(localStorage.timerData = (new Date).valueOf()))
+            dispatch(setRecoverLinkTimestampAC(localStorage.timerData = (new Date).valueOf()))
         })
         .catch(e => {
             console.log('Recover Error', e)
-        })
-        .finally(() => {
-            dispatch(setRecoverLinkTimestampAC(localStorage.timerData = (new Date).valueOf()))
         })
 }

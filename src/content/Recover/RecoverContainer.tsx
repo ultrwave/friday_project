@@ -53,7 +53,7 @@ function RecoverContainer() {
     // Render
 
     return (
-        !!isLoggedIn // todo
+        !isLoggedIn // todo
             ? <Redirect to={'/login'}/>
             :
             <Recover

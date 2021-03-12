@@ -5,8 +5,10 @@ import {passwordReducer} from './password-reducer';
 import {profileReducer} from './profile-reducer';
 import {recoverReducer} from './recover-reducer';
 import {registrationReducer} from './registration-reducer';
+import {appReducer} from './app-reducer';
 
 export const rootReducer = combineReducers({
+    appState: appReducer,
     auth: authReducer,
     pagePassword: passwordReducer,
     pageProfile: profileReducer,

@@ -67,8 +67,8 @@ function NewPasswordContainer() {
     }
 
     return (
-        !(!isLoggedIn && !token) //todo
-            ? <Redirect to={'/profile'}/>
+        !isLoggedIn
+            ? <Redirect to={'/login'}/>
             :
             <NewPassword
                 formState={formState}

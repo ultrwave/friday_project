@@ -17,10 +17,10 @@ export function Navbar() {
                 ? <button onClick={logout}>Logout</button>
                 : <NavbarItem to='/login' title='Login'/>
             }
-            <NavbarItem to='/registration' title='Registration'/>
+            {!isLoggedIn && <NavbarItem to='/registration' title='Registration'/>}
             <NavbarItem to='/profile' title='Profile'/>
             <NavbarItem to='/password' title='Password'/>
-            <NavbarItem to='/recover' title='Recover'/>
+            <NavbarItem to='/recover' title='Recover Pass'/>
             <NavbarItem to='/demo' title='Demo'/>
         </nav>
     )

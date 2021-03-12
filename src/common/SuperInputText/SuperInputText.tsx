@@ -23,7 +23,6 @@ type SuperInputTextPropsType = DefaultInputPropsType & {
 };
 
 const SuperInputText: React.FC<SuperInputTextPropsType> = ({
-  type, // достаём и игнорируем чтоб нельзя было задать другой тип инпута
   onChange,
   onChangeText,
   onKeyPress,
@@ -56,7 +55,6 @@ const SuperInputText: React.FC<SuperInputTextPropsType> = ({
     <div className={s.inputItem}>
       {title && <div className={s.title}>{title}</div>}
       <input
-        type={"text"}
         onChange={onChangeCallback}
         onKeyPress={onKeyPressCallback}
         className={finalInputClassName}

@@ -4,10 +4,8 @@ import SuperInputText from '../../common/SuperInputText/SuperInputText';
 import SuperCheckbox from '../../common/SuperCheckbox/SuperCheckbox';
 import SuperButton from '../../common/SuperButton/SuperButton';
 import {NavLink} from 'react-router-dom';
-import SuperInputPassword from '../../common/SuperInputPassword/SuperInputPassword';
 import {LoginFormStateType} from './LoginContainer';
 import {ValidatorFieldType} from '../../common/inputValidator';
-import {Loader} from '../../common/loader/loader';
 
 type LoginPropsType = {
     formState: LoginFormStateType
@@ -37,13 +35,15 @@ function Login({formState, onChangeHandler, onBlurHandler, checkBoxHandler, onSu
                 onChangeText={onChangeHandler('email')}
                 onBlur={onBlurHandler('email')}
                 placeholder={'Email'}
+                type={'text'}
             />
-            <SuperInputPassword
+            <SuperInputText
                 value={password.value}
                 error={password.error}
                 onChangeText={onChangeHandler('password')}
                 onBlur={onBlurHandler('password')}
                 placeholder={'Password'}
+                type={'password'}
             />
             <NavLink to={'/recover'}><span>Forgot password?</span></NavLink>
             <div className={style.rememberMe}>

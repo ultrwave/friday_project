@@ -1,5 +1,6 @@
 import store from './store';
-import {authAPI} from '../authAPI';
+import {authAPI} from '../api/authAPI';
+import {setAppStatusAC} from './app-reducer';
 
 type PageStateType = {
     isLoggedIn: boolean
@@ -64,7 +65,8 @@ const setProfileAC = (profile: AuthProfileType) => ({
 
 // Thunks
 
-export const checkCookiesTC = () => (dispatch: DispatchType) => { // todo
+export const setAuthTC = () => (dispatch: DispatchType) => { // todo
+    dispatch(setAppStatusAC('loading'))
     authAPI.me()
         .then((response) => {
             dispatch(setProfileAC(response as unknown as AuthProfileType))
@@ -74,29 +76,36 @@ export const checkCookiesTC = () => (dispatch: DispatchType) => { // todo
             console.log('Error: ', {...e})
             dispatch(setIsLoggedInAC(false))
         })
+        .finally(() => dispatch(setAppStatusAC('idle')))
 }
 
 export const logInTC = (login: string, password: string, rememberMe: boolean) => (dispatch: DispatchType) => {
+    dispatch(setAppStatusAC('loading'))
     authAPI.login(login, password, rememberMe)
         .then((response) => {
             dispatch(setProfileAC(response as unknown as AuthProfileType)) // todo - wtf ?!
             dispatch(setIsLoggedInAC(true))
         })
         .catch(e => console.log('Error: ', {...e}))
+        .finally(() => dispatch(setAppStatusAC('idle')))
 }
 
 export const logOutTC = () => (dispatch: DispatchType) => {
+    dispatch(setAppStatusAC('loading'))
     authAPI.logout()
         .then(response => {
             dispatch(setIsLoggedInAC(false))
         })
         .catch(e => console.log('Error: ', {...e}))
+        .finally(() => dispatch(setAppStatusAC('idle')))
 }
 
 export const setNewPasswordTC = (password: string, resetPasswordToken: string) => (dispatch: DispatchType) => {
+    dispatch(setAppStatusAC('loading'))
     authAPI.setNewPassword(password, resetPasswordToken)
         .then(response => {
             dispatch(setIsLoggedInAC(false))
         })
         .catch(e => console.log('Error: ', {...e}))
+        .finally(() => dispatch(setAppStatusAC('idle')))
 }
