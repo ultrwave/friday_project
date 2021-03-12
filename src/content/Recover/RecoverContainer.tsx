@@ -24,7 +24,7 @@ function RecoverContainer() {
 
     // Timer
 
-    const timerValueMs = 11000
+    const timerValueMs = 6000
     dispatch(setRecoverLinkTimestampAC(Number(localStorage.timerData)))
     const getTime = () => (Number(localStorage.timerData) + timerValueMs - (new Date).valueOf())
 
@@ -53,7 +53,7 @@ function RecoverContainer() {
     // Render
 
     return (
-        !isLoggedIn
+        !!isLoggedIn // todo
             ? <Redirect to={'/login'}/>
             :
             <Recover
