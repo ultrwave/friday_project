@@ -17,6 +17,8 @@ function App() {
 
     const dispatch = useDispatch()
     const appStatus = useSelector((state: RootStateType) => state.appState.status) // todo - перерисовка?
+    const isLoggedIn = useSelector((state: RootStateType) => state.auth.isLoggedIn)
+
 
     useEffect(() => {
         dispatch(setAuthTC())
