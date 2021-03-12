@@ -1,5 +1,5 @@
 import store from './store';
-import {loginAPI} from '../loginAPI';
+import {authAPI} from '../authAPI';
 
 type PageStateType = {
     isLoggedIn: boolean
@@ -64,8 +64,20 @@ const setProfileAC = (profile: AuthProfileType) => ({
 
 // Thunks
 
+export const checkCookiesTC = () => (dispatch: DispatchType) => { // todo
+    authAPI.me()
+        .then((response) => {
+            dispatch(setProfileAC(response as unknown as AuthProfileType))
+            dispatch(setIsLoggedInAC(true))
+        })
+        .catch(e => {
+            console.log('Error: ', {...e})
+            dispatch(setIsLoggedInAC(false))
+        })
+}
+
 export const logInTC = (login: string, password: string, rememberMe: boolean) => (dispatch: DispatchType) => {
-    loginAPI.login(login, password, rememberMe)
+    authAPI.login(login, password, rememberMe)
         .then((response) => {
             dispatch(setProfileAC(response as unknown as AuthProfileType)) // todo - wtf ?!
             dispatch(setIsLoggedInAC(true))
@@ -73,4 +85,18 @@ export const logInTC = (login: string, password: string, rememberMe: boolean) =>
         .catch(e => console.log('Error: ', {...e}))
 }
 
+export const logOutTC = () => (dispatch: DispatchType) => {
+    authAPI.logout()
+        .then(response => {
+            dispatch(setIsLoggedInAC(false))
+        })
+        .catch(e => console.log('Error: ', {...e}))
+}
 
+export const setNewPasswordTC = (password: string, resetPasswordToken: string) => (dispatch: DispatchType) => {
+    authAPI.setNewPassword(password, resetPasswordToken)
+        .then(response => {
+            dispatch(setIsLoggedInAC(false))
+        })
+        .catch(e => console.log('Error: ', {...e}))
+}

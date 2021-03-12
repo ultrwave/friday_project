@@ -1,7 +1,8 @@
-.item {
-
+a {
+    text-decoration: none;
 }
 
 .activeLink {
-
+    color: darkred;
+    font-weight: bold;
 }
