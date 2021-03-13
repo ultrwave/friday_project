@@ -5,6 +5,7 @@ import {NavLink} from 'react-router-dom';
 import SuperButton from '../../common/SuperButton/SuperButton';
 import {RecoverFormStateType} from './RecoverContainer';
 import RecoverTimer from './RecoverTimer';
+import inputValidator from '../../common/inputValidator';
 
 type RecoverPropsType = {
     formState: RecoverFormStateType
@@ -18,12 +19,12 @@ const Recover = ({formState, onChangeHandler, onBlurHandler, onSubmitHandler, ge
 
     console.log('Recover called')
 
-    let [timerIsActive, showTimer] = useState(true)
+    let [timerIsActive, showTimer] = useState(false)
 
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         onSubmitHandler(formState.value)
-        if (!formState.error) showTimer(true) // fix
+        if (!inputValidator(formState.value, 'email')) showTimer(true) // fix
     }
 
     return (

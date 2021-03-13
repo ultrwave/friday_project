@@ -50,7 +50,7 @@ function RecoverContainer() {
             error: formState.value ? inputValidator(email, 'email') : 'Required field',
             touched: true
         })
-        if (!formState.error) dispatch(recoverPasswordTC(email, baseUrl))
+        if (!formState.error) dispatch(recoverPasswordTC(email, baseUrl)) // todo - нужен промис?
     }
 
     // Render

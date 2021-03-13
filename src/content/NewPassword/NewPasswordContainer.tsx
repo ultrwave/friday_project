@@ -58,10 +58,16 @@ function NewPasswordContainer() {
     }
 
     const onSubmitHandler = (password: string) => {
-        if (formState.password.value !== formState.confirm.value) {
+        const error = !formState.password.value
+            ? 'Please enter new password'
+            : formState.password.value !== formState.confirm.value
+            ? 'Passwords do not match'
+            : ''
+        if (error) {
             setFormState({
                 ...formState,
-                confirm: {...formState.confirm, error: 'Passwords do not match', touched: true}
+                password: {...formState.password, error: ' ', touched: true},
+                confirm: {...formState.confirm, error, touched: true}
             })
         } else {
             dispatch(setNewPasswordTC(password, token))
