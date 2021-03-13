@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {FormEvent, useState} from 'react';
 import style from '../styles/Recover.module.css'
 import SuperInputText from '../../common/SuperInputText/SuperInputText';
 import {NavLink} from 'react-router-dom';
@@ -20,7 +20,8 @@ const Recover = ({formState, onChangeHandler, onBlurHandler, onSubmitHandler, ge
 
     let [timerIsActive, showTimer] = useState(true)
 
-    const submitForm = () => {
+    const submitForm = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
         onSubmitHandler(formState.value)
         if (!formState.error) showTimer(true) // fix
     }

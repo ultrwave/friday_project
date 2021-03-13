@@ -42,7 +42,7 @@ export const recoverPasswordTC = (email: string) => (dispatch: DispatchType) => 
          <a href='http://localhost:3000/#/set-new-password/$token$'>link</a></div>`
     authAPI.forgot(email, from, message)
         .then(response => {
-            dispatch(setRecoverLinkTimestampAC(localStorage.timerData = (new Date).valueOf()))
+            dispatch(setRecoverLinkTimestampAC(localStorage.timerData = Date.now()))
         })
         .catch(e => {
             console.log('Recover Error', e)

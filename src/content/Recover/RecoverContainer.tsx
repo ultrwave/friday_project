@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
 import inputValidator from '../../common/inputValidator';
 import Recover from './Recover';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootStateType} from '../../redux/store';
+import {useDispatch} from 'react-redux';
 import {recoverPasswordTC, setRecoverLinkTimestampAC} from '../../redux/recover-reducer';
-import {Redirect} from 'react-router-dom';
 
 export type RecoverFormStateType = {
     value: string
@@ -25,7 +23,7 @@ function RecoverContainer() {
 
     const timerValueMs = 6000
     dispatch(setRecoverLinkTimestampAC(Number(localStorage.timerData)))
-    const getTime = () => (Number(localStorage.timerData) + timerValueMs - (new Date).valueOf())
+    const getTime = () => (Number(localStorage.timerData) + timerValueMs - Date.now())
 
     // Handlers
 
