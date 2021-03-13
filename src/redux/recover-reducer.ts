@@ -34,12 +34,12 @@ export const setRecoverLinkTimestampAC = (timeMs: number) => ({
 )
 
 // Thunks
-// todo - url heroku
-export const recoverPasswordTC = (email: string) => (dispatch: DispatchType) => {
+
+export const recoverPasswordTC = (email: string, baseUrl: string) => (dispatch: DispatchType) => {
     const from = 'Administrator'
     const message =
         `<div style="background-color: lime; padding: 15px"> password recovery link:
-         <a href='http://localhost:3000/#/set-new-password/$token$'>link</a></div>`
+         <a href='${baseUrl}/$token$'>link</a></div>`
     authAPI.forgot(email, from, message)
         .then(response => {
             dispatch(setRecoverLinkTimestampAC(localStorage.timerData = Date.now()))

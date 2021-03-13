@@ -18,6 +18,7 @@ function RecoverContainer() {
     const dispatch = useDispatch()
     let [formState, setFormState] =
         useState<RecoverFormStateType>({value: '', error: '', touched: false})
+    const baseUrl = `${window.location.origin}/#/set-new-password`
 
     // Timer
 
@@ -49,7 +50,7 @@ function RecoverContainer() {
             error: formState.value ? inputValidator(email, 'email') : 'Required field',
             touched: true
         })
-        if (!formState.error) dispatch(recoverPasswordTC(email))
+        if (!formState.error) dispatch(recoverPasswordTC(email, baseUrl))
     }
 
     // Render

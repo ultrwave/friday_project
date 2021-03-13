@@ -34,7 +34,7 @@ function App() {
                         <Route path='/registration' render={() => <Registration/>}/>
                         <Route path='/profile' render={() => <Profile/>}/>
                         <Route path='/recover' render={() => <RecoverContainer/>}/>
-                        <Route path='/password/:token?' render={() => <NewPasswordContainer/>}/>
+                        <Route path='/set-new-password/:token?' render={() => <NewPasswordContainer/>}/>
                         <Route path='/demo' render={() => <SuperInputsDemo/>}/>
 
                         <Route path={'/404'} render={() => <h1>404: PAGE NOT FOUND</h1>}/>
