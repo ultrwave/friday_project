@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import inputValidator from '../../common/inputValidator';
 import NewPassword from './NewPassword';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootStateType} from '../../redux/store';
+import {useDispatch} from 'react-redux';
 import {setNewPasswordTC} from '../../redux/auth-reducer';
 import {useParams} from 'react-router-dom';
 
@@ -25,7 +24,6 @@ function NewPasswordContainer() {
     console.log('NewPasswordContainer called')
 
     const dispatch = useDispatch()
-    const isLoggedIn = useSelector((state: RootStateType): boolean => state.auth.isLoggedIn)
     const params: ParamsType = useParams()
     const token = params.token ? params.token : ''
 

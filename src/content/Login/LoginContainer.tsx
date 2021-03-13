@@ -4,7 +4,7 @@ import Login from './Login';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
 import {logInTC} from '../../redux/auth-reducer';
-import { Redirect } from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 export type LoginFormStateType = {
     email: InputStateType
@@ -23,7 +23,7 @@ function LoginContainer() {
     console.log('LoginContainer called')
 
     const dispatch = useDispatch()
-    const isLoggedIn = useSelector((state: RootStateType):boolean => state.auth.isLoggedIn)
+    const isLoggedIn = useSelector((state: RootStateType): boolean => state.auth.isLoggedIn)
 
     let [formState, setFormState] = useState<LoginFormStateType>(
         {
@@ -65,17 +65,15 @@ function LoginContainer() {
     }
 
     return (
-        isLoggedIn ?
-            // <h1>redirect to profile</h1>
-            <Redirect to={'profile'}/>
-            :
-            <Login
-            formState={formState}
-            onChangeHandler={onChangeHandler}
-            onBlurHandler={onBlurHandler}
-            checkBoxHandler={checkBoxHandler}
-            onSubmitHandler={onSubmitHandler}
-        />
+        isLoggedIn
+            ? <Redirect to={'profile'}/>
+            : <Login
+                formState={formState}
+                onChangeHandler={onChangeHandler}
+                onBlurHandler={onBlurHandler}
+                checkBoxHandler={checkBoxHandler}
+                onSubmitHandler={onSubmitHandler}
+            />
     )
 }
 

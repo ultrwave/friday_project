@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FormEvent} from 'react';
 import style from '../styles/Login.module.css'
 import SuperButton from '../../common/SuperButton/SuperButton';
 import {NavLink} from 'react-router-dom';
@@ -16,14 +16,15 @@ const NewPassword = ({formState, onChangeHandler, onBlurHandler, onSubmitHandler
 
     console.log('NewPassword called')
 
-    const submitForm = () => {
+    const submitForm = (e: FormEvent<HTMLFormElement>) => {
+        e.stopPropagation()
         onSubmitHandler(formState.password.value)
     }
 
     const formError = !!(formState.password.error || formState.confirm.error)
 
     return (
-        <form className={style.form}>
+        <form className={style.form} onSubmit={submitForm}>
             <h1>New password</h1>
             <SuperInputText
                 value={formState.password.value}
@@ -41,7 +42,7 @@ const NewPassword = ({formState, onChangeHandler, onBlurHandler, onSubmitHandler
                 placeholder={'Confirm'}
                 type={'password'}
             />
-            <SuperButton disabled={formError} onClick={submitForm}>Send</SuperButton>
+            <SuperButton disabled={formError} type={'submit'}>Send</SuperButton>
             <NavLink to={'/login'}><span>Login page</span></NavLink>
         </form>
     )

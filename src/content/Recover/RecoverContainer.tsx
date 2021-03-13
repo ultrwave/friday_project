@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useState} from 'react';
 import inputValidator from '../../common/inputValidator';
 import Recover from './Recover';
 import {useDispatch, useSelector} from 'react-redux';
@@ -18,7 +18,6 @@ function RecoverContainer() {
     console.log('RecoverContainer called')
 
     const dispatch = useDispatch()
-    const isLoggedIn = useSelector((state: RootStateType): boolean => state.auth.isLoggedIn)
     let [formState, setFormState] =
         useState<RecoverFormStateType>({value: '', error: '', touched: false})
 
@@ -47,15 +46,17 @@ function RecoverContainer() {
     }
 
     const onSubmitHandler = (email: string) => {
-        dispatch(recoverPasswordTC(email))
+        setFormState({
+            ...formState,
+            error: formState.value ? inputValidator(email, 'email') : 'Required field',
+            touched: true
+        })
+        if (!formState.error) dispatch(recoverPasswordTC(email))
     }
 
     // Render
 
     return (
-        !isLoggedIn // todo
-            ? <Redirect to={'/login'}/>
-            :
             <Recover
                 formState={formState}
                 getTime={getTime}

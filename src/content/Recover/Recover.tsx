@@ -22,11 +22,11 @@ const Recover = ({formState, onChangeHandler, onBlurHandler, onSubmitHandler, ge
 
     const submitForm = () => {
         onSubmitHandler(formState.value)
-        showTimer(true)
+        if (!formState.error) showTimer(true) // fix
     }
 
     return (
-        <form className={style.form}>
+        <form className={style.form} onSubmit={submitForm}>
             <h1>Recover</h1>
             <SuperInputText
                 value={formState.value}
@@ -38,7 +38,7 @@ const Recover = ({formState, onChangeHandler, onBlurHandler, onSubmitHandler, ge
             <div className={style.timerContainer}>
                 {timerIsActive
                     ? <RecoverTimer getTime={getTime} showTimer={showTimer}/>
-                    : <SuperButton disabled={!!formState.error} onClick={submitForm}>Send</SuperButton>
+                    : <SuperButton disabled={!!formState.error} type={'submit'}>Send</SuperButton>
                 }
             </div>
             <NavLink to={'/login'}><span>Login page</span></NavLink>

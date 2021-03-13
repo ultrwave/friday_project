@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FormEvent} from 'react';
 import style from '../styles/Login.module.css'
 import SuperInputText from '../../common/SuperInputText/SuperInputText';
 import SuperCheckbox from '../../common/SuperCheckbox/SuperCheckbox';
@@ -15,19 +15,22 @@ type LoginPropsType = {
     onSubmitHandler(email: string, password: string, rememberMe: boolean): void
 }
 
-function Login({formState, onChangeHandler, onBlurHandler, checkBoxHandler, onSubmitHandler}:LoginPropsType) {
+function Login({formState, onChangeHandler, onBlurHandler, checkBoxHandler, onSubmitHandler}: LoginPropsType) {
     console.log('Login called')
 
     const email = formState.email
     const password = formState.password
     const rememberMe = formState.rememberMe
 
-    const submitForm = () => {onSubmitHandler(email.value, password.value, rememberMe)}
+    const submitForm = (e: FormEvent<HTMLFormElement>) => {
+        e.stopPropagation()
+        onSubmitHandler(email.value, password.value, rememberMe)
+    }
 
     const disableSubmit = !!(email.error || password.error || formState.globalFormError)
 
     return (
-        <form className={style.form}>
+        <form className={style.form} onSubmit={submitForm}>
             <h1>Sign in</h1>
             <SuperInputText
                 value={email.value}
@@ -50,7 +53,7 @@ function Login({formState, onChangeHandler, onBlurHandler, checkBoxHandler, onSu
                 <SuperCheckbox onChangeChecked={checkBoxHandler} checked={rememberMe}/>
                 <span>Remember me</span>
             </div>
-            <SuperButton disabled={disableSubmit} onClick={submitForm}>Sign in</SuperButton>
+            <SuperButton disabled={disableSubmit} type={'submit'}>Sign in</SuperButton>
             <NavLink to={'/registration'}><span>Registration</span></NavLink>
         </form>
     )

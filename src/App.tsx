@@ -16,9 +16,7 @@ import {Loader} from './common/loader/loader';
 function App() {
 
     const dispatch = useDispatch()
-
-    const appStatus = useSelector((state: RootStateType) => state.appState.status) // todo - перерисовка?
-    const isLoggedIn = useSelector((state: RootStateType) => state.auth.isLoggedIn)
+    const appStatus = useSelector((state: RootStateType) => state.appState.status)
 
     useEffect(() => {
         dispatch(setAuthTC())
