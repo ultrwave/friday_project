@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import style from './App.module.css';
-import {HashRouter, Route} from 'react-router-dom';
+import {HashRouter, Route, Switch, Redirect} from 'react-router-dom';
 import Profile from './content/Profile';
 import Registration from './content/Registration';
 import {Navbar} from './common/Navbar';
@@ -28,12 +28,18 @@ function App() {
                 {appStatus === 'loading' && <Loader/>}
                 <Navbar/>
                 <div className={style.content}>
-                    <Route path='/login' render={() => <LoginContainer/>}/>
-                    <Route path='/registration' render={() => <Registration/>}/>
-                    <Route path='/profile' render={() => <Profile/>}/>
-                    <Route path='/recover' render={() => <RecoverContainer/>}/>
-                    <Route path='/password/:token?' render={() => <NewPasswordContainer/>}/>
-                    <Route path='/demo' render={() => <SuperInputsDemo/>}/>
+                    <Switch>
+                        <Route exact path={'/'} render={() => <Profile/>}/>
+                        <Route path='/login' render={() => <LoginContainer/>}/>
+                        <Route path='/registration' render={() => <Registration/>}/>
+                        <Route path='/profile' render={() => <Profile/>}/>
+                        <Route path='/recover' render={() => <RecoverContainer/>}/>
+                        <Route path='/password/:token?' render={() => <NewPasswordContainer/>}/>
+                        <Route path='/demo' render={() => <SuperInputsDemo/>}/>
+
+                        <Route path={'/404'} render={() => <h1>404: PAGE NOT FOUND</h1>}/>
+                        <Redirect from={'*'} to={'/404'}/>
+                    </Switch>
                 </div>
             </div>
         </HashRouter>
