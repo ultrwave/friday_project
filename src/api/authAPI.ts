@@ -31,3 +31,35 @@ export const authAPI = {
         return  instance.post('/auth/register', {email, password})
     },
 }
+
+export const packsAPI = {
+    getPacks() {
+        return instance.get('/cards/pack') //todo - params?
+    },
+    createPack(data: CreatePackType) {
+      return instance.post('/cards/pack', data)
+    },
+    deletePack(id: string) {
+        return instance.delete(`/cards/pack?id=${id}`)
+    },
+    updatePack(cardsPack: PackType) {
+        return instance.put('/cards/pack', cardsPack)
+    }
+}
+
+
+export type PackType = {
+    _id: string,
+    name?: string
+}
+
+export type CreatePackType = { // todo - оранж поля?
+    name?: string // если не отправить будет таким
+    path?: string // если не отправить будет такой
+    grade?: number // не обязателен
+    shots?: number // не обязателен
+    rating?: number // не обязателен
+    deckCover?: string // не обязателен
+    private?: boolean // если не отправить будет такой
+    type?: string // если не отправить будет таким
+}

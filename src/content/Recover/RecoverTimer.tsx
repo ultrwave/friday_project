@@ -9,7 +9,7 @@ type RecoverTimerPropsType = {
 function RecoverTimer({getTime, hideTimer}: RecoverTimerPropsType) {
     console.log('RecoverTimer called')
 
-    let [timeMs, setTimeMs] = useState(getTime())
+    const [timeMs, setTimeMs] = useState(getTime())
 
     const tick = () => {
         setTimeMs(getTime())
@@ -17,20 +17,15 @@ function RecoverTimer({getTime, hideTimer}: RecoverTimerPropsType) {
     }
 
     const convertMsToTime = (ms: number) => {
-        let minutes = Math.floor(ms / 60000);
-        let seconds = ((ms % 60000) / 1000);
+        const minutes = Math.floor(ms / 60000);
+        const seconds = ((ms % 60000) / 1000);
         return minutes + ':' + (seconds < 10 ? '0' : '') + Math.floor(seconds)
     }
 
-    const timerID: any = setInterval(() => tick(), 1000);
-
     useEffect(() => {
-
-        return () => {
-            clearInterval(timerID);
-            (new AbortController().abort())
-        }
-    })
+        const timerID = setInterval(() => tick(), 1000);
+        return () => clearInterval(timerID);
+    }, [])
 
     return (
         <span className={style.timer}>
