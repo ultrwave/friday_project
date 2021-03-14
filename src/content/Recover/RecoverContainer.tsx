@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import inputValidator from '../../common/inputValidator';
 import Recover from './Recover';
 import {useDispatch} from 'react-redux';
-import {recoverPasswordTC, setRecoverLinkTimestampAC} from '../../redux/recover-reducer';
+import {recoverPasswordTC} from '../../redux/recover-reducer';
 
 export type RecoverFormStateType = {
     value: string
@@ -19,14 +19,6 @@ function RecoverContainer() {
     let [formState, setFormState] =
         useState<RecoverFormStateType>({value: '', error: '', touched: false})
     const baseUrl = `${window.location.origin}/#/set-new-password`
-
-    // Timer
-
-    const timerValueMs = 6000
-    dispatch(setRecoverLinkTimestampAC(Number(localStorage.timerData)))
-    const getTime = () => (Number(localStorage.timerData) + timerValueMs - Date.now())
-
-    // Handlers
 
     const onChangeHandler = (value: string) => {
         setFormState({
@@ -50,19 +42,18 @@ function RecoverContainer() {
             error: formState.value ? inputValidator(email, 'email') : 'Required field',
             touched: true
         })
-        if (!formState.error) dispatch(recoverPasswordTC(email, baseUrl)) // todo - нужен промис?
+        if (!inputValidator(formState.value, 'email')) {
+            dispatch(recoverPasswordTC(email, baseUrl))
+        }
     }
 
-    // Render
-
     return (
-            <Recover
-                formState={formState}
-                getTime={getTime}
-                onChangeHandler={onChangeHandler}
-                onBlurHandler={onBlurHandler}
-                onSubmitHandler={onSubmitHandler}
-            />
+        <Recover
+            formState={formState}
+            onChangeHandler={onChangeHandler}
+            onBlurHandler={onBlurHandler}
+            onSubmitHandler={onSubmitHandler}
+        />
     )
 }
 

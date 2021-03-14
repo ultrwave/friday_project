@@ -1,60 +1,42 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import style from '../styles/Recover.module.css'
 
 type RecoverTimerPropsType = {
     getTime(): number
-    showTimer(show: boolean): void
+    hideTimer(show: boolean): void
 }
 
-type RecoverTimerStateType = {
-    timeMs: number
-}
+function RecoverTimer({getTime, hideTimer}: RecoverTimerPropsType) {
+    console.log('RecoverTimer called')
 
-class RecoverTimer extends React.Component<RecoverTimerPropsType, RecoverTimerStateType> {
+    let [timeMs, setTimeMs] = useState(getTime())
 
-    timerID: any
-
-    constructor(props: RecoverTimerPropsType) {
-        super(props);
-        this.state = {timeMs: this.props.getTime()};
+    const tick = () => {
+        setTimeMs(getTime())
+        if (getTime() < 0) hideTimer(false)
     }
 
-    componentDidMount() {
-        console.log('RecoverTimer called')
-        this.timerID = setInterval(
-            () => this.tick(),
-            1000
-        );
-    }
-
-    convertMsToTime(ms: number) {
+    const convertMsToTime = (ms: number) => {
         let minutes = Math.floor(ms / 60000);
         let seconds = ((ms % 60000) / 1000);
         return minutes + ':' + (seconds < 10 ? '0' : '') + Math.floor(seconds)
     }
 
-    tick() {
-        if (this.props.getTime() < 0) {
-            clearInterval(this.timerID)
-            this.props.showTimer(false)
-        } else {
-            this.setState({timeMs: this.props.getTime()})
+    const timerID: any = setInterval(() => tick(), 1000);
+
+    useEffect(() => {
+
+        return () => {
+            clearInterval(timerID);
+            (new AbortController().abort())
         }
-    };
+    })
 
-    time() {
-        return this.state.timeMs > 0 ? this.convertMsToTime(this.state.timeMs) : '...'
-    }
-
-    render() {
-        return (
-                <span className={style.timer}>
-                {`Time till next link: ${this.time()}`}
-                </span>
-        )
-    }
+    return (
+        <span className={style.timer}>
+                {`Time till next link: ${convertMsToTime(timeMs)}`}
+            </span>
+    )
 }
 
-
 export default RecoverTimer;
-
