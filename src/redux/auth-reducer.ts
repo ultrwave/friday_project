@@ -2,6 +2,9 @@ import store from './store';
 import {authAPI} from '../api/authAPI';
 import {setAppStatusAC} from './app-reducer';
 
+const SET_IS_LOGGED_IN = 'SET-IS-LOGGED-IN'
+const SET_PROFILE = 'SET-PROFILE'
+
 type PageStateType = {
     isLoggedIn: boolean
     profile: AuthProfileType | null
@@ -38,10 +41,10 @@ export const authReducer = (state: PageStateType = initialState, action: ActionT
 
     switch (action.type) {
 
-        case 'SET-IS-LOGGED-IN':
+        case SET_IS_LOGGED_IN:
             return {...state, isLoggedIn: action.isLoggedIn}
 
-        case 'SET-PROFILE':
+        case SET_PROFILE:
             return {...state, profile: action.profile}
 
         default:
@@ -49,8 +52,6 @@ export const authReducer = (state: PageStateType = initialState, action: ActionT
     }
 }
 
-const SET_IS_LOGGED_IN = 'SET-IS-LOGGED-IN'
-const SET_PROFILE = 'SET-PROFILE'
 
 const setIsLoggedInAC = (isLoggedIn: boolean) => ({
         type: SET_IS_LOGGED_IN,

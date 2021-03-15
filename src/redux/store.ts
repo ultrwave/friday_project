@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, createStore } from "redux"
+import { applyMiddleware, combineReducers, createStore, compose } from "redux"
 import thunkMiddleware from 'redux-thunk';
 import {authReducer} from './auth-reducer';
 import {passwordReducer} from './password-reducer';
@@ -16,7 +16,14 @@ export const rootReducer = combineReducers({
     pageRegistration: registrationReducer
 })
 
-let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
+// let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
+
+// вариант для работы с расширением (хрома) redux devtools:
+// @ts-ignore
+const composeEnhancers = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] as typeof compose || compose;
+const store = createStore(rootReducer, /* preloadedState, */ composeEnhancers(
+    applyMiddleware(thunkMiddleware)
+));
 
 export type RootStateType = ReturnType<typeof rootReducer>
 

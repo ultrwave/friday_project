@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import style from './App.module.css';
 import {HashRouter, Route, Switch, Redirect} from 'react-router-dom';
 import Profile from './content/Profile';
-import Registration from './content/Registration';
+import Registration from './content/Registration/Registration';
 import {Navbar} from './common/Navbar';
 import SuperInputsDemo from './content/SuperInputsDemo';
 import LoginContainer from './content/Login/LoginContainer';
@@ -12,6 +12,7 @@ import NewPasswordContainer from './content/NewPassword/NewPasswordContainer';
 import {setAuthTC} from './redux/auth-reducer';
 import {RootStateType} from './redux/store';
 import {Loader} from './common/loader/loader';
+import RegistrationContainer from './content/Registration/RegistrationContainer';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
                         <Route exact path={'/'} render={() => <Profile/>}/>
                         <Route path='/login' render={() => <LoginContainer/>}/>
                         <Route path='/registration' render={() => <Registration/>}/>
+                        <Route path='/registration2' render={() => <RegistrationContainer/>}/>
                         <Route path='/profile' render={() => <Profile/>}/>
                         <Route path='/recover' render={() => <RecoverContainer/>}/>
                         <Route path='/password/:token?' render={() => <NewPasswordContainer/>}/>
