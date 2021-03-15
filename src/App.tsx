@@ -13,6 +13,7 @@ import {setAuthTC} from './redux/auth-reducer';
 import {RootStateType} from './redux/store';
 import {Loader} from './common/loader/loader';
 import RegistrationContainer from './content/Registration/RegistrationContainer';
+import Page404 from "./content/Page404/Page404";
 
 function App() {
 
@@ -39,7 +40,8 @@ function App() {
                         <Route path='/password/:token?' render={() => <NewPasswordContainer/>}/>
                         <Route path='/demo' render={() => <SuperInputsDemo/>}/>
 
-                        <Route path={'/404'} render={() => <h1>404: PAGE NOT FOUND</h1>}/>
+                        {/*<Route path={'/404'} render={() => <h1>404: PAGE NOT FOUND</h1>}/>*/}
+                        <Route path={'/404'} render={() => <Page404/>}/>
                         <Redirect from={'*'} to={'/404'}/>
                     </Switch>
                 </div>
