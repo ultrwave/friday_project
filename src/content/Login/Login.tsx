@@ -6,6 +6,7 @@ import SuperButton from '../../common/SuperButton/SuperButton';
 import {NavLink} from 'react-router-dom';
 import {LoginFormStateType} from './LoginContainer';
 import {ValidatorFieldType} from '../../common/inputValidator';
+import {DEFAULT_EMAIL, DEFAULT_PASSWORD, DEV_MODE} from "../../App";
 
 type LoginPropsType = {
     formState: LoginFormStateType
@@ -30,32 +31,49 @@ function Login({formState, onChangeHandler, onBlurHandler, checkBoxHandler, onSu
     const disableSubmit = !!(email.error || password.error || formState.globalFormError)
 
     return (
-        <form className={style.form} onSubmit={submitForm}>
-            <h1>Sign in</h1>
-            <SuperInputText
-                value={email.value}
-                error={email.error}
-                onChangeText={onChangeHandler('email')}
-                onBlur={onBlurHandler('email')}
-                placeholder={'Email'}
-                type={'text'}
-            />
-            <SuperInputText
-                value={password.value}
-                error={password.error}
-                onChangeText={onChangeHandler('password')}
-                onBlur={onBlurHandler('password')}
-                placeholder={'Password'}
-                type={'password'}
-            />
-            <NavLink to={'/recover'}><span>Forgot password?</span></NavLink>
-            <div className={style.rememberMe}>
-                <SuperCheckbox onChangeChecked={checkBoxHandler} checked={rememberMe}/>
-                <span>Remember me</span>
-            </div>
-            <SuperButton disabled={disableSubmit} type={'submit'}>Sign in</SuperButton>
-            <NavLink to={'/registration'}><span>Registration</span></NavLink>
-        </form>
+        <>
+            <form className={style.form} onSubmit={submitForm}>
+                <h1>Sign in</h1>
+                <SuperInputText
+                    value={email.value}
+                    error={email.error}
+                    onChangeText={onChangeHandler('email')}
+                    onBlur={onBlurHandler('email')}
+                    placeholder={'Email'}
+                    type={'text'}
+                />
+                <SuperInputText
+                    value={password.value}
+                    error={password.error}
+                    onChangeText={onChangeHandler('password')}
+                    onBlur={onBlurHandler('password')}
+                    placeholder={'Password'}
+                    type={'password'}
+                />
+                <NavLink to={'/recover'}><span>Forgot password?</span></NavLink>
+                <div className={style.rememberMe}>
+                    <SuperCheckbox onChangeChecked={checkBoxHandler} checked={rememberMe}/>
+                    <span>Remember me</span>
+                </div>
+                <SuperButton disabled={disableSubmit} type={'submit'}>Sign in</SuperButton>
+            </form>
+            {DEV_MODE ?
+                <div className={style.messageDefault}>
+                    <div>To sign in you can use test account credentials:</div>
+                    <div className={style.credentialsContainer}>
+                        <div className={style.credentialsString}>
+                            <div className={style.credentialsTitle}>email:</div>
+                            <div className={style.credentialsValue}>{`${DEFAULT_EMAIL}`}</div>
+                        </div>
+                        <div className={style.credentialsString}>
+                            <div className={style.credentialsTitle}>password:</div>
+                            <div className={style.credentialsValue}>{`${DEFAULT_PASSWORD}`}</div>
+                        </div>
+                    </div>
+                </div>
+                : ''
+            }
+        </>
     )
 }
 

@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import style from './App.module.css';
 import {HashRouter, Route, Switch, Redirect} from 'react-router-dom';
-import Profile from './content/Profile';
+import Profile from './content/Profile/Profile';
 import Registration from './content/Registration/Registration';
 import {Navbar} from './common/Navbar';
 import SuperInputsDemo from './content/SuperInputsDemo';
@@ -14,6 +14,10 @@ import {RootStateType} from './redux/store';
 import {Loader} from './common/loader/loader';
 import RegistrationContainer from './content/Registration/RegistrationContainer';
 import Page404 from "./content/Page404/Page404";
+
+export const DEV_MODE = true
+export const DEFAULT_EMAIL = 'nya-admin@nya.nya'
+export const DEFAULT_PASSWORD = '1qazxcvBG'
 
 function App() {
 

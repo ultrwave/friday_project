@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
 import {logInTC} from '../../redux/auth-reducer';
 import {Redirect} from 'react-router-dom';
+import {DEFAULT_EMAIL, DEFAULT_PASSWORD, DEV_MODE} from "../../App";
 
 export type LoginFormStateType = {
     email: InputStateType
@@ -27,8 +28,8 @@ function LoginContainer() {
 
     let [formState, setFormState] = useState<LoginFormStateType>(
         {
-            email: {value: '', error: '', touched: false},
-            password: {value: '', error: '', touched: false},
+            email: {value: DEV_MODE ? DEFAULT_EMAIL : '', error: '', touched: false},
+            password: {value: DEV_MODE ? DEFAULT_PASSWORD : '', error: '', touched: false},
             rememberMe: false,
             globalFormError: ''
         })
@@ -67,13 +68,15 @@ function LoginContainer() {
     return (
         isLoggedIn
             ? <Redirect to={'profile'}/>
-            : <Login
-                formState={formState}
-                onChangeHandler={onChangeHandler}
-                onBlurHandler={onBlurHandler}
-                checkBoxHandler={checkBoxHandler}
-                onSubmitHandler={onSubmitHandler}
-            />
+            : <div>
+                <Login
+                    formState={formState}
+                    onChangeHandler={onChangeHandler}
+                    onBlurHandler={onBlurHandler}
+                    checkBoxHandler={checkBoxHandler}
+                    onSubmitHandler={onSubmitHandler}
+                />
+            </div>
     )
 }
 
