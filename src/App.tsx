@@ -12,6 +12,8 @@ import NewPasswordContainer from './content/NewPassword/NewPasswordContainer';
 import {setAuthTC} from './redux/auth-reducer';
 import {RootStateType} from './redux/store';
 import {Loader} from './common/loader/loader';
+import PacksPage from './content/PacksPage/PacksPage';
+import PacksPageContainer from './content/PacksPage/PacksPageContainer';
 
 function App() {
 
@@ -35,6 +37,7 @@ function App() {
                         <Route path='/profile' render={() => <Profile/>}/>
                         <Route path='/recover' render={() => <RecoverContainer/>}/>
                         <Route path='/set-new-password/:token?' render={() => <NewPasswordContainer/>}/>
+                        <Route path='/packs' render={() => <PacksPageContainer/>}/>
                         <Route path='/demo' render={() => <SuperInputsDemo/>}/>
 
                         <Route path={'/404'} render={() => <h1>404: PAGE NOT FOUND</h1>}/>

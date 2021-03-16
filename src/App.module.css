@@ -7,10 +7,10 @@
 }
 
 .content {
-    width: 50%;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: darkgray;
+    width: 95%;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #cad2c8;
     display: flex;
     justify-content: center;
 }
