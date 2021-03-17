@@ -1,10 +1,11 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
 import style from '../styles/PacksPage.module.css'
+import {GetPacksResponseType} from '../../api/authAPI';
+import PackItem from './PackItem';
 
 type PacksPagePropsType = {
-    packs: Array<any>
-    packsPerPage: number
+    packs: Array<GetPacksResponseType>
+    itemsPerPage: number
     totalPacksCount: number
     currentPage: number
     onPageChange: (page: number) => void
@@ -13,23 +14,9 @@ type PacksPagePropsType = {
 function PacksPage(props: PacksPagePropsType) {
     console.log('PacksPage called')
 
-    const packItem =
-        <li>
-            <div className={style.packItem}>
-                <div style={{width: '15%'}}>pack1</div>
-                <div style={{width: '15%'}}>7</div>
-                <div style={{width: '15%'}}>03.03.2021</div>
-                <div style={{width: '10%'}}>...</div>
-                <div style={{width: '15%'}}>
-                    <button>Delete</button>
-                    <button>Update</button>
-                </div>
-                <div style={{width: '30%'}}>
-                    <NavLink to={'/profile'}>cards</NavLink>
-                </div>
-            </div>
-        </li>
-
+    const packs = props.packs.map(p => {
+        return <PackItem {...p}/>
+    })
 
     return (
         <div className={style.packsPageWrapper}>
@@ -46,11 +33,7 @@ function PacksPage(props: PacksPagePropsType) {
                     <div style={{width: '30%'}}/>
                 </div>
                 <ul>
-                    {packItem}
-                    {packItem}
-                    {packItem}
-                    {packItem}
-                    {packItem}
+                    {packs}
                 </ul>
             </div>
         </div>

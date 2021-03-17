@@ -16,8 +16,8 @@ export const rootReducer = combineReducers({
     pageProfile: profileReducer,
     pageRecover: recoverReducer,
     pageRegistration: registrationReducer,
-    packs: packsReducer,
-    cards: cardsReducer
+    packsPage: packsReducer,
+    cardsPage: cardsReducer
 })
 
 let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))

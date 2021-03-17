@@ -42,6 +42,7 @@ ul {
 }
 
 .packItem {
+    font-size: 14px;
     padding: 5px 15px;
     display: flex;
     flex-direction: row;

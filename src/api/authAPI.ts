@@ -33,6 +33,7 @@ export const authAPI = {
 export const packsAPI = {
     getPacks() {
         return instance.get('/cards/pack') //todo - params?
+            .then(response => response.data)
     },
     createPack(data: CreatePackType) {
         return instance.post('/cards/pack', data)
@@ -40,7 +41,7 @@ export const packsAPI = {
     deletePack(id: string) {
         return instance.delete(`/cards/pack?id=${id}`)
     },
-    updatePack(cardsPack: PackType) {
+    updatePack(cardsPack: GetPacksResponseType) {
         return instance.put('/cards/pack', cardsPack)
     }
 }
@@ -55,15 +56,24 @@ export const cardsAPI = {
     deleteCard(id: string) {
         return instance.delete(`/cards/card?id=${id}`)
     },
-    updateCard(cardsPack: PackType) {
+    updateCard(cardsPack: GetPacksResponseType) {
         return instance.put('/cards/card', cardsPack)
     }
 }
 
 
-export type PackType = {
-    _id: string,
-    name?: string
+export type GetPacksResponseType = {
+    _id: string
+    user_id: string
+    name: string
+    path: string // папка
+    cardsCount: number
+    grade: number // средняя оценка карточек
+    shots: number // количество попыток
+    rating: number // лайки
+    type: "pack" // ещё будет "folder" (папка)
+    created: string
+    updated: string
 }
 
 export type CreatePackType = { // todo - оранж поля?
