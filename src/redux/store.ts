@@ -6,6 +6,7 @@ import {profileReducer} from './profile-reducer';
 import {recoverReducer} from './recover-reducer';
 import {registrationReducer} from './registration-reducer';
 import {appReducer} from './app-reducer';
+import {searchReducer} from "./search-reducer";
 
 export const rootReducer = combineReducers({
     appState: appReducer,
@@ -13,7 +14,8 @@ export const rootReducer = combineReducers({
     pagePassword: passwordReducer,
     pageProfile: profileReducer,
     pageRecover: recoverReducer,
-    pageRegistration: registrationReducer
+    pageRegistration: registrationReducer,
+    searchValue: searchReducer
 })
 
 // let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
