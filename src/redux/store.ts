@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, createStore, compose } from "redux"
+import {applyMiddleware, combineReducers, compose, createStore} from "redux"
 import thunkMiddleware from 'redux-thunk';
 import {authReducer} from './auth-reducer';
 import {passwordReducer} from './password-reducer';
@@ -7,6 +7,7 @@ import {recoverReducer} from './recover-reducer';
 import {registrationReducer} from './registration-reducer';
 import {appReducer} from './app-reducer';
 import {searchReducer} from "./search-reducer";
+import {paginationReducer} from "./pagination-reducer";
 
 export const rootReducer = combineReducers({
     appState: appReducer,
@@ -15,7 +16,8 @@ export const rootReducer = combineReducers({
     pageProfile: profileReducer,
     pageRecover: recoverReducer,
     pageRegistration: registrationReducer,
-    searchValue: searchReducer
+    searchValue: searchReducer,
+    pagination: paginationReducer
 })
 
 // let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))

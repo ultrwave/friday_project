@@ -5,6 +5,7 @@ import SuperCheckbox from '../common/SuperCheckbox/SuperCheckbox';
 import s from './styles/Registration.module.css'
 import SearchComponent from "../common/SearchComponent/SearchComponent";
 import SearchContainer from "../common/SearchComponent/SearchContainer";
+import PaginationContainer from "../common/Pagination/PaginationContainer";
 
 type RegistrationPropsType = {
     error?: string
@@ -53,7 +54,11 @@ function SuperInputsDemo() {
                     CheckboxText {/*// этот текст попадёт в children*/}
                 </SuperCheckbox>
                 <div>SearchComponent:
-                    <div style={{'border': 'solid 1px black'}}><SearchContainer/></div></div>
+                    <div style={{'border': 'solid 1px black'}}><SearchContainer/></div>
+                </div>
+                <div>Pagination:
+                    <div style={{'border': 'solid 1px black'}}><PaginationContainer/></div>
+                </div>
             </div>
         </div>
     )

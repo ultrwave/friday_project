@@ -1,6 +1,4 @@
-
 const SET_SEARCH_VALUE = 'SET_SEARCH_VALUE';
-
 
 export type InitialStateType = {
     searchValue: string
@@ -9,7 +7,6 @@ export type InitialStateType = {
 const initialState: InitialStateType = {
     searchValue: '',
 }
-
 
 type ActionTypes =
     | ReturnType<typeof setSearchAC>
