@@ -35,20 +35,20 @@ export const packsAPI = {
         return instance.get('/cards/pack') //todo - params?
             .then(response => response.data)
     },
-    createPack(data: CreatePackType) {
-        return instance.post('/cards/pack', data)
+    createPack(name: string) {
+        return instance.post('/cards/pack', {cardsPack:{name}})
     },
     deletePack(id: string) {
         return instance.delete(`/cards/pack?id=${id}`)
     },
-    updatePack(cardsPack: GetPacksResponseType) {
-        return instance.put('/cards/pack', cardsPack)
+    updatePack(id: string, newName: string) {
+        return instance.put('/cards/pack', {cardsPack:{_id: id, name: newName}})
     }
 }
 
 export const cardsAPI = {
     getCards() {
-        return instance.get('/cards/card') //todo - params?
+        return instance.get('/cards/card')
     },
     createCard(data: CreatePackType) {
         return instance.post('/cards/card', data)

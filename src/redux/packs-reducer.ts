@@ -1,6 +1,9 @@
 import {packsAPI, GetPacksResponseType} from '../api/authAPI';
 import {DispatchType} from './auth-reducer';
 import {setAppStatusAC} from './app-reducer';
+import {ThunkAction} from 'redux-thunk';
+import {RootStateType} from './store';
+import {Action} from 'redux';
 
 type PageStateType = {
     packs: Array<GetPacksResponseType>
@@ -81,13 +84,63 @@ export const setTotalPacksCountAC = (totalPacksCount: number) => (
 
 // Thunks
 
-export const getPacksTC = (page: number, pageCount: number) => (dispatch: DispatchType) => {
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
+    RootStateType,
+    unknown,
+    Action<string>>
+
+export const getPacksTC = (page: number, pageCount: number):AppThunk => (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     packsAPI.getPacks()
         .then((response) => {
             console.log(response)
             dispatch(setPacksAC(response.cardPacks))
             dispatch(setTotalPacksCountAC(response.cardPacksTotalCount))
+        })
+        .catch(e => console.log(e))
+        .finally(() => {
+            dispatch(setAppStatusAC('idle'))
+        })
+}
+
+export const createPackTC = (name: string):AppThunk => (dispatch, getState) => {
+    dispatch(setAppStatusAC('loading'))
+    packsAPI.createPack(name)
+        .then((response) => {
+            console.log(response)
+            const page = getState().packsPage.currentPage
+            const pageCount = getState().packsPage.itemsPerPage
+            dispatch(getPacksTC(page, pageCount))
+        })
+        .catch(e => console.log(e))
+        .finally(() => {
+            dispatch(setAppStatusAC('idle'))
+        })
+}
+
+export const deletePackTC = (id: string):AppThunk => (dispatch, getState) => {
+    dispatch(setAppStatusAC('loading'))
+    packsAPI.deletePack(id)
+        .then((response) => {
+            console.log(response)
+            const page = getState().packsPage.currentPage
+            const pageCount = getState().packsPage.itemsPerPage
+            dispatch(getPacksTC(page, pageCount))
+        })
+        .catch(e => console.log(e))
+        .finally(() => {
+            dispatch(setAppStatusAC('idle'))
+        })
+}
+// fix newName
+export const updatePackTC = (id: string, newName?: string):AppThunk => (dispatch, getState) => {
+    dispatch(setAppStatusAC('loading'))
+    packsAPI.updatePack(id, 'UPDATED Pack')
+        .then((response) => {
+            console.log(response)
+            const page = getState().packsPage.currentPage
+            const pageCount = getState().packsPage.itemsPerPage
+            dispatch(getPacksTC(page, pageCount))
         })
         .catch(e => console.log(e))
         .finally(() => {
