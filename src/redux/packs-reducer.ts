@@ -61,39 +61,22 @@ export const packsReducer = (state: PageStateType = initialState, action: Action
     }
 }
 
-
 const SET_PACKS = 'SET-PACKS'
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE'
 const SET_ITEMS_PER_PAGE = 'SET-ITEMS-PER-PAGE'
 const SET_TOTAL_PACKS_COUNT = 'SET-TOTAL-PACKS-COUNT'
 
-
 export const setPacksAC = (packs: Array<GetPacksResponseType>) => (
-    {
-        type: SET_PACKS,
-        packs
-    } as const
+    {type: SET_PACKS, packs} as const
 )
-
 export const setCurrentPageAC = (currentPage: number) => (
-    {
-        type: SET_CURRENT_PAGE,
-        currentPage
-    } as const
+    {type: SET_CURRENT_PAGE, currentPage} as const
 )
-
 export const setItemsPerPageAC = (itemsPerPage: number) => (
-    {
-        type: SET_ITEMS_PER_PAGE,
-        itemsPerPage
-    } as const
+    {type: SET_ITEMS_PER_PAGE, itemsPerPage} as const
 )
-
 export const setTotalPacksCountAC = (totalPacksCount: number) => (
-    {
-        type: SET_TOTAL_PACKS_COUNT,
-        totalPacksCount
-    } as const
+    {type: SET_TOTAL_PACKS_COUNT, totalPacksCount} as const
 )
 
 // Thunks
@@ -103,62 +86,39 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
     unknown,
     Action<string>>
 
-export const getPacksTC = ():AppThunk => (dispatch, getState) => {
-    dispatch(setAppStatusAC('loading'))
-    const params = getState().packsPage.params
-    packsAPI.getPacks(params)
-        .then((response) => {
-            console.log(response)
-            dispatch(setPacksAC(response.cardPacks))
-            dispatch(setTotalPacksCountAC(response.cardPacksTotalCount))
-        })
-        .catch(e => console.log(e))
-        .finally(() => {
-            dispatch(setAppStatusAC('idle'))
-        })
-}
+export const getPacksTC = (): AppThunk =>
+    (dispatch, getState) => {
+        dispatch(setAppStatusAC('loading'))
+        const params = getState().packsPage.params
+        packsAPI.getPacks(params)
+            .then((response) => {
+                dispatch(setPacksAC(response.cardPacks))
+                dispatch(setTotalPacksCountAC(response.cardPacksTotalCount))
+            })
+            .catch(e => console.log(e))
+            .finally(() => dispatch(setAppStatusAC('idle')))
+    }
 
-export const createPackTC = (name: string):AppThunk => (dispatch, getState) => {
+export const createPackTC = (name: string): AppThunk => (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     packsAPI.createPack(name)
-        .then((response) => {
-            console.log(response)
-            const page = getState().packsPage.currentPage
-            const pageCount = getState().packsPage.itemsPerPage
-            dispatch(getPacksTC())
-        })
+        .then(() => dispatch(getPacksTC()))
         .catch(e => console.log(e))
-        .finally(() => {
-            dispatch(setAppStatusAC('idle'))
-        })
+        .finally(() => dispatch(setAppStatusAC('idle')))
 }
 
-export const deletePackTC = (id: string):AppThunk => (dispatch, getState) => {
+export const deletePackTC = (id: string): AppThunk => (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     packsAPI.deletePack(id)
-        .then((response) => {
-            console.log(response)
-            const page = getState().packsPage.currentPage
-            const pageCount = getState().packsPage.itemsPerPage
-            dispatch(getPacksTC())
-        })
+        .then(() => dispatch(getPacksTC()))
         .catch(e => console.log(e))
-        .finally(() => {
-            dispatch(setAppStatusAC('idle'))
-        })
+        .finally(() => dispatch(setAppStatusAC('idle')))
 }
 // fix newName
-export const updatePackTC = (id: string, newName?: string):AppThunk => (dispatch, getState) => {
+export const updatePackTC = (id: string, newName?: string): AppThunk => (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     packsAPI.updatePack(id, 'UPDATED Pack')
-        .then((response) => {
-            console.log(response)
-            const page = getState().packsPage.currentPage
-            const pageCount = getState().packsPage.itemsPerPage
-            dispatch(getPacksTC())
-        })
+        .then(() => dispatch(getPacksTC()))
         .catch(e => console.log(e))
-        .finally(() => {
-            dispatch(setAppStatusAC('idle'))
-        })
+        .finally(() => dispatch(setAppStatusAC('idle')))
 }

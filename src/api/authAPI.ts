@@ -48,18 +48,18 @@ export const packsAPI = {
 }
 
 export const cardsAPI = {
-    getCards(params: any) { // todo - fix any
+    getCards(params: any) { // todo - fix params
         return instance.get('/cards/card',{params})
     .then(response => response.data)
     },
-    createCard(data: CreatePackType) {
+    createCard(data: CreateCardType) {
         return instance.post('/cards/card', data)
     },
     deleteCard(id: string) {
         return instance.delete(`/cards/card?id=${id}`)
     },
-    updateCard(cardsPack: GetPacksResponseType) {
-        return instance.put('/cards/card', cardsPack)
+    updateCard(id: string) {
+        return instance.put('/cards/card', {cardsPack:{_id: id, question: 'updated'}})
     }
 }
 
@@ -106,17 +106,17 @@ export type CardType = {
 }
 
 export type CreateCardType = {
-    answer: string // если не отправить будет таким
-    question: string // если не отправить будет таким
-    cardsPack_id: string
-    grade: number // 0..5, не обязателен
-    rating: number // не обязателен
-    shots: number // не обязателен
-    type: string // если не отправить будет таким
-    answerImg: string // не обязателен
-    questionImg: string // не обязателен
-    questionVideo: string // не обязателен
-    answerVideo: string // не обязателен
+    answer?: string // если не отправить будет таким
+    question?: string // если не отправить будет таким
+    cardsPack_id?: string
+    grade?: number // 0..5, не обязателен
+    rating?: number // не обязателен
+    shots?: number // не обязателен
+    type?: string // если не отправить будет таким
+    answerImg?: string // не обязателен
+    questionImg?: string // не обязателен
+    questionVideo?: string // не обязателен
+    answerVideo?: string // не обязателен
 }
 
 export type CardsResponseType = {
