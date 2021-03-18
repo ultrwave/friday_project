@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {GetPacksParamsType} from '../redux/packs-reducer';
 
 const instance = axios.create({
     withCredentials: true,
@@ -31,8 +32,8 @@ export const authAPI = {
 }
 
 export const packsAPI = {
-    getPacks() {
-        return instance.get('/cards/pack') //todo - params?
+    getPacks(params: GetPacksParamsType) {
+        return instance.get('/cards/pack', {params})
             .then(response => response.data)
     },
     createPack(name: string) {
@@ -47,8 +48,9 @@ export const packsAPI = {
 }
 
 export const cardsAPI = {
-    getCards() {
-        return instance.get('/cards/card')
+    getCards(params: any) { // todo - fix any
+        return instance.get('/cards/card',{params})
+    .then(response => response.data)
     },
     createCard(data: CreatePackType) {
         return instance.post('/cards/card', data)
@@ -65,6 +67,7 @@ export const cardsAPI = {
 export type GetPacksResponseType = {
     _id: string
     user_id: string
+    user_name: string
     name: string
     path: string // папка
     cardsCount: number

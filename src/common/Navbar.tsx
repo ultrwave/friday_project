@@ -21,7 +21,7 @@ export function Navbar() {
             <NavbarItem to='/profile' title='Profile'/>
             <NavbarItem to='/set-new-password' title='Password'/>
             <NavbarItem to='/recover' title='Recover Pass'/>
-            <NavbarItem to='/packs' title='Packs'/>
+            <NavbarItem to='/cards' title='Cards'/>
             <NavbarItem to='/demo' title='Demo'/>
         </nav>
     )

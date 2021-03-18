@@ -1,5 +1,4 @@
-import {packsAPI, GetPacksResponseType} from '../api/authAPI';
-import {DispatchType} from './auth-reducer';
+import {GetPacksResponseType, packsAPI} from '../api/authAPI';
 import {setAppStatusAC} from './app-reducer';
 import {ThunkAction} from 'redux-thunk';
 import {RootStateType} from './store';
@@ -10,13 +9,28 @@ type PageStateType = {
     totalPacksCount: number
     itemsPerPage: number
     currentPage: number
+    params: GetPacksParamsType
+}
+
+export type GetPacksParamsType = {
+    packName?: string
+    min?: number
+    max?: number
+    page: number
+    pageCount: number
+    sortPacks: '1created' | '0created' | '1updated' | '0updated'
 }
 
 const initialState: PageStateType = {
     packs: [],
     totalPacksCount: 0,
     itemsPerPage: 5,
-    currentPage: 1
+    currentPage: 1,
+    params: {
+        page: 1,
+        pageCount: 10,
+        sortPacks: '0updated',
+    }
 }
 
 type ActionTypes =
@@ -89,9 +103,10 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
     unknown,
     Action<string>>
 
-export const getPacksTC = (page: number, pageCount: number):AppThunk => (dispatch) => {
+export const getPacksTC = ():AppThunk => (dispatch, getState) => {
     dispatch(setAppStatusAC('loading'))
-    packsAPI.getPacks()
+    const params = getState().packsPage.params
+    packsAPI.getPacks(params)
         .then((response) => {
             console.log(response)
             dispatch(setPacksAC(response.cardPacks))
@@ -110,7 +125,7 @@ export const createPackTC = (name: string):AppThunk => (dispatch, getState) => {
             console.log(response)
             const page = getState().packsPage.currentPage
             const pageCount = getState().packsPage.itemsPerPage
-            dispatch(getPacksTC(page, pageCount))
+            dispatch(getPacksTC())
         })
         .catch(e => console.log(e))
         .finally(() => {
@@ -125,7 +140,7 @@ export const deletePackTC = (id: string):AppThunk => (dispatch, getState) => {
             console.log(response)
             const page = getState().packsPage.currentPage
             const pageCount = getState().packsPage.itemsPerPage
-            dispatch(getPacksTC(page, pageCount))
+            dispatch(getPacksTC())
         })
         .catch(e => console.log(e))
         .finally(() => {
@@ -140,7 +155,7 @@ export const updatePackTC = (id: string, newName?: string):AppThunk => (dispatch
             console.log(response)
             const page = getState().packsPage.currentPage
             const pageCount = getState().packsPage.itemsPerPage
-            dispatch(getPacksTC(page, pageCount))
+            dispatch(getPacksTC())
         })
         .catch(e => console.log(e))
         .finally(() => {

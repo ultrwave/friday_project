@@ -1,7 +1,7 @@
 import React, {FormEvent, useEffect, useState} from 'react';
-import style from '../styles/PacksPage.module.css'
+import style from '../styles/CardsPage.module.css'
 import {GetPacksResponseType} from '../../api/authAPI';
-import PackItem from './PackItem';
+import CardItem from './CardItem';
 import SuperInputText from '../../common/SuperInputText/SuperInputText';
 
 type PacksPagePropsType = {
@@ -22,7 +22,7 @@ export type AddPackFormStateType = {
     touched: boolean
 }
 
-function PacksPage(props: PacksPagePropsType) {
+function CardsPage(props: PacksPagePropsType) {
     console.log('CardsPage called')
 
     let [formState, setFormState] =
@@ -51,7 +51,7 @@ function PacksPage(props: PacksPagePropsType) {
     }
 
     const packs = props.packs.map(p => {
-        return <PackItem {...p}
+        return <CardItem {...p}
                          key={p._id}
                          deleteCallback={() => props.deletePack(p._id)}
                          updateCallback={() => props.updatePack(p._id)}
@@ -115,4 +115,4 @@ function PacksPage(props: PacksPagePropsType) {
     )
 }
 
-export default PacksPage;
+export default CardsPage;

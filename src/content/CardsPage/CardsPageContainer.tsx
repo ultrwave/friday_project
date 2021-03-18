@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
-import PacksPage from './PacksPage';
+import CardsPage from './CardsPage';
 import {useDispatch, useSelector} from 'react-redux';
 import {createPackTC, deletePackTC, getPacksTC, updatePackTC} from '../../redux/packs-reducer';
 import {RootStateType} from '../../redux/store';
 import {Redirect} from 'react-router-dom';
 
 
-function PacksPageContainer() {
+function CardsPageContainer() {
     console.log('PacksPageContainer called')
 
     const dispatch = useDispatch()
@@ -41,7 +41,7 @@ function PacksPageContainer() {
     return (
         !isLoggedIn
             ? <Redirect to={'login'}/>
-            : <PacksPage
+            : <CardsPage
                 packs={packs}
                 createPack={createPack}
                 deletePack={deletePack}
@@ -53,4 +53,4 @@ function PacksPageContainer() {
     )
 }
 
-export default PacksPageContainer;
+export default CardsPageContainer;

@@ -10,7 +10,7 @@ type PackItemPropsType = {
     updateCallback(): void
 }
 
-function PackItem(props: GetPacksResponseType & PackItemPropsType) {
+function CardItem(props: GetPacksResponseType & PackItemPropsType) {
 
     const myId = useSelector((state: RootStateType) => state.auth.profile?._id)
     const itemIsMine = props.user_id === myId
@@ -44,4 +44,4 @@ function PackItem(props: GetPacksResponseType & PackItemPropsType) {
     )
 }
 
-export default PackItem;
+export default CardItem;

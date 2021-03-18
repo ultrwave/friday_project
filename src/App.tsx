@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import style from './App.module.css';
-import {HashRouter, Route, Switch, Redirect} from 'react-router-dom';
+import {HashRouter, Redirect, Route, Switch} from 'react-router-dom';
 import Profile from './content/Profile';
 import Registration from './content/Registration';
 import {Navbar} from './common/Navbar';
@@ -12,7 +12,6 @@ import NewPasswordContainer from './content/NewPassword/NewPasswordContainer';
 import {setAuthTC} from './redux/auth-reducer';
 import {RootStateType} from './redux/store';
 import {Loader} from './common/loader/loader';
-import PacksPage from './content/PacksPage/PacksPage';
 import PacksPageContainer from './content/PacksPage/PacksPageContainer';
 
 function App() {
@@ -22,7 +21,7 @@ function App() {
 
     useEffect(() => {
         dispatch(setAuthTC())
-    }, [])
+    }, [dispatch])
 
     return (
         <HashRouter>
@@ -37,7 +36,7 @@ function App() {
                         <Route path='/profile' render={() => <Profile/>}/>
                         <Route path='/recover' render={() => <RecoverContainer/>}/>
                         <Route path='/set-new-password/:token?' render={() => <NewPasswordContainer/>}/>
-                        <Route path='/packs' render={() => <PacksPageContainer/>}/>
+                        <Route path='/cards/:token?' render={() => <PacksPageContainer/>}/>
                         <Route path='/demo' render={() => <SuperInputsDemo/>}/>
 
                         <Route path={'/404'} render={() => <h1>404: PAGE NOT FOUND</h1>}/>
