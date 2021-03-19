@@ -17,7 +17,7 @@ const NewPassword = ({formState, onChangeHandler, onBlurHandler, onSubmitHandler
     console.log('NewPassword called')
 
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
-        e.stopPropagation()
+        e.preventDefault()
         onSubmitHandler(formState.password.value)
     }
 

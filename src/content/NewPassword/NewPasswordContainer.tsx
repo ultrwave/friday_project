@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import inputValidator from '../../common/inputValidator';
 import NewPassword from './NewPassword';
 import {useDispatch} from 'react-redux';
 import {setNewPasswordTC} from '../../redux/auth-reducer';
-import {useParams} from 'react-router-dom';
+import {useParams, useLocation} from 'react-router-dom';
 
 export type NewPasswordFormStateType = {
     password: InputType
@@ -26,6 +26,7 @@ function NewPasswordContainer() {
     const dispatch = useDispatch()
     const params: ParamsType = useParams()
     const token = params.token ? params.token : ''
+    window.history.replaceState(null, '', '/#/set-new-password')
 
     let [formState, setFormState] = useState<NewPasswordFormStateType>(
         {
@@ -57,20 +58,29 @@ function NewPasswordContainer() {
     }
 
     const onSubmitHandler = (password: string) => {
-        if (formState.password.value !== formState.confirm.value) {
-            setFormState({...formState, confirm: {...formState.confirm, error: 'Passwords do not match'}})
+        const error = !formState.password.value
+            ? 'Please enter new password'
+            : formState.password.value !== formState.confirm.value
+            ? 'Passwords do not match'
+            : ''
+        if (error) {
+            setFormState({
+                ...formState,
+                password: {...formState.password, error: ' ', touched: true},
+                confirm: {...formState.confirm, error, touched: true}
+            })
         } else {
             dispatch(setNewPasswordTC(password, token))
         }
     }
 
     return (
-            <NewPassword
-                formState={formState}
-                onChangeHandler={onChangeHandler}
-                onBlurHandler={onBlurHandler}
-                onSubmitHandler={onSubmitHandler}
-            />
+        <NewPassword
+            formState={formState}
+            onChangeHandler={onChangeHandler}
+            onBlurHandler={onBlurHandler}
+            onSubmitHandler={onSubmitHandler}
+        />
     )
 }
 

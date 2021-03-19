@@ -1,0 +1,77 @@
+.packsPageWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+h1 {
+    font-size: 20px;
+}
+
+.table {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    border: 1px dotted darkred;
+}
+
+.table li:nth-child(even) {
+    background-color: #e2e0d9;
+}
+
+.table li:nth-child(odd) {
+    background-color: #d2d0c8;
+}
+
+.tableHeader {
+    padding: 0 15px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid darkred;
+    background-color: #de9b87;
+    font-weight: bold;
+}
+
+.packItem {
+    font-size: 14px;
+    padding: 5px 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.inputBlock {
+    display: flex;
+    align-items: flex-start;
+}
+
+.inputBlock input {
+    margin-top: 16px;
+    margin-left: 2px;
+}
+
+.inputBlock button {
+    margin-top: 16px;
+    margin-right: 4px;
+}
+
+.inputBlock span {
+    font-weight: normal;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-left: 2px;
+    cursor: pointer;
+}
+
+.itemIsNotMine {
+    color: #b17070;
+}

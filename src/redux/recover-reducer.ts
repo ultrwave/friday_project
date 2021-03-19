@@ -2,49 +2,53 @@ import {DispatchType} from './auth-reducer';
 import {authAPI} from '../api/authAPI';
 
 type PageStateType = {
-    lastLinkTimestamp: number
+    timerIsOn: boolean
 }
 
 const initialState: PageStateType = {
-    lastLinkTimestamp: 0,
+    timerIsOn: false,
 }
 
 type ActionTypes =
-    | ReturnType<typeof setRecoverLinkTimestampAC>
+    | ReturnType<typeof toggleTimerAC>
 
 export const recoverReducer = (state: PageStateType = initialState, action: ActionTypes): PageStateType => {
 
     switch (action.type) {
 
-        case 'SET-RECOVER-LINK-TIMESTAMP':
-            state.lastLinkTimestamp = action.timeMs
-            return state
+        case TOGGLE_TIMER_STATUS:
+            return {...state, timerIsOn: action.timerIsOn}
 
         default:
             return state
     }
 }
 
-const SET_RECOVER_LINK_TIMESTAMP = 'SET-RECOVER-LINK-TIMESTAMP'
+const TOGGLE_TIMER_STATUS = 'TOGGLE-TIMER-STATUS'
 
-export const setRecoverLinkTimestampAC = (timeMs: number) => ({
-        type: SET_RECOVER_LINK_TIMESTAMP,
-        timeMs
+export const toggleTimerAC = (timerIsOn: boolean) => ({
+        type: TOGGLE_TIMER_STATUS,
+        timerIsOn
     } as const
 )
 
 // Thunks
-// todo - url heroku
-export const recoverPasswordTC = (email: string) => (dispatch: DispatchType) => {
+
+export const recoverPasswordTC = (email: string, baseUrl: string) => (dispatch: DispatchType) => {
     const from = 'Administrator'
     const message =
         `<div style="background-color: lime; padding: 15px"> password recovery link:
-         <a href='http://localhost:3000/#/set-new-password/$token$'>link</a></div>`
+         <a href='${baseUrl}/$token$'>link</a></div>`
     authAPI.forgot(email, from, message)
         .then(response => {
-            dispatch(setRecoverLinkTimestampAC(localStorage.timerData = (new Date).valueOf()))
+            // localStorage.timerData = Date.now()
         })
         .catch(e => {
             console.log('Recover Error', e)
         })
+        .finally(() => {
+            localStorage.timerData = Date.now()
+            dispatch(toggleTimerAC(true))
+        })
+
 }

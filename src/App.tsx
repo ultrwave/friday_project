@@ -18,6 +18,8 @@ import Page404 from "./content/Page404/Page404";
 export const DEV_MODE = true
 export const DEFAULT_EMAIL = 'nya-admin@nya.nya'
 export const DEFAULT_PASSWORD = '1qazxcvBG'
+import PacksPageContainer from './content/PacksPage/PacksPageContainer';
+import CardsPageContainer from './content/CardsPage/CardsPageContainer';
 
 function App() {
 
@@ -26,7 +28,7 @@ function App() {
 
     useEffect(() => {
         dispatch(setAuthTC())
-    }, [])
+    }, [dispatch])
 
     return (
         <HashRouter>
@@ -41,7 +43,9 @@ function App() {
                         <Route path='/registration2' render={() => <RegistrationContainer/>}/>
                         <Route path='/profile' render={() => <Profile/>}/>
                         <Route path='/recover' render={() => <RecoverContainer/>}/>
-                        <Route path='/password/:token?' render={() => <NewPasswordContainer/>}/>
+                        <Route path='/set-new-password/:token?' render={() => <NewPasswordContainer/>}/>
+                        <Route path='/packs/' render={() => <PacksPageContainer/>}/>
+                        <Route path='/cards/:id?' render={() => <CardsPageContainer/>}/>
                         <Route path='/demo' render={() => <SuperInputsDemo/>}/>
 
                         {/*<Route path={'/404'} render={() => <h1>404: PAGE NOT FOUND</h1>}/>*/}

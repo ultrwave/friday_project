@@ -8,6 +8,8 @@ import {registrationReducer} from './registration-reducer';
 import {appReducer} from './app-reducer';
 import {searchReducer} from "./search-reducer";
 import {paginationReducer} from "./pagination-reducer";
+import {packsReducer} from './packs-reducer';
+import {cardsReducer} from './cards-reducer';
 
 export const rootReducer = combineReducers({
     appState: appReducer,
@@ -17,7 +19,10 @@ export const rootReducer = combineReducers({
     pageRecover: recoverReducer,
     pageRegistration: registrationReducer,
     searchValue: searchReducer,
-    pagination: paginationReducer
+    pagination: paginationReducer,
+    pageRegistration: registrationReducer,
+    packsPage: packsReducer,
+    cardsPage: cardsReducer
 })
 
 // let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))

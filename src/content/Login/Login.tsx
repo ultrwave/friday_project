@@ -18,13 +18,12 @@ type LoginPropsType = {
 
 function Login({formState, onChangeHandler, onBlurHandler, checkBoxHandler, onSubmitHandler}: LoginPropsType) {
     console.log('Login called')
-
     const email = formState.email
     const password = formState.password
     const rememberMe = formState.rememberMe
 
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
-        e.stopPropagation()
+        e.preventDefault()
         onSubmitHandler(email.value, password.value, rememberMe)
     }
 

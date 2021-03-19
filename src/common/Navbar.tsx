@@ -20,8 +20,10 @@ export function Navbar() {
             {!isLoggedIn && <NavbarItem to='/registration' title='Registration'/>}
             {!isLoggedIn && <NavbarItem to='/registration2' title='Registration2'/>}
             <NavbarItem to='/profile' title='Profile'/>
-            <NavbarItem to='/password' title='Password'/>
+            <NavbarItem to='/set-new-password' title='Password'/>
             <NavbarItem to='/recover' title='Recover Pass'/>
+            <NavbarItem to='/packs' title='Packs'/>
+            <NavbarItem to='/cards' title='Cards'/>
             <NavbarItem to='/demo' title='Demo'/>
         </nav>
     )
