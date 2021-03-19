@@ -26,7 +26,6 @@ function Profile() {
                             <img src={profileData.avatar} alt="" width="100"  height=""></img>
                             </div>
                             : <img src={defaultAvatar} alt="" width="100" height="100"/>
-
                         }
                         <div className={style.name}>Name: {profileData.name}</div>
                         <div className={style.email}>email: {profileData.email}</div>

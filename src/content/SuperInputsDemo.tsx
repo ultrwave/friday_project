@@ -6,6 +6,7 @@ import s from './styles/Registration.module.css'
 import SearchComponent from "../common/SearchComponent/SearchComponent";
 import SearchContainer from "../common/SearchComponent/SearchContainer";
 import PaginationContainer from "../common/Pagination/PaginationContainer";
+import SortContainer from "../common/Sort/SortContainer";
 
 type RegistrationPropsType = {
     error?: string
@@ -58,6 +59,9 @@ function SuperInputsDemo() {
                 </div>
                 <div>Pagination:
                     <div style={{'border': 'solid 1px black'}}><PaginationContainer/></div>
+                </div>
+                <div>Sort:
+                    <div style={{'border': 'solid 1px black'}}><SortContainer/></div>
                 </div>
             </div>
         </div>
