@@ -5,11 +5,15 @@ import {setCurrentPageAC, setItemsOnPageAC} from "../../redux/pagination-reducer
 import {RootStateType} from "../../redux/store";
 
 type PaginationStateType = {
-    currentPage: number
-    itemsOnPage: number
+    page: number
+    pageCount: number
 }
 
-function PaginationContainer() {
+export type PaginationContainerPropsType = {
+    totalItems: number
+}
+
+function PaginationContainer({totalItems}: PaginationContainerPropsType) {
     const dispatch = useDispatch()
     const paginationState = useSelector((state: RootStateType): PaginationStateType => state.pagination)
 
@@ -25,9 +29,9 @@ function PaginationContainer() {
     return (
         <div>
             <PaginationDisplay
-                currentPage={paginationState.currentPage}
-                itemsOnPage={paginationState.itemsOnPage}
-                totalItems={54}
+                currentPage={paginationState.page}
+                itemsOnPage={paginationState.pageCount}
+                totalItems={totalItems}
                 getPage={getPage}
                 getItemsOnPage={getItemsOnPage}
             />

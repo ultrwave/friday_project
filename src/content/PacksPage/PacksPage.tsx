@@ -1,18 +1,19 @@
 import React, {FormEvent, useEffect, useState} from 'react';
 import style from '../styles/PacksPage.module.css'
-import {GetPacksResponseType} from '../../api/authAPI';
+import {GetPacksResponseType} from '../../api/API';
 import PackItem from './PackItem';
 import SuperInputText from '../../common/SuperInputText/SuperInputText';
+import PaginationContainer from '../../common/Pagination/PaginationContainer';
+import SearchContainer from '../../common/SearchComponent/SearchContainer';
+import {RootStateType} from '../../redux/store';
+import {useSelector} from 'react-redux';
 
 type PacksPagePropsType = {
     packs: Array<GetPacksResponseType>
-    itemsPerPage: number
     totalPacksCount: number
-    currentPage: number
     createPack(name: string): void
     deletePack(id: string): void
     updatePack(id: string): void
-    onPageChange(page: number): void
 }
 
 export type AddPackFormStateType = {
@@ -27,6 +28,11 @@ function PacksPage(props: PacksPagePropsType) {
 
     let [formState, setFormState] =
         useState<AddPackFormStateType>({value: '', error: '', hide: true, touched: false})
+
+    let [isMine, setIsMine] = useState(false)
+
+    const filter = useSelector((state: RootStateType): string => state.searchValue.searchValue)
+    const myId = useSelector((state: RootStateType) => state.auth.profile?._id)
 
     const onChangeHandler = (value: string) => {
 
@@ -50,7 +56,10 @@ function PacksPage(props: PacksPagePropsType) {
         })
     }
 
-    const packs = props.packs.map(p => {
+    let packs = props.packs.filter(p => filter ? p.name.includes(filter) : true)
+    if (isMine) packs = packs.filter(p => p.user_id === myId)
+
+    const packsRender = packs.map(p => {
         return <PackItem {...p}
                          key={p._id}
                          deleteCallback={() => props.deletePack(p._id)}
@@ -58,12 +67,14 @@ function PacksPage(props: PacksPagePropsType) {
         />
     })
 
+
     useEffect(() => {
-    if (formState.touched && !formState.value) {
-        setFormState({...formState, error: 'Required'})
-    } else {
-        setFormState({...formState, error: ''})
-    }}, [formState.value, formState.touched])
+        if (formState.touched && !formState.value) {
+            setFormState({...formState, error: 'Required'})
+        } else {
+            setFormState({...formState, error: ''})
+        }
+    }, [formState.value, formState.touched])
 
     const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -74,8 +85,7 @@ function PacksPage(props: PacksPagePropsType) {
         if (formState.value) {
             props.createPack(formState.value)
             toggleHideInput(true)
-        }
-        else if (formState.touched) {
+        } else if (formState.touched) {
             toggleHideInput(true)
         }
     }
@@ -83,6 +93,24 @@ function PacksPage(props: PacksPagePropsType) {
     return (
         <div className={style.packsPageWrapper}>
             <h1 style={{alignSelf: 'center'}}>Packs</h1>
+            <div style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                width: '100%'
+            }}>
+                <div style={{alignSelf: 'flex-start', marginBottom: '5px'}}>
+                    <SearchContainer/>
+                    <input type="checkbox"
+                           checked={isMine}
+                           onChange={() => setIsMine(!isMine)}
+                    />
+                    <span style={{fontSize: '12px', marginLeft: '2px', color: 'gray'}}>Show mine</span>
+                </div>
+                <div style={{alignSelf: 'flex-end', marginBottom: '5px'}}>
+                    <PaginationContainer totalItems={props.totalPacksCount}/>
+                </div>
+            </div>
             <div className={style.table}>
                 <div className={style.tableHeader}>
                     <div style={{width: '15%'}}>Name</div>
@@ -108,7 +136,7 @@ function PacksPage(props: PacksPagePropsType) {
                     <div style={{width: '20%'}}/>
                 </div>
                 <ul>
-                    {packs}
+                    {packsRender}
                 </ul>
             </div>
         </div>

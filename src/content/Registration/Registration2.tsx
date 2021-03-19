@@ -56,7 +56,7 @@ function Registration2({registrationFormState, onChangeHandler, onBlurHandler, o
     //     if (false) {
     //         alert("Введите текст");
     //     } else {
-    //         authAPI.registerUser(state.email, state.password1)
+    //         API.registerUser(state.email, state.password1)
     //             .then((res: any) => {
     //                 console.log(`User ${res.data.addedUser.email} successfully signed up`)
     //                 //setState({...state, errorResponse: error.response.data.error})

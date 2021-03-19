@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch} from "react-redux";
 import SearchComponent from "./SearchComponent";
 // import inputValidator from "../inputValidator";
@@ -25,6 +25,10 @@ function SearchContainer() {
     const onSubmitHandler = (searchValue:string) => {
         dispatch(setSearchAC(searchValue))
     }
+
+    useEffect(() => {
+        onSubmitHandler(searchState.value)
+    }, [searchState.value])
 
     return (
         <div>

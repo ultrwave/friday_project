@@ -58,7 +58,7 @@ function SuperInputsDemo() {
                     <div style={{'border': 'solid 1px black'}}><SearchContainer/></div>
                 </div>
                 <div>Pagination:
-                    <div style={{'border': 'solid 1px black'}}><PaginationContainer/></div>
+                    <div style={{'border': 'solid 1px black'}}><PaginationContainer totalItems={50}/></div>
                 </div>
                 <div>Sort:
                     <div style={{'border': 'solid 1px black'}}><SortContainer/></div>

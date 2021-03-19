@@ -1,8 +1,6 @@
 import {applyMiddleware, combineReducers, compose, createStore} from "redux"
 import thunkMiddleware from 'redux-thunk';
 import {authReducer} from './auth-reducer';
-import {passwordReducer} from './password-reducer';
-import {profileReducer} from './profile-reducer';
 import {recoverReducer} from './recover-reducer';
 import {registrationReducer} from './registration-reducer';
 import {appReducer} from './app-reducer';
@@ -14,13 +12,10 @@ import {cardsReducer} from './cards-reducer';
 export const rootReducer = combineReducers({
     appState: appReducer,
     auth: authReducer,
-    pagePassword: passwordReducer,
-    pageProfile: profileReducer,
     pageRecover: recoverReducer,
     pageRegistration: registrationReducer,
     searchValue: searchReducer,
     pagination: paginationReducer,
-    pageRegistration: registrationReducer,
     packsPage: packsReducer,
     cardsPage: cardsReducer
 })

@@ -1,5 +1,5 @@
 import {setAppStatusAC} from "./app-reducer";
-import {authAPI} from "../api/authAPI";
+import {API} from "../api/API";
 import {DispatchType} from "./auth-reducer";
 
 const SET_SUCCESSFULLY_REGISTERED = 'SET-SUCCESSFULLY-REGISTERED'
@@ -20,7 +20,7 @@ export const registrationReducer = (state: PageStateType = initialState, action:
     switch (action.type) {
 
         case SET_SUCCESSFULLY_REGISTERED:
-            // debugger
+
             return {...state, isSuccessfullyRegistered: action.isSuccessfullyRegistered}
 
         default:
@@ -37,7 +37,7 @@ export const setSuccessfullyRegisteredAC = (isSuccessfullyRegistered: boolean) =
 
 export const registrationTC = (email: string, password: string) => (dispatch: DispatchType) => {
     // dispatch(setAppStatusAC('loading'))
-    // authAPI.registration(email, password)
+    // API.registration(email, password)
     //     .then((response) => {
     //          dispatch(setProfileAC(response))
     //         dispatch(setIsLoggedInAC(true))
@@ -45,7 +45,7 @@ export const registrationTC = (email: string, password: string) => (dispatch: Di
     //     .catch(e => console.log('Error: ', {...e}))
     //     .finally(() => dispatch(setAppStatusAC('idle')))
     dispatch(setAppStatusAC('loading'))
-    authAPI.registration(email, password)
+    API.registration(email, password)
         .then((response) => {
              //dispatch(setProfileAC(response))
              dispatch(setSuccessfullyRegisteredAC(true))

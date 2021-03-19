@@ -2,14 +2,17 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_ITEMS_ON_PAGE = 'SET_ITEMS_ON_PAGE';
 
 export type InitialStateType = {
-    currentPage: number
-    itemsOnPage: number
+    page: number
+    pageCount: number
 }
 
 const initialState: InitialStateType = {
-    currentPage: 1,
-    itemsOnPage: 10,
+    page: 1,
+    pageCount: 10,
 }
+
+
+
 
 type ActionTypes =
     | ReturnType<typeof setCurrentPageAC>
@@ -20,12 +23,12 @@ export const paginationReducer = (state: InitialStateType = initialState, action
         case SET_CURRENT_PAGE:
             return {
                 ...state,
-                currentPage: action.payload.value
+                page: action.payload.value
             }
         case SET_ITEMS_ON_PAGE:
             return {
                 ...state,
-                itemsOnPage: action.payload.value
+                pageCount: action.payload.value
             }
 
 

@@ -1,4 +1,4 @@
-import {GetPacksResponseType, packsAPI} from '../api/authAPI';
+import {GetPacksResponseType, packsAPI} from '../api/API';
 import {setAppStatusAC} from './app-reducer';
 import {ThunkAction} from 'redux-thunk';
 import {RootStateType} from './store';
@@ -8,7 +8,6 @@ import {setAuthTC} from './auth-reducer';
 type PageStateType = {
     packs: Array<GetPacksResponseType>
     totalPacksCount: number
-    itemsPerPage: number
     currentPage: number
     params: GetPacksParamsType
 }
@@ -25,7 +24,6 @@ export type GetPacksParamsType = {
 const initialState: PageStateType = {
     packs: [],
     totalPacksCount: 0,
-    itemsPerPage: 5,
     currentPage: 1,
     params: {
         page: 1,
@@ -37,7 +35,6 @@ const initialState: PageStateType = {
 type ActionTypes =
     | ReturnType<typeof setPacksAC>
     | ReturnType<typeof setCurrentPageAC>
-    | ReturnType<typeof setItemsPerPageAC>
     | ReturnType<typeof setTotalPacksCountAC>
 
 
@@ -51,9 +48,6 @@ export const packsReducer = (state: PageStateType = initialState, action: Action
         case 'SET-CURRENT-PAGE':
             return {...state, currentPage: action.currentPage}
 
-        case 'SET-ITEMS-PER-PAGE':
-            return {...state, itemsPerPage: action.itemsPerPage}
-
         case 'SET-TOTAL-PACKS-COUNT':
             return {...state, totalPacksCount: action.totalPacksCount}
 
@@ -64,7 +58,6 @@ export const packsReducer = (state: PageStateType = initialState, action: Action
 
 const SET_PACKS = 'SET-PACKS'
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE'
-const SET_ITEMS_PER_PAGE = 'SET-ITEMS-PER-PAGE'
 const SET_TOTAL_PACKS_COUNT = 'SET-TOTAL-PACKS-COUNT'
 
 export const setPacksAC = (packs: Array<GetPacksResponseType>) => (
@@ -72,9 +65,6 @@ export const setPacksAC = (packs: Array<GetPacksResponseType>) => (
 )
 export const setCurrentPageAC = (currentPage: number) => (
     {type: SET_CURRENT_PAGE, currentPage} as const
-)
-export const setItemsPerPageAC = (itemsPerPage: number) => (
-    {type: SET_ITEMS_PER_PAGE, itemsPerPage} as const
 )
 export const setTotalPacksCountAC = (totalPacksCount: number) => (
     {type: SET_TOTAL_PACKS_COUNT, totalPacksCount} as const
@@ -90,8 +80,8 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
 export const getPacksTC = (): AppThunk =>
     (dispatch, getState) => {
         dispatch(setAppStatusAC('loading'))
-        const params = getState().packsPage.params
-        packsAPI.getPacks(params)
+        const params = getState().pagination
+        packsAPI.getPacks({...params, sortPacks: '0updated'})
             .then((response) => {
                 dispatch(setPacksAC(response.cardPacks))
                 dispatch(setTotalPacksCountAC(response.cardPacksTotalCount))

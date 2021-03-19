@@ -5,8 +5,8 @@ import {setCurrentPageAC, setItemsOnPageAC} from "../../redux/pagination-reducer
 import {RootStateType} from "../../redux/store";
 
 type PaginationStateType = {
-    currentPage: number
-    itemsOnPage: number
+    page: number
+    pageCount: number
 }
 
 function SortContainer() {
@@ -25,8 +25,8 @@ function SortContainer() {
     return (
         <div>
             <SortDisplay
-                currentPage={paginationState.currentPage}
-                itemsOnPage={paginationState.itemsOnPage}
+                currentPage={paginationState.page}
+                itemsOnPage={paginationState.pageCount}
                 totalItems={54}
                 getPage={getPage}
                 getItemsOnPage={getItemsOnPage}
