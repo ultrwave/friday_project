@@ -23,11 +23,11 @@ ul {
 }
 
 .table li:nth-child(even) {
-    background-color: #ececec;
+    background-color: #e2e0d9;
 }
 
 .table li:nth-child(odd) {
-    background-color: #dbdbdb;
+    background-color: #d2d0c8;
 }
 
 .tableHeader {
@@ -37,7 +37,7 @@ ul {
     flex-direction: row;
     align-items: center;
     border: 1px solid darkred;
-    background-color: burlywood;
+    background-color: #de9b87;
     font-weight: bold;
 }
 

@@ -1,21 +1,22 @@
-import React, {FormEvent, useEffect, useState} from 'react';
+import React from 'react';
 import style from '../styles/CardsPage.module.css'
-import {GetPacksResponseType} from '../../api/authAPI';
+import {CardType} from '../../api/authAPI';
 import CardItem from './CardItem';
-import SuperInputText from '../../common/SuperInputText/SuperInputText';
 
 type PacksPagePropsType = {
-    packs: Array<GetPacksResponseType>
+    cards: Array<CardType>
+    packTitle: string
+    packId: string
     itemsPerPage: number
-    totalPacksCount: number
+    totalCardsCount: number
     currentPage: number
-    createPack(name: string): void
-    deletePack(id: string): void
-    updatePack(id: string): void
+    createCard(packId: string): void // fix args
+    deleteCard(packId: string, cardId: string): void
+    updateCard(packId: string, cardId: string): void
     onPageChange(page: number): void
 }
 
-export type AddPackFormStateType = {
+export type AddCardFormStateType = {
     value: string
     error: string
     hide: boolean
@@ -25,90 +26,31 @@ export type AddPackFormStateType = {
 function CardsPage(props: PacksPagePropsType) {
     console.log('CardsPage called')
 
-    let [formState, setFormState] =
-        useState<AddPackFormStateType>({value: '', error: '', hide: true, touched: false})
-
-    const onChangeHandler = (value: string) => {
-
-        setFormState({
-            ...formState,
-            value: value.trim(),
-        })
-    }
-    const onBlurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
-
-        setFormState({
-            ...formState,
-            touched: true
-        })
-    }
-    const toggleHideInput = (hide: boolean) => {
-
-        setFormState({
-            ...formState,
-            hide
-        })
-    }
-
-    const packs = props.packs.map(p => {
-        return <CardItem {...p}
-                         key={p._id}
-                         deleteCallback={() => props.deletePack(p._id)}
-                         updateCallback={() => props.updatePack(p._id)}
+    const cards = props.cards.map(c => {
+        return <CardItem {...c}
+                         key={c._id}
+                         deleteCallback={() => props.deleteCard(props.packId, c._id)}
+                         updateCallback={() => props.updateCard(props.packId, c._id)}
         />
     })
 
-    useEffect(() => {
-    if (formState.touched && !formState.value) {
-        setFormState({...formState, error: 'Required'})
-    } else {
-        setFormState({...formState, error: ''})
-    }}, [formState.value, formState.touched])
-
-    const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        setFormState({
-            ...formState,
-            touched: true
-        })
-        if (formState.value) {
-            props.createPack(formState.value)
-            toggleHideInput(true)
-        }
-        else if (formState.touched) {
-            toggleHideInput(true)
-        }
-    }
-
     return (
         <div className={style.packsPageWrapper}>
-            <h1 style={{alignSelf: 'center'}}>Packs</h1>
+            <h1 style={{alignSelf: 'center'}}>Pack Name</h1>
             <div className={style.table}>
                 <div className={style.tableHeader}>
-                    <div style={{width: '15%'}}>Name</div>
-                    <div style={{width: '10%'}}>Cards count</div>
-                    <div style={{width: '15%'}}>User</div>
+                    <div style={{width: '15%'}}>Question</div>
+                    <div style={{width: '10%'}}>Answer</div>
+                    <div style={{width: '15%'}}>Grade</div>
                     <div style={{width: '10%'}}>Updated</div>
                     <div style={{width: '10%'}}>Created</div>
                     <div style={{width: '15%'}}>
-                        {formState.hide
-                            ? <button onClick={() => toggleHideInput(false)}>Add</button>
-                            : <form className={style.inputBlock} onSubmit={onSubmitHandler}>
-                                <button type='submit'>Add</button>
-                                <SuperInputText
-                                    value={formState.value}
-                                    error={formState.error}
-                                    onChangeText={onChangeHandler}
-                                    onBlur={onBlurHandler}
-                                    placeholder={'Pack name'}
-                                />
-                                <span onClick={() => toggleHideInput(true)}>x</span>
-                            </form>}
+                        <button onClick={() => props.createCard(props.packId)}>New card</button>
                     </div>
                     <div style={{width: '25%'}}/>
                 </div>
                 <ul>
-                    {packs}
+                    {cards}
                 </ul>
             </div>
         </div>

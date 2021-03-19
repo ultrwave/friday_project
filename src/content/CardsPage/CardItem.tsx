@@ -1,16 +1,16 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import style from '../styles/PacksPage.module.css'
-import {GetPacksResponseType} from '../../api/authAPI';
+import {CardType} from '../../api/authAPI';
 import {useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
 
-type PackItemPropsType = {
+type CardItemPropsType = {
     deleteCallback(): void
     updateCallback(): void
 }
 
-function CardItem(props: GetPacksResponseType & PackItemPropsType) {
+function CardItem(props: CardType & CardItemPropsType) {
 
     const myId = useSelector((state: RootStateType) => state.auth.profile?._id)
     const itemIsMine = props.user_id === myId
@@ -24,9 +24,10 @@ function CardItem(props: GetPacksResponseType & PackItemPropsType) {
     return (
         <li>
             <div className={`${style.packItem}${itemIsMine? '' : (' ' + style.itemIsNotMine)}`}>
-                <div style={{width: '15%'}}>{props.name}</div>
-                <div style={{width: '10%'}}>{props.cardsCount}</div>
-                <div style={{width: '15%', color: 'gray'}}>{props.user_name}</div>
+                <div style={{width: '15%'}}>{props.question}</div>
+                <div style={{width: '10%'}}>{props.answer}</div>
+                <div style={{width: '15%'}}>
+                    {Math.round((props.grade + Number.EPSILON) * 100) / 100}</div>
                 <div style={{width: '10%', fontSize: '12px'}}>{updated}</div>
                 <div style={{width: '10%', fontSize: '12px'}}>{created}</div>
                 <div style={{width: '15%'}}>
@@ -36,9 +37,7 @@ function CardItem(props: GetPacksResponseType & PackItemPropsType) {
                             disabled={!itemIsMine}
                             onClick={props.updateCallback}>Update</button>
                 </div>
-                <div style={{width: '25%'}}>
-                    <NavLink to={`/cards/${props._id}`}>cards</NavLink>
-                </div>
+                <div style={{width: '25%'}}/>
             </div>
         </li>
     )

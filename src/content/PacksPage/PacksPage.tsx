@@ -87,7 +87,7 @@ function PacksPage(props: PacksPagePropsType) {
                 <div className={style.tableHeader}>
                     <div style={{width: '15%'}}>Name</div>
                     <div style={{width: '10%'}}>Cards count</div>
-                    <div style={{width: '15%'}}>User</div>
+                    <div style={{width: '20%'}}>User</div>
                     <div style={{width: '10%'}}>Updated</div>
                     <div style={{width: '10%'}}>Created</div>
                     <div style={{width: '15%'}}>
@@ -105,7 +105,7 @@ function PacksPage(props: PacksPagePropsType) {
                                 <span onClick={() => toggleHideInput(true)}>x</span>
                             </form>}
                     </div>
-                    <div style={{width: '25%'}}/>
+                    <div style={{width: '20%'}}/>
                 </div>
                 <ul>
                     {packs}

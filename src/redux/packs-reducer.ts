@@ -3,6 +3,7 @@ import {setAppStatusAC} from './app-reducer';
 import {ThunkAction} from 'redux-thunk';
 import {RootStateType} from './store';
 import {Action} from 'redux';
+import {setAuthTC} from './auth-reducer';
 
 type PageStateType = {
     packs: Array<GetPacksResponseType>
@@ -95,7 +96,10 @@ export const getPacksTC = (): AppThunk =>
                 dispatch(setPacksAC(response.cardPacks))
                 dispatch(setTotalPacksCountAC(response.cardPacksTotalCount))
             })
-            .catch(e => console.log(e))
+            .catch(e => {
+                console.log(e)
+                dispatch(setAuthTC())
+            })
             .finally(() => dispatch(setAppStatusAC('idle')))
     }
 
@@ -103,7 +107,10 @@ export const createPackTC = (name: string): AppThunk => (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     packsAPI.createPack(name)
         .then(() => dispatch(getPacksTC()))
-        .catch(e => console.log(e))
+        .catch(e => {
+            console.log(e)
+            dispatch(setAuthTC())
+        })
         .finally(() => dispatch(setAppStatusAC('idle')))
 }
 
@@ -111,7 +118,10 @@ export const deletePackTC = (id: string): AppThunk => (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     packsAPI.deletePack(id)
         .then(() => dispatch(getPacksTC()))
-        .catch(e => console.log(e))
+        .catch(e => {
+            console.log(e)
+            dispatch(setAuthTC())
+        })
         .finally(() => dispatch(setAppStatusAC('idle')))
 }
 // fix newName
@@ -119,6 +129,9 @@ export const updatePackTC = (id: string, newName?: string): AppThunk => (dispatc
     dispatch(setAppStatusAC('loading'))
     packsAPI.updatePack(id, 'UPDATED Pack')
         .then(() => dispatch(getPacksTC()))
-        .catch(e => console.log(e))
+        .catch(e => {
+            console.log(e)
+            dispatch(setAuthTC())
+        })
         .finally(() => dispatch(setAppStatusAC('idle')))
 }

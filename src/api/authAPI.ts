@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {GetPacksParamsType} from '../redux/packs-reducer';
+import {GetCardsParamsType} from '../redux/cards-reducer';
 
 const instance = axios.create({
     withCredentials: true,
@@ -48,18 +49,18 @@ export const packsAPI = {
 }
 
 export const cardsAPI = {
-    getCards(params: any) { // todo - fix params
-        return instance.get('/cards/card',{params})
+    getCards(id: string, params: GetCardsParamsType) { // todo - fix params
+        return instance.get(`/cards/card?cardsPack_id=${id}`,{params})
     .then(response => response.data)
     },
     createCard(data: CreateCardType) {
-        return instance.post('/cards/card', data)
+        return instance.post('/cards/card', {card: data})
     },
     deleteCard(id: string) {
         return instance.delete(`/cards/card?id=${id}`)
     },
     updateCard(id: string) {
-        return instance.put('/cards/card', {cardsPack:{_id: id, question: 'updated'}})
+        return instance.put('/cards/card', {card:{_id: id, question: 'updated'}})
     }
 }
 

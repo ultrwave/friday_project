@@ -1,55 +1,65 @@
 import React, {useEffect} from 'react';
 import CardsPage from './CardsPage';
 import {useDispatch, useSelector} from 'react-redux';
-import {createPackTC, deletePackTC, getPacksTC, updatePackTC} from '../../redux/packs-reducer';
 import {RootStateType} from '../../redux/store';
-import {Redirect} from 'react-router-dom';
+import {Redirect, useParams} from 'react-router-dom';
+import {createCardTC, deleteCardTC, getCardsTC, updateCardTC} from '../../redux/cards-reducer';
 
+type ParamsType = {
+    id: string | undefined
+}
 
 function CardsPageContainer() {
-    console.log('PacksPageContainer called')
+    console.log('CardsPageContainer called')
 
     const dispatch = useDispatch()
     const isLoggedIn = useSelector((state: RootStateType): boolean => state.auth.isLoggedIn)
 
+    const params: ParamsType = useParams()
+    const packId = params.id ? params.id : ''
+
     useEffect(() => {
-        dispatch(getPacksTC())
-    }, [dispatch])
+        dispatch(getCardsTC(packId))
+    }, [dispatch, packId])
 
-    const packs = useSelector((state:RootStateType) => state.packsPage.packs)
-    const totalPacksCount = useSelector((state:RootStateType) => state.packsPage.totalPacksCount)
-    const itemsPerPage = useSelector((state:RootStateType) => state.packsPage.itemsPerPage)
-    const currentPage = useSelector((state:RootStateType) => state.packsPage.currentPage)
+    const cards = useSelector((state: RootStateType) => state.cardsPage.cards)
+    const totalCardsCount = useSelector((state: RootStateType) => state.cardsPage.totalCardsCount)
+    const itemsPerPage = useSelector((state: RootStateType) => state.cardsPage.itemsPerPage)
+    const currentPage = useSelector((state: RootStateType) => state.cardsPage.currentPage)
+    const packTitle = useSelector((state: RootStateType) => state.cardsPage.packTitle)
 
-    const pagesCount = Math.ceil(totalPacksCount / itemsPerPage)
+    const pagesCount = Math.ceil(totalCardsCount / itemsPerPage)
 
     const pages = [];
     for (let i = 1; i <= pagesCount; i++) pages.push(i)
 
-    const createPack = (name: string) => {
-        dispatch(createPackTC(name))
+    const createCard = (id: string) => { // fix args
+        dispatch(createCardTC(id))
     }
 
-    const deletePack = (id: string) => {
-        dispatch(deletePackTC(id))
+    const deleteCard = (packId: string, cardId: string) => {
+        dispatch(deleteCardTC(packId, cardId))
     }
 
-    const updatePack = (id: string) => {
-        dispatch(updatePackTC(id))
+    const updateCard = (packId: string, cardId: string) => {
+        dispatch(updateCardTC(packId, cardId))
     }
 
     return (
         !isLoggedIn
-            ? <Redirect to={'login'}/>
+            ? <Redirect to={'/login'}/>
             : <CardsPage
-                packs={packs}
-                createPack={createPack}
-                deletePack={deletePack}
-                updatePack={updatePack}
+                cards={cards}
+                packId={packId}
+                packTitle={packTitle}
+                createCard={createCard}
+                deleteCard={deleteCard}
+                updateCard={updateCard}
                 itemsPerPage={itemsPerPage}
-                totalPacksCount={totalPacksCount}
+                totalCardsCount={totalCardsCount}
                 currentPage={currentPage}
-                onPageChange={a => a}/>
+                onPageChange={a => a}
+            />
     )
 }
 

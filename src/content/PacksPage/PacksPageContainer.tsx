@@ -40,7 +40,7 @@ function PacksPageContainer() {
 
     return (
         !isLoggedIn
-            ? <Redirect to={'login'}/>
+            ? <Redirect to={'/login'}/>
             : <PacksPage
                 packs={packs}
                 createPack={createPack}

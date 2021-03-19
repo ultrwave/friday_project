@@ -26,7 +26,7 @@ function PackItem(props: GetPacksResponseType & PackItemPropsType) {
             <div className={`${style.packItem}${itemIsMine? '' : (' ' + style.itemIsNotMine)}`}>
                 <div style={{width: '15%'}}>{props.name}</div>
                 <div style={{width: '10%'}}>{props.cardsCount}</div>
-                <div style={{width: '15%', color: 'gray'}}>{props.user_name}</div>
+                <div style={{width: '20%', fontSize: '12px', color: 'gray'}}>{props.user_name}</div>
                 <div style={{width: '10%', fontSize: '12px'}}>{updated}</div>
                 <div style={{width: '10%', fontSize: '12px'}}>{created}</div>
                 <div style={{width: '15%'}}>
@@ -36,7 +36,7 @@ function PackItem(props: GetPacksResponseType & PackItemPropsType) {
                             disabled={!itemIsMine}
                             onClick={props.updateCallback}>Update</button>
                 </div>
-                <div style={{width: '25%'}}>
+                <div style={{width: '20%'}}>
                     <NavLink to={`/cards/${props._id}`}>cards</NavLink>
                 </div>
             </div>
