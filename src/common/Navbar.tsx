@@ -17,8 +17,7 @@ export function Navbar() {
                 ? <button onClick={logout}>Logout</button>
                 : <NavbarItem to='/login' title='Login'/>
             }
-            {!isLoggedIn && <NavbarItem to='/registration' title='Registration'/>}
-            {!isLoggedIn && <NavbarItem to='/registration2' title='Registration2'/>}
+            {!isLoggedIn && <NavbarItem to='/registration2' title='Registration'/>}
             <NavbarItem to='/profile' title='Profile'/>
             <NavbarItem to='/set-new-password' title='Password'/>
             <NavbarItem to='/recover' title='Recover Pass'/>

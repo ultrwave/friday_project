@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {authAPI} from '../../api/authAPI';
+import {API} from '../../api/API';
 import {useDispatch, useSelector} from "react-redux";
 import {RootStateType} from "../../redux/store";
 import Registration2 from './Registration2';
@@ -64,7 +64,7 @@ function RegistrationContainer() {
     //     if (false) {
     //         alert("Введите текст");
     //     } else {
-    //         authAPI.registration(registrationFormState.email.value, registrationFormState.password.value)
+    //         API.registration(registrationFormState.email.value, registrationFormState.password.value)
     //             .then((res: any) => {
     //                 console.log(`User ${res.data.addedUser.email} successfully signed up`)
     //                 setSuccessfulRegistration(true)

@@ -1,4 +1,4 @@
-import {CardType, cardsAPI} from '../api/authAPI';
+import {CardType, cardsAPI} from '../api/API';
 import {setAppStatusAC} from './app-reducer';
 import {ThunkAction} from 'redux-thunk';
 import {RootStateType} from './store';
@@ -101,8 +101,8 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
 export const getCardsTC = (packId: string):AppThunk =>
     (dispatch, getState) => {
     dispatch(setAppStatusAC('loading'))
-    const params = getState().cardsPage.params
-    cardsAPI.getCards(packId, params)
+    const params = getState().pagination
+    cardsAPI.getCards(packId, {...params, sortCards: '1grade'})
         .then((response) => {
             dispatch(setCardsAC(response.cards))
             dispatch(setTotalCardsCountAC(response.cardsTotalCount))

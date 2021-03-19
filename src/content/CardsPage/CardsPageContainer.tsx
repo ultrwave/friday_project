@@ -14,21 +14,21 @@ function CardsPageContainer() {
 
     const dispatch = useDispatch()
     const isLoggedIn = useSelector((state: RootStateType): boolean => state.auth.isLoggedIn)
+    const page = useSelector((state: RootStateType): number => state.pagination.page)
+    const pageCount = useSelector((state: RootStateType): number => state.pagination.pageCount)
 
     const params: ParamsType = useParams()
     const packId = params.id ? params.id : ''
 
     useEffect(() => {
         dispatch(getCardsTC(packId))
-    }, [dispatch, packId])
+    }, [dispatch, packId, page, pageCount])
 
     const cards = useSelector((state: RootStateType) => state.cardsPage.cards)
     const totalCardsCount = useSelector((state: RootStateType) => state.cardsPage.totalCardsCount)
-    const itemsPerPage = useSelector((state: RootStateType) => state.cardsPage.itemsPerPage)
-    const currentPage = useSelector((state: RootStateType) => state.cardsPage.currentPage)
-    const packTitle = useSelector((state: RootStateType) => state.cardsPage.packTitle)
+    const itemsOnPage = useSelector((state: RootStateType) => state.pagination.pageCount)
 
-    const pagesCount = Math.ceil(totalCardsCount / itemsPerPage)
+    const pagesCount = Math.ceil(totalCardsCount / itemsOnPage)
 
     const pages = [];
     for (let i = 1; i <= pagesCount; i++) pages.push(i)
@@ -51,14 +51,10 @@ function CardsPageContainer() {
             : <CardsPage
                 cards={cards}
                 packId={packId}
-                packTitle={packTitle}
                 createCard={createCard}
                 deleteCard={deleteCard}
                 updateCard={updateCard}
-                itemsPerPage={itemsPerPage}
                 totalCardsCount={totalCardsCount}
-                currentPage={currentPage}
-                onPageChange={a => a}
             />
     )
 }

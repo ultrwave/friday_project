@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {createPackTC, deletePackTC, getPacksTC, updatePackTC} from '../../redux/packs-reducer';
 import {RootStateType} from '../../redux/store';
 import {Redirect} from 'react-router-dom';
+import PaginationContainer from '../../common/Pagination/PaginationContainer';
 
 
 function PacksPageContainer() {
@@ -11,17 +12,18 @@ function PacksPageContainer() {
 
     const dispatch = useDispatch()
     const isLoggedIn = useSelector((state: RootStateType): boolean => state.auth.isLoggedIn)
+    const page = useSelector((state: RootStateType): number => state.pagination.page)
+    const pageCount = useSelector((state: RootStateType): number => state.pagination.pageCount)
 
     useEffect(() => {
         dispatch(getPacksTC())
-    }, [dispatch])
+    }, [dispatch, page, pageCount])
 
-    const packs = useSelector((state:RootStateType) => state.packsPage.packs)
-    const totalPacksCount = useSelector((state:RootStateType) => state.packsPage.totalPacksCount)
-    const itemsPerPage = useSelector((state:RootStateType) => state.packsPage.itemsPerPage)
-    const currentPage = useSelector((state:RootStateType) => state.packsPage.currentPage)
+    const packs = useSelector((state: RootStateType) => state.packsPage.packs)
+    const totalPacksCount = useSelector((state: RootStateType) => state.packsPage.totalPacksCount)
+    const itemsOnPage = useSelector((state: RootStateType) => state.pagination.pageCount)
 
-    const pagesCount = Math.ceil(totalPacksCount / itemsPerPage)
+    const pagesCount = Math.ceil(totalPacksCount / itemsOnPage)
 
     const pages = [];
     for (let i = 1; i <= pagesCount; i++) pages.push(i)
@@ -46,10 +48,8 @@ function PacksPageContainer() {
                 createPack={createPack}
                 deletePack={deletePack}
                 updatePack={updatePack}
-                itemsPerPage={itemsPerPage}
                 totalPacksCount={totalPacksCount}
-                currentPage={currentPage}
-                onPageChange={a => a}/>
+            />
     )
 }
 

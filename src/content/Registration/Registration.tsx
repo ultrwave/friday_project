@@ -3,7 +3,7 @@ import SuperButton from '../../common/SuperButton/SuperButton';
 import SuperInputText from '../../common/SuperInputText/SuperInputText';
 import style from '../styles/Registration.module.css'
 import {Redirect} from 'react-router-dom';
-import {authAPI} from '../../api/authAPI';
+import {API} from '../../api/API';
 
 type RegistrationPropsType = {
     error?: string
@@ -36,7 +36,7 @@ function Registration() {
         if (emailError) {
             alert("Введите текст");
         } else {
-            // authAPI.registerUser(state.email, state.password1)
+            // API.registerUser(state.email, state.password1)
             //     .then((res: any) => {
             //         console.log(`User ${res.data.addedUser.email} successfully signed up`)
             //         //setState({...state, errorResponse: error.response.data.error})

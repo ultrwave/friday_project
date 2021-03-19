@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './PaginationDisplay.module.css';
+import s from '../styles/PaginationDisplay.module.css';
 
 type PaginationType = {
     currentPage: number

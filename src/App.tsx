@@ -13,13 +13,13 @@ import {setAuthTC} from './redux/auth-reducer';
 import {RootStateType} from './redux/store';
 import {Loader} from './common/loader/loader';
 import RegistrationContainer from './content/Registration/RegistrationContainer';
-import Page404 from "./content/Page404/Page404";
+import CardsPageContainer from './content/CardsPage/CardsPageContainer';
 
+import PacksPageContainer from './content/PacksPage/PacksPageContainer';
+import Page404 from "./content/Page404/Page404";
 export const DEV_MODE = true
 export const DEFAULT_EMAIL = 'nya-admin@nya.nya'
 export const DEFAULT_PASSWORD = '1qazxcvBG'
-import PacksPageContainer from './content/PacksPage/PacksPageContainer';
-import CardsPageContainer from './content/CardsPage/CardsPageContainer';
 
 function App() {
 
@@ -39,7 +39,6 @@ function App() {
                     <Switch>
                         <Route exact path={'/'} render={() => <Profile/>}/>
                         <Route path='/login' render={() => <LoginContainer/>}/>
-                        <Route path='/registration' render={() => <Registration/>}/>
                         <Route path='/registration2' render={() => <RegistrationContainer/>}/>
                         <Route path='/profile' render={() => <Profile/>}/>
                         <Route path='/recover' render={() => <RecoverContainer/>}/>

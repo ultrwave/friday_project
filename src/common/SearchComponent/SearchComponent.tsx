@@ -21,6 +21,11 @@ function SearchComponent({value, onChangeHandler, onSubmitHandler}: searchFieldT
         onSubmitHandler(e.target.value)
     }
 
+    const clearSearch = () => {
+        onChangeHandler('')
+        onSubmitHandler('')
+    }
+
 
     return (
         <div className={s.searchComponent}>
@@ -29,8 +34,9 @@ function SearchComponent({value, onChangeHandler, onSubmitHandler}: searchFieldT
                 onChange={(e) => onChangeHandler(e.currentTarget.value)}
                 onKeyPress={handleKeyPress}
                 onBlur={handleOnBlur}
+                placeholder={'Find on page'}
             />
-            <button>x</button>
+            <button onClick={clearSearch}>x</button>
         </div>
     );
 }
