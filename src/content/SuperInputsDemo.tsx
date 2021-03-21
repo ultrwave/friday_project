@@ -3,8 +3,8 @@ import SuperButton from '../common/SuperButton/SuperButton';
 import SuperInputText from '../common/SuperInputText/SuperInputText';
 import SuperCheckbox from '../common/SuperCheckbox/SuperCheckbox';
 import s from './styles/Registration.module.css'
-import SearchComponent from "../common/SearchComponent/SearchComponent";
-import SearchContainer from "../common/SearchComponent/SearchContainer";
+import NameFilterComponent from "../common/Search/NameFilterComponent";
+import SearchContainer from "../common/Search/SearchContainer";
 import PaginationContainer from "../common/Pagination/PaginationContainer";
 import SortContainer from "../common/Sort/SortContainer";
 

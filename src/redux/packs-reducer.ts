@@ -19,6 +19,7 @@ export type GetPacksParamsType = {
     page: number
     pageCount: number
     sortPacks: '1created' | '0created' | '1updated' | '0updated'
+    user_id?: string
 }
 
 const initialState: PageStateType = {
@@ -29,6 +30,7 @@ const initialState: PageStateType = {
         page: 1,
         pageCount: 10,
         sortPacks: '0updated',
+        packName: "",
     }
 }
 
@@ -80,7 +82,9 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
 export const getPacksTC = (): AppThunk =>
     (dispatch, getState) => {
         dispatch(setAppStatusAC('loading'))
-        const params = getState().pagination
+        const params = {...getState().pagination, packName: getState().searchValue.searchValue}
+        const user_id = getState().auth.profile?._id
+
         packsAPI.getPacks({...params, sortPacks: '0updated'})
             .then((response) => {
                 dispatch(setPacksAC(response.cardPacks))

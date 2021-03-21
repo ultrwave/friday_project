@@ -1,29 +1,30 @@
 import React from 'react';
-import s from './SearchComponent.module.css';
+import s from './NameFilterComponent.module.css';
 
 type searchFieldType = {
     value: string
     onChangeHandler(value: string): void
-    onSubmitHandler(value: string): void
+    onClearHandler(): void
+    // onSubmitHandler(value: string): void
 }
 
 
-function SearchComponent({value, onChangeHandler, onSubmitHandler}: searchFieldType) {
+function NameFilterComponent({value, onChangeHandler, onClearHandler}: searchFieldType) {
     const handleKeyPress = (e: any) => {
         if (e.key === 'Enter') {
             //alert(e.target.value)
-            onSubmitHandler(e.target.value)
+            // onSubmitHandler(e.target.value)
         }
     }
 
 
     const handleOnBlur = (e: any) => {
-        onSubmitHandler(e.target.value)
+        // onSubmitHandler(e.target.value)
     }
 
     const clearSearch = () => {
         onChangeHandler('')
-        onSubmitHandler('')
+        // onSubmitHandler('')
     }
 
 
@@ -36,9 +37,9 @@ function SearchComponent({value, onChangeHandler, onSubmitHandler}: searchFieldT
                 onBlur={handleOnBlur}
                 placeholder={'Find on page'}
             />
-            <button onClick={clearSearch}>x</button>
+            <button onClick={onClearHandler}>x</button>
         </div>
     );
 }
 
-export default SearchComponent;
+export default NameFilterComponent;

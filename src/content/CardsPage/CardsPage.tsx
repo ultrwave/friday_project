@@ -2,7 +2,7 @@ import React from 'react';
 import style from '../styles/CardsPage.module.css'
 import {CardType} from '../../api/API';
 import CardItem from './CardItem';
-import SearchContainer from '../../common/SearchComponent/SearchContainer';
+import SearchContainer from '../../common/Search/SearchContainer';
 import PaginationContainer from '../../common/Pagination/PaginationContainer';
 import {useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
