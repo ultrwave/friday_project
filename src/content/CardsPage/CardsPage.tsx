@@ -26,7 +26,7 @@ export type AddCardFormStateType = {
 function CardsPage(props: PacksPagePropsType) {
     console.log('CardsPage called')
 
-    const filter = useSelector((state: RootStateType): string => state.searchValue.searchValue)
+    const filter = useSelector((state: RootStateType): string => state.filterState.nameFilter)
     const pack = useSelector((state: RootStateType) => state.packsPage.packs.find(p => p._id === props.packId))
     const title = pack? pack.name : 'Pack'
 

@@ -1,11 +1,11 @@
 const SET_SEARCH_VALUE = 'SET_SEARCH_VALUE';
 
 export type InitialStateType = {
-    searchValue: string
+    nameFilter: string
 }
 
 const initialState: InitialStateType = {
-    searchValue: '',
+    nameFilter: "",
 }
 
 type ActionTypes =
@@ -18,7 +18,7 @@ export const searchReducer = (state: InitialStateType = initialState, action: Ac
         case SET_SEARCH_VALUE:
             return {
                 ...state,
-                searchValue: action.payload.value
+                nameFilter: action.payload.value
             }
 
         default:

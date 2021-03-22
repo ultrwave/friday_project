@@ -14,11 +14,11 @@ function PacksPageContainer() {
     const isLoggedIn = useSelector((state: RootStateType): boolean => state.auth.isLoggedIn)
     const page = useSelector((state: RootStateType): number => state.pagination.page)
     const pageCount = useSelector((state: RootStateType): number => state.pagination.pageCount)
-    const search = useSelector((state: RootStateType) => state.searchValue.searchValue)
+    const packNameFilter = useSelector((state: RootStateType) => state.filterState.nameFilter)
 
     useEffect(() => {
         dispatch(getPacksTC())
-    }, [dispatch, page, pageCount, search])
+    }, [dispatch, page, pageCount, packNameFilter])
 
     const packs = useSelector((state: RootStateType) => state.packsPage.packs)
     const totalPacksCount = useSelector((state: RootStateType) => state.packsPage.totalPacksCount)
@@ -40,6 +40,7 @@ function PacksPageContainer() {
     const updatePack = (id: string) => {
         dispatch(updatePackTC(id))
     }
+// debugger
 
     return (
         !isLoggedIn

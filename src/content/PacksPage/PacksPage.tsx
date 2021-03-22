@@ -31,7 +31,7 @@ function PacksPage(props: PacksPagePropsType) {
 
     let [isMine, setIsMine] = useState(false)
 
-    const filter = useSelector((state: RootStateType): string => state.searchValue.searchValue)
+    const filter = useSelector((state: RootStateType): string => state.filterState.nameFilter)
     const myId = useSelector((state: RootStateType) => state.auth.profile?._id)
 
     const onChangeHandler = (value: string) => {
@@ -56,8 +56,9 @@ function PacksPage(props: PacksPagePropsType) {
         })
     }
 
-    let packs = props.packs.filter(p => filter ? p.name.includes(filter) : true)
-    if (isMine) packs = packs.filter(p => p.user_id === myId)
+    const packs = props.packs
+    // let packs = props.packs.filter(p => filter ? p.name.includes(filter) : true)
+    // if (isMine) packs = packs.filter(p => p.user_id === myId)
 
     const packsRender = packs.map(p => {
         return <PackItem {...p}
@@ -88,6 +89,10 @@ function PacksPage(props: PacksPagePropsType) {
         } else if (formState.touched) {
             toggleHideInput(true)
         }
+    }
+
+    const handleIsMineOnChange = () => {
+        setIsMine(!isMine)
     }
 
     return (

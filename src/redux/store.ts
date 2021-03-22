@@ -14,7 +14,7 @@ export const rootReducer = combineReducers({
     auth: authReducer,
     pageRecover: recoverReducer,
     pageRegistration: registrationReducer,
-    searchValue: searchReducer,
+    filterState: searchReducer,
     pagination: paginationReducer,
     packsPage: packsReducer,
     cardsPage: cardsReducer
