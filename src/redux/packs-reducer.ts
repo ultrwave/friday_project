@@ -82,14 +82,17 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
 export const getPacksTC = (): AppThunk =>
     (dispatch, getState) => {
         dispatch(setAppStatusAC('loading'))
-        const params = {...getState().pagination, packName: getState().filterState.nameFilter}
-        // let params = getState().pagination
-        // const packName = getState().filterState.nameFilter
-        // if (packName)  { params = {...params, packName: packName}}
-        const user_id = getState().auth.profile?._id
-        // debugger
+        const params: GetPacksParamsType = {
+            ...getState().pagination,
+            sortPacks: '0updated',
+            packName: getState().filterState.nameFilter,
+        }
+        if (getState().filterState.onlyMyPacks) {
+            const user_id = getState().auth.profile?._id
+            params.user_id = user_id
+        }
 
-        packsAPI.getPacks({...params, sortPacks: '0updated'})
+        packsAPI.getPacks({...params})
             .then((response) => {
                 dispatch(setPacksAC(response.cardPacks))
                 dispatch(setTotalPacksCountAC(response.cardPacksTotalCount))

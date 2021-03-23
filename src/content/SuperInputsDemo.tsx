@@ -3,10 +3,8 @@ import SuperButton from '../common/SuperButton/SuperButton';
 import SuperInputText from '../common/SuperInputText/SuperInputText';
 import SuperCheckbox from '../common/SuperCheckbox/SuperCheckbox';
 import s from './styles/Registration.module.css'
-import NameFilterComponent from "../common/Search/NameFilterComponent";
 import SearchContainer from "../common/Search/SearchContainer";
 import PaginationContainer from "../common/Pagination/PaginationContainer";
-import SortContainer from "../common/Sort/SortContainer";
 
 type RegistrationPropsType = {
     error?: string
@@ -60,9 +58,9 @@ function SuperInputsDemo() {
                 <div>Pagination:
                     <div style={{'border': 'solid 1px black'}}><PaginationContainer totalItems={50}/></div>
                 </div>
-                <div>Sort:
-                    <div style={{'border': 'solid 1px black'}}><SortContainer/></div>
-                </div>
+                {/*<div>Sort:*/}
+                {/*    <div style={{'border': 'solid 1px black'}}><SortContainer/></div>*/}
+                {/*</div>*/}
             </div>
         </div>
     )

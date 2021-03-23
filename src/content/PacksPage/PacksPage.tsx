@@ -5,8 +5,6 @@ import PackItem from './PackItem';
 import SuperInputText from '../../common/SuperInputText/SuperInputText';
 import PaginationContainer from '../../common/Pagination/PaginationContainer';
 import SearchContainer from '../../common/Search/SearchContainer';
-import {RootStateType} from '../../redux/store';
-import {useSelector} from 'react-redux';
 
 type PacksPagePropsType = {
     packs: Array<GetPacksResponseType>
@@ -30,9 +28,6 @@ function PacksPage(props: PacksPagePropsType) {
         useState<AddPackFormStateType>({value: '', error: '', hide: true, touched: false})
 
     let [isMine, setIsMine] = useState(false)
-
-    const filter = useSelector((state: RootStateType): string => state.filterState.nameFilter)
-    const myId = useSelector((state: RootStateType) => state.auth.profile?._id)
 
     const onChangeHandler = (value: string) => {
 
@@ -106,11 +101,6 @@ function PacksPage(props: PacksPagePropsType) {
             }}>
                 <div style={{alignSelf: 'flex-start', marginBottom: '5px'}}>
                     <SearchContainer/>
-                    <input type="checkbox"
-                           checked={isMine}
-                           onChange={() => setIsMine(!isMine)}
-                    />
-                    <span style={{fontSize: '12px', marginLeft: '2px', color: 'gray'}}>Show mine</span>
                 </div>
                 <div style={{alignSelf: 'flex-end', marginBottom: '5px'}}>
                     <PaginationContainer totalItems={props.totalPacksCount}/>
