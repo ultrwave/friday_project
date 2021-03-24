@@ -5,6 +5,7 @@ import PackItem from './PackItem';
 import SuperInputText from '../../common/SuperInputText/SuperInputText';
 import PaginationContainer from '../../common/Pagination/PaginationContainer';
 import SearchContainer from '../../common/Search/SearchContainer';
+import ModalContainer from "../../common/modals/ModalContainer";
 
 type PacksPagePropsType = {
     packs: Array<GetPacksResponseType>
@@ -101,6 +102,9 @@ function PacksPage(props: PacksPagePropsType) {
             }}>
                 <div style={{alignSelf: 'flex-start', marginBottom: '5px'}}>
                     <SearchContainer/>
+                </div>
+                <div>
+                    <ModalContainer/>
                 </div>
                 <div style={{alignSelf: 'flex-end', marginBottom: '5px'}}>
                     <PaginationContainer totalItems={props.totalPacksCount}/>

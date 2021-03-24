@@ -5,6 +5,7 @@ import SuperCheckbox from '../common/SuperCheckbox/SuperCheckbox';
 import s from './styles/Registration.module.css'
 import SearchContainer from "../common/Search/SearchContainer";
 import PaginationContainer from "../common/Pagination/PaginationContainer";
+import ModalContainer from "../common/modals/ModalContainer";
 
 type RegistrationPropsType = {
     error?: string
@@ -61,6 +62,7 @@ function SuperInputsDemo() {
                 {/*<div>Sort:*/}
                 {/*    <div style={{'border': 'solid 1px black'}}><SortContainer/></div>*/}
                 {/*</div>*/}
+                <ModalContainer/>
             </div>
         </div>
     )
