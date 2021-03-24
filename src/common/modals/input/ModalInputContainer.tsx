@@ -1,11 +1,39 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ModalInput from './ModalInput';
 
 function ModalInputContainer(props: any) {
-    return (
-        <ModalInput>
+    const [show, setShow] = useState(false);
+    const [answer, setAnswer] = useState('test answer');
 
-        </ModalInput>
+    const [value1, setValue1] = useState('');
+    const [value2, setValue2] = useState('');
+
+
+    return (
+        <>
+            <div>
+                <button onClick={() => setShow(true)}>show input Modal</button>
+                {answer}-{value1}-{value2}
+            </div>
+            <ModalInput
+                show={show}
+                close={() => setShow(false)}
+
+                answer={answer}
+                setAnswer={setAnswer}
+
+                //inputData={[[value1, setValue1], [value2, setValue2]]}
+
+                enableBackground={true}
+                backgroundOnClick={() => setShow(false)}
+
+                width={300}
+                height={200}
+
+            >
+
+            </ModalInput>
+        </>
     );
 }
 

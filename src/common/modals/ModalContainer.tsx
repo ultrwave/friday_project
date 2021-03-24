@@ -1,7 +1,13 @@
 import React, {useState} from 'react';
 import Modal from './Modal';
 
-function ModalContainer(props: any) {
+
+type SimpleModalPropsType = {
+    modalText?: string
+    buttonText?: string
+}
+
+function ModalContainer(props: SimpleModalPropsType) {
     const [show, setShow] = useState(false)
 
     return (
@@ -17,8 +23,12 @@ function ModalContainer(props: any) {
 
                 show={show}
             >
-                Simple Modal
-                <div style={{marginTop: '5px'}}><button onClick={() => setShow(false)}>Close</button></div>
+                {props.modalText || 'Simple Modal'}
+                <div style={{marginTop: '5px'}}>
+                    <button onClick={() => setShow(false)}>
+                        {props.buttonText || 'Close'}
+                    </button>
+                </div>
             </Modal>
         </>
     );

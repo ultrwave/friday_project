@@ -6,6 +6,7 @@ import SuperInputText from '../../common/SuperInputText/SuperInputText';
 import PaginationContainer from '../../common/Pagination/PaginationContainer';
 import SearchContainer from '../../common/Search/SearchContainer';
 import ModalContainer from "../../common/modals/ModalContainer";
+import ModalInputContainer from "../../common/modals/input/ModalInputContainer";
 
 type PacksPagePropsType = {
     packs: Array<GetPacksResponseType>
@@ -104,7 +105,8 @@ function PacksPage(props: PacksPagePropsType) {
                     <SearchContainer/>
                 </div>
                 <div>
-                    <ModalContainer/>
+                    <ModalContainer  modalText={'Simple Modal in packs'}  buttonText={'Close it!'}/>
+                    <ModalInputContainer  modalText={'Simple Modal in packs'}  buttonText={'Close it!'}/>
                 </div>
                 <div style={{alignSelf: 'flex-end', marginBottom: '5px'}}>
                     <PaginationContainer totalItems={props.totalPacksCount}/>
@@ -119,7 +121,8 @@ function PacksPage(props: PacksPagePropsType) {
                     <div style={{width: '10%'}}>Created</div>
                     <div style={{width: '15%'}}>
                         {formState.hide
-                            ? <button onClick={() => toggleHideInput(false)}>Add</button>
+                            ?<> <button onClick={() => toggleHideInput(false)}>Add</button>
+                             <button onClick={() => toggleHideInput(false)}>AddModal</button></>
                             : <form className={style.inputBlock} onSubmit={onSubmitHandler}>
                                 <button type='submit'>Add</button>
                                 <SuperInputText

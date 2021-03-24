@@ -1,6 +1,6 @@
-import React, {CSSProperties, ReactChild, ReactChildren, useEffect} from 'react';
+import React, {CSSProperties, ReactChild, ReactChildren, ReactElement, useEffect} from 'react';
 
-export type ModalWindowPropsType = {
+export type ModalPropsType = {
     enableBackground?: boolean;
     backgroundStyle?: CSSProperties;
     backgroundOnClick?: () => void;
@@ -11,12 +11,14 @@ export type ModalWindowPropsType = {
     modalOnClick?: () => void;
 
     show: boolean
-    children?: ReactChild | ReactChild[] | ReactChildren | ReactChildren[];
+    // children?: ReactChild | ReactChild[] | ReactChildren | ReactChildren[];
+    children?: ReactChild | ReactChildren | (string | ReactChildren | ReactElement)[];
+    // children?: (string | ReactChildren | ReactElement)[];
 
 }
 
 
-function Modal(props: ModalWindowPropsType) {
+function Modal(props: ModalPropsType) {
     const {
         enableBackground,
         backgroundStyle,
