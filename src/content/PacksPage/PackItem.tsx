@@ -36,8 +36,11 @@ function PackItem(props: GetPacksResponseType & PackItemPropsType) {
                             disabled={!itemIsMine}
                             onClick={props.updateCallback}>Update</button>
                 </div>
-                <div style={{width: '20%'}}>
+                <div style={{width: '5%'}}>
                     <NavLink to={`/cards/${props._id}`}>cards</NavLink>
+                </div>
+                <div style={{width: '15%'}}>
+                    <NavLink to={`/learn/${props._id}`}>learn</NavLink>
                 </div>
             </div>
         </li>

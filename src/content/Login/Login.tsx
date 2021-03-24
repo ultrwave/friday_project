@@ -30,7 +30,7 @@ function Login({formState, onChangeHandler, onBlurHandler, checkBoxHandler, onSu
     const disableSubmit = !!(email.error || password.error || formState.globalFormError)
 
     return (
-        <>
+        <div className={style.pageContainer}>
             <form className={style.form} onSubmit={submitForm}>
                 <h1>Sign in</h1>
                 <SuperInputText
@@ -72,7 +72,7 @@ function Login({formState, onChangeHandler, onBlurHandler, checkBoxHandler, onSu
                 </div>
                 : ''
             }
-        </>
+        </div>
     )
 }
 

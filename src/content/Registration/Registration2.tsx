@@ -88,6 +88,7 @@ function Registration2({registrationFormState, onChangeHandler, onBlurHandler, o
     // }
 
     return (
+        <div className={style.pageContainer}>
         <form className={style.form} onSubmit={submitForm}>
             <h1>Sign Up</h1>
             <div className={style.registrationErrorMessage}>
@@ -149,7 +150,7 @@ function Registration2({registrationFormState, onChangeHandler, onBlurHandler, o
             </div>
 
         </form>
-
+        </div>
 
 
         // state.successfullyRegistered ?
