@@ -1,12 +1,14 @@
 import React, {CSSProperties, ReactChildren, ReactElement, ReactNode, useState} from 'react';
 import Modal from "../Modal";
+import InputMap, {IInputData} from "./InputMap";
 
 export type ModalInputPropsType = {
     show: boolean;
     close: () => void;
 
-    // inputData?: IInputData[];
-    //inputData?: string;
+    inputData?: IInputData[];
+    modalText?: string
+    buttonTitle?: string
     answer?: string;
     setAnswer?: (answer: string) => void;
 
@@ -27,7 +29,9 @@ export type ModalInputPropsType = {
 }
 
 function ModalInput({
-                        //inputData,
+                        inputData,
+                        modalText,
+                        // modalButtonTitle,
                         answer,
                         setAnswer = (answer: string) => {
                         },
@@ -53,12 +57,18 @@ function ModalInput({
                         children,
                     }: ModalInputPropsType) {
     const [answerData, setAnswerData] = useState(answer);
-    const [saveInputs, setSaveInputs] = useState({f: () => {}})
+    const [saveInputs, setSaveInputs] = useState({
+        f: () => {
+        }
+    })
 
     const successCloseModal = () => {
         saveInputs.f();
         setAnswer(answerData || '');
-        setSaveInputs({f: () => {}}); // unsubscribe
+        setSaveInputs({
+            f: () => {
+            }
+        }); // unsubscribe
         close();
     };
 
@@ -78,6 +88,7 @@ function ModalInput({
 
             show={show}
         >
+            {modalText || 'question modal'}
             {/*{children ? children : 'question Modal'}*/}
             <div
                 style={{
@@ -96,12 +107,12 @@ function ModalInput({
                         onChange={e => setAnswerData(e.currentTarget.value)}
                     />
                 )}
-                {/*<InputMap*/}
-                {/*    inputData={inputData}*/}
-                {/*    setSaveInputs={setSaveInputs} // subscribe*/}
+                <InputMap
+                    inputData={inputData}
+                    setSaveInputs={setSaveInputs} // subscribe
 
-                {/*    inputStyles={inputStyles}*/}
-                {/*/>*/}
+                    inputStyles={inputStyles}
+                />
 
             </div>
             <button onClick={successCloseModal} style={{...buttonStyles}}>{button}</button>

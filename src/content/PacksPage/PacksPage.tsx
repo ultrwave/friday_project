@@ -5,7 +5,6 @@ import PackItem from './PackItem';
 import SuperInputText from '../../common/SuperInputText/SuperInputText';
 import PaginationContainer from '../../common/Pagination/PaginationContainer';
 import SearchContainer from '../../common/Search/SearchContainer';
-import ModalContainer from "../../common/modals/ModalContainer";
 import ModalInputContainer from "../../common/modals/input/ModalInputContainer";
 
 type PacksPagePropsType = {
@@ -88,6 +87,14 @@ function PacksPage(props: PacksPagePropsType) {
         }
     }
 
+    const onModalSubmitHandler = (value: string) => {
+        // debugger
+        if (value) {
+            props.createPack(value)
+        }
+
+    }
+
     const handleIsMineOnChange = () => {
         setIsMine(!isMine)
     }
@@ -104,10 +111,10 @@ function PacksPage(props: PacksPagePropsType) {
                 <div style={{alignSelf: 'flex-start', marginBottom: '5px'}}>
                     <SearchContainer/>
                 </div>
-                <div>
-                    <ModalContainer  modalText={'Simple Modal in packs'}  buttonText={'Close it!'}/>
-                    <ModalInputContainer  modalText={'Simple Modal in packs'}  buttonText={'Close it!'}/>
-                </div>
+                {/*<div>*/}
+                {/*    <ModalContainer  modalText={'Simple Modal in packs'}  buttonText={'Close it!'}/>*/}
+                {/*    <ModalInputContainer  modalText={'Simple Modal in packs'}  buttonText={'Close it!'}/>*/}
+                {/*</div>*/}
                 <div style={{alignSelf: 'flex-end', marginBottom: '5px'}}>
                     <PaginationContainer totalItems={props.totalPacksCount}/>
                 </div>
@@ -121,8 +128,12 @@ function PacksPage(props: PacksPagePropsType) {
                     <div style={{width: '10%'}}>Created</div>
                     <div style={{width: '15%'}}>
                         {formState.hide
-                            ?<> <button onClick={() => toggleHideInput(false)}>Add</button>
-                             <button onClick={() => toggleHideInput(false)}>AddModal</button></>
+                            ? <>
+                                <button onClick={() => toggleHideInput(false)}>Add</button>
+                                <ModalInputContainer buttonTitle={'AddModal'} modalText={'Enter the pack name'}
+                                                     defaultAnswer={'New pack'}
+                                                     answerCallback={onModalSubmitHandler}/>
+                            </>
                             : <form className={style.inputBlock} onSubmit={onSubmitHandler}>
                                 <button type='submit'>Add</button>
                                 <SuperInputText
