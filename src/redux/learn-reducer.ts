@@ -5,13 +5,15 @@ type PageStateType = {
     cards: Array<CardType>
     cardId: string
     grade: number
+    cardIndex: number
 }
 
 const initialState: PageStateType = {
     packTitle: 'Pack',
     cards: [],
     cardId: '',
-    grade: 0
+    grade: 0,
+    cardIndex: 0
 }
 
 type ActionTypes =

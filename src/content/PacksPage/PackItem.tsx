@@ -40,7 +40,7 @@ function PackItem(props: GetPacksResponseType & PackItemPropsType) {
                     <NavLink to={`/cards/${props._id}/${encodeURI(props.name)}`}>cards</NavLink>
                 </div>
                 <div style={{width: '15%'}}>
-                    <NavLink to={`/learn/${props._id}`}>learn</NavLink>
+                    <NavLink to={`/learn/${props._id}/${encodeURI(props.name)}`}>learn</NavLink>
                 </div>
             </div>
         </li>
