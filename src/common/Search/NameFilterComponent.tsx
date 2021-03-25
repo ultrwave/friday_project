@@ -5,10 +5,11 @@ type searchFieldType = {
     value: string
     onChangeHandler(value: string): void
     onClearHandler(): void
+    placeholder?: string
 }
 
 
-function NameFilterComponent({value, onChangeHandler, onClearHandler}: searchFieldType) {
+function NameFilterComponent({value, onChangeHandler, onClearHandler, placeholder= 'Filter by name'}: searchFieldType) {
     const handleKeyPress = (e: any) => {
         if (e.key === 'Enter') {
         }
@@ -20,7 +21,7 @@ function NameFilterComponent({value, onChangeHandler, onClearHandler}: searchFie
                 type='text' className={s.input} value={value}
                 onChange={(e) => onChangeHandler(e.currentTarget.value)}
                 onKeyPress={handleKeyPress}
-                placeholder={'Pack name'}
+                placeholder={placeholder}
             />
             <button onClick={onClearHandler}>x</button>
         </div>
