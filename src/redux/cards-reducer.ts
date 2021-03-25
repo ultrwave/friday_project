@@ -125,10 +125,10 @@ export const createCardTC = (packId: string):AppThunk => (dispatch) => {
         .finally(() => {dispatch(setAppStatusAC('idle'))})
 }
 
-export const deleteCardTC = (packId: string, cardId: string):AppThunk => (dispatch) => {
+export const deleteCardTC = (packId: string, cardId: string, pagination = true):AppThunk => (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     cardsAPI.deleteCard(cardId)
-        .then(() => dispatch(getCardsTC(packId)))
+        .then(() => dispatch(getCardsTC(packId, pagination)))
         .catch(e => {
             console.log(e)
             dispatch(setAuthTC())

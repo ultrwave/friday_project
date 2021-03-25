@@ -8,7 +8,7 @@ const initialState: InitialStateType = {
     status: 'loading',
     isInitialized: false
 }
-export type AppStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
+export type AppStatusType = 'idle' | 'loading' | 'sending' | 'failed'
 
 
 type ActionTypes =

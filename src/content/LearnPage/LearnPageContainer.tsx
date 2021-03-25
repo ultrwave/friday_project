@@ -3,12 +3,13 @@ import LearnPage from './LearnPage';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
 import {useParams} from 'react-router-dom';
-import {getCardsTC, updateCardTC} from '../../redux/cards-reducer';
+import {deleteCardTC, getCardsTC, updateCardTC} from '../../redux/cards-reducer';
 import {sendGradeTC} from '../../redux/learn-reducer';
 
 type ParamsType = {
     id: string | undefined
     title: string | undefined
+    isMine: string | undefined
 }
 
 function LearnPageContainer() {
@@ -19,10 +20,12 @@ function LearnPageContainer() {
     const params: ParamsType = useParams()
     const title = params.title ? params.title : 'Pack'
     const packId = params.id ? params.id : ''
+    const isMine = params.isMine? params.isMine : '0'
     const cards = useSelector((state: RootStateType) => state.cardsPage.cards)
     let [index, setIndex] = useState(0)
     let [smartMode, setMode] = useState(false)
     let card = cards[index]
+    // window.history.replaceState(null, '', `/#/learn/${title}`)
 
     useEffect(() => {
         dispatch(getCardsTC(packId, false))
@@ -44,14 +47,20 @@ function LearnPageContainer() {
         setIndex( res.id + 1)
     }
 
+    const deleteCard = (cardId: string) => {
+        dispatch(deleteCardTC(packId, cardId,false))
+    }
+
     return (
         <LearnPage title={title}
                    card={card}
                    index={index + 1}
+                   isMine={isMine}
                    amount={cards.length}
                    smartMode={smartMode}
                    toggleMode={() => setMode(m => !m)}
                    getNextCard={smartMode? getNextSmart : getNextSimple}
+                   deleteCard={deleteCard}
                    setGrade={setGrade}
         />
     )

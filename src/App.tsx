@@ -46,10 +46,9 @@ function App() {
                         <Route path='/set-new-password/:token?' render={() => <NewPasswordContainer/>}/>
                         <Route path='/packs/' render={() => <PacksPageContainer/>}/>
                         <Route path='/cards/:id?/:title?' render={() => <CardsPageContainer/>}/>
-                        <Route path='/learn/:id?/:title?' render={() => <LearnPageContainer/>}/>
+                        <Route path='/learn/:id?/:title?/:isMine?' render={() => <LearnPageContainer/>}/>
                         <Route path='/demo' render={() => <SuperInputsDemo/>}/>
 
-                        {/*<Route path={'/404'} render={() => <h1>404: PAGE NOT FOUND</h1>}/>*/}
                         <Route path={'/404'} render={() => <Page404/>}/>
                         <Redirect from={'*'} to={'/404'}/>
                     </Switch>

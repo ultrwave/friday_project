@@ -3,14 +3,41 @@
     flex-direction: row;
     max-width: 400px;
     overflow: auto;
+    box-shadow: 0 0 20px rgba(50,30,30,0.3);
+    border-collapse: collapse;
     /*flex-wrap: nowrap;*/
     /*align-items: center;*/
     /*align-content: center;*/
     /*flex-grow: initial;*/
     /*width: 100px;*/
     /*box-sizing: border-box;*/
+
 }
 
+.main button, .main select {
+    outline: none;
+    margin-bottom: 4px;
+    border: 1px solid burlywood;
+    border-right-style: none;
+    display: table-cell;
+
+}
+
+.main::-webkit-scrollbar {
+    padding: 2px;
+    height: 8px;
+    width: 12px;
+    background: white;
+    border: 1px solid burlywood;
+}
+
+.main::-webkit-scrollbar-thumb {
+    background: #b1936d;
+}
+
+.main::-webkit-scrollbar-corner {
+    background: white;
+}
 /*.input {*/
 /*    overflow: hidden;*/
 /*    width: 100%;*/

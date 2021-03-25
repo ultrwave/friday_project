@@ -11,10 +11,10 @@ function PacksPageContainer() {
     console.log('PacksPageContainer called')
 
     const dispatch = useDispatch()
+    const isLoggedIn = useSelector((state: RootStateType): boolean => state.auth.isLoggedIn)
+    const appStatus = useSelector((state: RootStateType): string => state.appState.status)
     const page = useSelector((state: RootStateType): number => state.pagination.page)
     const pageCount = useSelector((state: RootStateType): number => state.pagination.pageCount)
-    const appStatus = useSelector((state: RootStateType): string => state.appState.status)
-    const isLoggedIn = useSelector((state: RootStateType): boolean => state.auth.isLoggedIn)
     const packs = useSelector((state: RootStateType) => state.packsPage.packs)
     const totalPacksCount = useSelector((state: RootStateType) => state.packsPage.totalPacksCount)
     const itemsOnPage = useSelector((state: RootStateType) => state.pagination.pageCount)

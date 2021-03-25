@@ -56,7 +56,7 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
 
 export const sendGradeTC = (card_id: string, grade: number): AppThunk =>
     (dispatch) => {
-        dispatch(setAppStatusAC('loading'))
+        dispatch(setAppStatusAC('sending'))
         cardsAPI.sendGrade(card_id, grade)
             .then((response) => {
                 dispatch(updateCardGradeAC(card_id, response.grade))

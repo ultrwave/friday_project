@@ -14,10 +14,10 @@ function CardsPageContainer() {
     console.log('CardsPageContainer called')
 
     const dispatch = useDispatch()
-    const page = useSelector((state: RootStateType): number => state.pagination.page)
-    const pageCount = useSelector((state: RootStateType): number => state.pagination.pageCount)
     const appStatus = useSelector((state: RootStateType): string => state.appState.status)
     const isLoggedIn = useSelector((state: RootStateType): boolean => state.auth.isLoggedIn)
+    const page = useSelector((state: RootStateType): number => state.pagination.page)
+    const pageCount = useSelector((state: RootStateType): number => state.pagination.pageCount)
     const cards = useSelector((state: RootStateType) => state.cardsPage.cards)
     const totalCardsCount = useSelector((state: RootStateType) => state.cardsPage.totalCardsCount)
     const itemsOnPage = useSelector((state: RootStateType) => state.pagination.pageCount)

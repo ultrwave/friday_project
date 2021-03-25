@@ -26,7 +26,7 @@
 .lastCard {
     margin: 0;
     color: #b1936d;
-    border: 3px dotted white;
+    border: 3px dotted #b1936d;
     padding: 0 5px;
 }
 
@@ -43,6 +43,7 @@
 }
 
 .card {
+    position: relative;
     min-width: 90%;
     min-height: 140px;
     border: 2px solid burlywood;
@@ -63,6 +64,16 @@
 .answer {
     font-size: 20px;
     color: #4c4c4c;
+}
+
+.delete {
+    font-size: 14px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin: 2px 8px;
+    color: burlywood;
+    cursor: pointer;
 }
 
 .answerButton:disabled {
@@ -98,7 +109,7 @@
     border: none;
     color: #FFFFFF;
     text-align: center;
-    font-size: 28px;
+    font-size: 26px;
     padding: 5px;
     width: 120px;
     height: 40px;
