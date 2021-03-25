@@ -6,8 +6,10 @@ import SearchContainer from '../../common/SearchComponent/SearchContainer';
 import PaginationContainer from '../../common/Pagination/PaginationContainer';
 import {useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
+import {useParams} from 'react-router-dom';
 
 type PacksPagePropsType = {
+    title: string
     cards: Array<CardType>
     packId: string
     totalCardsCount: number
@@ -27,8 +29,6 @@ function CardsPage(props: PacksPagePropsType) {
     console.log('CardsPage called')
 
     const filter = useSelector((state: RootStateType): string => state.searchValue.searchValue)
-    const pack = useSelector((state: RootStateType) => state.packsPage.packs.find(p => p._id === props.packId))
-    const title = pack? pack.name : 'Pack'
 
     const cards = props.cards.filter(c => filter? c.question.includes(filter) : true)
         .map(c => {
@@ -41,7 +41,7 @@ function CardsPage(props: PacksPagePropsType) {
 
     return (
         <div className={style.packsPageWrapper}>
-            <h1 style={{alignSelf: 'center'}}>{title}</h1>
+            <h1 style={{alignSelf: 'center'}}>{props.title}</h1>
             <div style={{display: 'flex',
                 flexDirection: 'row',
                 justifyContent: 'space-between',

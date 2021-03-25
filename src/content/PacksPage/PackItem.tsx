@@ -37,7 +37,7 @@ function PackItem(props: GetPacksResponseType & PackItemPropsType) {
                             onClick={props.updateCallback}>Update</button>
                 </div>
                 <div style={{width: '5%'}}>
-                    <NavLink to={`/cards/${props._id}`}>cards</NavLink>
+                    <NavLink to={`/cards/${props._id}/${encodeURI(props.name)}`}>cards</NavLink>
                 </div>
                 <div style={{width: '15%'}}>
                     <NavLink to={`/learn/${props._id}`}>learn</NavLink>

@@ -7,6 +7,7 @@ import {createCardTC, deleteCardTC, getCardsTC, updateCardTC} from '../../redux/
 
 type ParamsType = {
     id: string | undefined
+    title: string | undefined
 }
 
 function CardsPageContainer() {
@@ -19,6 +20,7 @@ function CardsPageContainer() {
 
     const params: ParamsType = useParams()
     const packId = params.id ? params.id : ''
+    const title = params.title ? params.title : 'Pack'
 
     useEffect(() => {
         dispatch(getCardsTC(packId))
@@ -49,6 +51,7 @@ function CardsPageContainer() {
         !isLoggedIn
             ? <Redirect to={'/login'}/>
             : <CardsPage
+                title={title}
                 cards={cards}
                 packId={packId}
                 createCard={createCard}

@@ -24,7 +24,7 @@ export type AddPackFormStateType = {
 }
 
 function PacksPage(props: PacksPagePropsType) {
-    console.log('CardsPage called')
+    console.log('LearnPage called')
 
     let [formState, setFormState] =
         useState<AddPackFormStateType>({value: '', error: '', hide: true, touched: false})

@@ -17,6 +17,7 @@ import CardsPageContainer from './content/CardsPage/CardsPageContainer';
 
 import PacksPageContainer from './content/PacksPage/PacksPageContainer';
 import Page404 from "./content/Page404/Page404";
+import LearnPageContainer from './content/LearnPage/LearnPageContainer';
 export const DEV_MODE = true
 export const DEFAULT_EMAIL = 'nya-admin@nya.nya'
 export const DEFAULT_PASSWORD = '1qazxcvBG'
@@ -44,7 +45,8 @@ function App() {
                         <Route path='/recover' render={() => <RecoverContainer/>}/>
                         <Route path='/set-new-password/:token?' render={() => <NewPasswordContainer/>}/>
                         <Route path='/packs/' render={() => <PacksPageContainer/>}/>
-                        <Route path='/cards/:id?' render={() => <CardsPageContainer/>}/>
+                        <Route path='/cards/:id?/:title?' render={() => <CardsPageContainer/>}/>
+                        <Route path='/learn/:id?/:title?' render={() => <LearnPageContainer/>}/>
                         <Route path='/demo' render={() => <SuperInputsDemo/>}/>
 
                         {/*<Route path={'/404'} render={() => <h1>404: PAGE NOT FOUND</h1>}/>*/}
