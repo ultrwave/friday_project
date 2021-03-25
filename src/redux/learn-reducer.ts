@@ -1,4 +1,9 @@
-import {CardType} from '../api/API';
+import {cardsAPI, CardType} from '../api/API';
+import {ThunkAction} from 'redux-thunk';
+import {RootStateType} from './store';
+import {Action} from 'redux';
+import {setAppStatusAC} from './app-reducer';
+import {setAuthTC} from './auth-reducer';
 
 type PageStateType = {
     packTitle: string
@@ -17,36 +22,48 @@ const initialState: PageStateType = {
 }
 
 type ActionTypes =
-    | ReturnType<typeof setCardIdAC>
-    | ReturnType<typeof setGradeAC>
-
+    | ReturnType<typeof updateCardGradeAC>
 
 
 export const learnReducer = (state: PageStateType = initialState, action: ActionTypes): PageStateType => {
 
     switch (action.type) {
 
-        case 'SET-CARD-ID':
-            return {...state, cardId: action.cardId}
-
-        case 'SET-GRADE':
-            return {...state, grade: action.grade}
+        case 'UPDATE-CARD-GRADE':
+            return {
+                ...state, cards: state.cards.map(
+                    c => c._id === action.cardId ? {...c, grade: action.grade} : c
+                )
+            }
 
         default:
             return state
     }
 }
 
-const SET_CARD_ID = 'SET-CARD-ID'
-const SET_GRADE = 'SET-GRADE'
+const UPDATE_CARD_GRADE = 'UPDATE-CARD-GRADE'
 
-export const setCardIdAC = (cardId: string) => (
-    {type: SET_CARD_ID, cardId} as const
+export const updateCardGradeAC = (cardId: string, grade: number) => (
+    {type: UPDATE_CARD_GRADE, cardId, grade} as const
 )
-export const setGradeAC = (grade: number) => (
-    {type: SET_GRADE, grade} as const
-)
-
 
 // Thunks
 
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
+    RootStateType,
+    unknown,
+    Action<string>>
+
+export const sendGradeTC = (card_id: string, grade: number): AppThunk =>
+    (dispatch) => {
+        dispatch(setAppStatusAC('loading'))
+        cardsAPI.sendGrade(card_id, grade)
+            .then((response) => {
+                dispatch(updateCardGradeAC(card_id, response.grade))
+            })
+            .catch(e => {
+                console.log(e)
+                dispatch(setAuthTC())
+            })
+            .finally(() => dispatch(setAppStatusAC('idle')))
+    }

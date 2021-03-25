@@ -2,10 +2,9 @@ import React, {useEffect, useState} from 'react';
 import LearnPage from './LearnPage';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
-import {Redirect, useParams} from 'react-router-dom';
-import {createCardTC, deleteCardTC, getCardsTC, updateCardTC} from '../../redux/cards-reducer';
-import {setGradeAC} from '../../redux/learn-reducer';
-import {CardType} from '../../api/API';
+import {useParams} from 'react-router-dom';
+import {getCardsTC, updateCardTC} from '../../redux/cards-reducer';
+import {sendGradeTC} from '../../redux/learn-reducer';
 
 type ParamsType = {
     id: string | undefined
@@ -17,33 +16,25 @@ function LearnPageContainer() {
 
     const dispatch = useDispatch()
     const isLoggedIn = useSelector((state: RootStateType): boolean => state.auth.isLoggedIn)
-
     const params: ParamsType = useParams()
     const title = params.title ? params.title : 'Pack'
     const packId = params.id ? params.id : ''
-
-    console.log(params)
+    const cards = useSelector((state: RootStateType) => state.cardsPage.cards)
+    let [index, setIndex] = useState(0)
+    let [smartMode, setMode] = useState(false)
+    let card = cards[index]
 
     useEffect(() => {
         dispatch(getCardsTC(packId, false))
     }, [dispatch, packId])
 
-    const cards = useSelector((state: RootStateType) => state.cardsPage.cards)
-    const cardId = useSelector((state: RootStateType): string => state.learnPage.cardId)
-    const grade = useSelector((state: RootStateType): number => state.learnPage.grade)
-
-    let [index, setIndex] = useState(0)
-    let [smartMode, setMode] = useState(false)
-    let card = cards[index]
-
-    const setGrade = (grade: number) => {
-        dispatch(setGradeAC(grade))
+    const setGrade = (card_id: string, grade: number) => {
+        dispatch(sendGradeTC(card_id, grade))
     }
 
     const getNextSimple = () => setIndex(i => index + 1 >= cards.length? 0 : i + 1)
 
     const getNextSmart = () => {
-
         const sum = cards.reduce((acc, card) => acc + (6 - card.grade)**2, 0)
         const rand = Math.random() * sum
         const res = cards.reduce((acc: {sum: number, id: number}, card, i) => {
@@ -58,8 +49,6 @@ function LearnPageContainer() {
                    card={card}
                    index={index + 1}
                    amount={cards.length}
-                   cardId={cardId}
-                   grade={grade}
                    smartMode={smartMode}
                    toggleMode={() => setMode(m => !m)}
                    getNextCard={smartMode? getNextSmart : getNextSimple}

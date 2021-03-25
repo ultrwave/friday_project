@@ -19,7 +19,7 @@ export const API = {
             .then(response => response.data)
     },
     logout() {
-      return instance.delete('/auth/me')
+        return instance.delete('/auth/me')
     },
     forgot(email: string, from: string, message: string) {
         return instance.post('/auth/forgot', {email, from, message})
@@ -27,8 +27,8 @@ export const API = {
     setNewPassword(password: string, resetPasswordToken: string) {
         return instance.post('/auth/set-new-password', {password, resetPasswordToken})
     },
-    registration(email:string,password:string) {
-        return  instance.post('/auth/register', {email, password})
+    registration(email: string, password: string) {
+        return instance.post('/auth/register', {email, password})
     },
 }
 
@@ -38,20 +38,20 @@ export const packsAPI = {
             .then(response => response.data)
     },
     createPack(name: string) {
-        return instance.post('/cards/pack', {cardsPack:{name}})
+        return instance.post('/cards/pack', {cardsPack: {name}})
     },
     deletePack(id: string) {
         return instance.delete(`/cards/pack?id=${id}`)
     },
     updatePack(id: string, newName: string) {
-        return instance.put('/cards/pack', {cardsPack:{_id: id, name: newName}})
+        return instance.put('/cards/pack', {cardsPack: {_id: id, name: newName}})
     }
 }
 
 export const cardsAPI = {
     getCards(id: string, params: GetCardsParamsType) { // todo - fix params
-        return instance.get(`/cards/card?cardsPack_id=${id}`,{params})
-    .then(response => response.data)
+        return instance.get(`/cards/card?cardsPack_id=${id}`, {params})
+            .then(response => response.data)
     },
     createCard(data: CreateCardType) {
         return instance.post('/cards/card', {card: data})
@@ -60,7 +60,11 @@ export const cardsAPI = {
         return instance.delete(`/cards/card?id=${id}`)
     },
     updateCard(id: string) {
-        return instance.put('/cards/card', {card:{_id: id, question: 'updated'}})
+        return instance.put('/cards/card', {card: {_id: id, question: 'updated'}})
+    },
+    sendGrade(card_id: string, grade: number) {
+        return instance.put('/cards/grade', {card_id, grade})
+            .then(response => response.data.updatedGrade)
     }
 }
 
@@ -75,7 +79,7 @@ export type GetPacksResponseType = {
     grade: number // средняя оценка карточек
     shots: number // количество попыток
     rating: number // лайки
-    type: "pack" // ещё будет "folder" (папка)
+    type: 'pack' // ещё будет "folder" (папка)
     created: string
     updated: string
 }
