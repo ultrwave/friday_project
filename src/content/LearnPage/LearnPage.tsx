@@ -9,11 +9,13 @@ type LearnPagePropsType = {
     index: number
     cardId: string
     grade: number
+    smartMode: boolean
+    toggleMode(): void
     getNextCard(): void
     setGrade(grade: number): void
 }
 
-function LearnPage(props: LearnPagePropsType) {
+function LearnPage({title, card, amount, index, cardId, grade, smartMode, toggleMode, getNextCard, setGrade}: LearnPagePropsType) {
     console.log('LearnPage called')
 
     let [show, setShow] = useState(false)
@@ -22,28 +24,31 @@ function LearnPage(props: LearnPagePropsType) {
     useEffect(() => {
         setShow(false)
         setAnswer(0)
-    }, [props.index])
+    }, [index])
 
     const showHandler = () => setShow(!show)
 
     const answerHandler = (id: number) => {
         setAnswer(id)
-        props.setGrade(id)
+        setGrade(id)
     }
 
-
-    // <button id={'1'} onClick={answerHandler}>text</button> ??
     return (
         <div className={style.pageContainer}>
-            <h1>{props.title}</h1>
-            <h2 className={`${props.card? style.cardsCount : style.packEmpty}
-            ${props.index === props.amount? style.lastCard : ''}`}>
-                {props.card ? `${props.index}/${props.amount}` : 'Pack is empty'}
+            <h1>{title}</h1>
+            <h2 className={style.modeTitle}
+                onClick={toggleMode}>
+                <span style={{marginRight: '5px'}}>Smart random is</span>
+                <span style={{color: smartMode? 'CadetBlue' : 'Salmon'}}>{smartMode ? 'ON' : ' OFF'}</span>
             </h2>
-            {props.card &&
+            <h2 className={`${card ? style.cardsCount : style.packEmpty}
+            ${!smartMode && index === amount ? style.lastCard : ''}`}>
+                {card ? `${index}/${amount}` : 'Pack is empty'}
+            </h2>
+            {card &&
             <div className={style.cardContainer}>
                 <div className={style.card}>
-                    <span className={style.question}>{props.card.question}</span>
+                    <span className={style.question}>{card.question}</span>
                     {show
                         ? <div className={style.buttonsBlock}>
                             <button disabled={!!answer}
@@ -80,9 +85,9 @@ function LearnPage(props: LearnPagePropsType) {
                         : <button className={style.checkButton} onClick={showHandler}>Check</button>
                     }
                 </div>
-                {props.amount > 1 &&
+                {amount > 1 &&
                 <button className={style.nextButton}
-                        onClick={props.getNextCard}>
+                        onClick={getNextCard}>
                     <span>Next</span>
                 </button>
                 }

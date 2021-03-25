@@ -18,7 +18,7 @@ export type GetCardsParamsType = {
     cardName?: string
     min?: number
     max?: number
-    page: number
+    page?: number
     pageCount: number
     sortCards: '1grade' | '0grade'
 }
@@ -98,10 +98,10 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
     unknown,
     Action<string>>
 
-export const getCardsTC = (packId: string):AppThunk =>
+export const getCardsTC = (packId: string, pagination = true):AppThunk =>
     (dispatch, getState) => {
     dispatch(setAppStatusAC('loading'))
-    const params = getState().pagination
+    const params = pagination? getState().pagination : {pageCount: 1000}
     cardsAPI.getCards(packId, {...params, sortCards: '1grade'})
         .then((response) => {
             dispatch(setCardsAC(response.cards))

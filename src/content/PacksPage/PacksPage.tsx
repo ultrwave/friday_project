@@ -24,7 +24,7 @@ export type AddPackFormStateType = {
 }
 
 function PacksPage(props: PacksPagePropsType) {
-    console.log('LearnPage called')
+    console.log('PacksPage called')
 
     let [formState, setFormState] =
         useState<AddPackFormStateType>({value: '', error: '', hide: true, touched: false})
@@ -58,15 +58,12 @@ function PacksPage(props: PacksPagePropsType) {
 
     let packs = props.packs.filter(p => filter ? p.name.includes(filter) : true)
     if (isMine) packs = packs.filter(p => p.user_id === myId)
-
-    const packsRender = packs.map(p => {
-        return <PackItem {...p}
-                         key={p._id}
-                         deleteCallback={() => props.deletePack(p._id)}
-                         updateCallback={() => props.updatePack(p._id)}
-        />
-    })
-
+    let packsRender = packs.map(p =>
+        <PackItem {...p}
+                  key={p._id}
+                  deleteCallback={() => props.deletePack(p._id)}
+                  updateCallback={() => props.updatePack(p._id)}
+        />)
 
     useEffect(() => {
         if (formState.touched && !formState.value) {

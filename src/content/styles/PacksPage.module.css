@@ -22,6 +22,11 @@ ul {
     border: 1px dotted darkred;
 }
 
+.table li {
+    opacity: 0.0;
+    transition: all 0.2s;
+}
+
 .table li:nth-child(even) {
     background-color: #ececec;
 }

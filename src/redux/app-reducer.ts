@@ -5,7 +5,7 @@ export type InitialStateType = {
 }
 
 const initialState: InitialStateType = {
-    status: 'idle',
+    status: 'loading',
     isInitialized: false
 }
 export type AppStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
