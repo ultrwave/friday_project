@@ -1,0 +1,125 @@
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    min-height: 80%;
+}
+
+.cardsCount {
+    margin: 3px 0;
+    padding: 0;
+    color: gray;
+    font-size: 20px;
+}
+
+.lastCard {
+    margin: 0;
+    color: #b1936d;
+    border: 3px dotted white;
+    padding: 0 5px;
+}
+
+.packEmpty {
+    margin: 40px;
+    color: #673434;
+}
+
+.cardContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+}
+
+.card {
+    min-width: 90%;
+    min-height: 100px;
+    border: 3px solid darkgrey;
+    background-color: #ece4f3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    padding: 20px 10px 10px;
+}
+
+.question {
+    margin-bottom: 20px;
+}
+
+.answerButton:disabled {
+    cursor: default;
+    transition: all 0.5s;
+}
+
+.buttonsBlock {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.answerButton, .checkButton {
+    width: 100px;
+    height: 30px;
+    margin: 2px 2px 0;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.highlightAnswer {
+    background-color: #ffffff;
+    color: #4c4c4c;
+}
+
+.nextButton {
+    outline: none;
+    border-radius: 4px;
+    background-color: #b1936d;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    padding: 5px;
+    width: 120px;
+    height: 40px;
+    transition: all 0.2s;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.nextButton:hover {
+    box-shadow: 0 0 4px rgba(0,0,0,0.7);
+}
+
+.nextButton:active {
+    background-color: #5b5959;
+}
+
+.nextButton span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.3s;
+}
+
+.nextButton span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.nextButton:hover span {
+    padding-right: 25px;
+}
+
+.nextButton:hover span:after {
+    opacity: 1;
+    right: 0;
+}
