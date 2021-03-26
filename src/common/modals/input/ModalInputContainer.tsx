@@ -1,14 +1,20 @@
 import React, {useState} from 'react';
 import ModalInput from './ModalInput';
 
+
+// export type AnswerType = { answer: string, value1?: string, value2?: string }
+
 export type ModalInputContainerPropsType = {
     buttonTitle?: string
     modalText?: string
     defaultAnswer?: string
-    answerCallback?: (answer: string) => void;
+    // answerCallback?: (answer: string[]) => void;
+    answerCallback?: (answer: {
+        answer: string,
+        value1: string,
+        value2: string
+    }) => void;
     inputsCount?: 1 | 2 | 3
-
-
 }
 
 function ModalInputContainer(props: ModalInputContainerPropsType) {
@@ -17,10 +23,15 @@ function ModalInputContainer(props: ModalInputContainerPropsType) {
 
     const [value1, setValue1] = useState('');
     const [value2, setValue2] = useState('');
+
+
     const setAnswerHandler = (value: string) => {
         setAnswer(value)
-        // debugger
-        props.answerCallback && props.answerCallback(value)
+        props.answerCallback && props.answerCallback({
+            answer: value,
+            value1,
+            value2
+        })
     }
 
     const modalInputProps: any = {
@@ -35,14 +46,11 @@ function ModalInputContainer(props: ModalInputContainerPropsType) {
         height: 200,
     }
 
-    if( props.inputsCount === 2){
+    if (props.inputsCount === 3) {
         modalInputProps.inputData = [[value1, setValue1], [value2, setValue2]]
-    } else if (props.inputsCount === 3) {
+    } else if (props.inputsCount === 2) {
         modalInputProps.inputData = [[value1, setValue1]]
     }
-
-
-
 
     return (
         <>
@@ -52,23 +60,7 @@ function ModalInputContainer(props: ModalInputContainerPropsType) {
                 {/*{answer}-{value1}-{value2}*/}
                 {/*{answer}*/}
             </div>
-            <ModalInput
-                {...modalInputProps}
-                // show={show}
-                // close={() => setShow(false)}
-                // modalText={props.modalText}
-                //
-                // answer={answer}
-                // setAnswer={setAnswerHandler}
-                //
-                // inputData={[[value1, setValue1], [value2, setValue2]]}
-                //
-                // enableBackground={true}
-                // backgroundOnClick={() => setShow(false)}
-                //
-                // width={300}
-                // height={200}
-            >
+            <ModalInput {...modalInputProps}>
             </ModalInput>
         </>
     );

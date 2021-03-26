@@ -2,6 +2,8 @@ import React, {CSSProperties, ReactChildren, ReactElement, ReactNode, useState} 
 import Modal from "../Modal";
 import InputMap, {IInputData} from "./InputMap";
 
+// export type AnswerType = { answer: string, value1?: string, value2?:string }
+
 export type ModalInputPropsType = {
     show: boolean;
     close: () => void;
@@ -33,7 +35,7 @@ function ModalInput({
                         modalText,
                         // modalButtonTitle,
                         answer,
-                        setAnswer = (answer: string) => {
+                        setAnswer = (answer) => {
                         },
 
                         inputContainerStyles,

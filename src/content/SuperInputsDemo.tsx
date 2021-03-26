@@ -7,6 +7,7 @@ import SearchContainer from "../common/Search/SearchContainer";
 import PaginationContainer from "../common/Pagination/PaginationContainer";
 import ModalContainer from "../common/modals/ModalContainer";
 import ModalInputContainer from '../common/modals/input/ModalInputContainer';
+import ModalQuestionContainer from '../common/modals/question/ModalQuestionContainer';
 
 type RegistrationPropsType = {
     error?: string
@@ -41,7 +42,7 @@ function SuperInputsDemo() {
                     onChangeText={setText}
                     onEnter={showAlert}
                     error={error}
-                    className={s.green} // проверьте, рабоет ли смешивание классов
+                    className={s.green} // проверьте, работает ли смешивание классов
                 />
 
                 <SuperButton
@@ -65,6 +66,7 @@ function SuperInputsDemo() {
                 {/*</div>*/}
                 <ModalContainer  modalText={'Simple Modal'}  buttonText={'Close it!'}/>
                 <ModalInputContainer  buttonTitle={'Modal Input demo'} modalText={'Simple Modal input'} />
+                <ModalQuestionContainer/>
             </div>
         </div>
     )

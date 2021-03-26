@@ -87,10 +87,15 @@ function PacksPage(props: PacksPagePropsType) {
         }
     }
 
-    const onModalSubmitHandler = (value: string) => {
+    const onModalSubmitHandler = (value: any) => {
         // debugger
-        if (value) {
-            props.createPack(value)
+        if (value.answer) {
+            props.createPack(value.answer)
+        }
+
+
+        if (value.value1) {
+            alert(value.value1)
         }
 
     }
@@ -109,7 +114,9 @@ function PacksPage(props: PacksPagePropsType) {
                 width: '100%'
             }}>
                 <div style={{alignSelf: 'flex-start', marginBottom: '5px'}}>
-                    <SearchContainer/>
+                    <SearchContainer
+                        placeholder={'Pack name'}
+                    />
                 </div>
                 {/*<div>*/}
                 {/*    <ModalContainer  modalText={'Simple Modal in packs'}  buttonText={'Close it!'}/>*/}
@@ -130,9 +137,12 @@ function PacksPage(props: PacksPagePropsType) {
                         {formState.hide
                             ? <>
                                 <button onClick={() => toggleHideInput(false)}>Add</button>
-                                <ModalInputContainer buttonTitle={'AddModal'} modalText={'Enter the pack name'}
+                                <ModalInputContainer buttonTitle={'AddModal'}
+                                                     modalText={'Enter the pack name'}
                                                      defaultAnswer={'New pack'}
-                                                     answerCallback={onModalSubmitHandler}/>
+                                                     answerCallback={onModalSubmitHandler}
+                                                     inputsCount={3}
+                                />
                             </>
                             : <form className={style.inputBlock} onSubmit={onSubmitHandler}>
                                 <button type='submit'>Add</button>

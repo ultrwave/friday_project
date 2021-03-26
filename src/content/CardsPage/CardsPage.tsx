@@ -47,7 +47,7 @@ function CardsPage(props: PacksPagePropsType) {
                 justifyContent: 'space-between',
                 width: '100%'}}>
                 <div style={{alignSelf: 'flex-start', marginBottom: '5px'}}>
-                    <SearchContainer/>
+                    <SearchContainer placeholder={'Card name'}/>
                 </div>
                 <div style={{alignSelf: 'flex-end', marginBottom: '5px'}}>
                     <PaginationContainer totalItems={props.totalCardsCount}/>

@@ -8,8 +8,11 @@ export type SearchStateType = {
     nameFilter: string
     onlyMyPacks: boolean
 }
+export type SearchContainerPropsType = {
+    placeholder: string
+}
 
-function SearchContainer() {
+function SearchContainer({placeholder}:SearchContainerPropsType) {
     const dispatch = useDispatch()
     const [searchState, setSearchState] = useState<SearchStateType>(
         {
@@ -55,6 +58,7 @@ function SearchContainer() {
                 onChangeHandler={onChangeHandler}
                 //onSubmitHandler={(onSubmitHandler)}
                 onClearHandler={onClearHandler}
+                placeholder={placeholder}
             />
             <input type="checkbox" id="showOnlyMyPacks" name="interest" checked={searchState.onlyMyPacks}
                    onClick={myPacksHandler}/>
