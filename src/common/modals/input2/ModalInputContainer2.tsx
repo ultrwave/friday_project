@@ -8,10 +8,10 @@ import ModalInput2, {AnswersType} from './ModalInput2';
 export type ModalInputContainerPropsType = {
     buttonTitle?: string
     modalText?: string
+    isMine: boolean
     defaultAnswers: AnswersType
     // answerCallback?: (answer: string[]) => void;
     answerCallback?: (answers: AnswersType) => void;
-    inputsCount?: 1 | 2 | 3
 }
 
 function ModalInputContainer2(props: ModalInputContainerPropsType) {
@@ -54,7 +54,9 @@ function ModalInputContainer2(props: ModalInputContainerPropsType) {
     return (
         <>
             <div>
-                <button onClick={() => setShow(true)}>{props.buttonTitle || 'Modal Input'}</button>
+                <button onClick={() => setShow(true)}
+                >{props.buttonTitle || 'Modal Input'}
+                </button>
                 {/*{answers.answer1}{`-${answers?.answer2}`}{`-${answers?.answer3}`}*/}
                 {/*{answer}-{value1}-{value2}*/}
                 {/*{answer}*/}

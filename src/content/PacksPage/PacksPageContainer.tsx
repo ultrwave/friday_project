@@ -19,7 +19,7 @@ function PacksPageContainer() {
 
     useEffect(() => {
         dispatch(getPacksTC())
-    }, [dispatch, page, pageCount, packNameFilter])
+    }, [dispatch, page, pageCount, packNameFilter.onlyMyPacks])
 
     const packs = useSelector((state: RootStateType) => state.packsPage.packs)
     const totalPacksCount = useSelector((state: RootStateType) => state.packsPage.totalPacksCount)
@@ -27,9 +27,6 @@ function PacksPageContainer() {
 
     const pagesCount = Math.ceil(totalPacksCount / itemsOnPage)
     const pages = []; for (let i = 1; i <= pagesCount; i++) pages.push(i)
-
-    const pages = [];
-    for (let i = 1; i <= pagesCount; i++) pages.push(i)
 
     const createPack = (name: string) => {
         dispatch(createPackTC(name))
@@ -39,8 +36,8 @@ function PacksPageContainer() {
         dispatch(deletePackTC(id))
     }
 
-    const updatePack = (id: string) => {
-        dispatch(updatePackTC(id))
+    const updatePack = (id: string, name: string) => {
+        dispatch(updatePackTC(id, name))
     }
 
     return (

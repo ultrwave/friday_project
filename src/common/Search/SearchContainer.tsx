@@ -17,7 +17,7 @@ function SearchContainer({placeholder}:SearchContainerPropsType) {
     const [searchState, setSearchState] = useState<SearchStateType>(
         {
             nameFilter: "",
-            onlyMyPacks: false
+            onlyMyPacks: true
         }
     )
 
@@ -33,7 +33,7 @@ function SearchContainer({placeholder}:SearchContainerPropsType) {
             ...searchState,
             onlyMyPacks: !searchState.onlyMyPacks
         })
-
+        dispatch(setFiltersAC(searchState))
         console.log(searchState)
     }
     const setFiltersHandler = () => {
@@ -60,10 +60,11 @@ function SearchContainer({placeholder}:SearchContainerPropsType) {
                 onClearHandler={onClearHandler}
                 placeholder={placeholder}
             />
-            <input type="checkbox" id="showOnlyMyPacks" name="interest" checked={searchState.onlyMyPacks}
+            <input type="checkbox" id="showOnlyMyPacks" name="interest" checked={!searchState.onlyMyPacks}
                    onClick={myPacksHandler}/>
             <label htmlFor="showOnlyMyPacks">Only my packs</label>
-            <button onClick={setFiltersHandler}>Search</button>
+            <button onClick={setFiltersHandler}
+            style={{marginLeft: '10px'}}>Search</button>
         </div>
     );
 }

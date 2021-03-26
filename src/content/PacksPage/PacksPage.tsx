@@ -5,9 +5,8 @@ import PackItem from './PackItem';
 import SuperInputText from '../../common/SuperInputText/SuperInputText';
 import PaginationContainer from '../../common/Pagination/PaginationContainer';
 import SearchContainer from '../../common/Search/SearchContainer';
-import ModalInputContainer from "../../common/modals/input/ModalInputContainer";
+import ModalInputContainer from '../../common/modals/input/ModalInputContainer';
 import ModalInputContainer2 from '../../common/modals/input2/ModalInputContainer2';
-import SearchContainer from '../../common/SearchComponent/SearchContainer';
 import {RootStateType} from '../../redux/store';
 import {useDispatch, useSelector} from 'react-redux';
 import {getPacksTC, setSortPacksAC} from '../../redux/packs-reducer';
@@ -17,7 +16,7 @@ type PacksPagePropsType = {
     totalPacksCount: number
     createPack(name: string): void
     deletePack(id: string): void
-    updatePack(id: string): void
+    updatePack(id: string, name: string): void
 }
 
 export type AddPackFormStateType = {
@@ -36,7 +35,7 @@ function PacksPage(props: PacksPagePropsType) {
 
     let [isMine, setIsMine] = useState(false)
 
-    const filter = useSelector((state: RootStateType): string => state.searchValue.searchValue)
+    const filter = useSelector((state: RootStateType): string => state.filterState.nameFilter)
     const myId = useSelector((state: RootStateType) => state.auth.profile?._id)
     const sort = useSelector((state: RootStateType) => state.packsPage.params.sortPacks)
     const crSorting = sort.slice(1) === 'created'
@@ -69,7 +68,7 @@ function PacksPage(props: PacksPagePropsType) {
         <PackItem {...p}
                   key={p._id}
                   deleteCallback={() => props.deletePack(p._id)}
-                  updateCallback={() => props.updatePack(p._id)}
+                  updateCallback={(name: string) => props.updatePack(p._id, name)}
         />)
 
     useEffect(() => {
@@ -100,7 +99,6 @@ function PacksPage(props: PacksPagePropsType) {
     }
 
     const onModalSubmitHandler = (value: any) => {
-        // debugger
         if (value.answer) {
             props.createPack(value.answer)
         }
@@ -113,7 +111,6 @@ function PacksPage(props: PacksPagePropsType) {
     }
 
     const onModalSubmitHandler2 = (value: any) => {
-        // debugger
         if (value.answer1) {
             props.createPack(value.answer1)
         }
@@ -148,43 +145,34 @@ function PacksPage(props: PacksPagePropsType) {
                     <div style={{width: '10%'}}>Cards count</div>
                     <div style={{width: '20%'}}>User</div>
                     <div style={{width: '10%'}}>
-                        <span className={`${style.sortSettings} ${!crSorting? style.activeSetting : ''}`}
-                        onClick={() => setSort('updated')}>
-                            {`Updated ${sort === '1updated'? '↑' : '↓'}`}
+                        <span className={`${style.sortSettings} ${!crSorting ? style.activeSetting : ''}`}
+                              onClick={() => setSort('updated')}>
+                            {`Updated ${sort === '1updated' ? '↑' : '↓'}`}
                         </span>
                     </div>
                     <div style={{width: '10%', marginLeft: '12px'}}>
-                        <span className={`${style.sortSettings} ${crSorting? style.activeSetting : ''}`}
-                        onClick={() => setSort('created')}>
-                            {`Created ${sort === '1created'? '↑' : '↓'}`}
+                        <span className={`${style.sortSettings} ${crSorting ? style.activeSetting : ''}`}
+                              onClick={() => setSort('created')}>
+                            {`Created ${sort === '1created' ? '↑' : '↓'}`}
                         </span>
                     </div>
                     <div style={{width: '15%'}}>
                         {formState.hide
-                            ? <>
-                                {/*<button onClick={() => toggleHideInput(false)}>Add</button>*/}
-                                {/*<ModalInputContainer buttonTitle={'AddModal'}*/}
-                                {/*                     modalText={'Enter the pack name'}*/}
-                                {/*                     defaultAnswer={'New pack'}*/}
-                                {/*                     answerCallback={onModalSubmitHandler}*/}
-                                {/*                     inputsCount={1}*/}
-                                {/*/>*/}
-                                <ModalInputContainer2 buttonTitle={'AddModal2'}
-                                                      modalText={'Enter the pack name'}
-                                                      defaultAnswers={{
-                                                          answer1: '',
-                                                          // answer2: 'Answer',
-                                                          // answer3: 'answer3'
-                                                      }}
-                                                      answerCallback={onModalSubmitHandler2}
-                                                      inputsCount={2}
-                                />
-                            </>
-                            ? <button className={style.addButton}
-                                      onClick={() => toggleHideInput(false)}>Add</button>
+                            ?
+                            <ModalInputContainer2 buttonTitle={'Add Pack'}
+                                                  modalText={'Enter new pack name'}
+                                                  isMine={isMine}
+                                                  defaultAnswers={{
+                                                      answer1: '',
+                                                      answer2: '',
+                                                      // answer3: 'answer3'
+                                                  }}
+                                                  answerCallback={onModalSubmitHandler2}
+                            />
                             : <form className={style.inputBlock} onSubmit={onSubmitHandler}>
                                 <button className={style.addButton}
-                                        type='submit'>Add</button>
+                                        type='submit'>Add
+                                </button>
                                 <SuperInputText
                                     value={formState.value}
                                     error={formState.error}

@@ -18,7 +18,8 @@ function PaginationDisplay({currentPage, totalItems, itemsOnPage, getPage, getIt
     for (let i = 1; i <= lastPage; i++) pages.push((
         <button
             key={i}
-            style={{background: currentPage === i ? 'lightblue' : undefined}}
+            style={{background: currentPage === i ? '#4c4c4c' : undefined,
+                color: currentPage === i ? 'white' : undefined}}
             onClick={() => getPage(i)}
         >
             {i}

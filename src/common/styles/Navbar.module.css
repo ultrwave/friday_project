@@ -4,6 +4,7 @@
     align-items: center;
     height: 60px;
     background: rgb(134,134,134);
+    min-width: 1200px;
     background: linear-gradient(90deg, rgba(134,134,134,1) 0%, rgba(93,93,93,1) 23%, rgba(60,60,60,1) 62%);
     box-shadow: 0 2px 2px rgba(50,30,30,0.7);
     padding: 2px 0;
