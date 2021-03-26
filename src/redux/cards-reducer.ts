@@ -38,6 +38,7 @@ const initialState: PageStateType = {
 
 type ActionTypes =
     | ReturnType<typeof setCardsAC>
+    | ReturnType<typeof setSortCardsAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setItemsPerPageAC>
     | ReturnType<typeof setTotalCardsCountAC>
@@ -50,6 +51,11 @@ export const cardsReducer = (state: PageStateType = initialState, action: Action
 
         case 'SET-CARDS':
             return {...state, cards: action.cards}
+
+        case 'SET-SORT-CARDS':
+            return {...state, params: {
+                ...state.params, sortCards: state.params.sortCards === '1grade'? '0grade' : '1grade'
+                }}
 
         case 'SET-PACK-TITLE':
             return {...state, packTitle: action.title}
@@ -69,6 +75,7 @@ export const cardsReducer = (state: PageStateType = initialState, action: Action
 }
 
 const SET_CARDS = 'SET-CARDS'
+const SET_SORT_CARDS = 'SET-SORT-CARDS'
 const SET_PACK_TITLE = 'SET-PACK-TITLE'
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE'
 const SET_ITEMS_PER_PAGE = 'SET-ITEMS-PER-PAGE'
@@ -89,7 +96,9 @@ export const setItemsPerPageAC = (itemsPerPage: number) => (
 export const setTotalCardsCountAC = (totalCardsCount: number) => (
     {type: SET_TOTAL_CARDS_COUNT, totalCardsCount} as const
 )
-
+export const setSortCardsAC = () => (
+    {type: SET_SORT_CARDS} as const
+)
 
 // Thunks
 
@@ -102,7 +111,8 @@ export const getCardsTC = (packId: string, pagination = true):AppThunk =>
     (dispatch, getState) => {
     dispatch(setAppStatusAC('loading'))
     const params = pagination? getState().pagination : {pageCount: 1000}
-    cardsAPI.getCards(packId, {...params, sortCards: '1grade'})
+    const sortCards = getState().cardsPage.params.sortCards
+    cardsAPI.getCards(packId, {...params, sortCards})
         .then((response) => {
             dispatch(setCardsAC(response.cards))
             dispatch(setTotalCardsCountAC(response.cardsTotalCount))

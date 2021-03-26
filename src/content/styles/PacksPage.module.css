@@ -36,6 +36,18 @@ ul {
     border: 1px dotted darkred;
 }
 
+.sortSettings {
+    cursor: pointer;
+    padding: 2px 12px;
+    margin: 2px;
+}
+
+.activeSetting {
+    margin: 0;
+    border: 2px dotted black;
+    padding: 2px 12px;
+}
+
 .table li {
     opacity: 0.0;
     transition: all 0.2s;
@@ -79,8 +91,15 @@ ul {
 }
 
 .inputBlock button {
-    margin-top: 16px;
     margin-right: 4px;
+}
+
+.addButton {
+    font-size: 18px;
+    width: 56px;
+    height: 30px;
+    margin-left: 12px;
+    align-self: center;
 }
 
 .inputBlock span {
@@ -118,4 +137,9 @@ ul {
     transition: revert;
     color: revert;
 
+}
+
+.packsPageWrapper a {
+    color: #9b7d58;
+    font-size: 16px;
 }

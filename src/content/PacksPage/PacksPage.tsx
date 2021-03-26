@@ -6,7 +6,8 @@ import SuperInputText from '../../common/SuperInputText/SuperInputText';
 import PaginationContainer from '../../common/Pagination/PaginationContainer';
 import SearchContainer from '../../common/SearchComponent/SearchContainer';
 import {RootStateType} from '../../redux/store';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {getPacksTC, setSortPacksAC} from '../../redux/packs-reducer';
 
 type PacksPagePropsType = {
     packs: Array<GetPacksResponseType>
@@ -26,6 +27,7 @@ export type AddPackFormStateType = {
 function PacksPage(props: PacksPagePropsType) {
     console.log('PacksPage called')
 
+    const dispatch = useDispatch()
     let [formState, setFormState] =
         useState<AddPackFormStateType>({value: '', error: '', hide: true, touched: false})
 
@@ -33,6 +35,8 @@ function PacksPage(props: PacksPagePropsType) {
 
     const filter = useSelector((state: RootStateType): string => state.searchValue.searchValue)
     const myId = useSelector((state: RootStateType) => state.auth.profile?._id)
+    const sort = useSelector((state: RootStateType) => state.packsPage.params.sortPacks)
+    const crSorting = sort.slice(1) === 'created'
 
     const onChangeHandler = (value: string) => {
 
@@ -87,6 +91,11 @@ function PacksPage(props: PacksPagePropsType) {
         }
     }
 
+    const setSort = (type: 'created' | 'updated') => {
+        dispatch(setSortPacksAC(type))
+        dispatch(getPacksTC())
+    }
+
     return (
         <div className={style.packsPageWrapper}>
             <h1 className={style.pageTitle}>Packs</h1>
@@ -108,13 +117,25 @@ function PacksPage(props: PacksPagePropsType) {
                     <div style={{width: '15%'}}>Name</div>
                     <div style={{width: '10%'}}>Cards count</div>
                     <div style={{width: '20%'}}>User</div>
-                    <div style={{width: '10%'}}>Updated</div>
-                    <div style={{width: '10%'}}>Created</div>
+                    <div style={{width: '10%'}}>
+                        <span className={`${style.sortSettings} ${!crSorting? style.activeSetting : ''}`}
+                        onClick={() => setSort('updated')}>
+                            {`Updated ${sort === '1updated'? '↑' : '↓'}`}
+                        </span>
+                    </div>
+                    <div style={{width: '10%', marginLeft: '12px'}}>
+                        <span className={`${style.sortSettings} ${crSorting? style.activeSetting : ''}`}
+                        onClick={() => setSort('created')}>
+                            {`Created ${sort === '1created'? '↑' : '↓'}`}
+                        </span>
+                    </div>
                     <div style={{width: '15%'}}>
                         {formState.hide
-                            ? <button onClick={() => toggleHideInput(false)}>Add</button>
+                            ? <button className={style.addButton}
+                                      onClick={() => toggleHideInput(false)}>Add</button>
                             : <form className={style.inputBlock} onSubmit={onSubmitHandler}>
-                                <button type='submit'>Add</button>
+                                <button className={style.addButton}
+                                        type='submit'>Add</button>
                                 <SuperInputText
                                     value={formState.value}
                                     error={formState.error}
@@ -125,7 +146,7 @@ function PacksPage(props: PacksPagePropsType) {
                                 <span onClick={() => toggleHideInput(true)}>x</span>
                             </form>}
                     </div>
-                    <div style={{width: '20%'}}/>
+                    <div style={{width: '10%'}}/>
                 </div>
                 <ul>
                     {packsRender}

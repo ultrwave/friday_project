@@ -33,8 +33,8 @@ function PackItem(props: GetPacksResponseType & PackItemPropsType) {
                 <div style={{width: '15%'}}>{props.name}</div>
                 <div style={{width: '10%'}}>{props.cardsCount}</div>
                 <div style={{width: '20%', fontSize: '12px', color: 'gray'}}>{props.user_name}</div>
-                <div style={{width: '10%', fontSize: '12px'}}>{updated}</div>
-                <div style={{width: '10%', fontSize: '12px'}}>{created}</div>
+                <div style={{width: '10%', fontSize: '12px', paddingLeft: '12px'}}>{updated}</div>
+                <div style={{width: '10%', fontSize: '12px', paddingLeft: '12px'}}>{created}</div>
                 <div style={{width: '15%'}}>
                     <button disabled={!itemIsMine}
                             onClick={props.deleteCallback}>Delete</button>
@@ -45,7 +45,7 @@ function PackItem(props: GetPacksResponseType & PackItemPropsType) {
                 <div style={{width: '5%'}}>
                     <NavLink to={`/cards/${props._id}/${encodeURI(props.name)}`}>cards</NavLink>
                 </div>
-                <div style={{width: '15%'}}>
+                <div style={{width: '5%'}}>
                     <NavLink to={`/learn/${props._id}/${encodeURI(props.name)}/${itemIsMine? 1 : 0}`}>learn</NavLink>
                 </div>
             </div>

@@ -4,9 +4,11 @@ import {CardType} from '../../api/API';
 import CardItem from './CardItem';
 import SearchContainer from '../../common/SearchComponent/SearchContainer';
 import PaginationContainer from '../../common/Pagination/PaginationContainer';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
 import {useParams} from 'react-router-dom';
+import {getPacksTC, setSortPacksAC} from '../../redux/packs-reducer';
+import {getCardsTC, setSortCardsAC} from '../../redux/cards-reducer';
 
 type PacksPagePropsType = {
     title: string
@@ -28,16 +30,23 @@ export type AddCardFormStateType = {
 function CardsPage(props: PacksPagePropsType) {
     console.log('CardsPage called')
 
+    const dispatch = useDispatch()
     const filter = useSelector((state: RootStateType): string => state.searchValue.searchValue)
+    const sort = useSelector((state: RootStateType): string => state.cardsPage.params.sortCards)
 
-    const cards = props.cards.filter(c => filter? c.question.includes(filter) : true)
+    const setSort = () => {
+        dispatch(setSortCardsAC())
+        dispatch(getCardsTC(props.packId))
+    }
+
+    const cards = props.cards.filter(c => filter ? c.question.includes(filter) : true)
         .map(c => {
-        return <CardItem {...c}
-                         key={c._id}
-                         deleteCallback={() => props.deleteCard(props.packId, c._id)}
-                         updateCallback={() => props.updateCard(props.packId, c._id)}
-        />
-    })
+            return <CardItem {...c}
+                             key={c._id}
+                             deleteCallback={() => props.deleteCard(props.packId, c._id)}
+                             updateCallback={() => props.updateCard(props.packId, c._id)}
+            />
+        })
 
     return (
         <div className={style.cardsPageWrapper}>
@@ -54,7 +63,11 @@ function CardsPage(props: PacksPagePropsType) {
                 <div className={style.tableHeader}>
                     <div style={{width: '15%'}}>Question</div>
                     <div style={{width: '10%'}}>Answer</div>
-                    <div style={{width: '15%'}}>Grade</div>
+                    <div style={{width: '15%'}}>
+                        <span className={`${style.sortSettings} ${style.activeSetting}`}
+                              onClick={setSort}>
+                            {`Grade ${sort === '1grade' ? '↑' : '↓'}`}
+                        </span></div>
                     <div style={{width: '10%'}}>Updated</div>
                     <div style={{width: '10%'}}>Created</div>
                     <div style={{width: '15%'}}>

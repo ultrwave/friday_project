@@ -8,6 +8,7 @@
 
 .content {
     width: 95%;
+    min-width: 1200px;
     margin: 20px auto;
     padding: 10px;
     background-color: #e5e3d8;
