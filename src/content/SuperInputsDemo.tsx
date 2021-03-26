@@ -3,10 +3,11 @@ import SuperButton from '../common/SuperButton/SuperButton';
 import SuperInputText from '../common/SuperInputText/SuperInputText';
 import SuperCheckbox from '../common/SuperCheckbox/SuperCheckbox';
 import s from './styles/Registration.module.css'
-import SearchComponent from "../common/SearchComponent/SearchComponent";
-import SearchContainer from "../common/SearchComponent/SearchContainer";
+import SearchContainer from "../common/Search/SearchContainer";
 import PaginationContainer from "../common/Pagination/PaginationContainer";
-import SortContainer from "../common/Sort/SortContainer";
+import ModalContainer from "../common/modals/ModalContainer";
+import ModalInputContainer from '../common/modals/input/ModalInputContainer';
+import ModalQuestionContainer from '../common/modals/question/ModalQuestionContainer';
 
 type RegistrationPropsType = {
     error?: string
@@ -41,7 +42,7 @@ function SuperInputsDemo() {
                     onChangeText={setText}
                     onEnter={showAlert}
                     error={error}
-                    className={s.green} // проверьте, рабоет ли смешивание классов
+                    className={s.green} // проверьте, работает ли смешивание классов
                 />
 
                 <SuperButton
@@ -55,14 +56,17 @@ function SuperInputsDemo() {
                     CheckboxText {/*// этот текст попадёт в children*/}
                 </SuperCheckbox>
                 <div>SearchComponent:
-                    <div style={{'border': 'solid 1px black'}}><SearchContainer/></div>
+                    <div style={{'border': 'solid 1px black'}}><SearchContainer placeholder={'placeholder'}/></div>
                 </div>
                 <div>Pagination:
                     <div style={{'border': 'solid 1px black'}}><PaginationContainer totalItems={50}/></div>
                 </div>
-                <div>Sort:
-                    <div style={{'border': 'solid 1px black'}}><SortContainer/></div>
-                </div>
+                {/*<div>Sort:*/}
+                {/*    <div style={{'border': 'solid 1px black'}}><SortContainer/></div>*/}
+                {/*</div>*/}
+                <ModalContainer  modalText={'Simple Modal'}  buttonText={'Close it!'}/>
+                <ModalInputContainer  buttonTitle={'Modal Input demo'} modalText={'Simple Modal input'} />
+                <ModalQuestionContainer/>
             </div>
         </div>
     )

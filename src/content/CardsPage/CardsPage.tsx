@@ -2,7 +2,7 @@ import React from 'react';
 import style from '../styles/CardsPage.module.css'
 import {CardType} from '../../api/API';
 import CardItem from './CardItem';
-import SearchContainer from '../../common/SearchComponent/SearchContainer';
+import SearchContainer from '../../common/Search/SearchContainer';
 import PaginationContainer from '../../common/Pagination/PaginationContainer';
 import {useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
@@ -26,7 +26,7 @@ export type AddCardFormStateType = {
 function CardsPage(props: PacksPagePropsType) {
     console.log('CardsPage called')
 
-    const filter = useSelector((state: RootStateType): string => state.searchValue.searchValue)
+    const filter = useSelector((state: RootStateType): string => state.filterState.nameFilter)
     const pack = useSelector((state: RootStateType) => state.packsPage.packs.find(p => p._id === props.packId))
     const title = pack? pack.name : 'Pack'
 
@@ -47,7 +47,7 @@ function CardsPage(props: PacksPagePropsType) {
                 justifyContent: 'space-between',
                 width: '100%'}}>
                 <div style={{alignSelf: 'flex-start', marginBottom: '5px'}}>
-                    <SearchContainer/>
+                    <SearchContainer placeholder={'Card name'}/>
                 </div>
                 <div style={{alignSelf: 'flex-end', marginBottom: '5px'}}>
                     <PaginationContainer totalItems={props.totalCardsCount}/>
