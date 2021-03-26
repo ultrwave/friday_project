@@ -1,10 +1,44 @@
 .navbar {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
-    height: 40px;
-    margin: 5px auto;
-    background-color: wheat;
+    height: 60px;
+    background: rgb(134,134,134);
+    background: linear-gradient(90deg, rgba(134,134,134,1) 0%, rgba(93,93,93,1) 23%, rgba(60,60,60,1) 62%);
+    box-shadow: 0 2px 2px rgba(50,30,30,0.7);
+    padding: 2px 0;
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+}
+
+.logo {
+    height: 55px;
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter: drop-shadow(5px 5px 5px #222);
+    margin: 0 50px 4px;
+}
+
+.logoutButton {
+    background: none;
+    color: #eacca3;
+    border: 2px dotted #eacca3;
+    padding: 4px 15px;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    margin-right: 30px;
+}
+
+.logoutButton:hover {
+    background: none;
+    border: 2px dotted white;
+    color: white;
 }
 
 .navbarItem {

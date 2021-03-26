@@ -40,12 +40,9 @@ function CardsPage(props: PacksPagePropsType) {
     })
 
     return (
-        <div className={style.packsPageWrapper}>
-            <h1 style={{alignSelf: 'center'}}>{props.title}</h1>
-            <div style={{display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                width: '100%'}}>
+        <div className={style.cardsPageWrapper}>
+            <h1 className={style.pageTitle}>{props.title}</h1>
+            <div className={style.controlsContainer}>
                 <div style={{alignSelf: 'flex-start', marginBottom: '5px'}}>
                     <SearchContainer/>
                 </div>

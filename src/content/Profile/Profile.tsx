@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
 import {Redirect} from 'react-router-dom';
 import style from '../styles/Profile.module.css'
+import appStyle from '../../common/styles/Common.module.css'
 import defaultAvatar from '../../common/images/default_avatar.png';
 import {AuthProfileType, logOutTC} from '../../redux/auth-reducer';
 
@@ -15,7 +16,7 @@ function Profile() {
 
     return (
         <div>
-            <h1 className={style.profile}>
+            <h1 className={`${appStyle.defaultTitle} ${style.title}`}>
                 Profile
             </h1>
             {
@@ -23,7 +24,7 @@ function Profile() {
                     ? <div className={style.profileData}>
                         {profileData.avatar ?
                             <div>
-                            <img src={profileData.avatar} alt="" width="100"  height=""></img>
+                                <img src={profileData.avatar} alt="" width="100" height=""></img>
                             </div>
                             : <img src={defaultAvatar} alt="" width="100" height="100"/>
                         }
@@ -34,7 +35,7 @@ function Profile() {
 
                         {/*<div className={style.name}>{profile.data.name}</div>*/}
                         {/*<div className={style.name}>{userName}</div>*/}
-                        <button onClick={logoutHandler}>Log out</button>
+                        <button className={appStyle.defaultButton} onClick={logoutHandler}>Log out</button>
                     </div>
                     : <Redirect to={'/login'}/>
             }

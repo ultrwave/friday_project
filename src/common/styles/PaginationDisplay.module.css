@@ -23,6 +23,9 @@
 
 }
 
+.main button:active {
+}
+
 .main::-webkit-scrollbar {
     padding: 2px;
     height: 8px;
@@ -43,3 +46,8 @@
 /*    width: 100%;*/
 
 /*}*/
+.main button {
+    background-color: white;
+    padding: 0 5px;
+    cursor: pointer;
+}

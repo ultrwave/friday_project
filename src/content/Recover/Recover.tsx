@@ -1,5 +1,6 @@
 import React, {FormEvent} from 'react';
 import style from '../styles/Recover.module.css'
+import appStyle from '../../common/styles/Common.module.css'
 import SuperInputText from '../../common/SuperInputText/SuperInputText';
 import {NavLink} from 'react-router-dom';
 import SuperButton from '../../common/SuperButton/SuperButton';
@@ -37,7 +38,7 @@ const Recover = ({formState, onChangeHandler, onBlurHandler, onSubmitHandler}: R
 
     return (
         <form className={style.form} onSubmit={submitForm}>
-            <h1>Recover</h1>
+            <h1 className={appStyle.defaultTitle}>Recover</h1>
             <SuperInputText
                 value={formState.value}
                 error={formState.error}
@@ -48,7 +49,9 @@ const Recover = ({formState, onChangeHandler, onBlurHandler, onSubmitHandler}: R
             <div className={style.timerContainer}>
                 {timerIsOn
                     ? <RecoverTimer getTime={getTime} hideTimer={hideTimer}/>
-                    : <SuperButton disabled={!!formState.error} type={'submit'}>Send</SuperButton>
+                    : <SuperButton className={appStyle.defaultButton}
+                                   disabled={!!formState.error}
+                                   type={'submit'}>Send</SuperButton>
                 }
             </div>
             <NavLink to={'/login'}><span>Login page</span></NavLink>

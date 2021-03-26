@@ -89,13 +89,8 @@ function PacksPage(props: PacksPagePropsType) {
 
     return (
         <div className={style.packsPageWrapper}>
-            <h1 style={{alignSelf: 'center'}}>Packs</h1>
-            <div style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                width: '100%'
-            }}>
+            <h1 className={style.pageTitle}>Packs</h1>
+            <div className={style.controlsContainer}>
                 <div style={{alignSelf: 'flex-start', marginBottom: '5px'}}>
                     <SearchContainer/>
                     <input type="checkbox"

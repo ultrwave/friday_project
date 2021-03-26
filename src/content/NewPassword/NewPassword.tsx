@@ -1,5 +1,6 @@
 import React, {FormEvent} from 'react';
 import style from '../styles/Login.module.css'
+import appStyle from '../../common/styles/Common.module.css'
 import SuperButton from '../../common/SuperButton/SuperButton';
 import {NavLink} from 'react-router-dom';
 import {NewPasswordFormStateType} from './NewPasswordContainer';
@@ -13,7 +14,6 @@ type RecoverPropsType = {
 }
 
 const NewPassword = ({formState, onChangeHandler, onBlurHandler, onSubmitHandler,}: RecoverPropsType) => {
-
     console.log('NewPassword called')
 
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
@@ -25,7 +25,7 @@ const NewPassword = ({formState, onChangeHandler, onBlurHandler, onSubmitHandler
 
     return (
         <form className={style.form} onSubmit={submitForm}>
-            <h1>New password</h1>
+            <h1 className={appStyle.defaultTitle}>New password</h1>
             <SuperInputText
                 value={formState.password.value}
                 error={formState.password.error}
@@ -42,7 +42,10 @@ const NewPassword = ({formState, onChangeHandler, onBlurHandler, onSubmitHandler
                 placeholder={'Confirm'}
                 type={'password'}
             />
-            <SuperButton disabled={formError} type={'submit'}>Send</SuperButton>
+            <SuperButton className={appStyle.defaultButton}
+                         disabled={formError} type={'submit'}>
+                <span>Send</span>
+            </SuperButton>
             <NavLink to={'/login'}><span>Login page</span></NavLink>
         </form>
     )

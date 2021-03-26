@@ -2,6 +2,7 @@ import React, {FormEvent} from 'react';
 import SuperButton from '../../common/SuperButton/SuperButton';
 import SuperInputText from '../../common/SuperInputText/SuperInputText';
 import style from '../styles/Registration.module.css'
+import appStyle from '../../common/styles/Common.module.css'
 import {RegistrationFormStateType} from "./RegistrationContainer";
 import {RegistrationValidatorFieldType} from '../../common/registrationInputValidator';
 
@@ -90,11 +91,11 @@ function Registration2({registrationFormState, onChangeHandler, onBlurHandler, o
     return (
         <div className={style.pageContainer}>
         <form className={style.form} onSubmit={submitForm}>
-            <h1>Sign Up</h1>
+            <h1 className={appStyle.defaultTitle}>Sign Up</h1>
             <div className={style.registrationErrorMessage}>
                 {errorResponse}
             </div>
-            <div>
+            <div className={style.container}>
                 <SuperInputText
                     title={'Email'}
                     value={email.value}
@@ -142,6 +143,7 @@ function Registration2({registrationFormState, onChangeHandler, onBlurHandler, o
                 {/*/>*/}
 
                 <SuperButton
+                    className={`${appStyle.defaultButton} ${style.submitButton}`}
                     disabled={disableSubmit}
                     type={'submit'}
                 >

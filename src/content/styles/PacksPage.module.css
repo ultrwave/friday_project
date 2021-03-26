@@ -9,6 +9,20 @@ h1 {
     font-size: 20px;
 }
 
+.pageTitle {
+    font-size: 32px;
+    align-self: center;
+    margin: 10px;
+    color: #4c4c4c;
+}
+
+.controlsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
 .table {
     display: flex;
     flex-direction: column;
@@ -79,4 +93,29 @@ ul {
 
 .itemIsNotMine {
     color: #b17070;
+}
+
+.packsPageWrapper button {
+    border: 1px solid #ded7d3;
+    outline: none;
+    padding: 4px 12px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(100,100,100,0.3);
+    transition: 0.2s;
+}
+
+.packsPageWrapper button:hover {
+    background-color: #a79375;
+    border: 1px solid white;
+    color: white;
+}
+
+.packsPageWrapper button:disabled:hover {
+    background-color: revert;
+    border: 1px solid #ded7d3;
+    padding: 4px 12px;
+    cursor: default;
+    transition: revert;
+    color: revert;
+
 }
