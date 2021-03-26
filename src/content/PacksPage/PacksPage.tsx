@@ -6,6 +6,7 @@ import SuperInputText from '../../common/SuperInputText/SuperInputText';
 import PaginationContainer from '../../common/Pagination/PaginationContainer';
 import SearchContainer from '../../common/Search/SearchContainer';
 import ModalInputContainer from "../../common/modals/input/ModalInputContainer";
+import ModalInputContainer2 from '../../common/modals/input2/ModalInputContainer2';
 
 type PacksPagePropsType = {
     packs: Array<GetPacksResponseType>
@@ -100,6 +101,18 @@ function PacksPage(props: PacksPagePropsType) {
 
     }
 
+    const onModalSubmitHandler2 = (value: any) => {
+        // debugger
+        if (value.answer1) {
+            props.createPack(value.answer1)
+        }
+
+        if (value.answer2) {
+            alert(value.answer2)
+        }
+
+    }
+
     const handleIsMineOnChange = () => {
         setIsMine(!isMine)
     }
@@ -136,12 +149,22 @@ function PacksPage(props: PacksPagePropsType) {
                     <div style={{width: '15%'}}>
                         {formState.hide
                             ? <>
-                                <button onClick={() => toggleHideInput(false)}>Add</button>
-                                <ModalInputContainer buttonTitle={'AddModal'}
-                                                     modalText={'Enter the pack name'}
-                                                     defaultAnswer={'New pack'}
-                                                     answerCallback={onModalSubmitHandler}
-                                                     inputsCount={3}
+                                {/*<button onClick={() => toggleHideInput(false)}>Add</button>*/}
+                                {/*<ModalInputContainer buttonTitle={'AddModal'}*/}
+                                {/*                     modalText={'Enter the pack name'}*/}
+                                {/*                     defaultAnswer={'New pack'}*/}
+                                {/*                     answerCallback={onModalSubmitHandler}*/}
+                                {/*                     inputsCount={1}*/}
+                                {/*/>*/}
+                                <ModalInputContainer2 buttonTitle={'AddModal2'}
+                                                      modalText={'Enter the pack name'}
+                                                      defaultAnswers={{
+                                                          answer1: '',
+                                                          // answer2: 'Answer',
+                                                          // answer3: 'answer3'
+                                                      }}
+                                                      answerCallback={onModalSubmitHandler2}
+                                                      inputsCount={2}
                                 />
                             </>
                             : <form className={style.inputBlock} onSubmit={onSubmitHandler}>
