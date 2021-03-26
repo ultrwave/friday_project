@@ -35,7 +35,7 @@ const ModalQuestionContainer = (
         <>
             <div>
                 <button onClick={() => setShow(true)}>{buttonTitle}</button>
-                {answer ? <span>Yes</span> : <span>No</span>}
+                {/*{answer ? <span>Yes</span> : <span>No</span>}*/}
             </div>
 
             <ModalQuestion

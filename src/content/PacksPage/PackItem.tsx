@@ -4,6 +4,7 @@ import style from '../styles/PacksPage.module.css'
 import {GetPacksResponseType} from '../../api/API';
 import {useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
+import ModalQuestionContainer from "../../common/modals/question/ModalQuestionContainer";
 
 type PackItemPropsType = {
     deleteCallback(): void
@@ -21,20 +22,30 @@ function PackItem(props: GetPacksResponseType & PackItemPropsType) {
     const created = new Date(props.created)
         .toLocaleDateString("en-UE", {hour12: false, hour: 'numeric', minute: 'numeric'});
 
+    const deleteHandler = (answer: boolean) => {
+        if (answer) {
+            props.deleteCallback()
+        }
+    }
+
     return (
         <li>
-            <div className={`${style.packItem}${itemIsMine? '' : (' ' + style.itemIsNotMine)}`}>
+            <div className={`${style.packItem}${itemIsMine ? '' : (' ' + style.itemIsNotMine)}`}>
                 <div style={{width: '15%'}}>{props.name}</div>
                 <div style={{width: '10%'}}>{props.cardsCount}</div>
                 <div style={{width: '20%', fontSize: '12px', color: 'gray'}}>{props.user_name}</div>
                 <div style={{width: '10%', fontSize: '12px'}}>{updated}</div>
                 <div style={{width: '10%', fontSize: '12px'}}>{created}</div>
-                <div style={{width: '15%'}}>
-                    <button disabled={!itemIsMine}
-                            onClick={props.deleteCallback}>Delete</button>
+                <div style={{width: '15%', display: 'flex', flexDirection: 'row'}}>
+                    {/*<button disabled={!itemIsMine}*/}
+                    {/*        onClick={props.deleteCallback}>Delete*/}
+                    {/*</button>*/}
+                    <ModalQuestionContainer buttonTitle={'Delete'} modalText={'Delete pack?'}
+                                            answerCallback={deleteHandler}/>
                     <button style={{marginLeft: '5px'}}
                             disabled={!itemIsMine}
-                            onClick={props.updateCallback}>Update</button>
+                            onClick={props.updateCallback}>Update
+                    </button>
                 </div>
                 <div style={{width: '20%'}}>
                     <NavLink to={`/cards/${props._id}`}>cards</NavLink>
