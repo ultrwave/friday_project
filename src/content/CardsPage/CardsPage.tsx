@@ -2,12 +2,16 @@ import React from 'react';
 import style from '../styles/CardsPage.module.css'
 import {CardType} from '../../api/API';
 import CardItem from './CardItem';
-import SearchContainer from '../../common/Search/SearchContainer';
+import SearchContainer from '../../common/SearchComponent/SearchContainer';
 import PaginationContainer from '../../common/Pagination/PaginationContainer';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
+import {useParams} from 'react-router-dom';
+import {getPacksTC, setSortPacksAC} from '../../redux/packs-reducer';
+import {getCardsTC, setSortCardsAC} from '../../redux/cards-reducer';
 
 type PacksPagePropsType = {
+    title: string
     cards: Array<CardType>
     packId: string
     totalCardsCount: number
@@ -26,28 +30,30 @@ export type AddCardFormStateType = {
 function CardsPage(props: PacksPagePropsType) {
     console.log('CardsPage called')
 
-    const filter = useSelector((state: RootStateType): string => state.filterState.nameFilter)
-    const pack = useSelector((state: RootStateType) => state.packsPage.packs.find(p => p._id === props.packId))
-    const title = pack? pack.name : 'Pack'
+    const dispatch = useDispatch()
+    const filter = useSelector((state: RootStateType): string => state.searchValue.searchValue)
+    const sort = useSelector((state: RootStateType): string => state.cardsPage.params.sortCards)
 
-    const cards = props.cards.filter(c => filter? c.question.includes(filter) : true)
+    const setSort = () => {
+        dispatch(setSortCardsAC())
+        dispatch(getCardsTC(props.packId))
+    }
+
+    const cards = props.cards.filter(c => filter ? c.question.includes(filter) : true)
         .map(c => {
-        return <CardItem {...c}
-                         key={c._id}
-                         deleteCallback={() => props.deleteCard(props.packId, c._id)}
-                         updateCallback={() => props.updateCard(props.packId, c._id)}
-        />
-    })
+            return <CardItem {...c}
+                             key={c._id}
+                             deleteCallback={() => props.deleteCard(props.packId, c._id)}
+                             updateCallback={() => props.updateCard(props.packId, c._id)}
+            />
+        })
 
     return (
-        <div className={style.packsPageWrapper}>
-            <h1 style={{alignSelf: 'center'}}>{title}</h1>
-            <div style={{display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                width: '100%'}}>
+        <div className={style.cardsPageWrapper}>
+            <h1 className={style.pageTitle}>{props.title}</h1>
+            <div className={style.controlsContainer}>
                 <div style={{alignSelf: 'flex-start', marginBottom: '5px'}}>
-                    <SearchContainer placeholder={'Card name'}/>
+                    <SearchContainer/>
                 </div>
                 <div style={{alignSelf: 'flex-end', marginBottom: '5px'}}>
                     <PaginationContainer totalItems={props.totalCardsCount}/>
@@ -57,7 +63,11 @@ function CardsPage(props: PacksPagePropsType) {
                 <div className={style.tableHeader}>
                     <div style={{width: '15%'}}>Question</div>
                     <div style={{width: '10%'}}>Answer</div>
-                    <div style={{width: '15%'}}>Grade</div>
+                    <div style={{width: '15%'}}>
+                        <span className={`${style.sortSettings} ${style.activeSetting}`}
+                              onClick={setSort}>
+                            {`Grade ${sort === '1grade' ? '↑' : '↓'}`}
+                        </span></div>
                     <div style={{width: '10%'}}>Updated</div>
                     <div style={{width: '10%'}}>Created</div>
                     <div style={{width: '15%'}}>

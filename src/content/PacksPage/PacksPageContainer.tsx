@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import PacksPage from './PacksPage';
 import {useDispatch, useSelector} from 'react-redux';
 import {createPackTC, deletePackTC, getPacksTC, updatePackTC} from '../../redux/packs-reducer';
@@ -12,6 +12,7 @@ function PacksPageContainer() {
 
     const dispatch = useDispatch()
     const isLoggedIn = useSelector((state: RootStateType): boolean => state.auth.isLoggedIn)
+    const appStatus = useSelector((state: RootStateType): string => state.appState.status)
     const page = useSelector((state: RootStateType): number => state.pagination.page)
     const pageCount = useSelector((state: RootStateType): number => state.pagination.pageCount)
     const packNameFilter = useSelector((state: RootStateType) => state.filterState)
@@ -25,6 +26,7 @@ function PacksPageContainer() {
     const itemsOnPage = useSelector((state: RootStateType) => state.pagination.pageCount)
 
     const pagesCount = Math.ceil(totalPacksCount / itemsOnPage)
+    const pages = []; for (let i = 1; i <= pagesCount; i++) pages.push(i)
 
     const pages = [];
     for (let i = 1; i <= pagesCount; i++) pages.push(i)
@@ -42,7 +44,7 @@ function PacksPageContainer() {
     }
 
     return (
-        !isLoggedIn
+        appStatus === 'idle' && !isLoggedIn
             ? <Redirect to={'/login'}/>
             : <PacksPage
                 packs={packs}

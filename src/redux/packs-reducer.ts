@@ -19,7 +19,6 @@ export type GetPacksParamsType = {
     page: number
     pageCount: number
     sortPacks: '1created' | '0created' | '1updated' | '0updated'
-    user_id?: string
 }
 
 const initialState: PageStateType = {
@@ -30,12 +29,12 @@ const initialState: PageStateType = {
         page: 1,
         pageCount: 10,
         sortPacks: '0updated',
-        packName: "",
     }
 }
 
 type ActionTypes =
     | ReturnType<typeof setPacksAC>
+    | ReturnType<typeof setSortPacksAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setTotalPacksCountAC>
 
@@ -53,12 +52,23 @@ export const packsReducer = (state: PageStateType = initialState, action: Action
         case 'SET-TOTAL-PACKS-COUNT':
             return {...state, totalPacksCount: action.totalPacksCount}
 
+        case 'SET-SORT-PACKS':
+            return {...state,
+                params: {...state.params,
+                sortPacks: action.sort === 'created'
+                    ? state.params.sortPacks === '1created'
+                    ? '0created' : '1created'
+                    : state.params.sortPacks === '1updated'
+                    ? '0updated' : '1updated'
+                }}
+
         default:
             return state
     }
 }
 
 const SET_PACKS = 'SET-PACKS'
+const SET_SORT_PACKS = 'SET-SORT-PACKS'
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE'
 const SET_TOTAL_PACKS_COUNT = 'SET-TOTAL-PACKS-COUNT'
 
@@ -71,6 +81,9 @@ export const setCurrentPageAC = (currentPage: number) => (
 export const setTotalPacksCountAC = (totalPacksCount: number) => (
     {type: SET_TOTAL_PACKS_COUNT, totalPacksCount} as const
 )
+export const setSortPacksAC = (sort: 'updated' | 'created') => (
+    {type: SET_SORT_PACKS, sort} as const
+)
 
 // Thunks
 
@@ -82,17 +95,9 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
 export const getPacksTC = (): AppThunk =>
     (dispatch, getState) => {
         dispatch(setAppStatusAC('loading'))
-        const params: GetPacksParamsType = {
-            ...getState().pagination,
-            sortPacks: '0updated',
-            packName: getState().filterState.nameFilter,
-        }
-        if (getState().filterState.onlyMyPacks) {
-            const user_id = getState().auth.profile?._id
-            params.user_id = user_id
-        }
-
-        packsAPI.getPacks({...params})
+        const params = getState().pagination
+        const sortPacks = getState().packsPage.params.sortPacks
+        packsAPI.getPacks({...params, sortPacks})
             .then((response) => {
                 dispatch(setPacksAC(response.cardPacks))
                 dispatch(setTotalPacksCountAC(response.cardPacksTotalCount))

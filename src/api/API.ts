@@ -4,8 +4,8 @@ import {GetCardsParamsType} from '../redux/cards-reducer';
 
 const instance = axios.create({
     withCredentials: true,
-    // baseURL: 'http://localhost:7542/2.0/',
-    baseURL: 'https://neko-back.herokuapp.com/2.0',
+    baseURL: 'http://localhost:7542/2.0/',
+    // baseURL: 'https://neko-back.herokuapp.com/2.0',
     headers: {}
 })
 
@@ -61,6 +61,11 @@ export const cardsAPI = {
     },
     updateCard(id: string) {
         return instance.put('/cards/card', {card: {_id: id, question: 'updated'}})
+    },
+    sendGrade(card_id: string, grade: number) {
+        return instance.put('/cards/grade', {card_id, grade})
+            .then(response => response.data.updatedGrade)
+        return instance.put('/cards/card', {card: {_id: id, question: 'updated'}})
     }
 }
 
@@ -75,7 +80,7 @@ export type GetPacksResponseType = {
     grade: number // средняя оценка карточек
     shots: number // количество попыток
     rating: number // лайки
-    type: "pack" // ещё будет "folder" (папка)
+    type: 'pack' // ещё будет "folder" (папка)
     created: string
     updated: string
 }

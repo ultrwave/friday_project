@@ -1,8 +1,19 @@
 a {
     text-decoration: none;
+    color: #d99740;
 }
 
-.activeLink {
-    color: darkred;
+.item a {
+    text-decoration: none;
+    transition: 0.2s;
+    color: #e7cfaf;
+}
+
+.item a:hover {
+    color: white;
+}
+
+.item .activeLink {
+    color: white;
     font-weight: bold;
 }

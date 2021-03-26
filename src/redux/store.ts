@@ -8,6 +8,7 @@ import {searchReducer} from "./search-reducer";
 import {paginationReducer} from "./pagination-reducer";
 import {packsReducer} from './packs-reducer';
 import {cardsReducer} from './cards-reducer';
+import {learnReducer} from './learn-reducer';
 
 export const rootReducer = combineReducers({
     appState: appReducer,
@@ -17,7 +18,8 @@ export const rootReducer = combineReducers({
     filterState: searchReducer,
     pagination: paginationReducer,
     packsPage: packsReducer,
-    cardsPage: cardsReducer
+    cardsPage: cardsReducer,
+    learnPage: learnReducer
 })
 
 // let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))

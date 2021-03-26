@@ -1,5 +1,6 @@
 import React, {FormEvent} from 'react';
 import style from '../styles/Login.module.css'
+import appStyle from '../../common/styles/Common.module.css'
 import SuperInputText from '../../common/SuperInputText/SuperInputText';
 import SuperCheckbox from '../../common/SuperCheckbox/SuperCheckbox';
 import SuperButton from '../../common/SuperButton/SuperButton';
@@ -30,7 +31,7 @@ function Login({formState, onChangeHandler, onBlurHandler, checkBoxHandler, onSu
     const disableSubmit = !!(email.error || password.error || formState.globalFormError)
 
     return (
-        <>
+        <div className={style.pageContainer}>
             <form className={style.form} onSubmit={submitForm}>
                 <h1>Sign in</h1>
                 <SuperInputText
@@ -54,7 +55,10 @@ function Login({formState, onChangeHandler, onBlurHandler, checkBoxHandler, onSu
                     <SuperCheckbox onChangeChecked={checkBoxHandler} checked={rememberMe}/>
                     <span>Remember me</span>
                 </div>
-                <SuperButton disabled={disableSubmit} type={'submit'}>Sign in</SuperButton>
+                <SuperButton className={appStyle.defaultButton}
+                             disabled={disableSubmit}
+                             type={'submit'}
+                >Sign in</SuperButton>
             </form>
             {DEV_MODE ?
                 <div className={style.messageDefault}>
@@ -72,7 +76,7 @@ function Login({formState, onChangeHandler, onBlurHandler, checkBoxHandler, onSu
                 </div>
                 : ''
             }
-        </>
+        </div>
     )
 }
 

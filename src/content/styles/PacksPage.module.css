@@ -9,6 +9,20 @@ h1 {
     font-size: 20px;
 }
 
+.pageTitle {
+    font-size: 32px;
+    align-self: center;
+    margin: 10px;
+    color: #4c4c4c;
+}
+
+.controlsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
 .table {
     display: flex;
     flex-direction: column;
@@ -20,6 +34,23 @@ ul {
     list-style-type: none;
     padding: 0;
     border: 1px dotted darkred;
+}
+
+.sortSettings {
+    cursor: pointer;
+    padding: 2px 12px;
+    margin: 2px;
+}
+
+.activeSetting {
+    margin: 0;
+    border: 2px dotted black;
+    padding: 2px 12px;
+}
+
+.table li {
+    opacity: 0.0;
+    transition: all 0.2s;
 }
 
 .table li:nth-child(even) {
@@ -60,8 +91,15 @@ ul {
 }
 
 .inputBlock button {
-    margin-top: 16px;
     margin-right: 4px;
+}
+
+.addButton {
+    font-size: 18px;
+    width: 56px;
+    height: 30px;
+    margin-left: 12px;
+    align-self: center;
 }
 
 .inputBlock span {
@@ -74,4 +112,34 @@ ul {
 
 .itemIsNotMine {
     color: #b17070;
+}
+
+.packsPageWrapper button {
+    border: 1px solid #ded7d3;
+    outline: none;
+    padding: 4px 12px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(100,100,100,0.3);
+    transition: 0.2s;
+}
+
+.packsPageWrapper button:hover {
+    background-color: #a79375;
+    border: 1px solid white;
+    color: white;
+}
+
+.packsPageWrapper button:disabled:hover {
+    background-color: revert;
+    border: 1px solid #ded7d3;
+    padding: 4px 12px;
+    cursor: default;
+    transition: revert;
+    color: revert;
+
+}
+
+.packsPageWrapper a {
+    color: #9b7d58;
+    font-size: 16px;
 }

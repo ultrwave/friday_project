@@ -7,26 +7,28 @@ import {createCardTC, deleteCardTC, getCardsTC, updateCardTC} from '../../redux/
 
 type ParamsType = {
     id: string | undefined
+    title: string | undefined
 }
 
 function CardsPageContainer() {
     console.log('CardsPageContainer called')
 
     const dispatch = useDispatch()
+    const appStatus = useSelector((state: RootStateType): string => state.appState.status)
     const isLoggedIn = useSelector((state: RootStateType): boolean => state.auth.isLoggedIn)
     const page = useSelector((state: RootStateType): number => state.pagination.page)
     const pageCount = useSelector((state: RootStateType): number => state.pagination.pageCount)
+    const cards = useSelector((state: RootStateType) => state.cardsPage.cards)
+    const totalCardsCount = useSelector((state: RootStateType) => state.cardsPage.totalCardsCount)
+    const itemsOnPage = useSelector((state: RootStateType) => state.pagination.pageCount)
 
     const params: ParamsType = useParams()
     const packId = params.id ? params.id : ''
+    const title = params.title ? params.title : 'Pack'
 
     useEffect(() => {
         dispatch(getCardsTC(packId))
     }, [dispatch, packId, page, pageCount])
-
-    const cards = useSelector((state: RootStateType) => state.cardsPage.cards)
-    const totalCardsCount = useSelector((state: RootStateType) => state.cardsPage.totalCardsCount)
-    const itemsOnPage = useSelector((state: RootStateType) => state.pagination.pageCount)
 
     const pagesCount = Math.ceil(totalCardsCount / itemsOnPage)
 
@@ -46,9 +48,10 @@ function CardsPageContainer() {
     }
 
     return (
-        !isLoggedIn
+        appStatus === 'idle' && !isLoggedIn
             ? <Redirect to={'/login'}/>
             : <CardsPage
+                title={title}
                 cards={cards}
                 packId={packId}
                 createCard={createCard}

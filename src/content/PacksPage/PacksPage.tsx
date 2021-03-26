@@ -7,6 +7,10 @@ import PaginationContainer from '../../common/Pagination/PaginationContainer';
 import SearchContainer from '../../common/Search/SearchContainer';
 import ModalInputContainer from "../../common/modals/input/ModalInputContainer";
 import ModalInputContainer2 from '../../common/modals/input2/ModalInputContainer2';
+import SearchContainer from '../../common/SearchComponent/SearchContainer';
+import {RootStateType} from '../../redux/store';
+import {useDispatch, useSelector} from 'react-redux';
+import {getPacksTC, setSortPacksAC} from '../../redux/packs-reducer';
 
 type PacksPagePropsType = {
     packs: Array<GetPacksResponseType>
@@ -24,12 +28,18 @@ export type AddPackFormStateType = {
 }
 
 function PacksPage(props: PacksPagePropsType) {
-    console.log('CardsPage called')
+    console.log('PacksPage called')
 
+    const dispatch = useDispatch()
     let [formState, setFormState] =
         useState<AddPackFormStateType>({value: '', error: '', hide: true, touched: false})
 
     let [isMine, setIsMine] = useState(false)
+
+    const filter = useSelector((state: RootStateType): string => state.searchValue.searchValue)
+    const myId = useSelector((state: RootStateType) => state.auth.profile?._id)
+    const sort = useSelector((state: RootStateType) => state.packsPage.params.sortPacks)
+    const crSorting = sort.slice(1) === 'created'
 
     const onChangeHandler = (value: string) => {
 
@@ -53,18 +63,14 @@ function PacksPage(props: PacksPagePropsType) {
         })
     }
 
-    const packs = props.packs
-    // let packs = props.packs.filter(p => filter ? p.name.includes(filter) : true)
-    // if (isMine) packs = packs.filter(p => p.user_id === myId)
-
-    const packsRender = packs.map(p => {
-        return <PackItem {...p}
-                         key={p._id}
-                         deleteCallback={() => props.deletePack(p._id)}
-                         updateCallback={() => props.updatePack(p._id)}
-        />
-    })
-
+    let packs = props.packs.filter(p => filter ? p.name.includes(filter) : true)
+    if (isMine) packs = packs.filter(p => p.user_id === myId)
+    let packsRender = packs.map(p =>
+        <PackItem {...p}
+                  key={p._id}
+                  deleteCallback={() => props.deletePack(p._id)}
+                  updateCallback={() => props.updatePack(p._id)}
+        />)
 
     useEffect(() => {
         if (formState.touched && !formState.value) {
@@ -86,6 +92,11 @@ function PacksPage(props: PacksPagePropsType) {
         } else if (formState.touched) {
             toggleHideInput(true)
         }
+    }
+
+    const setSort = (type: 'created' | 'updated') => {
+        dispatch(setSortPacksAC(type))
+        dispatch(getPacksTC())
     }
 
     const onModalSubmitHandler = (value: any) => {
@@ -119,22 +130,14 @@ function PacksPage(props: PacksPagePropsType) {
 
     return (
         <div className={style.packsPageWrapper}>
-            <h1 style={{alignSelf: 'center'}}>Packs</h1>
-            <div style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                width: '100%'
-            }}>
+            <h1 className={style.pageTitle}>Packs</h1>
+            <div className={style.controlsContainer}>
                 <div style={{alignSelf: 'flex-start', marginBottom: '5px'}}>
                     <SearchContainer
                         placeholder={'Pack name'}
                     />
+                    <span style={{fontSize: '12px', marginLeft: '2px', color: 'gray'}}>Show mine</span>
                 </div>
-                {/*<div>*/}
-                {/*    <ModalContainer  modalText={'Simple Modal in packs'}  buttonText={'Close it!'}/>*/}
-                {/*    <ModalInputContainer  modalText={'Simple Modal in packs'}  buttonText={'Close it!'}/>*/}
-                {/*</div>*/}
                 <div style={{alignSelf: 'flex-end', marginBottom: '5px'}}>
                     <PaginationContainer totalItems={props.totalPacksCount}/>
                 </div>
@@ -144,8 +147,18 @@ function PacksPage(props: PacksPagePropsType) {
                     <div style={{width: '15%'}}>Name</div>
                     <div style={{width: '10%'}}>Cards count</div>
                     <div style={{width: '20%'}}>User</div>
-                    <div style={{width: '10%'}}>Updated</div>
-                    <div style={{width: '10%'}}>Created</div>
+                    <div style={{width: '10%'}}>
+                        <span className={`${style.sortSettings} ${!crSorting? style.activeSetting : ''}`}
+                        onClick={() => setSort('updated')}>
+                            {`Updated ${sort === '1updated'? '↑' : '↓'}`}
+                        </span>
+                    </div>
+                    <div style={{width: '10%', marginLeft: '12px'}}>
+                        <span className={`${style.sortSettings} ${crSorting? style.activeSetting : ''}`}
+                        onClick={() => setSort('created')}>
+                            {`Created ${sort === '1created'? '↑' : '↓'}`}
+                        </span>
+                    </div>
                     <div style={{width: '15%'}}>
                         {formState.hide
                             ? <>
@@ -167,8 +180,11 @@ function PacksPage(props: PacksPagePropsType) {
                                                       inputsCount={2}
                                 />
                             </>
+                            ? <button className={style.addButton}
+                                      onClick={() => toggleHideInput(false)}>Add</button>
                             : <form className={style.inputBlock} onSubmit={onSubmitHandler}>
-                                <button type='submit'>Add</button>
+                                <button className={style.addButton}
+                                        type='submit'>Add</button>
                                 <SuperInputText
                                     value={formState.value}
                                     error={formState.error}
@@ -179,7 +195,7 @@ function PacksPage(props: PacksPagePropsType) {
                                 <span onClick={() => toggleHideInput(true)}>x</span>
                             </form>}
                     </div>
-                    <div style={{width: '20%'}}/>
+                    <div style={{width: '10%'}}/>
                 </div>
                 <ul>
                     {packsRender}
