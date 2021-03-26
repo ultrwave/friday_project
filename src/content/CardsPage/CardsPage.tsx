@@ -2,12 +2,10 @@ import React from 'react';
 import style from '../styles/CardsPage.module.css'
 import {CardType} from '../../api/API';
 import CardItem from './CardItem';
-import SearchContainer from '../../common/SearchComponent/SearchContainer';
+import SearchContainer from '../../common/Search/SearchContainer';
 import PaginationContainer from '../../common/Pagination/PaginationContainer';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
-import {useParams} from 'react-router-dom';
-import {getPacksTC, setSortPacksAC} from '../../redux/packs-reducer';
 import {getCardsTC, setSortCardsAC} from '../../redux/cards-reducer';
 
 type PacksPagePropsType = {
@@ -31,7 +29,7 @@ function CardsPage(props: PacksPagePropsType) {
     console.log('CardsPage called')
 
     const dispatch = useDispatch()
-    const filter = useSelector((state: RootStateType): string => state.searchValue.searchValue)
+    const filter = useSelector((state: RootStateType): string => state.filterState.nameFilter)
     const sort = useSelector((state: RootStateType): string => state.cardsPage.params.sortCards)
 
     const setSort = () => {
@@ -53,7 +51,7 @@ function CardsPage(props: PacksPagePropsType) {
             <h1 className={style.pageTitle}>{props.title}</h1>
             <div className={style.controlsContainer}>
                 <div style={{alignSelf: 'flex-start', marginBottom: '5px'}}>
-                    <SearchContainer/>
+                    <SearchContainer placeholder={'Search'}/>
                 </div>
                 <div style={{alignSelf: 'flex-end', marginBottom: '5px'}}>
                     <PaginationContainer totalItems={props.totalCardsCount}/>

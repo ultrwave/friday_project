@@ -65,7 +65,7 @@ export const cardsAPI = {
     sendGrade(card_id: string, grade: number) {
         return instance.put('/cards/grade', {card_id, grade})
             .then(response => response.data.updatedGrade)
-        return instance.put('/cards/card', {card: {_id: id, question: 'updated'}})
+        return instance.put('/cards/card', {card: {_id: card_id, question: 'updated'}})
     }
 }
 

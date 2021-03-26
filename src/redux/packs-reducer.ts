@@ -17,6 +17,7 @@ export type GetPacksParamsType = {
     min?: number
     max?: number
     page: number
+    user_id?: string
     pageCount: number
     sortPacks: '1created' | '0created' | '1updated' | '0updated'
 }
@@ -97,7 +98,12 @@ export const getPacksTC = (): AppThunk =>
         dispatch(setAppStatusAC('loading'))
         const params = getState().pagination
         const sortPacks = getState().packsPage.params.sortPacks
-        packsAPI.getPacks({...params, sortPacks})
+        const packName = getState().filterState.nameFilter
+        let user_id = undefined
+        if (getState().filterState.onlyMyPacks) {
+            user_id = getState().auth.profile?._id
+        }
+        packsAPI.getPacks({...params, sortPacks, packName, user_id})
             .then((response) => {
                 dispatch(setPacksAC(response.cardPacks))
                 dispatch(setTotalPacksCountAC(response.cardPacksTotalCount))
@@ -109,7 +115,7 @@ export const getPacksTC = (): AppThunk =>
             .finally(() => dispatch(setAppStatusAC('idle')))
     }
 
-export const createPackTC = (name: string): AppThunk => (dispatch) => {
+        export const createPackTC = (name: string): AppThunk => (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     packsAPI.createPack(name)
         .then(() => dispatch(getPacksTC()))
@@ -131,9 +137,9 @@ export const deletePackTC = (id: string): AppThunk => (dispatch) => {
         .finally(() => dispatch(setAppStatusAC('idle')))
 }
 // fix newName
-export const updatePackTC = (id: string, newName?: string): AppThunk => (dispatch) => {
+export const updatePackTC = (id: string, newName: string = 'UPDATED Pack'): AppThunk => (dispatch) => {
     dispatch(setAppStatusAC('loading'))
-    packsAPI.updatePack(id, 'UPDATED Pack')
+    packsAPI.updatePack(id, newName)
         .then(() => dispatch(getPacksTC()))
         .catch(e => {
             console.log(e)

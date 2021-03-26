@@ -4,6 +4,7 @@ import ModalQuestion from "./ModalQuestion";
 export type ModalQuestionContainerPropsType = {
     buttonTitle?: string
     modalText?: string
+    isMine: boolean
     answerCallback?: (answer: boolean) => void;
 }
 
@@ -12,7 +13,8 @@ const ModalQuestionContainer = (
         buttonTitle = 'ModalQuestion',
         modalText = 'Question text',
         answerCallback = () => {
-        }
+        },
+        isMine
     }: ModalQuestionContainerPropsType) => {
 
     const [show, setShow] = useState(false);
@@ -34,7 +36,8 @@ const ModalQuestionContainer = (
     return (
         <>
             <div>
-                <button onClick={() => setShow(true)}>{buttonTitle}</button>
+                <button onClick={() => setShow(true)}
+                disabled={!isMine}>{buttonTitle}</button>
                 {/*{answer ? <span>Yes</span> : <span>No</span>}*/}
             </div>
 
