@@ -1,5 +1,5 @@
 import store from './store';
-import {API} from '../api/API';
+import {authAPI} from '../api/AuthAPI';
 import {setAppStatusAC} from './app-reducer';
 
 const SET_IS_LOGGED_IN = 'SET-IS-LOGGED-IN'
@@ -68,7 +68,7 @@ const setProfileAC = (profile: AuthProfileType) => ({
 
 export const setAuthTC = () => (dispatch: DispatchType) => {
     dispatch(setAppStatusAC('loading'))
-    API.me()
+    authAPI.me()
         .then((response) => {
             dispatch(setProfileAC(response))
             dispatch(setIsLoggedInAC(true))
@@ -82,7 +82,7 @@ export const setAuthTC = () => (dispatch: DispatchType) => {
 
 export const logInTC = (login: string, password: string, rememberMe: boolean) => (dispatch: DispatchType) => {
     dispatch(setAppStatusAC('loading'))
-    API.login(login, password, rememberMe)
+    authAPI.login(login, password, rememberMe)
         .then((response) => {
             dispatch(setProfileAC(response))
             dispatch(setIsLoggedInAC(true))
@@ -93,7 +93,7 @@ export const logInTC = (login: string, password: string, rememberMe: boolean) =>
 
 export const logOutTC = () => (dispatch: DispatchType) => {
     dispatch(setAppStatusAC('loading'))
-    API.logout()
+    authAPI.logout()
         .then(response => {
             dispatch(setIsLoggedInAC(false))
         })
@@ -103,7 +103,7 @@ export const logOutTC = () => (dispatch: DispatchType) => {
 
 export const setNewPasswordTC = (password: string, resetPasswordToken: string) => (dispatch: DispatchType) => {
     dispatch(setAppStatusAC('loading'))
-    API.setNewPassword(password, resetPasswordToken)
+    authAPI.setNewPassword(password, resetPasswordToken)
         .then(response => {
             dispatch(setIsLoggedInAC(false))
         })

@@ -1,4 +1,4 @@
-import {GetPacksResponseType, packsAPI} from '../api/API';
+import {GetPacksResponseType, packsAPI} from '../api/AuthAPI';
 import {setAppStatusAC} from './app-reducer';
 import {ThunkAction} from 'redux-thunk';
 import {RootStateType} from './store';

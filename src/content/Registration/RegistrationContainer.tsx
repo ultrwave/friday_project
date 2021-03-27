@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {API} from '../../api/API';
+import {authAPI} from '../../api/AuthAPI';
 import {useDispatch, useSelector} from "react-redux";
 import {RootStateType} from "../../redux/store";
 import Registration2 from './Registration2';

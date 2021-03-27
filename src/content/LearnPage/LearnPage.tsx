@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {CardType} from '../../api/API';
+import {CardType} from '../../api/AuthAPI';
 import style from '../styles/LearnPage.module.css'
 import {useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';

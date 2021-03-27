@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {NavLink} from 'react-router-dom';
 import style from '../styles/PacksPage.module.css'
-import {GetPacksResponseType} from '../../api/API';
+import {GetPacksResponseType} from '../../api/AuthAPI';
 import {useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
 import ModalQuestionContainer from '../../common/modals/question/ModalQuestionContainer';

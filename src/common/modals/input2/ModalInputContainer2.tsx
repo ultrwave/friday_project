@@ -55,6 +55,7 @@ function ModalInputContainer2(props: ModalInputContainerPropsType) {
         <>
             <div>
                 <button onClick={() => setShow(true)}
+                        disabled={!props.isMine}
                 >{props.buttonTitle || 'Modal Input'}
                 </button>
                 {/*{answers.answer1}{`-${answers?.answer2}`}{`-${answers?.answer3}`}*/}

@@ -3,7 +3,7 @@ import SuperButton from '../../common/SuperButton/SuperButton';
 import SuperInputText from '../../common/SuperInputText/SuperInputText';
 import style from '../styles/Registration.module.css'
 import {Redirect} from 'react-router-dom';
-import {API} from '../../api/API';
+import {authAPI} from '../../api/AuthAPI';
 
 type RegistrationPropsType = {
     error?: string

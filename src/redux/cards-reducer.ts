@@ -1,4 +1,4 @@
-import {CardType, cardsAPI} from '../api/API';
+import {CardType, cardsAPI} from '../api/AuthAPI';
 import {setAppStatusAC} from './app-reducer';
 import {ThunkAction} from 'redux-thunk';
 import {RootStateType} from './store';
@@ -53,9 +53,11 @@ export const cardsReducer = (state: PageStateType = initialState, action: Action
             return {...state, cards: action.cards}
 
         case 'SET-SORT-CARDS':
-            return {...state, params: {
-                ...state.params, sortCards: state.params.sortCards === '1grade'? '0grade' : '1grade'
-                }}
+            return {
+                ...state, params: {
+                    ...state.params, sortCards: state.params.sortCards === '1grade' ? '0grade' : '1grade'
+                }
+            }
 
         case 'SET-PACK-TITLE':
             return {...state, packTitle: action.title}
@@ -107,24 +109,24 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
     unknown,
     Action<string>>
 
-export const getCardsTC = (packId: string, pagination = true):AppThunk =>
+export const getCardsTC = (packId: string, pagination = true): AppThunk =>
     (dispatch, getState) => {
-    dispatch(setAppStatusAC('loading'))
-    const params = pagination? getState().pagination : {pageCount: 1000}
-    const sortCards = getState().cardsPage.params.sortCards
-    cardsAPI.getCards(packId, {...params, sortCards})
-        .then((response) => {
-            dispatch(setCardsAC(response.cards))
-            dispatch(setTotalCardsCountAC(response.cardsTotalCount))
-        })
-        .catch(e => {
-            console.log(e)
-            dispatch(setAuthTC())
-        })
-        .finally(() => dispatch(setAppStatusAC('idle')))
-}
+        dispatch(setAppStatusAC('loading'))
+        const params = pagination ? getState().pagination : {pageCount: 1000}
+        const sortCards = getState().cardsPage.params.sortCards
+        cardsAPI.getCards(packId, {...params, sortCards})
+            .then((response) => {
+                dispatch(setCardsAC(response.cards))
+                dispatch(setTotalCardsCountAC(response.cardsTotalCount))
+            })
+            .catch(e => {
+                console.log(e)
+                dispatch(setAuthTC())
+            })
+            .finally(() => dispatch(setAppStatusAC('idle')))
+    }
 
-export const createCardTC = (packId: string):AppThunk => (dispatch) => {
+export const createCardTC = (packId: string): AppThunk => (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     cardsAPI.createCard({question: 'New Card', cardsPack_id: packId})
         .then(() => dispatch(getCardsTC(packId)))
@@ -132,10 +134,12 @@ export const createCardTC = (packId: string):AppThunk => (dispatch) => {
             console.log(e)
             dispatch(setAuthTC())
         })
-        .finally(() => {dispatch(setAppStatusAC('idle'))})
+        .finally(() => {
+            dispatch(setAppStatusAC('idle'))
+        })
 }
 
-export const deleteCardTC = (packId: string, cardId: string, pagination = true):AppThunk => (dispatch) => {
+export const deleteCardTC = (packId: string, cardId: string, pagination = true): AppThunk => (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     cardsAPI.deleteCard(cardId)
         .then(() => dispatch(getCardsTC(packId, pagination)))
@@ -146,9 +150,9 @@ export const deleteCardTC = (packId: string, cardId: string, pagination = true):
         .finally(() => dispatch(setAppStatusAC('idle')))
 }
 // fix newName
-export const updateCardTC = (packId: string, cardId: string, update?: string):AppThunk => (dispatch) => {
+export const updateCardTC = (packId: string, cardId: string, update: string = 'updated'): AppThunk => (dispatch) => {
     dispatch(setAppStatusAC('loading'))
-    cardsAPI.updateCard(cardId)
+    cardsAPI.updateCard(cardId, update)
         .then(() => dispatch(getCardsTC(packId)))
         .catch(e => {
             console.log(e)

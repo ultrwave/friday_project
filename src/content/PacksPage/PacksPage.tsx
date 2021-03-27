@@ -1,6 +1,6 @@
 import React, {FormEvent, useEffect, useState} from 'react';
 import style from '../styles/PacksPage.module.css'
-import {GetPacksResponseType} from '../../api/API';
+import {GetPacksResponseType} from '../../api/AuthAPI';
 import PackItem from './PackItem';
 import SuperInputText from '../../common/SuperInputText/SuperInputText';
 import PaginationContainer from '../../common/Pagination/PaginationContainer';

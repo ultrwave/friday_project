@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import style from '../styles/PacksPage.module.css'
-import {CardType} from '../../api/API';
+import {CardType} from '../../api/AuthAPI';
 import {useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
 

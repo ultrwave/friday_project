@@ -1,5 +1,5 @@
 import {DispatchType} from './auth-reducer';
-import {API} from '../api/API';
+import {authAPI} from '../api/AuthAPI';
 
 type PageStateType = {
     timerIsOn: boolean
@@ -39,7 +39,7 @@ export const recoverPasswordTC = (email: string, baseUrl: string) => (dispatch: 
     const message =
         `<div style="background-color: lime; padding: 15px"> password recovery link:
          <a href='${baseUrl}/$token$'>link</a></div>`
-    API.forgot(email, from, message)
+    authAPI.forgot(email, from, message)
         .then(response => {
             // localStorage.timerData = Date.now()
         })

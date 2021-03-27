@@ -9,7 +9,7 @@ const instance = axios.create({
     headers: {}
 })
 
-export const API = {
+export const authAPI = {
     me() {
         return instance.post('/auth/me')
             .then(response => response.data)
@@ -49,7 +49,7 @@ export const packsAPI = {
 }
 
 export const cardsAPI = {
-    getCards(id: string, params: GetCardsParamsType) { // todo - fix params
+    getCards(id: string, params: GetCardsParamsType) {
         return instance.get(`/cards/card?cardsPack_id=${id}`, {params})
             .then(response => response.data)
     },
@@ -59,13 +59,12 @@ export const cardsAPI = {
     deleteCard(id: string) {
         return instance.delete(`/cards/card?id=${id}`)
     },
-    updateCard(id: string) {
-        return instance.put('/cards/card', {card: {_id: id, question: 'updated'}})
+    updateCard(id: string, question: string) {
+        return instance.put('/cards/card', {card: {_id: id, question}})
     },
     sendGrade(card_id: string, grade: number) {
         return instance.put('/cards/grade', {card_id, grade})
             .then(response => response.data.updatedGrade)
-        return instance.put('/cards/card', {card: {_id: card_id, question: 'updated'}})
     }
 }
 
