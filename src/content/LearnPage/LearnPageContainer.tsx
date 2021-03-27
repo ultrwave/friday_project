@@ -20,7 +20,7 @@ function LearnPageContainer() {
     const params: ParamsType = useParams()
     const title = params.title ? params.title : 'Pack'
     const packId = params.id ? params.id : ''
-    const isMine = params.isMine? params.isMine : '0'
+    const isMine = params.isMine? params.isMine === '1' : false
     const cards = useSelector((state: RootStateType) => state.cardsPage.cards)
     let [index, setIndex] = useState(0)
     let [smartMode, setMode] = useState(false)

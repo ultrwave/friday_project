@@ -133,7 +133,6 @@ function PacksPage(props: PacksPagePropsType) {
                     <SearchContainer
                         placeholder={'Pack name'}
                     />
-                    <span style={{fontSize: '12px', marginLeft: '2px', color: 'gray'}}>Show mine</span>
                 </div>
                 <div style={{alignSelf: 'flex-end', marginBottom: '5px'}}>
                     <PaginationContainer totalItems={props.totalPacksCount}/>
@@ -161,7 +160,7 @@ function PacksPage(props: PacksPagePropsType) {
                             ?
                             <ModalInputContainer2 buttonTitle={'Add Pack'}
                                                   modalText={'Enter new pack name'}
-                                                  isMine={isMine}
+                                                  isMine={true}
                                                   defaultAnswers={{
                                                       answer1: '',
                                                       answer2: '',

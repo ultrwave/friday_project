@@ -76,11 +76,6 @@
     cursor: pointer;
 }
 
-.answerButton:disabled {
-    cursor: default;
-    transition: all 0.5s;
-}
-
 .buttonsBlock {
     margin-top: 20px;
     display: flex;
@@ -89,17 +84,39 @@
 }
 
 .answerButton, .checkButton {
-    width: 100px;
-    height: 30px;
+    border: 2px solid #b1936d;
+    border-radius: 4px;
     margin: 2px 2px 0;
-    font-size: 14px;
     cursor: pointer;
     transition: all 0.5s;
 }
 
+.checkButton {
+    height: 30px;
+    width: 100px;
+    font-size: 14px;
+}
+
+.answerButton {
+    height: 40px;
+    width: 50px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #868686;
+}
+
+.answerButton:hover {
+
+}
+
+.answerButton:disabled {
+    cursor: default;
+    border: 2px solid white;
+    color: #a9a9a9;
+}
+
 .highlightAnswer {
-    background-color: #ffffff;
-    color: #4c4c4c;
+    color: #9b7d58;
 }
 
 .nextButton {
@@ -151,3 +168,7 @@
     right: 0;
 }
 
+.nextButtonDisabled {
+    transition: 0.5s all;
+    opacity: 0.0%;
+}
