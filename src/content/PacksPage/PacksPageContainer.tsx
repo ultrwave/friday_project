@@ -21,12 +21,21 @@ function PacksPageContainer() {
         dispatch(getPacksTC())
     }, [dispatch, page, pageCount, packNameFilter.onlyMyPacks])
 
-    const packs = useSelector((state: RootStateType) => state.packsPage.packs)
+    let packs = useSelector((state: RootStateType) => state.packsPage.packs)
     const totalPacksCount = useSelector((state: RootStateType) => state.packsPage.totalPacksCount)
     const itemsOnPage = useSelector((state: RootStateType) => state.pagination.pageCount)
+    const filter = useSelector((state: RootStateType) => state.packsPage.params.sortPacks)
+    if (filter === '1updated') {
+        packs.sort((a, b) =>
+            (new Date(b.updated).getTime()) - (new Date(a.updated)).getTime())
+    } else if (filter === '0updated') {
+        packs.sort((a, b) =>
+            (new Date(a.updated).getTime()) - (new Date(b.updated)).getTime())
+    }
 
     const pagesCount = Math.ceil(totalPacksCount / itemsOnPage)
-    const pages = []; for (let i = 1; i <= pagesCount; i++) pages.push(i)
+    const pages = [];
+    for (let i = 1; i <= pagesCount; i++) pages.push(i)
 
     const createPack = (name: string) => {
         dispatch(createPackTC(name))

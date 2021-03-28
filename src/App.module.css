@@ -6,6 +6,10 @@
     align-items: center;
 }
 
+* {
+    font-family: Verdana, sans-serif;
+}
+
 .content {
     width: 95%;
     min-width: 1200px;

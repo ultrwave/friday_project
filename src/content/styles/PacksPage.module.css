@@ -31,9 +31,9 @@ h1 {
 }
 
 ul {
+    border: none;
     list-style-type: none;
     padding: 0;
-    border: 1px dotted darkred;
 }
 
 .sortSettings {
@@ -44,21 +44,22 @@ ul {
 
 .activeSetting {
     margin: 0;
-    border: 2px dotted black;
+    border: 2px dotted white;
     padding: 2px 12px;
 }
 
 .table li {
     opacity: 0.0;
     transition: all 0.2s;
+    border: 2px solid white;
 }
 
 .table li:nth-child(even) {
-    background-color: #ececec;
+    background-color: #e7e7e7;
 }
 
 .table li:nth-child(odd) {
-    background-color: #dbdbdb;
+    background-color: #d7d7d7;
 }
 
 .tableHeader {
@@ -67,9 +68,9 @@ ul {
     display: flex;
     flex-direction: row;
     align-items: center;
-    border: 1px solid darkred;
-    background-color: burlywood;
-    font-weight: bold;
+    color: white;
+    background: linear-gradient(90deg, rgb(150, 150, 150) 0%, rgb(121, 121, 121) 23%, rgb(86, 86, 86) 62%);
+    box-shadow: 0 2px 2px rgba(50,30,30,0.7);
 }
 
 .packItem {
@@ -78,6 +79,8 @@ ul {
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-bottom: 2px;
+    box-shadow: 0 3px 3px rgba(0,0,0,0.4);
 }
 
 .inputBlock {
@@ -124,7 +127,7 @@ ul {
 }
 
 .packsPageWrapper button:hover {
-    background-color: #a79375;
+    background-color: #5b5959;
     border: 1px solid white;
     color: white;
 }

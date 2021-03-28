@@ -23,8 +23,7 @@
 
 }
 
-.main button:active {
-}
+
 
 .main::-webkit-scrollbar {
     padding: 2px;
@@ -50,4 +49,8 @@
     background-color: white;
     padding: 0 5px;
     cursor: pointer;
+}
+
+.main button:hover {
+    background-color: #b1936d !important;
 }

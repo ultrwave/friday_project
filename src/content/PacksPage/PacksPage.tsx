@@ -5,7 +5,6 @@ import PackItem from './PackItem';
 import SuperInputText from '../../common/SuperInputText/SuperInputText';
 import PaginationContainer from '../../common/Pagination/PaginationContainer';
 import SearchContainer from '../../common/Search/SearchContainer';
-import ModalInputContainer from '../../common/modals/input/ModalInputContainer';
 import ModalInputContainer2 from '../../common/modals/input2/ModalInputContainer2';
 import {RootStateType} from '../../redux/store';
 import {useDispatch, useSelector} from 'react-redux';
@@ -140,16 +139,16 @@ function PacksPage(props: PacksPagePropsType) {
             </div>
             <div className={style.table}>
                 <div className={style.tableHeader}>
-                    <div style={{width: '15%'}}>Name</div>
-                    <div style={{width: '10%'}}>Cards count</div>
-                    <div style={{width: '20%'}}>User</div>
-                    <div style={{width: '10%'}}>
+                    <div style={{width: '12%'}}>Name</div>
+                    <div style={{width: '18%'}}>Cards count</div>
+                    <div style={{width: '15%'}}>User</div>
+                    <div style={{width: '11%'}}>
                         <span className={`${style.sortSettings} ${!crSorting ? style.activeSetting : ''}`}
                               onClick={() => setSort('updated')}>
                             {`Updated ${sort === '1updated' ? '↑' : '↓'}`}
                         </span>
                     </div>
-                    <div style={{width: '10%', marginLeft: '12px'}}>
+                    <div style={{width: '13%'}}>
                         <span className={`${style.sortSettings} ${crSorting ? style.activeSetting : ''}`}
                               onClick={() => setSort('created')}>
                             {`Created ${sort === '1created' ? '↑' : '↓'}`}
