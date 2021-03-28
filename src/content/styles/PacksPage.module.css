@@ -55,11 +55,11 @@ ul {
 }
 
 .table li:nth-child(even) {
-    background-color: #e7e7e7;
+    background-color: #eae4d8;
 }
 
 .table li:nth-child(odd) {
-    background-color: #d7d7d7;
+    background-color: #eae0c7;
 }
 
 .tableHeader {
@@ -69,7 +69,8 @@ ul {
     flex-direction: row;
     align-items: center;
     color: white;
-    background: linear-gradient(90deg, rgb(150, 150, 150) 0%, rgb(121, 121, 121) 23%, rgb(86, 86, 86) 62%);
+    background: linear-gradient(90deg, rgba(93,93,93,1) 23%, rgba(60,60,60,1) 62%);
+    border-radius: 3px;
     box-shadow: 0 2px 2px rgba(50,30,30,0.7);
 }
 
@@ -143,7 +144,7 @@ ul {
 }
 
 .packsPageWrapper a {
-    color: #9b7d58;
+    color: #a44700;
     font-size: 16px;
 }
 
