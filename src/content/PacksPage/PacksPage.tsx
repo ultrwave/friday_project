@@ -156,8 +156,8 @@ function PacksPage(props: PacksPagePropsType) {
                         </span>
                     </div>
                     <div style={{width: '15%'}}>
-                        {formState.hide
-                            ?
+                        {/*{formState.hide*/}
+                        {/*    ?*/}
                             <ModalInputContainer2 buttonTitle={'Add Pack'}
                                                   modalText={'Enter new pack name'}
                                                   isMine={true}
@@ -168,19 +168,20 @@ function PacksPage(props: PacksPagePropsType) {
                                                   }}
                                                   answerCallback={onModalSubmitHandler2}
                             />
-                            : <form className={style.inputBlock} onSubmit={onSubmitHandler}>
-                                <button className={style.addButton}
-                                        type='submit'>Add
-                                </button>
-                                <SuperInputText
-                                    value={formState.value}
-                                    error={formState.error}
-                                    onChangeText={onChangeHandler}
-                                    onBlur={onBlurHandler}
-                                    placeholder={'Pack name'}
-                                />
-                                <span onClick={() => toggleHideInput(true)}>x</span>
-                            </form>}
+                            {/*: <form className={style.inputBlock} onSubmit={onSubmitHandler}>*/}
+                            {/*    <button className={style.addButton}*/}
+                            {/*            type='submit'>Add*/}
+                            {/*    </button>*/}
+                            {/*    <SuperInputText*/}
+                            {/*        value={formState.value}*/}
+                            {/*        error={formState.error}*/}
+                            {/*        onChangeText={onChangeHandler}*/}
+                            {/*        onBlur={onBlurHandler}*/}
+                            {/*        placeholder={'Pack name'}*/}
+                            {/*    />*/}
+                            {/*    <span onClick={() => toggleHideInput(true)}>x</span>*/}
+                            {/*</form>*/}
+                        {/*}*/}
                     </div>
                     <div style={{width: '10%'}}/>
                 </div>
