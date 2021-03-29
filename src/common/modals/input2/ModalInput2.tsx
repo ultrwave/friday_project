@@ -1,6 +1,6 @@
 import React, {CSSProperties, ReactChildren, ReactElement, ReactNode, useState} from 'react';
 import Modal from "../Modal";
-import InputMap, {IInputData} from "./InputMap";
+// import InputMap, {IInputData} from "./InputMap";
 
 // export type AnswerType = { answer: string, value1?: string, value2?:string }
 export type AnswersType = {
@@ -13,7 +13,7 @@ export type ModalInputPropsType = {
     show: boolean;
     close: () => void;
 
-    inputData?: IInputData[];
+    // inputData?: IInputData[];
     modalText?: string
     buttonTitle?: string
     answers: AnswersType;
@@ -36,7 +36,7 @@ export type ModalInputPropsType = {
 }
 
 function ModalInput2({
-                         inputData,
+                         // inputData,
                          modalText,
                          // modalButtonTitle,
                          answers,
@@ -79,6 +79,7 @@ function ModalInput2({
         }); // unsubscribe
         close();
     };
+    console.log(answers.answer1)
 
     return (
         <Modal
@@ -118,6 +119,7 @@ function ModalInput2({
                 {answers?.answer2 && (
                     <input
                         value={answerData.answer2}
+                        placeholder={answers.answer1}
                         style={{...inputStyles}}
                         onChange={e => setAnswerData({...answerData, answer2: e.currentTarget.value})}
                     />
