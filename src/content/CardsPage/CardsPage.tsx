@@ -70,6 +70,7 @@ function CardsPage(props: PacksPagePropsType) {
                     <div style={{width: '10%'}}>Created</div>
                     <div style={{width: '15%'}}>
                         <button onClick={() => props.createCard(props.packId)}>New card</button>
+
                     </div>
                     <div style={{width: '25%'}}/>
                 </div>

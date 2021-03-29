@@ -6,7 +6,7 @@ import s from './styles/Registration.module.css'
 import SearchContainer from "../common/Search/SearchContainer";
 import PaginationContainer from "../common/Pagination/PaginationContainer";
 import ModalContainer from "../common/modals/ModalContainer";
-import ModalInputContainer from '../common/modals/input/ModalInputContainer';
+import ModalInputContainer2 from '../common/modals/input2/ModalInputContainer2';
 import ModalQuestionContainer from '../common/modals/question/ModalQuestionContainer';
 
 type RegistrationPropsType = {
@@ -65,7 +65,7 @@ function SuperInputsDemo() {
                 {/*    <div style={{'border': 'solid 1px black'}}><SortContainer/></div>*/}
                 {/*</div>*/}
                 <ModalContainer  modalText={'Simple Modal'}  buttonText={'Close it!'}/>
-                <ModalInputContainer  buttonTitle={'Modal Input demo'} modalText={'Simple Modal input'} />
+                {/*<ModalInputContainer2  buttonTitle={'Modal Input demo'} modalText={'Simple Modal input'} />*/}
                 <ModalQuestionContainer isMine={true}/>
             </div>
         </div>
