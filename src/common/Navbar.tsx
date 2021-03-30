@@ -22,7 +22,7 @@ export function Navbar() {
                 <NavbarItem to='/recover' title='Recover Pass'/>
                 <NavbarItem to='/packs' title='Packs'/>
                 <NavbarItem to='/cards' title='Cards'/>
-                <NavbarItem to='/demo' title='Demo'/>
+                {/*<NavbarItem to='/demo' title='Demo'/>*/}
                 {isLoggedIn
                     ? <button className={style.logoutButton} onClick={logout}>Logout</button>
                     : <span className={style.logoutButton}><NavbarItem to='/login' title='Login'/></span>
