@@ -4,10 +4,12 @@ import {CardType} from '../../api/AuthAPI';
 import {useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
 import ModalQuestionContainer from "../../common/modals/question/ModalQuestionContainer";
+import ModalInputContainer2 from "../../common/modals/input2/ModalInputContainer2";
+import {AnswersType} from "../../common/modals/input2/ModalInput2";
 
 type CardItemPropsType = {
     deleteCallback(): void
-    updateCallback(): void
+    updateCallback(question: string, answer: string): void
 }
 
 function CardItem(props: CardType & CardItemPropsType) {
@@ -27,6 +29,10 @@ function CardItem(props: CardType & CardItemPropsType) {
         }
     }
 
+    const inputHandler = (value: AnswersType) => {
+        props.updateCallback(value.field1.value || 'Updated card', value.field2?.value || 'Empty answer')
+    }
+
     return (
         <li>
             <div className={`${style.packItem}${itemIsMine ? '' : (' ' + style.itemIsNotMine)}`}>
@@ -40,7 +46,7 @@ function CardItem(props: CardType & CardItemPropsType) {
                     {/*<button disabled={!itemIsMine}*/}
                     {/*        onClick={props.deleteCallback}>Delete</button>*/}
                     <ModalQuestionContainer buttonTitle={'Delete'}
-                                            // modalText={'Delete card?'}
+                        // modalText={'Delete card?'}
                                             isMine={itemIsMine}
                                             answerCallback={deleteHandler}>
                         <>
@@ -48,10 +54,20 @@ function CardItem(props: CardType & CardItemPropsType) {
                             <div>Delete card?</div>
                         </>
                     </ModalQuestionContainer>
-                    <button style={{marginLeft: '5px'}}
-                            disabled={!itemIsMine}
-                            onClick={props.updateCallback}>Update
-                    </button>
+                    {/*<button style={{marginLeft: '5px'}}*/}
+                    {/*        disabled={!itemIsMine}*/}
+                    {/*        onClick={props.updateCallback}>Update*/}
+                    {/*</button>*/}
+                    <ModalInputContainer2 buttonTitle={'Update'}
+                                          modalText={'Enter new name'}
+                                          isMine={itemIsMine}
+                                          defaultAnswers={{
+                                              field1: {title: 'Question', value: props.question},
+                                              field2: {title: 'Answer', value: props.answer},
+                                              // field3: {}
+                                          }}
+                                          answerCallback={inputHandler}
+                    />
                 </div>
                 <div style={{width: '25%'}}/>
             </div>
