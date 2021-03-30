@@ -41,11 +41,11 @@ function PackItem(props: GetPacksResponseType & PackItemPropsType) {
     return (
         <li style={delay ? {} : {opacity: '1.0'}}>
             <div className={`${style.packItem}${itemIsMine ? '' : (' ' + style.itemIsNotMine)}`}>
-                <div style={{width: '15%'}}>{props.name}</div>
-                <div style={{width: '10%'}}>{props.cardsCount}</div>
-                <div style={{width: '20%', fontSize: '12px', color: 'gray'}}>{props.user_name}</div>
-                <div style={{width: '10%', fontSize: '12px'}}>{updated}</div>
-                <div style={{width: '10%', fontSize: '12px', paddingLeft: '27px'}}>{created}</div>
+                <div style={{width: '20%'}}>{props.name}</div>
+                <div style={{width: '15%'}}>{props.cardsCount}</div>
+                <div style={{width: '10%', fontSize: '12px', color: 'gray'}}>{props.user_name}</div>
+                <div style={{width: '15%', fontSize: '12px'}}>{updated}</div>
+                <div style={{width: '15%', fontSize: '12px'}}>{created}</div>
                 <div style={{width: '15%', display: 'flex', flexDirection: 'row'}}>
                     <ModalQuestionContainer buttonTitle={'Delete'}
                                             modalText={'Delete pack?'}
@@ -67,8 +67,7 @@ function PackItem(props: GetPacksResponseType & PackItemPropsType) {
                 </div>
                 <div style={{width: '5%'}}>
                     <NavLink
-                        to={`/learn/${props._id}/${encodeURI(props.name)}/
-                        ${itemIsMine ? 1 : 0}`}>learn</NavLink>
+                        to={`/learn/${props._id}/${props.name}/${itemIsMine ? 1 : 0}`}>learn</NavLink>
                 </div>
             </div>
         </li>

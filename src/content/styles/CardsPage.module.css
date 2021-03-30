@@ -44,7 +44,8 @@ ul {
 
 .activeSetting {
     margin: 0;
-    border: 2px dotted black;
+    border: 1px dotted black;
+    border-radius: 3px;
     padding: 2px 12px;
 }
 

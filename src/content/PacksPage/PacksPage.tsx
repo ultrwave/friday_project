@@ -139,22 +139,22 @@ function PacksPage(props: PacksPagePropsType) {
             </div>
             <div className={style.table}>
                 <div className={style.tableHeader}>
-                    <div style={{width: '12%'}}>Name</div>
-                    <div style={{width: '18%'}}>Cards count</div>
-                    <div style={{width: '15%'}}>User</div>
-                    <div style={{width: '11%'}}>
+                    <div className={style.colName}><span>Name</span></div>
+                    <div className={style.colCards}><span>Cards count</span></div>
+                    <div className={style.colUser}><span>User</span></div>
+                    <div className={style.colUpdated}>
                         <span className={`${style.sortSettings} ${!crSorting ? style.activeSetting : ''}`}
                               onClick={() => setSort('updated')}>
                             {`Updated ${sort === '1updated' ? '↑' : '↓'}`}
                         </span>
                     </div>
-                    <div style={{width: '13%'}}>
+                    <div className={style.colCreated}>
                         <span className={`${style.sortSettings} ${crSorting ? style.activeSetting : ''}`}
                               onClick={() => setSort('created')}>
                             {`Created ${sort === '1created' ? '↑' : '↓'}`}
                         </span>
                     </div>
-                    <div style={{width: '15%'}}>
+                    <div className={style.colAdd}>
                         {formState.hide
                             ?
                             <ModalInputContainer2 buttonTitle={'Add Pack'}
@@ -181,7 +181,7 @@ function PacksPage(props: PacksPagePropsType) {
                                 <span onClick={() => toggleHideInput(true)}>x</span>
                             </form>}
                     </div>
-                    <div style={{width: '10%'}}/>
+                    <div className={style.colFiller}/>
                 </div>
                 <ul>
                     {packsRender}

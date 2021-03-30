@@ -21,11 +21,12 @@ function LearnPageContainer() {
     const title = params.title ? params.title : 'Pack'
     const packId = params.id ? params.id : ''
     const isMine = params.isMine? params.isMine === '1' : false
+
     const cards = useSelector((state: RootStateType) => state.cardsPage.cards)
     let [index, setIndex] = useState(0)
     let [smartMode, setMode] = useState(false)
     let card = cards[index]
-    // window.history.replaceState(null, '', `/#/learn/${title}`)
+    window.history.replaceState(null, '', `/#/learn/${title}`)
 
     useEffect(() => {
         dispatch(getCardsTC(packId, false))
