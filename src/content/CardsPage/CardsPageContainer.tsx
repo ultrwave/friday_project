@@ -35,8 +35,8 @@ function CardsPageContainer() {
     const pages = [];
     for (let i = 1; i <= pagesCount; i++) pages.push(i)
 
-    const createCard = (id: string) => { // fix args
-        dispatch(createCardTC(id))
+    const createCard = (id: string, question: string, answer: string) => { // fix args
+        dispatch(createCardTC(id, question, answer))
     }
 
     const deleteCard = (packId: string, cardId: string) => {

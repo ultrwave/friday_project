@@ -34,7 +34,7 @@ function SearchContainer({placeholder}:SearchContainerPropsType) {
             onlyMyPacks: !searchState.onlyMyPacks
         })
         dispatch(setFiltersAC(searchState))
-        console.log(searchState)
+        //console.log(searchState)
     }
     const setFiltersHandler = () => {
         dispatch(setFiltersAC(searchState))

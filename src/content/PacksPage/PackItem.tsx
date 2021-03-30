@@ -56,9 +56,9 @@ function PackItem(props: GetPacksResponseType & PackItemPropsType) {
                                           modalText={'Enter new name'}
                                           isMine={itemIsMine}
                                           defaultAnswers={{
-                                              answer1: '',
-                                              // answer2: '',
-                                              // answer3: 'answer3'
+                                              field1: {title: 'Pack Name', value:"todo: show a pack name here"},
+                                              // field2: {},
+                                              // field3: {}
                                           }}
                                           answerCallback={inputHandler}
                     />

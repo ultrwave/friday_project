@@ -7,13 +7,15 @@ import PaginationContainer from '../../common/Pagination/PaginationContainer';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
 import {getCardsTC, setSortCardsAC} from '../../redux/cards-reducer';
+import ModalInputContainer2 from "../../common/modals/input2/ModalInputContainer2";
+import {AnswersType} from "../../common/modals/input2/ModalInput2";
 
 type PacksPagePropsType = {
     title: string
     cards: Array<CardType>
     packId: string
     totalCardsCount: number
-    createCard(packId: string): void // fix args
+    createCard(packId: string, question: string, answer: string): void // fix args
     deleteCard(packId: string, cardId: string): void
     updateCard(packId: string, cardId: string): void
 }
@@ -46,6 +48,11 @@ function CardsPage(props: PacksPagePropsType) {
             />
         })
 
+    const onModalSubmitHandler = (value: AnswersType) => {
+        //debugger
+        props.createCard(props.packId, value.field1.value || '', value.field2?.value || '')
+    }
+
     return (
         <div className={style.cardsPageWrapper}>
             <h1 className={style.pageTitle}>{props.title}</h1>
@@ -69,7 +76,16 @@ function CardsPage(props: PacksPagePropsType) {
                     <div style={{width: '10%'}}>Updated</div>
                     <div style={{width: '10%'}}>Created</div>
                     <div style={{width: '15%'}}>
-                        <button onClick={() => props.createCard(props.packId)}>New card</button>
+                        {/*<button onClick={() => props.createCard(props.packId)}>New card</button>*/}
+                        <ModalInputContainer2 buttonTitle={'Add Card'}
+                                              modalText={'New card'}
+                                              isMine={true}
+                                              defaultAnswers={{
+                                                  field1: {title:'Question'},
+                                                  field2: {title:'Answer'},
+                                              }}
+                                              answerCallback={onModalSubmitHandler}
+                        />
 
                     </div>
                     <div style={{width: '25%'}}/>

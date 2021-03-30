@@ -10,6 +10,7 @@ import ModalInputContainer2 from '../../common/modals/input2/ModalInputContainer
 import {RootStateType} from '../../redux/store';
 import {useDispatch, useSelector} from 'react-redux';
 import {getPacksTC, setSortPacksAC} from '../../redux/packs-reducer';
+import {AnswersType} from "../../common/modals/input2/ModalInput2";
 
 type PacksPagePropsType = {
     packs: Array<GetPacksResponseType>
@@ -110,15 +111,15 @@ function PacksPage(props: PacksPagePropsType) {
 
     }
 
-    const onModalSubmitHandler2 = (value: any) => {
-        if (value.answer1) {
-            props.createPack(value.answer1)
-        }
+    const onModalSubmitHandler2 = (value: AnswersType) => {
+        // if (value.field1) {
+        //console.log('>>>>', value.field1.value)
+            props.createPack('' + value.field1.value)
+        // }
 
-        if (value.answer2) {
-            alert(value.answer2)
+        if (value.field2) {
+            alert(value.field2.value)
         }
-
     }
 
     const handleIsMineOnChange = () => {
@@ -162,8 +163,8 @@ function PacksPage(props: PacksPagePropsType) {
                                                   modalText={'Enter new pack name'}
                                                   isMine={true}
                                                   defaultAnswers={{
-                                                      answer1: '',
-                                                      answer2: '',
+                                                      field1: {title: 'Pack name'},
+                                                      // field2: '',
                                                       // answer3: 'answer3'
                                                   }}
                                                   answerCallback={onModalSubmitHandler2}
