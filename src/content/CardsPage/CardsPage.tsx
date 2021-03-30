@@ -58,7 +58,7 @@ function CardsPage(props: PacksPagePropsType) {
             <h1 className={style.pageTitle}>{props.title}</h1>
             <div className={style.controlsContainer}>
                 <div style={{alignSelf: 'flex-start', marginBottom: '5px'}}>
-                    <SearchContainer placeholder={'Search'}/>
+                    <SearchContainer placeholder={'Search'} showOnlyMyPacksCheckbox={false}/>
                 </div>
                 <div style={{alignSelf: 'flex-end', marginBottom: '5px'}}>
                     <PaginationContainer totalItems={props.totalCardsCount}/>

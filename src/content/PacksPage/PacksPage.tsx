@@ -133,6 +133,7 @@ function PacksPage(props: PacksPagePropsType) {
                 <div style={{alignSelf: 'flex-start', marginBottom: '5px'}}>
                     <SearchContainer
                         placeholder={'Pack name'}
+                        showOnlyMyPacksCheckbox
                     />
                 </div>
                 <div style={{alignSelf: 'flex-end', marginBottom: '5px'}}>

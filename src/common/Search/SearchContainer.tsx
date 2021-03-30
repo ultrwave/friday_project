@@ -3,6 +3,7 @@ import {useDispatch} from "react-redux";
 import NameFilterComponent from "./NameFilterComponent";
 // import inputValidator from "../inputValidator";
 import {setFiltersAC} from "../../redux/search-reducer";
+import s from '../styles/SearchContainer.module.css';
 
 export type SearchStateType = {
     nameFilter: string
@@ -10,9 +11,10 @@ export type SearchStateType = {
 }
 export type SearchContainerPropsType = {
     placeholder: string
+    showOnlyMyPacksCheckbox: boolean
 }
 
-function SearchContainer({placeholder}:SearchContainerPropsType) {
+function SearchContainer({placeholder, showOnlyMyPacksCheckbox}: SearchContainerPropsType) {
     const dispatch = useDispatch()
     const [searchState, setSearchState] = useState<SearchStateType>(
         {
@@ -53,18 +55,25 @@ function SearchContainer({placeholder}:SearchContainerPropsType) {
 
     return (
         <div>
-            <NameFilterComponent
-                value={searchState.nameFilter}
-                onChangeHandler={onChangeHandler}
-                //onSubmitHandler={(onSubmitHandler)}
-                onClearHandler={onClearHandler}
-                placeholder={placeholder}
-            />
-            <input type="checkbox" id="showOnlyMyPacks" name="interest" checked={!searchState.onlyMyPacks}
-                   onClick={myPacksHandler}/>
-            <label htmlFor="showOnlyMyPacks">Only my packs</label>
-            <button onClick={setFiltersHandler}
-            style={{marginLeft: '10px'}}>Search</button>
+            <div className={s.searchContainer}>
+                <NameFilterComponent
+                    value={searchState.nameFilter}
+                    onChangeHandler={onChangeHandler}
+                    //onSubmitHandler={(onSubmitHandler)}
+                    onClearHandler={onClearHandler}
+                    placeholder={placeholder}
+                />
+                <button onClick={setFiltersHandler}
+                        style={{marginLeft: '10px'}}>Search
+                </button>
+            </div>
+            {showOnlyMyPacksCheckbox ?
+                <>
+                    <input type="checkbox" id="showOnlyMyPacks" name="interest" checked={!searchState.onlyMyPacks}
+                           onChange={myPacksHandler}/>
+                    <label htmlFor="showOnlyMyPacks">Only my packs</label>
+                </> : ''}
+
         </div>
     );
 }
