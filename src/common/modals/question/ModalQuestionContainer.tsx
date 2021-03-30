@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {ReactNode, useState} from "react";
 import ModalQuestion from "./ModalQuestion";
 
 export type ModalQuestionContainerPropsType = {
@@ -6,15 +6,17 @@ export type ModalQuestionContainerPropsType = {
     modalText?: string
     isMine: boolean
     answerCallback?: (answer: boolean) => void;
+    children?: ReactNode
 }
 
 const ModalQuestionContainer = (
     {
         buttonTitle = 'ModalQuestion',
-        modalText = 'Question text',
+        modalText,
         answerCallback = () => {
         },
-        isMine
+        isMine,
+        children
     }: ModalQuestionContainerPropsType) => {
 
     const [show, setShow] = useState(false);
@@ -37,7 +39,7 @@ const ModalQuestionContainer = (
         <>
             <div>
                 <button onClick={() => setShow(true)}
-                disabled={!isMine}>{buttonTitle}</button>
+                        disabled={!isMine}>{buttonTitle}</button>
                 {/*{answer ? <span>Yes</span> : <span>No</span>}*/}
             </div>
 
@@ -53,7 +55,10 @@ const ModalQuestionContainer = (
                 width={300}
                 height={200}
             >
-                {modalText}
+                <>
+                    {modalText}
+                    {children ? children : ''}
+                </>
             </ModalQuestion>
         </>
     );
