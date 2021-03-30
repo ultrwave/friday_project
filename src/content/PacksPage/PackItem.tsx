@@ -6,6 +6,7 @@ import {useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
 import ModalQuestionContainer from '../../common/modals/question/ModalQuestionContainer';
 import ModalInputContainer2 from '../../common/modals/input2/ModalInputContainer2';
+import {AnswersType} from "../../common/modals/input2/ModalInput2";
 
 type PackItemPropsType = {
     deleteCallback(): void
@@ -35,8 +36,8 @@ function PackItem(props: GetPacksResponseType & PackItemPropsType) {
         }
     }
 
-    const inputHandler = (value: any) => {
-        props.updateCallback(value.answer1)
+    const inputHandler = (value: AnswersType) => {
+        props.updateCallback(value.field1.value || 'Updated pack')
     }
 
     return (
@@ -56,7 +57,7 @@ function PackItem(props: GetPacksResponseType & PackItemPropsType) {
                                           modalText={'Enter new name'}
                                           isMine={itemIsMine}
                                           defaultAnswers={{
-                                              field1: {title: 'Pack Name', value:"todo: show a pack name here"},
+                                              field1: {title: 'Pack Name', value: props.name},
                                               // field2: {},
                                               // field3: {}
                                           }}
