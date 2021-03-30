@@ -65,7 +65,6 @@ function SuperInputsDemo() {
                 {/*    <div style={{'border': 'solid 1px black'}}><SortContainer/></div>*/}
                 {/*</div>*/}
                 <ModalContainer modalText={'Simple Modal'} buttonText={'Close it!'}/>
-                {/*<ModalInputContainer2  buttonTitle={'Modal Input demo'} modalText={'Simple Modal input'} />*/}
                 <ModalQuestionContainer isMine={true}/>
             </div>
         </div>
