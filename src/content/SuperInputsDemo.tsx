@@ -6,7 +6,6 @@ import s from './styles/Registration.module.css'
 import SearchContainer from "../common/Search/SearchContainer";
 import PaginationContainer from "../common/Pagination/PaginationContainer";
 import ModalContainer from "../common/modals/ModalContainer";
-import ModalInputContainer from '../common/modals/input/ModalInputContainer';
 import ModalQuestionContainer from '../common/modals/question/ModalQuestionContainer';
 
 type RegistrationPropsType = {
@@ -56,7 +55,8 @@ function SuperInputsDemo() {
                     CheckboxText {/*// этот текст попадёт в children*/}
                 </SuperCheckbox>
                 <div>SearchComponent:
-                    <div style={{'border': 'solid 1px black'}}><SearchContainer placeholder={'placeholder'}/></div>
+                    <div style={{'border': 'solid 1px black'}}><SearchContainer placeholder={'placeholder'}
+                                                                                showOnlyMyPacksCheckbox/></div>
                 </div>
                 <div>Pagination:
                     <div style={{'border': 'solid 1px black'}}><PaginationContainer totalItems={50}/></div>
@@ -64,8 +64,7 @@ function SuperInputsDemo() {
                 {/*<div>Sort:*/}
                 {/*    <div style={{'border': 'solid 1px black'}}><SortContainer/></div>*/}
                 {/*</div>*/}
-                <ModalContainer  modalText={'Simple Modal'}  buttonText={'Close it!'}/>
-                <ModalInputContainer  buttonTitle={'Modal Input demo'} modalText={'Simple Modal input'} />
+                <ModalContainer modalText={'Simple Modal'} buttonText={'Close it!'}/>
                 <ModalQuestionContainer isMine={true}/>
             </div>
         </div>

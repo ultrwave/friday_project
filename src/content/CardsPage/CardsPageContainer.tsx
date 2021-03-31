@@ -35,16 +35,16 @@ function CardsPageContainer() {
     const pages = [];
     for (let i = 1; i <= pagesCount; i++) pages.push(i)
 
-    const createCard = (id: string) => { // fix args
-        dispatch(createCardTC(id))
+    const createCard = (id: string, question: string, answer: string) => { // fix args
+        dispatch(createCardTC(id, question, answer))
     }
 
     const deleteCard = (packId: string, cardId: string) => {
         dispatch(deleteCardTC(packId, cardId))
     }
 
-    const updateCard = (packId: string, cardId: string) => {
-        dispatch(updateCardTC(packId, cardId))
+    const updateCard = (packId: string, cardId: string, question:string, answer:string) => {
+        dispatch(updateCardTC(packId, cardId, question, answer))
     }
 
     return (

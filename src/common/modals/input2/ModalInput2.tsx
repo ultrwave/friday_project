@@ -1,19 +1,23 @@
 import React, {CSSProperties, ReactChildren, ReactElement, ReactNode, useState} from 'react';
 import Modal from "../Modal";
-import InputMap, {IInputData} from "./InputMap";
+// import InputMap, {IInputData} from "./InputMap";
 
 // export type AnswerType = { answer: string, value1?: string, value2?:string }
+export type FieldType = {
+    title?: string,
+    value?: string
+}
 export type AnswersType = {
-    answer1: string
-    answer2?: string
-    answer3?: string
+    field1: FieldType
+    field2?: FieldType
+    field3?: FieldType
 }
 
 export type ModalInputPropsType = {
     show: boolean;
     close: () => void;
 
-    inputData?: IInputData[];
+    // inputData?: IInputData[];
     modalText?: string
     buttonTitle?: string
     answers: AnswersType;
@@ -36,7 +40,7 @@ export type ModalInputPropsType = {
 }
 
 function ModalInput2({
-                         inputData,
+                         // inputData,
                          modalText,
                          // modalButtonTitle,
                          answers,
@@ -70,15 +74,16 @@ function ModalInput2({
     })
 
     const successCloseModal = () => {
-        saveInputs.f();
-        // setAnswer(answerData || '');
         setAnswer(answerData);
-        setSaveInputs({
-            f: () => {
-            }
-        }); // unsubscribe
+        // saveInputs.f();
+        setAnswerData({field1:{}, field2:{}, field3:{}});
+        // setSaveInputs({
+        //     f: () => {
+        //     }
+        // }); // unsubscribe
         close();
     };
+    //console.log(answers.field1)
 
     return (
         <Modal
@@ -109,25 +114,37 @@ function ModalInput2({
                 }}
             >
                 {/*{answers !== undefined && (*/}
-                    <input
-                        value={answerData.answer1}
-                        style={{...inputStyles}}
-                        onChange={e => setAnswerData({...answerData, answer1: e.currentTarget.value})}
-                    />
+                <input
+                    value={answerData.field1.value}
+                    placeholder={answers.field1.title}
+                    style={{...inputStyles}}
+                    onChange={e => setAnswerData({
+                        ...answerData,
+                        field1: {...answerData.field1, value: e.currentTarget.value}
+                    })}
+                />
                 {/*)}*/}
-                {answers?.answer2 && (
+                {answers?.field2 && (
                     <input
-                        value={answerData.answer2}
+                        value={answerData.field2?.value}
+                        placeholder={answers.field2.title}
                         style={{...inputStyles}}
-                        onChange={e => setAnswerData({...answerData, answer2: e.currentTarget.value})}
+                        onChange={e => setAnswerData({
+                            ...answerData,
+                            field2: {...answerData.field2, value: e.currentTarget.value}
+                        })}
                     />
                 )}
 
-                {answers?.answer3 && (
+                {answers?.field3 && (
                     <input
-                        value={answerData.answer3}
+                        value={answerData.field3?.value}
+                        placeholder={answers.field3.title}
                         style={{...inputStyles}}
-                        onChange={e => setAnswerData({...answerData, answer3: e.currentTarget.value})}
+                        onChange={e => setAnswerData({
+                            ...answerData,
+                            field3: {...answerData.field3, value: e.currentTarget.value}
+                        })}
                     />
                 )}
 

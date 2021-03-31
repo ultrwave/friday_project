@@ -1,4 +1,4 @@
-import {CardType, cardsAPI} from '../api/AuthAPI';
+import {cardsAPI, CardType} from '../api/AuthAPI';
 import {setAppStatusAC} from './app-reducer';
 import {ThunkAction} from 'redux-thunk';
 import {RootStateType} from './store';
@@ -126,9 +126,10 @@ export const getCardsTC = (packId: string, pagination = true): AppThunk =>
             .finally(() => dispatch(setAppStatusAC('idle')))
     }
 
-export const createCardTC = (packId: string): AppThunk => (dispatch) => {
+export const createCardTC = (packId: string, question: string, answer: string): AppThunk => (dispatch) => {
     dispatch(setAppStatusAC('loading'))
-    cardsAPI.createCard({question: 'New Card', cardsPack_id: packId})
+    console.log("sgdfgsfg: ", packId, question, answer)
+    cardsAPI.createCard({question: question || 'New Card', answer, cardsPack_id: packId})
         .then(() => dispatch(getCardsTC(packId)))
         .catch(e => {
             console.log(e)
@@ -150,13 +151,14 @@ export const deleteCardTC = (packId: string, cardId: string, pagination = true):
         .finally(() => dispatch(setAppStatusAC('idle')))
 }
 // fix newName
-export const updateCardTC = (packId: string, cardId: string, update: string = 'updated'): AppThunk => (dispatch) => {
-    dispatch(setAppStatusAC('loading'))
-    cardsAPI.updateCard(cardId, update)
-        .then(() => dispatch(getCardsTC(packId)))
-        .catch(e => {
-            console.log(e)
-            dispatch(setAuthTC())
-        })
-        .finally(() => dispatch(setAppStatusAC('idle')))
-}
+export const updateCardTC = (packId: string, cardId: string, question: string = 'updated', answer: string): AppThunk =>
+    (dispatch) => {
+        dispatch(setAppStatusAC('loading'))
+        cardsAPI.updateCard(cardId, question, answer)
+            .then(() => dispatch(getCardsTC(packId)))
+            .catch(e => {
+                console.log(e)
+                dispatch(setAuthTC())
+            })
+            .finally(() => dispatch(setAppStatusAC('idle')))
+    }

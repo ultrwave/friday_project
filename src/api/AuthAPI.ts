@@ -59,8 +59,8 @@ export const cardsAPI = {
     deleteCard(id: string) {
         return instance.delete(`/cards/card?id=${id}`)
     },
-    updateCard(id: string, question: string) {
-        return instance.put('/cards/card', {card: {_id: id, question}})
+    updateCard(id: string, question: string, answer: string) {
+        return instance.put('/cards/card', {card: {_id: id, question, answer}})
     },
     sendGrade(card_id: string, grade: number) {
         return instance.put('/cards/grade', {card_id, grade})

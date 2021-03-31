@@ -5,10 +5,12 @@ import PackItem from './PackItem';
 import SuperInputText from '../../common/SuperInputText/SuperInputText';
 import PaginationContainer from '../../common/Pagination/PaginationContainer';
 import SearchContainer from '../../common/Search/SearchContainer';
+// import ModalInputContainer from '../../common/modals/input/ModalInputContainer';
 import ModalInputContainer2 from '../../common/modals/input2/ModalInputContainer2';
 import {RootStateType} from '../../redux/store';
 import {useDispatch, useSelector} from 'react-redux';
 import {getPacksTC, setSortPacksAC} from '../../redux/packs-reducer';
+import {AnswersType} from "../../common/modals/input2/ModalInput2";
 
 type PacksPagePropsType = {
     packs: Array<GetPacksResponseType>
@@ -109,15 +111,12 @@ function PacksPage(props: PacksPagePropsType) {
 
     }
 
-    const onModalSubmitHandler2 = (value: any) => {
-        if (value.answer1) {
-            props.createPack(value.answer1)
-        }
+    const onModalSubmitHandler2 = (value: AnswersType) => {
+            props.createPack('' + value.field1.value)
 
-        if (value.answer2) {
-            alert(value.answer2)
+        if (value.field2) {
+            alert(value.field2.value)
         }
-
     }
 
     const handleIsMineOnChange = () => {
@@ -131,6 +130,7 @@ function PacksPage(props: PacksPagePropsType) {
                 <div style={{alignSelf: 'flex-start', marginBottom: '5px'}}>
                     <SearchContainer
                         placeholder={'Pack name'}
+                        showOnlyMyPacksCheckbox
                     />
                 </div>
                 <div style={{alignSelf: 'flex-end', marginBottom: '5px'}}>
@@ -139,49 +139,34 @@ function PacksPage(props: PacksPagePropsType) {
             </div>
             <div className={style.table}>
                 <div className={style.tableHeader}>
-                    <div className={style.colName}><span>Name</span></div>
-                    <div className={style.colCards}><span>Cards count</span></div>
-                    <div className={style.colUser}><span>User</span></div>
-                    <div className={style.colUpdated}>
+                    <div style={{width: '15%'}}>Name</div>
+                    <div style={{width: '10%'}}>Cards count</div>
+                    <div style={{width: '20%'}}>User</div>
+                    <div style={{width: '10%'}}>
                         <span className={`${style.sortSettings} ${!crSorting ? style.activeSetting : ''}`}
                               onClick={() => setSort('updated')}>
                             {`Updated ${sort === '1updated' ? '↑' : '↓'}`}
                         </span>
                     </div>
-                    <div className={style.colCreated}>
+                    <div style={{width: '10%', marginLeft: '12px'}}>
                         <span className={`${style.sortSettings} ${crSorting ? style.activeSetting : ''}`}
                               onClick={() => setSort('created')}>
                             {`Created ${sort === '1created' ? '↑' : '↓'}`}
                         </span>
                     </div>
-                    <div className={style.colAdd}>
-                        {formState.hide
-                            ?
+                    <div style={{width: '15%'}}>
                             <ModalInputContainer2 buttonTitle={'Add Pack'}
                                                   modalText={'Enter new pack name'}
                                                   isMine={true}
                                                   defaultAnswers={{
-                                                      answer1: '',
-                                                      answer2: '',
+                                                      field1: {title: 'Pack name'},
+                                                      // field2: '',
                                                       // answer3: 'answer3'
                                                   }}
                                                   answerCallback={onModalSubmitHandler2}
                             />
-                            : <form className={style.inputBlock} onSubmit={onSubmitHandler}>
-                                <button className={style.addButton}
-                                        type='submit'>Add
-                                </button>
-                                <SuperInputText
-                                    value={formState.value}
-                                    error={formState.error}
-                                    onChangeText={onChangeHandler}
-                                    onBlur={onBlurHandler}
-                                    placeholder={'Pack name'}
-                                />
-                                <span onClick={() => toggleHideInput(true)}>x</span>
-                            </form>}
                     </div>
-                    <div className={style.colFiller}/>
+                    <div style={{width: '10%'}}/>
                 </div>
                 <ul>
                     {packsRender}

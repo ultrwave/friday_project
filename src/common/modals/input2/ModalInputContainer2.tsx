@@ -18,18 +18,19 @@ function ModalInputContainer2(props: ModalInputContainerPropsType) {
     // const {answer1, answer2, answer3} = props.defaultAnswers
 
     const [show, setShow] = useState(false);
-    const [answers, setAnswers] = useState(props.defaultAnswers );
+    // const [answers, setAnswers] = useState(props.defaultAnswers );
 
     // const [value1, setValue1] = useState('');
     // const [value2, setValue2] = useState('');
 
 
-    const setAnswerHandler = ({answer1, answer2, answer3}: AnswersType) => {
-        setAnswers({answer1, answer2, answer3})
+    const setAnswerHandler = ({field1, field2, field3}: AnswersType) => {
+        // setAnswers({field1: field1, field2: field2, field3: field3})
+        // console.log('<<<', field1)
         props.answerCallback && props.answerCallback({
-            answer1,
-            answer2,
-            answer3
+            field1: field1,
+            field2: field2,
+            field3: field3
         })
     }
 
@@ -37,7 +38,7 @@ function ModalInputContainer2(props: ModalInputContainerPropsType) {
         show: show,
         close: () => setShow(false),
         modalText: props.modalText,
-        answers: answers,
+        answers: props.defaultAnswers,
         setAnswer: setAnswerHandler,
         enableBackground: true,
         backgroundOnClick: () => setShow(false),
