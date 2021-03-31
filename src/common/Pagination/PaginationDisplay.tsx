@@ -18,8 +18,10 @@ function PaginationDisplay({currentPage, totalItems, itemsOnPage, getPage, getIt
     for (let i = 1; i <= lastPage; i++) pages.push((
         <button
             key={i}
-            style={{background: currentPage === i ? '#4c4c4c' : undefined,
-                color: currentPage === i ? 'white' : undefined}}
+            style={{
+                background: currentPage === i ? '#4c4c4c' : undefined,
+                color: currentPage === i ? 'white' : undefined
+            }}
             onClick={() => getPage(i)}
         >
             {i}
@@ -28,7 +30,7 @@ function PaginationDisplay({currentPage, totalItems, itemsOnPage, getPage, getIt
 
     // 1 ... 4 5 (6) 7 8 ... 11
     const centralPartWidth = 1
-    if ((currentPage + 2+centralPartWidth) < lastPage) {
+    if ((currentPage + 2 + centralPartWidth) < lastPage) {
         pages[currentPage + centralPartWidth] = (
             <span key={currentPage + 1 + centralPartWidth} style={{}}>
                 - ... -
@@ -42,7 +44,7 @@ function PaginationDisplay({currentPage, totalItems, itemsOnPage, getPage, getIt
                 - ... -
             </span>
         );
-        pages = pages.filter((p, i) => i < 2 || i > currentPage - (2+centralPartWidth));
+        pages = pages.filter((p, i) => i < 2 || i > currentPage - (2 + centralPartWidth));
     }
 
     return (
