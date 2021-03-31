@@ -128,7 +128,7 @@ export const getCardsTC = (packId: string, pagination = true): AppThunk =>
 
 export const createCardTC = (packId: string, question: string, answer: string): AppThunk => (dispatch) => {
     dispatch(setAppStatusAC('loading'))
-    console.log("sgdfgsfg: ",packId, question, answer)
+    console.log("sgdfgsfg: ", packId, question, answer)
     cardsAPI.createCard({question: question || 'New Card', answer, cardsPack_id: packId})
         .then(() => dispatch(getCardsTC(packId)))
         .catch(e => {
@@ -151,13 +151,14 @@ export const deleteCardTC = (packId: string, cardId: string, pagination = true):
         .finally(() => dispatch(setAppStatusAC('idle')))
 }
 // fix newName
-export const updateCardTC = (packId: string, cardId: string, update: string = 'updated'): AppThunk => (dispatch) => {
-    dispatch(setAppStatusAC('loading'))
-    cardsAPI.updateCard(cardId, update)
-        .then(() => dispatch(getCardsTC(packId)))
-        .catch(e => {
-            console.log(e)
-            dispatch(setAuthTC())
-        })
-        .finally(() => dispatch(setAppStatusAC('idle')))
-}
+export const updateCardTC = (packId: string, cardId: string, question: string = 'updated', answer: string): AppThunk =>
+    (dispatch) => {
+        dispatch(setAppStatusAC('loading'))
+        cardsAPI.updateCard(cardId, question, answer)
+            .then(() => dispatch(getCardsTC(packId)))
+            .catch(e => {
+                console.log(e)
+                dispatch(setAuthTC())
+            })
+            .finally(() => dispatch(setAppStatusAC('idle')))
+    }

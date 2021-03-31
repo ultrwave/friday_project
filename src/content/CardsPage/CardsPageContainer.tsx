@@ -43,8 +43,8 @@ function CardsPageContainer() {
         dispatch(deleteCardTC(packId, cardId))
     }
 
-    const updateCard = (packId: string, cardId: string) => {
-        dispatch(updateCardTC(packId, cardId))
+    const updateCard = (packId: string, cardId: string, question:string, answer:string) => {
+        dispatch(updateCardTC(packId, cardId, question, answer))
     }
 
     return (

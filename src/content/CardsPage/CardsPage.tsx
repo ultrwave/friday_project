@@ -17,7 +17,7 @@ type PacksPagePropsType = {
     totalCardsCount: number
     createCard(packId: string, question: string, answer: string): void // fix args
     deleteCard(packId: string, cardId: string): void
-    updateCard(packId: string, cardId: string): void
+    updateCard(packId: string, cardId: string, question: string, answer: string): void
 }
 
 export type AddCardFormStateType = {
@@ -44,7 +44,8 @@ function CardsPage(props: PacksPagePropsType) {
             return <CardItem {...c}
                              key={c._id}
                              deleteCallback={() => props.deleteCard(props.packId, c._id)}
-                             updateCallback={() => props.updateCard(props.packId, c._id)}
+                             updateCallback={(question, answer) =>
+                                 props.updateCard(props.packId, c._id, question, answer)}
             />
         })
 
@@ -81,8 +82,8 @@ function CardsPage(props: PacksPagePropsType) {
                                               modalText={'New card'}
                                               isMine={true}
                                               defaultAnswers={{
-                                                  field1: {title:'Question'},
-                                                  field2: {title:'Answer'},
+                                                  field1: {title: 'Question'},
+                                                  field2: {title: 'Answer'},
                                               }}
                                               answerCallback={onModalSubmitHandler}
                         />
