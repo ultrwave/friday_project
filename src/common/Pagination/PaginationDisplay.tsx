@@ -26,6 +26,24 @@ function PaginationDisplay({currentPage, totalItems, itemsOnPage, getPage, getIt
         </button>
     ));
 
+    // 1 ... 4 5 (6) 7 8 ... 11
+    if ((currentPage + 4) < lastPage) {
+        pages[currentPage + 2] = (
+            <span key={currentPage + 3} style={{}}>
+                - ... -
+            </span>
+        );
+        pages = pages.filter((p, i) => i < (currentPage + 3) || i === (lastPage - 1));
+    }
+    if (currentPage > 5) {
+        pages[1] = (
+            <span key={2} style={{}}>
+                - ... -
+            </span>
+        );
+        pages = pages.filter((p, i) => i < 2 || i > currentPage - 4);
+    }
+
     return (
         <div className={s.main}>
             <select value={itemsOnPage}
