@@ -24,7 +24,11 @@ function Profile() {
                     ? <div className={style.profileData}>
                         {profileData.avatar ?
                             <div>
-                                <img src={profileData.avatar} alt="" width="100" height=""></img>
+                                <img className={style.avatar}
+                                     src={profileData.avatar}
+                                     alt=""
+                                     width="100"
+                                     height=""/>
                             </div>
                             : <img src={defaultAvatar} alt="" width="100" height="100"/>
                         }
