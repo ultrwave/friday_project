@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import style from './App.module.css';
 import {HashRouter, Route, Switch, Redirect} from 'react-router-dom';
 import Profile from './content/Profile/Profile';
@@ -31,10 +31,21 @@ function App() {
         dispatch(setAuthTC())
     }, [dispatch])
 
+    let [hideLoader, setHideLoader] = useState(false)
+
+    let id: ReturnType<typeof setTimeout>
+    if (appStatus === 'idle') {
+        id = setTimeout(() => setHideLoader(true), 1000)
+    }
+
+    useEffect(() => {
+        return clearTimeout(id)
+    })
+
     return (
         <HashRouter>
             <div className="App">
-                {appStatus === 'loading' && <Loader/>}
+                {appStatus === 'loading' && <Loader status={hideLoader}/>}
                 <Navbar/>
                 <div className={style.content}>
                     <Switch>

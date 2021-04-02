@@ -2,46 +2,24 @@ import React, {useEffect, useState} from 'react'
 import style from './loader.module.css'
 import loader from './loader.svg'
 
-export function Loader() {
+type LoaderPropsType = {
+    status: boolean
+}
 
-    // const [isMounted, setIsMounted] = useState(true);
-    // const shouldRender = useDelayUnmount(isMounted, 500);
-    // const mountedStyle = {opacity: 1, transition: 'opacity 500ms ease-in'};
-    // const unmountedStyle = {opacity: 0, transition: 'opacity 500ms ease-in'};
-    //
-    // function useDelayUnmount(isMounted: boolean, delayTime: number) {
-    //     const [shouldRender, setShouldRender] = useState(false);
-    //
-    //     useEffect(() => {
-    //         let timeoutId: any;
-    //         if (isMounted && !shouldRender) {
-    //             setShouldRender(true);
-    //         } else if (!isMounted && shouldRender) {
-    //             timeoutId = setTimeout(
-    //                 () => setShouldRender(false),
-    //                 delayTime
-    //             );
-    //         }
-    //         return () => clearTimeout(timeoutId);
-    //     }, [isMounted, delayTime, shouldRender]);
-    //     return shouldRender;
-    // }
-    //
-    // const fadeStyle = isMounted ? mountedStyle : unmountedStyle
-    //
-    // useEffect(() => {
-    //     setTimeout(() => setIsMounted(false), 100)
+export function Loader({status}: LoaderPropsType) {
 
-    // return (
-    //         <div className={`${style.dimScreen} ${fadeStyle}`}>
-    //             <img className={style.loader}
-    //                  src={loader}
-    //                  alt="Loading..."/>
-    //         </div>
-    // )
+    console.log(status)
+
+    let [opacity, setOpacity] = useState({opacity: '0.4'})
+
+    useEffect(() => {
+        const id = setTimeout(() => setOpacity({opacity: '1.0'}), 10)
+        return clearTimeout(id)
+    }, [])
 
     return (
-        <div className={`${style.dimScreen}`}>
+        <div className={`${style.dimScreen}`}
+             style={opacity}>
             <img className={style.loader}
                  src={loader}
                  alt="Loading..."/>
