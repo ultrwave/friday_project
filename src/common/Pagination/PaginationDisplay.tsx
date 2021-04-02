@@ -33,7 +33,7 @@ function PaginationDisplay({currentPage, totalItems, itemsOnPage, getPage, getIt
     if ((currentPage + 2 + centralPartWidth) < lastPage) {
         pages[currentPage + centralPartWidth] = (
             <span key={currentPage + 1 + centralPartWidth} style={{}}>
-                - ... -
+                 ...
             </span>
         );
         pages = pages.filter((p, i) => i < (currentPage + 1 + centralPartWidth) || i === (lastPage - 1));
@@ -41,7 +41,7 @@ function PaginationDisplay({currentPage, totalItems, itemsOnPage, getPage, getIt
     if (currentPage > 3 + centralPartWidth) {
         pages[1] = (
             <span key={2} style={{}}>
-                - ... -
+                 ...
             </span>
         );
         pages = pages.filter((p, i) => i < 2 || i > currentPage - (2 + centralPartWidth));
