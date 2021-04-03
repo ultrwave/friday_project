@@ -1,25 +1,18 @@
 import React, {useEffect, useState} from 'react'
 import style from './loader.module.css'
 import loader from './loader.svg'
+import {useSelector} from 'react-redux';
+import {RootStateType} from '../../redux/store';
 
 type LoaderPropsType = {
-    status: boolean
 }
 
-export function Loader({status}: LoaderPropsType) {
+export function Loader(props: LoaderPropsType) {
 
-    console.log(status)
-
-    let [opacity, setOpacity] = useState({opacity: '0.4'})
-
-    useEffect(() => {
-        const id = setTimeout(() => setOpacity({opacity: '1.0'}), 10)
-        return clearTimeout(id)
-    }, [])
+    const fadeOut = useSelector((state: RootStateType) => state.appState.status)
 
     return (
-        <div className={`${style.dimScreen}`}
-             style={opacity}>
+        <div className={`${style.dimScreen} ${fadeOut === 'idle' && style.hideLoader}`}>
             <img className={style.loader}
                  src={loader}
                  alt="Loading..."/>

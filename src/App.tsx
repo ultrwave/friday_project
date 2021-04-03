@@ -16,13 +16,15 @@ import RegistrationContainer from './content/Registration/RegistrationContainer'
 import CardsPageContainer from './content/CardsPage/CardsPageContainer';
 
 import PacksPageContainer from './content/PacksPage/PacksPageContainer';
-import Page404 from "./content/Page404/Page404";
+import Page404 from './content/Page404/Page404';
 import LearnPageContainer from './content/LearnPage/LearnPageContainer';
+
 export const DEV_MODE = true
 export const DEFAULT_EMAIL = 'nya-admin@nya.nya'
 export const DEFAULT_PASSWORD = '1qazxcvBG'
 
 function App() {
+    console.log('App called')
 
     const dispatch = useDispatch()
     const appStatus = useSelector((state: RootStateType) => state.appState.status)
@@ -31,21 +33,27 @@ function App() {
         dispatch(setAuthTC())
     }, [dispatch])
 
-    let [hideLoader, setHideLoader] = useState(false)
+    let [showLoader, setShowLoader] = useState(true)
 
-    let id: ReturnType<typeof setTimeout>
-    if (appStatus === 'idle') {
-        id = setTimeout(() => setHideLoader(true), 1000)
-    }
+    let id = 0
+    useEffect(() => {
+        if (appStatus === 'idle' && showLoader) {
+            id = +setTimeout(() => {
+                setShowLoader(false)
+            }, 301)
+        } else {
+        setShowLoader(appStatus === 'loading')
+        }
+    }, [appStatus])
 
     useEffect(() => {
-        return clearTimeout(id)
-    })
+        return () => clearTimeout(id)
+    }, [showLoader])
 
     return (
         <HashRouter>
             <div className="App">
-                {appStatus === 'loading' && <Loader status={hideLoader}/>}
+                {showLoader && <Loader/>}
                 <Navbar/>
                 <div className={style.content}>
                     <Switch>
