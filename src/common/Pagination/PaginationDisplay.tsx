@@ -20,7 +20,8 @@ function PaginationDisplay({currentPage, totalItems, itemsOnPage, getPage, getIt
             key={i}
             style={{
                 background: currentPage === i ? '#4c4c4c' : undefined,
-                color: currentPage === i ? 'white' : undefined
+                color: currentPage === i ? 'white' : undefined,
+                transition: currentPage === i ? '1.0s' : '0.0s'
             }}
             onClick={() => getPage(i)}
         >

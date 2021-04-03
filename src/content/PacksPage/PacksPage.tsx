@@ -2,7 +2,6 @@ import React, {FormEvent, useEffect, useState} from 'react';
 import style from '../styles/PacksPage.module.css'
 import {GetPacksResponseType} from '../../api/AuthAPI';
 import PackItem from './PackItem';
-import SuperInputText from '../../common/SuperInputText/SuperInputText';
 import PaginationContainer from '../../common/Pagination/PaginationContainer';
 import SearchContainer from '../../common/Search/SearchContainer';
 // import ModalInputContainer from '../../common/modals/input/ModalInputContainer';
@@ -10,7 +9,7 @@ import ModalInputContainer2 from '../../common/modals/input2/ModalInputContainer
 import {RootStateType} from '../../redux/store';
 import {useDispatch, useSelector} from 'react-redux';
 import {getPacksTC, setSortPacksAC} from '../../redux/packs-reducer';
-import {AnswersType} from "../../common/modals/input2/ModalInput2";
+import {AnswersType} from '../../common/modals/input2/ModalInput2';
 
 type PacksPagePropsType = {
     packs: Array<GetPacksResponseType>
