@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import style from './App.module.css';
-import {HashRouter, Route, Switch, Redirect} from 'react-router-dom';
+import {HashRouter, Redirect, Route, Switch} from 'react-router-dom';
 import Profile from './content/Profile/Profile';
-import Registration from './content/Registration/Registration';
 import {Navbar} from './common/Navbar';
 import SuperInputsDemo from './content/SuperInputsDemo';
 import LoginContainer from './content/Login/LoginContainer';

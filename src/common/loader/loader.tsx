@@ -1,13 +1,10 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import style from './loader.module.css'
 import loader from './loader.svg'
 import {useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
 
-type LoaderPropsType = {
-}
-
-export function Loader(props: LoaderPropsType) {
+export function Loader() {
 
     const fadeOut = useSelector((state: RootStateType) => state.appState.status)
 

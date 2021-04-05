@@ -1,5 +1,5 @@
-import React from 'react';
-import style from '../styles/PacksPage.module.css'
+import React, {useEffect, useState} from 'react';
+import style from '../styles/CardsPage.module.css'
 import {CardType} from '../../api/AuthAPI';
 import {useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
@@ -16,6 +16,12 @@ function CardItem(props: CardType & CardItemPropsType) {
 
     const myId = useSelector((state: RootStateType) => state.auth.profile?._id)
     const itemIsMine = props.user_id === myId
+
+    let [delay, setDelay] = useState(true)
+
+    useEffect(() => {
+        const timerId = setTimeout(() => setDelay(false), 100)
+    }, [delay])
 
     const updated = new Date(props.updated)
         .toLocaleDateString("en-UE", {hour12: false, hour: 'numeric', minute: 'numeric'});
@@ -34,8 +40,8 @@ function CardItem(props: CardType & CardItemPropsType) {
     }
 
     return (
-        <li>
-            <div className={`${style.packItem}${itemIsMine ? '' : (' ' + style.itemIsNotMine)}`}>
+        <li style={delay ? {} : {opacity: '1.0'}}>
+            <div className={`${style.cardItem}${itemIsMine ? '' : (' ' + style.itemIsNotMine)}`}>
                 <div style={{width: '15%'}}>{props.question}</div>
                 <div style={{width: '10%'}}>{props.answer}</div>
                 <div style={{width: '15%'}}>

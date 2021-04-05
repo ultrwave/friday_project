@@ -30,40 +30,11 @@ function PacksPage(props: PacksPagePropsType) {
     console.log('PacksPage called')
 
     const dispatch = useDispatch()
-    let [formState, setFormState] =
-        useState<AddPackFormStateType>({value: '', error: '', hide: true, touched: false})
-
-    let [isMine, setIsMine] = useState(false)
-
     const filter = useSelector((state: RootStateType): string => state.filterState.nameFilter)
-    const myId = useSelector((state: RootStateType) => state.auth.profile?._id)
     const sort = useSelector((state: RootStateType) => state.packsPage.params.sortPacks)
     const crSorting = sort.slice(1) === 'created'
 
-    const onChangeHandler = (value: string) => {
-
-        setFormState({
-            ...formState,
-            value: value.trim(),
-        })
-    }
-    const onBlurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
-
-        setFormState({
-            ...formState,
-            touched: true
-        })
-    }
-    const toggleHideInput = (hide: boolean) => {
-
-        setFormState({
-            ...formState,
-            hide
-        })
-    }
-
     let packs = props.packs.filter(p => filter ? p.name.includes(filter) : true)
-    if (isMine) packs = packs.filter(p => p.user_id === myId)
     let packsRender = packs.map(p =>
         <PackItem {...p}
                   key={p._id}
@@ -71,43 +42,9 @@ function PacksPage(props: PacksPagePropsType) {
                   updateCallback={(name: string) => props.updatePack(p._id, name)}
         />)
 
-    useEffect(() => {
-        if (formState.touched && !formState.value) {
-            setFormState({...formState, error: 'Required'})
-        } else {
-            setFormState({...formState, error: ''})
-        }
-    }, [formState.value, formState.touched])
-
-    const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        setFormState({
-            ...formState,
-            touched: true
-        })
-        if (formState.value) {
-            props.createPack(formState.value)
-            toggleHideInput(true)
-        } else if (formState.touched) {
-            toggleHideInput(true)
-        }
-    }
-
     const setSort = (type: 'created' | 'updated') => {
         dispatch(setSortPacksAC(type))
         dispatch(getPacksTC())
-    }
-
-    const onModalSubmitHandler = (value: any) => {
-        if (value.answer) {
-            props.createPack(value.answer)
-        }
-
-
-        if (value.value1) {
-            alert(value.value1)
-        }
-
     }
 
     const onModalSubmitHandler2 = (value: AnswersType) => {
@@ -116,10 +53,6 @@ function PacksPage(props: PacksPagePropsType) {
         if (value.field2) {
             alert(value.field2.value)
         }
-    }
-
-    const handleIsMineOnChange = () => {
-        setIsMine(!isMine)
     }
 
     return (

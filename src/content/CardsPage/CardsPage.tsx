@@ -50,7 +50,6 @@ function CardsPage(props: PacksPagePropsType) {
         })
 
     const onModalSubmitHandler = (value: AnswersType) => {
-        //debugger
         props.createCard(props.packId, value.field1.value || '', value.field2?.value || '')
     }
 
@@ -77,7 +76,6 @@ function CardsPage(props: PacksPagePropsType) {
                     <div style={{width: '10%'}}>Updated</div>
                     <div style={{width: '10%'}}>Created</div>
                     <div style={{width: '15%'}}>
-                        {/*<button onClick={() => props.createCard(props.packId)}>New card</button>*/}
                         <ModalInputContainer2 buttonTitle={'Add Card'}
                                               modalText={'New card'}
                                               isMine={true}

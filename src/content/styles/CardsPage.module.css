@@ -33,7 +33,7 @@ h1 {
 ul {
     list-style-type: none;
     padding: 0;
-    border: 1px dotted darkred;
+    border: none;
 }
 
 .sortSettings {
@@ -47,6 +47,12 @@ ul {
     border: 1px dotted black;
     border-radius: 3px;
     padding: 2px 12px;
+}
+
+.table li {
+    opacity: 0.0;
+    transition: all 0.2s;
+    border: 2px solid white;
 }
 
 .table li:nth-child(even) {
@@ -68,12 +74,14 @@ ul {
     box-shadow: 0 2px 2px rgba(50,30,30,0.7);
 }
 
-.packItem {
+.cardItem {
     font-size: 14px;
     padding: 5px 15px;
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-bottom: 2px;
+    box-shadow: 0 3px 3px rgba(0,0,0,0.4);
 }
 
 .inputBlock {
@@ -107,6 +115,7 @@ ul {
     border: 1px solid #ded7d3;
     outline: none;
     padding: 4px 12px;
+    border-radius: 2px;
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(100,100,100,0.3);
     transition: 0.2s;

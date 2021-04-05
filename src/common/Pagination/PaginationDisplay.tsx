@@ -21,7 +21,7 @@ function PaginationDisplay({currentPage, totalItems, itemsOnPage, getPage, getIt
             style={{
                 background: currentPage === i ? '#4c4c4c' : undefined,
                 color: currentPage === i ? 'white' : undefined,
-                transition: currentPage === i ? '1.0s' : '0.0s'
+                transition: currentPage === i ? '0.9s' : '0.0s'
             }}
             onClick={() => getPage(i)}
         >
