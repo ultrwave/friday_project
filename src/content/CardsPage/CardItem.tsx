@@ -21,6 +21,7 @@ function CardItem(props: CardType & CardItemPropsType) {
 
     useEffect(() => {
         const timerId = setTimeout(() => setDelay(false), 100)
+        return () => clearTimeout(timerId)
     }, [delay])
 
     const updated = new Date(props.updated)

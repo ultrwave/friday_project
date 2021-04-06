@@ -108,6 +108,7 @@ ul {
     padding: 5px 15px;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     margin-bottom: 2px;
     box-shadow: 0 3px 3px rgba(0,0,0,0.4);

@@ -72,8 +72,7 @@ function PacksPage(props: PacksPagePropsType) {
             <div className={style.table}>
                 <div className={style.tableHeader}>
                     <div style={{width: '15%'}}>Name</div>
-                    <div style={{width: '10%'}}>Cards count</div>
-                    <div style={{width: '20%'}}>User</div>
+                    <div style={{width: '10%'}}>Cards</div>
                     <div style={{width: '10%'}}>
                         <span className={`${style.sortSettings} ${!crSorting ? style.activeSetting : ''}`}
                               onClick={() => setSort('updated')}>

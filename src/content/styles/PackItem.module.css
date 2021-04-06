@@ -1,0 +1,67 @@
+.packItem {
+    height: 34px;
+    font-size: 14px;
+    padding: 5px 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 2px;
+    box-shadow: 0 3px 3px rgba(0,0,0,0.4);
+}
+
+.packItem > div {
+    margin: 0 15px;
+}
+
+.nameBlock {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.packName {
+    color: #3c3c3c;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.userName {
+    font-size: 12px;
+    color: #9b7d58;
+
+}
+
+.itemIsNotMine {
+    color: #888;
+    font-weight: normal;
+}
+
+.count {
+    font-weight: bold;
+    font-size: 20px;
+    color: #3c3c3c;
+    width: 50px;
+    text-align: center;
+}
+
+.emptyPack {
+    color: #bbb;
+}
+
+.updated, .created {
+    color: #888;
+    font-size: 12px;
+    width: 60px;
+    text-align: center;
+}
+
+.buttonsBlock {
+    display: flex;
+    flex-direction: row;
+}
+
+.buttonsBlock button {
+    border-radius: 3px;
+}

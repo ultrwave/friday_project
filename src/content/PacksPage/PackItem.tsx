@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {NavLink} from 'react-router-dom';
-import style from '../styles/PacksPage.module.css'
+import style from '../styles/PackItem.module.css'
 import {GetPacksResponseType} from '../../api/AuthAPI';
 import {useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
 import ModalQuestionContainer from '../../common/modals/question/ModalQuestionContainer';
 import ModalInputContainer2 from '../../common/modals/input2/ModalInputContainer2';
-import {AnswersType} from "../../common/modals/input2/ModalInput2";
+import {AnswersType} from '../../common/modals/input2/ModalInput2';
 
 type PackItemPropsType = {
     deleteCallback(): void
@@ -22,12 +22,16 @@ function PackItem(props: GetPacksResponseType & PackItemPropsType) {
 
     useEffect(() => {
         const timerId = setTimeout(() => setDelay(false), 100)
+        return () => clearTimeout(timerId)
     }, [delay])
 
     const updated = new Date(props.updated)
-        .toLocaleDateString('en-UE', {hour12: false, hour: 'numeric', minute: 'numeric'});
+        .toLocaleDateString('en-UE', {hour12: false, hour: 'numeric', minute: 'numeric'})
+        .split(',').join('')
 
-    const created = new Date(props.updated).toLocaleString().split(',')[0]
+    const created = new Date(props.updated)
+        .toLocaleDateString('en-UE', {hour12: false, hour: 'numeric', minute: 'numeric'})
+        .split(',').join('')
 
     const deleteHandler = (answer: boolean) => {
         if (answer) {
@@ -41,13 +45,19 @@ function PackItem(props: GetPacksResponseType & PackItemPropsType) {
 
     return (
         <li style={delay ? {} : {opacity: '1.0'}}>
-            <div className={`${style.packItem}${itemIsMine ? '' : (' ' + style.itemIsNotMine)}`}>
-                <div style={{width: '20%'}}>{props.name}</div>
-                <div style={{width: '15%'}}>{props.cardsCount}</div>
-                <div style={{width: '10%', fontSize: '12px', color: 'gray'}}>{props.user_name}</div>
-                <div style={{width: '15%', fontSize: '12px'}}>{updated}</div>
-                <div style={{width: '15%', fontSize: '12px'}}>{created}</div>
-                <div style={{width: '15%', display: 'flex', flexDirection: 'row'}}>
+            <div className={style.packItem}>
+                <div className={style.nameBlock}>
+                    <span className={`${style.packName} ${itemIsMine || style.itemIsNotMine}`}>
+                        {props.name}
+                    </span>
+                    <span className={style.userName}>{props.user_name}</span>
+                </div>
+                <div className={`${style.count} ${props.cardsCount === 0 && style.emptyPack}`}>
+                    {props.cardsCount}
+                </div>
+                <div className={style.updated}>{updated}</div>
+                <div className={style.created}>{created}</div>
+                <div className={style.buttonsBlock}>
                     <ModalQuestionContainer buttonTitle={'Delete'}
                                             modalText={'Delete pack?'}
                                             isMine={itemIsMine}
@@ -63,10 +73,10 @@ function PackItem(props: GetPacksResponseType & PackItemPropsType) {
                                           answerCallback={inputHandler}
                     />
                 </div>
-                <div style={{width: '5%'}}>
+                <div className={style.cardsLink}>
                     <NavLink to={`/cards/${props._id}/${encodeURI(props.name)}`}>cards</NavLink>
                 </div>
-                <div style={{width: '5%'}}>
+                <div className={style.learnLink}>
                     <NavLink
                         to={`/learn/${props._id}/${props.name}/${itemIsMine ? 1 : 0}`}>learn</NavLink>
                 </div>
