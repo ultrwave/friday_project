@@ -23,7 +23,7 @@ function NameFilterComponent({value, onChangeHandler, onClearHandler, placeholde
                 onKeyPress={handleKeyPress}
                 placeholder={placeholder}
             />
-            <button onClick={onClearHandler}>x</button>
+            {/*<button onClick={onClearHandler}>x</button>*/}
         </div>
     );
 }

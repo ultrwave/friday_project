@@ -9,7 +9,7 @@ export function Loader() {
     const fadeOut = useSelector((state: RootStateType) => state.appState.status)
 
     return (
-        <div className={`${style.dimScreen} ${fadeOut === 'idle' && style.hideLoader}`}>
+        <div className={`${style.dimScreen} ${fadeOut === 'idle' ? style.hideLoader: ''}`}>
             <img className={style.loader}
                  src={loader}
                  alt="Loading..."/>

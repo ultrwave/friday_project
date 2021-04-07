@@ -36,14 +36,14 @@ function App() {
 
     let id = 0
     useEffect(() => {
-        if (appStatus === 'idle' && showLoader) {
+        if (appStatus !== 'loading' && showLoader) {
             id = +setTimeout(() => {
                 setShowLoader(false)
             }, 301)
         } else {
-        setShowLoader(appStatus === 'loading')
+            setShowLoader(appStatus === 'loading')
         }
-    }, [appStatus])
+    }, [appStatus, showLoader])
 
     useEffect(() => {
         return () => clearTimeout(id)

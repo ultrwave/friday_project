@@ -50,6 +50,7 @@ function PaginationDisplay({currentPage, totalItems, itemsOnPage, getPage, getIt
 
     return (
         <div className={s.main}>
+            {pages}
             <select value={itemsOnPage}
                     onChange={e => {
                         getItemsOnPage(Number(e.currentTarget.value))
@@ -60,7 +61,6 @@ function PaginationDisplay({currentPage, totalItems, itemsOnPage, getPage, getIt
                 <option value={20}>20</option>
                 <option value={50}>50</option>
             </select>
-            {pages}
         </div>
     );
 }

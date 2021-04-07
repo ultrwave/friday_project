@@ -2,16 +2,22 @@
   margin: 0;
 }
 .superInput {
-  border: 1px solid black;
+  outline: none;
   margin-bottom: 0 !important;
   margin-left: 0 !important;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid #9b7d58;
 }
 
 .errorInput {
+  outline: none;
   border: 1px solid red;
   background: white;
   margin-bottom: 0 !important;
   margin-left: 0 !important;
+  padding: 5px;
+  border-radius: 3px;
 
 }
 

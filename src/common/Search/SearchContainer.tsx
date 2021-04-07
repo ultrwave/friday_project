@@ -55,6 +55,20 @@ function SearchContainer({placeholder, showOnlyMyPacksCheckbox}: SearchContainer
 
     return (
         <div>
+            {showOnlyMyPacksCheckbox ?
+                <>
+                    <input type="checkbox"
+                           id="showOnlyMyPacks"
+                           name="interest"
+                           checked={!searchState.onlyMyPacks}
+                           onChange={myPacksHandler}
+                    />
+                    <label htmlFor="showOnlyMyPacks"
+                           style={{fontSize: '12px', color: '#777'}}
+                    >
+                        Only my packs
+                    </label>
+                </> : ''}
             <div className={s.searchContainer}>
                 <NameFilterComponent
                     value={searchState.nameFilter}
@@ -64,16 +78,9 @@ function SearchContainer({placeholder, showOnlyMyPacksCheckbox}: SearchContainer
                     placeholder={placeholder}
                 />
                 <button onClick={setFiltersHandler}
-                        style={{marginLeft: '10px'}}>Search
+                        style={{marginLeft: '5px', borderRadius: '4px'}}>Search
                 </button>
             </div>
-            {showOnlyMyPacksCheckbox ?
-                <>
-                    <input type="checkbox" id="showOnlyMyPacks" name="interest" checked={!searchState.onlyMyPacks}
-                           onChange={myPacksHandler}/>
-                    <label htmlFor="showOnlyMyPacks">Only my packs</label>
-                </> : ''}
-
         </div>
     );
 }

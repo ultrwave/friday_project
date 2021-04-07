@@ -38,7 +38,7 @@ const Recover = ({formState, onChangeHandler, onBlurHandler, onSubmitHandler}: R
 
     return (
         <form className={style.form} onSubmit={submitForm}>
-            <h1 className={appStyle.defaultTitle}>Recover</h1>
+            <h1 className={appStyle.defaultTitle}>Recover password</h1>
             <SuperInputText
                 value={formState.value}
                 error={formState.error}
