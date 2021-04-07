@@ -7,6 +7,8 @@ import {RootStateType} from '../../redux/store';
 import ModalQuestionContainer from '../../common/modals/question/ModalQuestionContainer';
 import ModalInputContainer2 from '../../common/modals/input2/ModalInputContainer2';
 import {AnswersType} from '../../common/modals/input2/ModalInput2';
+import cardsIcon from '../../common/images/cardsIcon.png'
+import learnIcon from '../../common/images/learnIcon.png'
 
 type PackItemPropsType = {
     deleteCallback(): void
@@ -74,11 +76,16 @@ function PackItem(props: GetPacksResponseType & PackItemPropsType) {
                     />
                 </div>
                 <div className={style.cardsLink}>
-                    <NavLink to={`/cards/${props._id}/${encodeURI(props.name)}`}>cards</NavLink>
+                    <NavLink to={`/cards/${props._id}/${encodeURI(props.name)}`}>
+                        <img src={cardsIcon} alt="Cards"/>
+                        <span className={style.tooltip}>Cards</span>
+                    </NavLink>
                 </div>
                 <div className={style.learnLink}>
-                    <NavLink
-                        to={`/learn/${props._id}/${props.name}/${itemIsMine ? 1 : 0}`}>learn</NavLink>
+                    <NavLink to={`/learn/${props._id}/${props.name}/${itemIsMine ? 1 : 0}`}>
+                        <img src={learnIcon} alt="Learn"/>
+                        <span className={style.tooltip}>Learn</span>
+                    </NavLink>
                 </div>
             </div>
         </li>

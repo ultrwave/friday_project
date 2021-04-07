@@ -1,4 +1,5 @@
 .packItem {
+    width: 780px;
     height: 34px;
     font-size: 14px;
     padding: 5px 15px;
@@ -7,20 +8,18 @@
     align-items: center;
     margin-bottom: 2px;
     box-shadow: 0 3px 3px rgba(0,0,0,0.4);
-}
-
-.packItem > div {
-    margin: 0 15px;
+    border-radius: 0 0 15% 15%;
 }
 
 .nameBlock {
+    margin-left: 10px;
     width: 200px;
     display: flex;
     flex-direction: column;
 }
 
 .packName {
-    color: #3c3c3c;
+    color: #2b2b2b;
     display: block;
     overflow: hidden;
     white-space: nowrap;
@@ -34,7 +33,7 @@
 }
 
 .itemIsNotMine {
-    color: #888;
+    color: #9f9f9f;
     font-weight: normal;
 }
 
@@ -44,6 +43,7 @@
     color: #3c3c3c;
     width: 50px;
     text-align: center;
+    margin-left: 25px;
 }
 
 .emptyPack {
@@ -55,13 +55,64 @@
     font-size: 12px;
     width: 60px;
     text-align: center;
+    margin-left: 35px;
 }
 
 .buttonsBlock {
     display: flex;
     flex-direction: row;
+    margin-left: 25px;
 }
 
 .buttonsBlock button {
     border-radius: 3px;
+}
+
+.packItem a {
+    display: inline-block;
+    height: 34px;
+}
+
+.cardsLink, .learnLink {
+    position: relative;
+}
+
+.cardsLink {
+    margin-left: 30px;
+}
+
+.learnLink {
+    margin-left: 20px;
+}
+
+.cardsLink img {
+    height: 120%;
+}
+
+.learnLink img {
+    margin-top: 5px;
+    height: 90%;
+}
+
+.tooltip {
+    opacity: 0.0;
+    width: 35px;
+    bottom: 20%;
+    left: -7%;
+    font-size: 12px;
+    background-color: #4c4c4c;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+    transition: 0.2s all;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.cardsLink:hover .tooltip, .learnLink:hover .tooltip {
+    opacity: 1.0;
 }

@@ -71,21 +71,21 @@ function PacksPage(props: PacksPagePropsType) {
             </div>
             <div className={style.table}>
                 <div className={style.tableHeader}>
-                    <div style={{width: '15%'}}>Name</div>
-                    <div style={{width: '10%'}}>Cards</div>
-                    <div style={{width: '10%'}}>
+                    <div style={{width: '250px'}}>Name</div>
+                    <div style={{width: '65px'}}>Cards</div>
+                    <div>
                         <span className={`${style.sortSettings} ${!crSorting ? style.activeSetting : ''}`}
                               onClick={() => setSort('updated')}>
                             {`Updated ${sort === '1updated' ? '↑' : '↓'}`}
                         </span>
                     </div>
-                    <div style={{width: '10%', marginLeft: '12px'}}>
+                    <div>
                         <span className={`${style.sortSettings} ${crSorting ? style.activeSetting : ''}`}
                               onClick={() => setSort('created')}>
                             {`Created ${sort === '1created' ? '↑' : '↓'}`}
                         </span>
                     </div>
-                    <div style={{width: '15%'}}>
+                    <div style={{marginLeft: 'auto'}}>
                             <ModalInputContainer2 buttonTitle={'Add Pack'}
                                                   modalText={'Enter new pack name'}
                                                   isMine={true}
@@ -97,7 +97,6 @@ function PacksPage(props: PacksPagePropsType) {
                                                   answerCallback={onModalSubmitHandler2}
                             />
                     </div>
-                    <div style={{width: '10%'}}/>
                 </div>
                 <ul>
                     {packsRender}
