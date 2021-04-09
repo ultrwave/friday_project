@@ -16,7 +16,6 @@ function LearnPageContainer() {
     console.log('LearnPageContainer called')
 
     const dispatch = useDispatch()
-    const isLoggedIn = useSelector((state: RootStateType): boolean => state.auth.isLoggedIn)
     const params: ParamsType = useParams()
     const title = params.title ? params.title : 'Pack'
     const packId = params.id ? params.id : ''
@@ -26,10 +25,10 @@ function LearnPageContainer() {
     let [index, setIndex] = useState(0)
     let [smartMode, setMode] = useState(false)
     let card = cards[index]
-    window.history.replaceState(null, '', `/#/learn/${title}`)
 
     useEffect(() => {
         dispatch(getCardsTC(packId, false))
+        window.history.replaceState(null, '', `/#/learn/${title}`)
     }, [dispatch, packId])
 
     const setGrade = (card_id: string, grade: number) => {

@@ -84,7 +84,7 @@ function PackItem(props: GetPacksResponseType & PackItemPropsType) {
                 <div className={style.learnLink}>
                     <NavLink to={`/learn/${props._id}/${props.name}/${itemIsMine ? 1 : 0}`}>
                         <img src={learnIcon} alt="Learn"/>
-                        <span className={style.tooltip}>Learn</span>
+                        <span className={style.tooltip}>Study</span>
                     </NavLink>
                 </div>
             </div>

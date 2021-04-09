@@ -98,7 +98,6 @@
     opacity: 0.0;
     width: 35px;
     bottom: 20%;
-    left: -7%;
     font-size: 12px;
     background-color: #4c4c4c;
     color: #fff;
@@ -112,6 +111,13 @@
     z-index: 1;
 }
 
+.cardsLink .tooltip {
+    left: -6%;
+}
+
+.learnLink .tooltip {
+    left: -22%;
+}
 /* Show the tooltip text when you mouse over the tooltip container */
 .cardsLink:hover .tooltip, .learnLink:hover .tooltip {
     opacity: 1.0;

@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 60px;
+    height: 56px;
     background: rgb(134,134,134);
     min-width: 1200px;
     background: linear-gradient(90deg, rgba(134,134,134,1) 0%, rgba(93,93,93,1) 23%, rgba(60,60,60,1) 62%);
@@ -20,10 +20,10 @@
 }
 
 .logo {
-    height: 55px;
+    height: 50px;
     -webkit-filter: drop-shadow(5px 5px 5px #222);
     filter: drop-shadow(5px 5px 5px #222);
-    margin: 0 50px 4px;
+    margin: 4px 50px 0;
 }
 
 .logoutButton {

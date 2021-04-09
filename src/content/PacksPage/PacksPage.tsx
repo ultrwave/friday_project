@@ -1,10 +1,9 @@
-import React, {FormEvent, useEffect, useState} from 'react';
+import React from 'react';
 import style from '../styles/PacksPage.module.css'
 import {GetPacksResponseType} from '../../api/AuthAPI';
 import PackItem from './PackItem';
 import PaginationContainer from '../../common/Pagination/PaginationContainer';
 import SearchContainer from '../../common/Search/SearchContainer';
-// import ModalInputContainer from '../../common/modals/input/ModalInputContainer';
 import ModalInputContainer2 from '../../common/modals/input2/ModalInputContainer2';
 import {RootStateType} from '../../redux/store';
 import {useDispatch, useSelector} from 'react-redux';
@@ -71,7 +70,7 @@ function PacksPage(props: PacksPagePropsType) {
             </div>
             <div className={style.table}>
                 <div className={style.tableHeader}>
-                    <div style={{width: '250px'}}>Name</div>
+                    <div style={{width: '250px'}}>Packs</div>
                     <div style={{width: '65px'}}>Cards</div>
                     <div>
                         <span className={`${style.sortSettings} ${!crSorting ? style.activeSetting : ''}`}

@@ -107,6 +107,7 @@ ul {
     align-self: center;
     margin-top: 4px;
     color: white;
+    /*font-weight: bold;*/
     background: linear-gradient(90deg, rgba(93,93,93,1) 23%, rgba(60,60,60,1) 62%);
     border-radius: 3px;
     box-shadow: 0 2px 2px rgba(50,30,30,0.7);
@@ -115,6 +116,8 @@ ul {
 .tableHeader button {
     background-color: #b1936d;
     color: white;
+    /*font-weight: bold;*/
+    /*font-size: 16px;*/
     border: 1px solid black !important;
     padding: 5px 10px !important;
 }
