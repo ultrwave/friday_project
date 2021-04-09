@@ -7,8 +7,8 @@ import PaginationContainer from '../../common/Pagination/PaginationContainer';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
 import {getCardsTC, setSortCardsAC} from '../../redux/cards-reducer';
-import ModalInputContainer2 from "../../common/modals/input2/ModalInputContainer2";
-import {AnswersType} from "../../common/modals/input2/ModalInput2";
+import ModalInputContainer2 from '../../common/modals/input2/ModalInputContainer2';
+import {AnswersType} from '../../common/modals/input2/ModalInput2';
 
 type PacksPagePropsType = {
     title: string
@@ -58,7 +58,10 @@ function CardsPage(props: PacksPagePropsType) {
             <h1 className={style.pageTitle}>{props.title}</h1>
             <div className={style.controlsContainer}>
                 <div style={{alignSelf: 'flex-start', marginBottom: '5px'}}>
-                    <SearchContainer placeholder={'Search'} showOnlyMyPacksCheckbox={false}/>
+                    <SearchContainer
+                        placeholder={'Search cards'}
+                        showOnlyMyPacksCheckbox={false}
+                    />
                 </div>
                 <div style={{alignSelf: 'flex-end', marginBottom: '5px'}}>
                     <PaginationContainer totalItems={props.totalCardsCount}/>
@@ -66,16 +69,17 @@ function CardsPage(props: PacksPagePropsType) {
             </div>
             <div className={style.table}>
                 <div className={style.tableHeader}>
-                    <div style={{width: '15%'}}>Question</div>
-                    <div style={{width: '10%'}}>Answer</div>
-                    <div style={{width: '15%'}}>
+                    <div style={{width: '230px'}}>Description</div>
+                    <div>
                         <span className={`${style.sortSettings} ${style.activeSetting}`}
                               onClick={setSort}>
                             {`Grade ${sort === '1grade' ? '↑' : '↓'}`}
                         </span></div>
-                    <div style={{width: '10%'}}>Updated</div>
-                    <div style={{width: '10%'}}>Created</div>
-                    <div style={{width: '15%'}}>
+                    <div className={style.sortSettings}
+                    style={{marginLeft: '36px'}}>Updated</div>
+                    <div className={style.sortSettings}
+                    style={{marginLeft: '36px'}}>Created</div>
+                    <div style={{marginLeft: 'auto'}}>
                         <ModalInputContainer2 buttonTitle={'Add Card'}
                                               modalText={'New card'}
                                               isMine={true}
@@ -85,9 +89,7 @@ function CardsPage(props: PacksPagePropsType) {
                                               }}
                                               answerCallback={onModalSubmitHandler}
                         />
-
                     </div>
-                    <div style={{width: '25%'}}/>
                 </div>
                 <ul>
                     {cards}

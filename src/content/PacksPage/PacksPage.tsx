@@ -60,8 +60,8 @@ function PacksPage(props: PacksPagePropsType) {
             <div className={style.controlsContainer}>
                 <div style={{alignSelf: 'flex-start', marginBottom: '5px'}}>
                     <SearchContainer
-                        placeholder={'Pack name'}
-                        showOnlyMyPacksCheckbox
+                        placeholder={'Search packs'}
+                        showOnlyMyPacksCheckbox={false}
                     />
                 </div>
                 <div style={{alignSelf: 'flex-end', marginBottom: '5px'}}>
@@ -90,8 +90,6 @@ function PacksPage(props: PacksPagePropsType) {
                                                   isMine={true}
                                                   defaultAnswers={{
                                                       field1: {title: 'Pack name'},
-                                                      // field2: '',
-                                                      // answer3: 'answer3'
                                                   }}
                                                   answerCallback={onModalSubmitHandler2}
                             />

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import style from '../styles/CardsPage.module.css'
+import style from '../styles/CardItem.module.css'
 import {CardType} from '../../api/AuthAPI';
 import {useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
@@ -42,18 +42,16 @@ function CardItem(props: CardType & CardItemPropsType) {
 
     return (
         <li style={delay ? {} : {opacity: '1.0'}}>
-            <div className={`${style.cardItem}${itemIsMine ? '' : (' ' + style.itemIsNotMine)}`}>
-                <div style={{width: '15%'}}>{props.question}</div>
-                <div style={{width: '10%'}}>{props.answer}</div>
-                <div style={{width: '15%'}}>
+            <div className={`${style.cardItem} ${itemIsMine || style.itemIsNotMine}`}>
+                <div className={style.descriptionBlock}>
+                    <div className={style.cardDescription}>{props.question}</div>
+                </div>
+                <div className={style.count}>
                     {Math.round((props.grade + Number.EPSILON) * 100) / 100}</div>
-                <div style={{width: '10%', fontSize: '12px'}}>{updated}</div>
-                <div style={{width: '10%', fontSize: '12px'}}>{created}</div>
-                <div style={{width: '15%', display: 'flex', flexDirection: 'row'}}>
-                    {/*<button disabled={!itemIsMine}*/}
-                    {/*        onClick={props.deleteCallback}>Delete</button>*/}
+                <div className={style.updated}>{updated}</div>
+                <div className={style.created}>{created}</div>
+                <div className={style.buttonsBlock}>
                     <ModalQuestionContainer buttonTitle={'Delete'}
-                        // modalText={'Delete card?'}
                                             isMine={itemIsMine}
                                             answerCallback={deleteHandler}>
                         <>
@@ -61,22 +59,16 @@ function CardItem(props: CardType & CardItemPropsType) {
                             <div>Delete card?</div>
                         </>
                     </ModalQuestionContainer>
-                    {/*<button style={{marginLeft: '5px'}}*/}
-                    {/*        disabled={!itemIsMine}*/}
-                    {/*        onClick={props.updateCallback}>Update*/}
-                    {/*</button>*/}
                     <ModalInputContainer2 buttonTitle={'Update'}
                                           modalText={'Enter new name'}
                                           isMine={itemIsMine}
                                           defaultAnswers={{
                                               field1: {title: 'Question', value: props.question},
                                               field2: {title: 'Answer', value: props.answer},
-                                              // field3: {}
                                           }}
                                           answerCallback={inputHandler}
                     />
                 </div>
-                <div style={{width: '25%'}}/>
             </div>
         </li>
     )

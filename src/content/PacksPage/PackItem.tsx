@@ -69,8 +69,6 @@ function PackItem(props: GetPacksResponseType & PackItemPropsType) {
                                           isMine={itemIsMine}
                                           defaultAnswers={{
                                               field1: {title: 'Pack Name', value: props.name},
-                                              // field2: {},
-                                              // field3: {}
                                           }}
                                           answerCallback={inputHandler}
                     />
