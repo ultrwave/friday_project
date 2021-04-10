@@ -1,4 +1,5 @@
 import React, {CSSProperties, ReactChild, ReactChildren, ReactElement, useEffect} from 'react';
+import appStyle from '../../common/styles/Common.module.css'
 
 export type ModalPropsType = {
     enableBackground?: boolean;
@@ -11,10 +12,7 @@ export type ModalPropsType = {
     modalOnClick?: () => void;
 
     show: boolean
-    // children?: ReactChild | ReactChild[] | ReactChildren | ReactChildren[];
     children?: ReactChild | ReactChildren | (string | ReactChildren | ReactElement)[];
-    // children?: (string | ReactChildren | ReactElement)[];
-
 }
 
 
@@ -87,7 +85,9 @@ function Modal(props: ModalPropsType) {
                 }}
                 onClick={modalOnClick}
             >
-                {children}
+                <div className={appStyle.modal}>
+                    {children}
+                </div>
             </div>
         </>
     );

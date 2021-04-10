@@ -4,10 +4,6 @@ import SuperInputText from '../../common/SuperInputText/SuperInputText';
 import style from '../styles/Registration.module.css'
 import {Redirect} from 'react-router-dom';
 
-type RegistrationPropsType = {
-    error?: string
-}
-
 type StateType = {
     email: string
     password1: string
@@ -92,10 +88,10 @@ function Registration() {
                     />
 
                     <SuperButton
-                        red={false} // пропсу с булевым значением не обязательно указывать true
+                        red={false}
                         onClick={handleSignUp}
                     >
-                        Sign up {/*// название кнопки попадёт в children*/}
+                        Sign up
                     </SuperButton>
 
 

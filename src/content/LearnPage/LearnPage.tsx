@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {CardType} from '../../api/AuthAPI';
+import {CardType} from '../../api/API';
 import style from '../styles/LearnPage.module.css'
 import {useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
@@ -20,7 +20,6 @@ type LearnPagePropsType = {
 }
 
 function LearnPage({title, card, isMine, amount, index, smartMode, toggleMode, getNextCard, deleteCard, setGrade}: LearnPagePropsType) {
-    console.log('LearnPage called')
 
     const appStatus = useSelector((state: RootStateType): string => state.appState.status)
     const isLoggedIn = useSelector((state: RootStateType): boolean => state.auth.isLoggedIn)

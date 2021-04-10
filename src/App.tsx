@@ -23,7 +23,6 @@ export const DEFAULT_EMAIL = 'nya-admin@nya.nya'
 export const DEFAULT_PASSWORD = '1qazxcvBG'
 
 function App() {
-    console.log('App called')
 
     const dispatch = useDispatch()
     const appStatus = useSelector((state: RootStateType) => state.appState.status)
@@ -47,7 +46,7 @@ function App() {
 
     useEffect(() => {
         return () => clearTimeout(id)
-    }, [showLoader])
+    }, [showLoader, id])
 
     return (
         <HashRouter>

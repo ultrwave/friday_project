@@ -59,5 +59,6 @@
     position: fixed; /* or absolute */
     top: 250px;
     left: 50%;
+    transition: 0.3s all;
     transform: translate(-50%, -50%);
 }

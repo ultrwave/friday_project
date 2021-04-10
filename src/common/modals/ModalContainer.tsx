@@ -19,8 +19,6 @@ function ModalContainer(props: SimpleModalPropsType) {
 
                 width={300}
                 height={200}
-                // modalOnClick={() => setShow(false)}
-
                 show={show}
             >
                 {props.modalText || 'Simple Modal'}

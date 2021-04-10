@@ -14,7 +14,6 @@ type RecoverPropsType = {
 }
 
 const NewPassword = ({formState, onChangeHandler, onBlurHandler, onSubmitHandler,}: RecoverPropsType) => {
-    console.log('NewPassword called')
 
     const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()

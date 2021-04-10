@@ -1,6 +1,6 @@
 import React from 'react';
 import style from '../styles/PacksPage.module.css'
-import {GetPacksResponseType} from '../../api/AuthAPI';
+import {GetPacksResponseType} from '../../api/API';
 import PackItem from './PackItem';
 import PaginationContainer from '../../common/Pagination/PaginationContainer';
 import SearchContainer from '../../common/Search/SearchContainer';
@@ -26,7 +26,6 @@ export type AddPackFormStateType = {
 }
 
 function PacksPage(props: PacksPagePropsType) {
-    console.log('PacksPage called')
 
     const dispatch = useDispatch()
     const filter = useSelector((state: RootStateType): string => state.filterState.nameFilter)

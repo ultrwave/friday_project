@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import inputValidator from '../../common/inputValidator';
 import NewPassword from './NewPassword';
 import {useDispatch} from 'react-redux';
 import {setNewPasswordTC} from '../../redux/auth-reducer';
-import {useParams, useLocation} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 
 export type NewPasswordFormStateType = {
     password: InputType
@@ -21,7 +21,6 @@ type ParamsType = {
 }
 
 function NewPasswordContainer() {
-    console.log('NewPasswordContainer called')
 
     const dispatch = useDispatch()
     const params: ParamsType = useParams()

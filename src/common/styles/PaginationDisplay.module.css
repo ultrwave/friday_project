@@ -3,15 +3,8 @@
     flex-direction: row;
     max-width: 400px;
     height: 26px;
-    /*overflow: auto;*/
     box-shadow: 0 4px 6px rgba(50,30,30,0.2);
     border-collapse: collapse;
-    /*flex-wrap: nowrap;*/
-    /*align-items: center;*/
-    /*align-content: center;*/
-    /*flex-grow: initial;*/
-    /*width: 100px;*/
-    /*box-sizing: border-box;*/
 
 }
 
@@ -19,7 +12,6 @@
     margin-right: 2px;
     outline: none;
     border: 1px solid burlywood;
-    /*border-right-style: none;*/
     border-radius: 4px !important;
     display: table-cell;
 
@@ -46,11 +38,7 @@
 .main::-webkit-scrollbar-corner {
     background: white;
 }
-/*.input {*/
-/*    overflow: hidden;*/
-/*    width: 100%;*/
 
-/*}*/
 .main button {
     background-color: white;
     padding: 0 10px !important;

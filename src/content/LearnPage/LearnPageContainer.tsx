@@ -3,7 +3,7 @@ import LearnPage from './LearnPage';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
 import {useParams} from 'react-router-dom';
-import {deleteCardTC, getCardsTC, updateCardTC} from '../../redux/cards-reducer';
+import {deleteCardTC, getCardsTC} from '../../redux/cards-reducer';
 import {sendGradeTC} from '../../redux/learn-reducer';
 
 type ParamsType = {
@@ -13,7 +13,6 @@ type ParamsType = {
 }
 
 function LearnPageContainer() {
-    console.log('LearnPageContainer called')
 
     const dispatch = useDispatch()
     const params: ParamsType = useParams()
@@ -29,7 +28,7 @@ function LearnPageContainer() {
     useEffect(() => {
         dispatch(getCardsTC(packId, false))
         window.history.replaceState(null, '', `/#/learn/${title}`)
-    }, [dispatch, packId])
+    }, [dispatch, packId, title])
 
     const setGrade = (card_id: string, grade: number) => {
         dispatch(sendGradeTC(card_id, grade))

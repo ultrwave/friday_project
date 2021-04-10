@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import style from '../styles/CardItem.module.css'
-import {CardType} from '../../api/AuthAPI';
+import {CardType} from '../../api/API';
 import {useSelector} from 'react-redux';
 import {RootStateType} from '../../redux/store';
 import ModalQuestionContainer from "../../common/modals/question/ModalQuestionContainer";

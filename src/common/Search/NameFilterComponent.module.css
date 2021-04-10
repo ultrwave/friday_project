@@ -2,12 +2,6 @@
     display: flex;
     flex-direction: row;
     min-width: 220px;
-    /*flex-wrap: nowrap;*/
-    /*align-items: center;*/
-    /*align-content: center;*/
-    /*flex-grow: initial;*/
-    /*width: 100px;*/
-    /*box-sizing: border-box;*/
 }
 
 .input {

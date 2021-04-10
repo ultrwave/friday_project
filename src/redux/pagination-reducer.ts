@@ -11,9 +11,6 @@ const initialState: InitialStateType = {
     pageCount: 10,
 }
 
-
-
-
 type ActionTypes =
     | ReturnType<typeof setCurrentPageAC>
 

@@ -13,7 +13,6 @@ export type RecoverFormStateType = {
 !localStorage.timerData && localStorage.setItem('timerData', '0')
 
 function RecoverContainer() {
-    console.log('RecoverContainer called')
 
     const dispatch = useDispatch()
     let [formState, setFormState] =

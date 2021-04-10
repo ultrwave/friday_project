@@ -7,7 +7,6 @@ type RecoverTimerPropsType = {
 }
 
 function RecoverTimer({getTime, hideTimer}: RecoverTimerPropsType) {
-    console.log('RecoverTimer called')
 
     const [timeMs, setTimeMs] = useState(getTime())
 

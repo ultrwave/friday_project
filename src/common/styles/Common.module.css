@@ -58,3 +58,18 @@
     border: 1px solid #e2cbaf;
     border-radius: 4px;
 }
+
+.modal {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.modal * {
+    margin-top: 20px;
+}
+
+.modal input {
+    padding: 2px 10px;
+}

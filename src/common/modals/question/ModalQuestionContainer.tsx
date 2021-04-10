@@ -40,7 +40,6 @@ const ModalQuestionContainer = (
             <div>
                 <button onClick={() => setShow(true)}
                         disabled={!isMine}>{buttonTitle}</button>
-                {/*{answer ? <span>Yes</span> : <span>No</span>}*/}
             </div>
 
             <ModalQuestion

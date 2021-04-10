@@ -1,14 +1,12 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {useEffect} from 'react';
 import PacksPage from './PacksPage';
 import {useDispatch, useSelector} from 'react-redux';
 import {createPackTC, deletePackTC, getPacksTC, updatePackTC} from '../../redux/packs-reducer';
 import {RootStateType} from '../../redux/store';
 import {Redirect} from 'react-router-dom';
-import PaginationContainer from '../../common/Pagination/PaginationContainer';
 
 
 function PacksPageContainer() {
-    console.log('PacksPageContainer called')
 
     const dispatch = useDispatch()
     const isLoggedIn = useSelector((state: RootStateType): boolean => state.auth.isLoggedIn)

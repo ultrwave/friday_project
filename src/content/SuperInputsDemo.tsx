@@ -20,15 +20,12 @@ function SuperInputsDemo() {
         if (error) {
             alert("Введите текст");
         } else {
-            alert(text); // если нет ошибки показать текст
+            alert(text);
 
         }
     };
 
     const [checked, setChecked] = useState<boolean>(false);
-    // const testOnChange = (e: ChangeEvent<HTMLInputElement>) =>
-    //     setChecked(e.currentTarget.checked);
-
 
     return (
         <div className={s.demoContainer}>
@@ -41,18 +38,18 @@ function SuperInputsDemo() {
                     onChangeText={setText}
                     onEnter={showAlert}
                     error={error}
-                    className={s.green} // проверьте, работает ли смешивание классов
+                    className={s.green}
                 />
 
                 <SuperButton
-                    red={text === ''} // пропсу с булевым значением не обязательно указывать true
+                    red={text === ''}
                     onClick={showAlert}
                 >
-                    Button {/*// название кнопки попадёт в children*/}
+                    Button
                 </SuperButton>
 
                 <SuperCheckbox checked={checked} onChangeChecked={setChecked}>
-                    CheckboxText {/*// этот текст попадёт в children*/}
+                    CheckboxText
                 </SuperCheckbox>
                 <div>SearchComponent:
                     <div style={{'border': 'solid 1px black'}}><SearchContainer placeholder={'placeholder'}

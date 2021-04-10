@@ -21,7 +21,6 @@ export type InputStateType = {
 }
 
 function LoginContainer() {
-    console.log('LoginContainer called')
 
     const dispatch = useDispatch()
     const isLoggedIn = useSelector((state: RootStateType): boolean => state.auth.isLoggedIn)

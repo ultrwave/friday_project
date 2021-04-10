@@ -33,9 +33,8 @@ const initialState: RegistrationFormStateType = {
 
 
 function RegistrationContainer() {
-    console.log('Registration Container component called')
+
     const dispatch = useDispatch()
-    const isLoggedIn = useSelector((state: RootStateType): boolean => state.auth.isLoggedIn)
     const isSuccessfullyRegistered = useSelector((state: RootStateType): boolean => state.pageRegistration.isSuccessfullyRegistered)
 
     const [registrationFormState, setRegistrationFormState] = useState<RegistrationFormStateType>(initialState);

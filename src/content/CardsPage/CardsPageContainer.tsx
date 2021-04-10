@@ -11,7 +11,6 @@ type ParamsType = {
 }
 
 function CardsPageContainer() {
-    console.log('CardsPageContainer called')
 
     const dispatch = useDispatch()
     const appStatus = useSelector((state: RootStateType): string => state.appState.status)

@@ -106,7 +106,6 @@
     border-radius: 6px;
     transition: 0.2s all;
 
-    /* Position the tooltip text - see examples below! */
     position: absolute;
     z-index: 1;
 }
@@ -118,7 +117,7 @@
 .learnLink .tooltip {
     left: -22%;
 }
-/* Show the tooltip text when you mouse over the tooltip container */
+
 .cardsLink:hover .tooltip, .learnLink:hover .tooltip {
     opacity: 1.0;
 }

@@ -1,5 +1,5 @@
 import {DispatchType} from './auth-reducer';
-import {authAPI} from '../api/AuthAPI';
+import {authAPI} from '../api/API';
 
 type PageStateType = {
     timerIsOn: boolean
@@ -41,7 +41,6 @@ export const recoverPasswordTC = (email: string, baseUrl: string) => (dispatch: 
          <a href='${baseUrl}/$token$'>link</a></div>`
     authAPI.forgot(email, from, message)
         .then(response => {
-            // localStorage.timerData = Date.now()
         })
         .catch(e => {
             console.log('Recover Error', e)

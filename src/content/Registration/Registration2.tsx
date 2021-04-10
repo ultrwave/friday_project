@@ -72,7 +72,7 @@ function Registration2({
                             disabled={disableSubmit}
                             type={'submit'}
                         >
-                            Sign up {/* название кнопки попадёт в children*/}
+                            Sign up
                         </SuperButton>
                     </div>
                 </form>

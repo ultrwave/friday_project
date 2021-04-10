@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
 import NameFilterComponent from "./NameFilterComponent";
-// import inputValidator from "../inputValidator";
 import {setFiltersAC} from "../../redux/search-reducer";
 import s from '../styles/SearchContainer.module.css';
 
@@ -73,7 +72,6 @@ function SearchContainer({placeholder, showOnlyMyPacksCheckbox}: SearchContainer
                 <NameFilterComponent
                     value={searchState.nameFilter}
                     onChangeHandler={onChangeHandler}
-                    //onSubmitHandler={(onSubmitHandler)}
                     onClearHandler={onClearHandler}
                     placeholder={placeholder}
                 />

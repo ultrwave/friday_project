@@ -1,4 +1,4 @@
-import {cardsAPI, CardType} from '../api/AuthAPI';
+import {cardsAPI, CardType} from '../api/API';
 import {setAppStatusAC} from './app-reducer';
 import {ThunkAction} from 'redux-thunk';
 import {RootStateType} from './store';

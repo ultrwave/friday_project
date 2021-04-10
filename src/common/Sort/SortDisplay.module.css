@@ -1,16 +1,4 @@
 .main {
     display: flex;
     flex-direction: row;
-    /*flex-wrap: nowrap;*/
-    /*align-items: center;*/
-    /*align-content: center;*/
-    /*flex-grow: initial;*/
-    /*width: 100px;*/
-    /*box-sizing: border-box;*/
 }
-
-/*.input {*/
-/*    overflow: hidden;*/
-/*    width: 100%;*/
-
-/*}*/

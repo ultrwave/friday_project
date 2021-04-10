@@ -18,7 +18,6 @@ type RecoverPropsType = {
 }
 
 const Recover = ({formState, onChangeHandler, onBlurHandler, onSubmitHandler}: RecoverPropsType) => {
-    console.log('Recover called')
 
     const dispatch = useDispatch()
 

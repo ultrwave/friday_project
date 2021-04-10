@@ -1,8 +1,6 @@
 import React, {CSSProperties, ReactChildren, ReactElement, ReactNode, useState} from 'react';
-import Modal from "../Modal";
-// import InputMap, {IInputData} from "./InputMap";
+import Modal from '../Modal';
 
-// export type AnswerType = { answer: string, value1?: string, value2?:string }
 export type FieldType = {
     title?: string,
     value?: string
@@ -17,7 +15,6 @@ export type ModalInputPropsType = {
     show: boolean;
     close: () => void;
 
-    // inputData?: IInputData[];
     modalText?: string
     buttonTitle?: string
     answers: AnswersType;
@@ -40,9 +37,7 @@ export type ModalInputPropsType = {
 }
 
 function ModalInput2({
-                         // inputData,
                          modalText,
-                         // modalButtonTitle,
                          answers,
                          setAnswer = (answers) => {
                          },
@@ -68,89 +63,79 @@ function ModalInput2({
                          children,
                      }: ModalInputPropsType) {
     const [answerData, setAnswerData] = useState(answers);
-    const [saveInputs, setSaveInputs] = useState({
-        f: () => {
-        }
-    })
 
     const successCloseModal = () => {
         setAnswer(answerData);
-        // saveInputs.f();
-        setAnswerData({field1:{}, field2:{}, field3:{}});
-        // setSaveInputs({
-        //     f: () => {
-        //     }
-        // }); // unsubscribe
+        setAnswerData({field1: {}, field2: {}, field3: {}});
         close();
     };
-    //console.log(answers.field1)
 
     return (
-        <Modal
-            enableBackground={enableBackground}
-            backgroundOnClick={() => {
-                setAnswerData(answers);
-                backgroundOnClick()
-            }}
-            backgroundStyle={backgroundStyle}
-
-            width={width}
-            height={height}
-            modalOnClick={modalOnClick}
-            modalStyle={modalStyle}
-
-            show={show}
-        >
-            {modalText || 'question modal'}
-            {/*{children ? children : 'question Modal'}*/}
-            <div
-                style={{
-                    width: '100%',
-                    display: 'flex',
-                    flexFlow: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'space-around',
-                    ...inputContainerStyles,
+        <div>
+            <Modal
+                enableBackground={enableBackground}
+                backgroundOnClick={() => {
+                    setAnswerData(answers);
+                    backgroundOnClick()
                 }}
+                backgroundStyle={backgroundStyle}
+
+                width={width}
+                height={height}
+                modalOnClick={modalOnClick}
+                modalStyle={modalStyle}
+
+                show={show}
             >
-                {/*{answers !== undefined && (*/}
-                <input
-                    value={answerData.field1.value}
-                    placeholder={answers.field1.title}
-                    style={{...inputStyles}}
-                    onChange={e => setAnswerData({
-                        ...answerData,
-                        field1: {...answerData.field1, value: e.currentTarget.value}
-                    })}
-                />
-                {/*)}*/}
-                {answers?.field2 && (
+                {modalText || 'question modal'}
+                <div
+                    style={{
+                        width: '100%',
+                        display: 'flex',
+                        flexFlow: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'space-around',
+                        ...inputContainerStyles,
+                    }}
+                >
                     <input
-                        value={answerData.field2?.value}
-                        placeholder={answers.field2.title}
+                        value={answerData.field1.value}
+                        placeholder={answers.field1.title}
                         style={{...inputStyles}}
                         onChange={e => setAnswerData({
                             ...answerData,
-                            field2: {...answerData.field2, value: e.currentTarget.value}
+                            field1: {...answerData.field1, value: e.currentTarget.value}
                         })}
                     />
-                )}
+                    {answers?.field2 && (
+                        <input
+                            value={answerData.field2?.value}
+                            placeholder={answers.field2.title}
+                            style={{...inputStyles}}
+                            onChange={e => setAnswerData({
+                                ...answerData,
+                                field2: {...answerData.field2, value: e.currentTarget.value}
+                            })}
+                        />
+                    )}
 
-                {answers?.field3 && (
-                    <input
-                        value={answerData.field3?.value}
-                        placeholder={answers.field3.title}
-                        style={{...inputStyles}}
-                        onChange={e => setAnswerData({
-                            ...answerData,
-                            field3: {...answerData.field3, value: e.currentTarget.value}
-                        })}
-                    />
-                )}
+                    {answers?.field3 && (
+                        <input
+                            value={answerData.field3?.value}
+                            placeholder={answers.field3.title}
+                            style={{...inputStyles}}
+                            onChange={e => setAnswerData({
+                                ...answerData,
+                                field3: {...answerData.field3, value: e.currentTarget.value}
+                            })}
+                        />
+                    )}
 
-            </div>
-            <button onClick={successCloseModal} style={{...buttonStyles}}>{button}</button>
-        </Modal>
+                </div>
+                <button onClick={successCloseModal}
+                        style={{padding: '8px 25px', ...buttonStyles}}>{button}</button>
+            </Modal>
+        </div>
     );
 }
 

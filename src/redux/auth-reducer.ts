@@ -1,5 +1,5 @@
 import store from './store';
-import {authAPI} from '../api/AuthAPI';
+import {authAPI} from '../api/API';
 import {setAppStatusAC} from './app-reducer';
 
 const SET_IS_LOGGED_IN = 'SET-IS-LOGGED-IN'
@@ -20,12 +20,12 @@ export type AuthProfileType = {
     email: string;
     name: string;
     avatar?: string;
-    publicCardPacksCount: number; // количество колод
+    publicCardPacksCount: number;
 
     created: Date;
     updated: Date;
     isAdmin: boolean;
-    verified: boolean; // подтвердил ли почту
+    verified: boolean;
     rememberMe: boolean;
 
     error?: string;

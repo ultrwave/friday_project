@@ -1,6 +1,6 @@
 import React from 'react';
 import style from '../styles/CardsPage.module.css'
-import {CardType} from '../../api/AuthAPI';
+import {CardType} from '../../api/API';
 import CardItem from './CardItem';
 import SearchContainer from '../../common/Search/SearchContainer';
 import PaginationContainer from '../../common/Pagination/PaginationContainer';
@@ -28,7 +28,6 @@ export type AddCardFormStateType = {
 }
 
 function CardsPage(props: PacksPagePropsType) {
-    console.log('CardsPage called')
 
     const dispatch = useDispatch()
     const filter = useSelector((state: RootStateType): string => state.filterState.nameFilter)

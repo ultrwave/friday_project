@@ -74,25 +74,25 @@ export type GetPacksResponseType = {
     user_id: string
     user_name: string
     name: string
-    path: string // папка
+    path: string
     cardsCount: number
-    grade: number // средняя оценка карточек
-    shots: number // количество попыток
-    rating: number // лайки
-    type: 'pack' // ещё будет "folder" (папка)
+    grade: number
+    shots: number
+    rating: number
+    type: 'pack'
     created: string
     updated: string
 }
 
-export type CreatePackType = { // todo - оранж поля?
-    name?: string // если не отправить будет таким
-    path?: string // если не отправить будет такой
-    grade?: number // не обязателен
-    shots?: number // не обязателен
-    rating?: number // не обязателен
-    deckCover?: string // не обязателен
-    private?: boolean // если не отправить будет такой
-    type?: string // если не отправить будет таким
+export type CreatePackType = {
+    name?: string
+    path?: string
+    grade?: number
+    shots?: number
+    rating?: number
+    deckCover?: string
+    private?: boolean
+    type?: string
 }
 
 export type CardType = {
@@ -111,17 +111,17 @@ export type CardType = {
 }
 
 export type CreateCardType = {
-    answer?: string // если не отправить будет таким
-    question?: string // если не отправить будет таким
+    answer?: string
+    question?: string
     cardsPack_id?: string
-    grade?: number // 0..5, не обязателен
-    rating?: number // не обязателен
-    shots?: number // не обязателен
-    type?: string // если не отправить будет таким
-    answerImg?: string // не обязателен
-    questionImg?: string // не обязателен
-    questionVideo?: string // не обязателен
-    answerVideo?: string // не обязателен
+    grade?: number
+    rating?: number
+    shots?: number
+    type?: string
+    answerImg?: string
+    questionImg?: string
+    questionVideo?: string
+    answerVideo?: string
 }
 
 export type CardsResponseType = {
