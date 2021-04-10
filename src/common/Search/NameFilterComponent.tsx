@@ -5,13 +5,15 @@ type searchFieldType = {
     value: string
     onChangeHandler(value: string): void
     onClearHandler(): void
+    setFiltersHandler(): void
     placeholder?: string
 }
 
 
-function NameFilterComponent({value, onChangeHandler, onClearHandler, placeholder= 'Filter by name'}: searchFieldType) {
+function NameFilterComponent({value, onChangeHandler, setFiltersHandler, onClearHandler, placeholder= 'Filter by name'}: searchFieldType) {
     const handleKeyPress = (e: any) => {
         if (e.key === 'Enter') {
+            setFiltersHandler()
         }
     }
 

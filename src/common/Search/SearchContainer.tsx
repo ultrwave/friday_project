@@ -35,7 +35,6 @@ function SearchContainer({placeholder, showOnlyMyPacksCheckbox}: SearchContainer
             onlyMyPacks: !searchState.onlyMyPacks
         })
         dispatch(setFiltersAC(searchState))
-        //console.log(searchState)
     }
     const setFiltersHandler = () => {
         dispatch(setFiltersAC(searchState))
@@ -73,6 +72,7 @@ function SearchContainer({placeholder, showOnlyMyPacksCheckbox}: SearchContainer
                     value={searchState.nameFilter}
                     onChangeHandler={onChangeHandler}
                     onClearHandler={onClearHandler}
+                    setFiltersHandler={setFiltersHandler}
                     placeholder={placeholder}
                 />
                 <button onClick={setFiltersHandler}
