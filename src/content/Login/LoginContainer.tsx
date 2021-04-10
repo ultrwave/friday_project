@@ -67,7 +67,7 @@ function LoginContainer() {
 
     return (
         isLoggedIn
-            ? <Redirect to={'profile'}/>
+            ? <Redirect to={'packs'}/>
             : <div>
                 <Login
                     formState={formState}

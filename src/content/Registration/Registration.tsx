@@ -3,7 +3,6 @@ import SuperButton from '../../common/SuperButton/SuperButton';
 import SuperInputText from '../../common/SuperInputText/SuperInputText';
 import style from '../styles/Registration.module.css'
 import {Redirect} from 'react-router-dom';
-import {authAPI} from '../../api/AuthAPI';
 
 type RegistrationPropsType = {
     error?: string
@@ -36,30 +35,16 @@ function Registration() {
         if (emailError) {
             alert("Введите текст");
         } else {
-            // API.registerUser(state.email, state.password1)
-            //     .then((res: any) => {
-            //         console.log(`User ${res.data.addedUser.email} successfully signed up`)
-            //         //setState({...state, errorResponse: error.response.data.error})
-            //         //return <Redirect to={'/friday_project#/login/'}/>
-            //         setSuccessfulRegistration(true)
-            //
-            //     })
-            //     .catch((error) => {
-            //         setState({...state, errorResponse: error.response.data.error})
-            //     })
         }
     };
 
     const handleEmail = (val: string) => {
-        //alert(val)
         setState({...state, email: val, errorResponse: ""})
     }
     const handlePw1 = (val: string) => {
-        //alert(val)
         setState({...state, password1: val, errorResponse: ""})
     }
     const handlePw2 = (val: string) => {
-        // alert(val)
         setState({...state, password2: val, errorResponse: ""})
     }
 

@@ -32,13 +32,15 @@ function Profile() {
                             </div>
                             : <img src={defaultAvatar} alt="" width="100" height="100"/>
                         }
-                        <div className={style.name}>Name: {profileData.name}</div>
-                        <div className={style.email}>email: {profileData.email}</div>
-                        <div className={style.packsCount}>Public card packs
-                            count: {profileData.publicCardPacksCount}</div>
+                        <div className={appStyle.infoWrapper}>
+                            <div className={style.info}>
+                                <div className={style.name}>Name: {profileData.name}</div>
+                                <div className={style.email}>Email: {profileData.email}</div>
+                                <div className={style.packsCount}>Public card packs
+                                    count: {profileData.publicCardPacksCount}</div>
+                            </div>
+                        </div>
 
-                        {/*<div className={style.name}>{profile.data.name}</div>*/}
-                        {/*<div className={style.name}>{userName}</div>*/}
                         <button className={appStyle.defaultButton} onClick={logoutHandler}>Log out</button>
                     </div>
                     : <Redirect to={'/login'}/>

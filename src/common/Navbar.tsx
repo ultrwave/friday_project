@@ -21,15 +21,14 @@ export function Navbar() {
             <div className={style.menu}>
                 {!isLoggedIn && <NavbarItem to='/registration2' title='Registration'/>}
                 {isLoggedIn && <>
-                <NavbarItem to='/profile' title='Profile'/>
-                <NavbarItem to='/set-new-password' title='Password'/>
-                <NavbarItem to='/recover' title='Recover Pass'/>
-                <NavbarItem to='/packs' title='Packs'/>
-                <NavbarItem to='/cards' title='Cards'/>
+                    <NavbarItem to='/packs' title='Packs'/>
+                    <NavbarItem to='/profile' title='Profile'/>
+                    <NavbarItem to='/set-new-password' title='Password'/>
+                    <NavbarItem to='/recover' title='Recover'/>
                 </>}
                 {isLoggedIn
                     ? <button className={style.logoutButton} onClick={logout}>Logout</button>
-                    : <span className={style.logoutButton}><NavbarItem to='/login' title='Login'/></span>
+                    : <div className={style.loginButton}><NavbarItem to='/login' title='Login'/></div>
                 }
             </div>
         </nav>

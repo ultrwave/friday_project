@@ -32,34 +32,36 @@ function Login({formState, onChangeHandler, onBlurHandler, checkBoxHandler, onSu
 
     return (
         <div className={style.pageContainer}>
-            <form className={style.form} onSubmit={submitForm}>
-                <h1>Sign in</h1>
-                <SuperInputText
-                    value={email.value}
-                    error={email.error}
-                    onChangeText={onChangeHandler('email')}
-                    onBlur={onBlurHandler('email')}
-                    placeholder={'Email'}
-                    type={'text'}
-                />
-                <SuperInputText
-                    value={password.value}
-                    error={password.error}
-                    onChangeText={onChangeHandler('password')}
-                    onBlur={onBlurHandler('password')}
-                    placeholder={'Password'}
-                    type={'password'}
-                />
-                <NavLink to={'/recover'}><span>Forgot password?</span></NavLink>
-                <div className={style.rememberMe}>
-                    <SuperCheckbox onChangeChecked={checkBoxHandler} checked={rememberMe}/>
-                    <span>Remember me</span>
-                </div>
-                <SuperButton className={appStyle.defaultButton}
-                             disabled={disableSubmit}
-                             type={'submit'}
-                >Sign in</SuperButton>
-            </form>
+            <h1 className={appStyle.defaultTitle}>Sign in</h1>
+            <div className={appStyle.infoWrapper}>
+                <form className={style.form} onSubmit={submitForm}>
+                    <SuperInputText
+                        value={email.value}
+                        error={email.error}
+                        onChangeText={onChangeHandler('email')}
+                        onBlur={onBlurHandler('email')}
+                        placeholder={'Email'}
+                        type={'text'}
+                    />
+                    <SuperInputText
+                        value={password.value}
+                        error={password.error}
+                        onChangeText={onChangeHandler('password')}
+                        onBlur={onBlurHandler('password')}
+                        placeholder={'Password'}
+                        type={'password'}
+                    />
+                    <NavLink to={'/recover'}><span>Forgot password?</span></NavLink>
+                    <div className={style.rememberMe}>
+                        <SuperCheckbox onChangeChecked={checkBoxHandler} checked={rememberMe}/>
+                        <span>Remember me</span>
+                    </div>
+                    <SuperButton className={appStyle.defaultButton}
+                                 disabled={disableSubmit}
+                                 type={'submit'}
+                    >Sign in</SuperButton>
+                </form>
+            </div>
             {DEV_MODE ?
                 <div className={style.messageDefault}>
                     <div>To sign in you can use test account credentials:</div>

@@ -49,3 +49,12 @@
     opacity: 1;
     right: 0;
 }
+
+.infoWrapper {
+    margin: 10px 0 30px;
+    padding: 20px 40px;
+    background-color: white;
+    box-shadow: 0 4px 30px rgba(50,30,30,0.6);
+    border: 1px solid #e2cbaf;
+    border-radius: 4px;
+}

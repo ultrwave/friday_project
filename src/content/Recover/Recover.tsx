@@ -37,25 +37,29 @@ const Recover = ({formState, onChangeHandler, onBlurHandler, onSubmitHandler}: R
     }
 
     return (
-        <form className={style.form} onSubmit={submitForm}>
+        <div className={style.wrapper}>
             <h1 className={appStyle.defaultTitle}>Recover password</h1>
-            <SuperInputText
-                value={formState.value}
-                error={formState.error}
-                onChangeText={onChangeHandler}
-                onBlur={onBlurHandler}
-                placeholder={'Email'}
-            />
-            <div className={style.timerContainer}>
-                {timerIsOn
-                    ? <RecoverTimer getTime={getTime} hideTimer={hideTimer}/>
-                    : <SuperButton className={appStyle.defaultButton}
-                                   disabled={!!formState.error}
-                                   type={'submit'}>Send</SuperButton>
-                }
+            <div className={appStyle.infoWrapper}>
+                <form className={style.form} onSubmit={submitForm}>
+                    <SuperInputText
+                        value={formState.value}
+                        error={formState.error}
+                        onChangeText={onChangeHandler}
+                        onBlur={onBlurHandler}
+                        placeholder={'Email'}
+                    />
+                    <div className={style.timerContainer}>
+                        {timerIsOn
+                            ? <RecoverTimer getTime={getTime} hideTimer={hideTimer}/>
+                            : <SuperButton className={appStyle.defaultButton}
+                                           disabled={!!formState.error}
+                                           type={'submit'}>Send</SuperButton>
+                        }
+                    </div>
+                    <NavLink to={'/login'}><span>Login page</span></NavLink>
+                </form>
             </div>
-            <NavLink to={'/login'}><span>Login page</span></NavLink>
-        </form>
+        </div>
     )
 }
 

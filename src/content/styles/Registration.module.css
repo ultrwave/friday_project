@@ -1,6 +1,8 @@
 .pageContainer {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .form {
@@ -11,13 +13,15 @@
     align-items: center;
 }
 
-.form * {
-    margin: 5px;
+.form button {
+    margin-top: 30px;
 }
 
-/*.green {*/
-/*    border-bottom: 5px solid forestgreen;*/
-/*}*/
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .registrationErrorMessage {
     height: 1em;
@@ -25,7 +29,6 @@
     font-size: 0.8em;
     text-align: left;
     margin: 10px 5px 0 5px;
-    /*width: 100%*/
 }
 
 .demoContainer {
