@@ -59,8 +59,8 @@ function LearnPage({title, card, isMine, amount, index, smartMode, toggleMode, g
                 <div className={style.cardContainer}>
                 <h2 className={style.modeTitle}
                              onClick={toggleMode}>
-                    <span style={{marginRight: '5px'}}>Smart random is</span>
-                    <span style={smartModeStyle}>{smartMode ? 'ON' : ' OFF'}</span>
+                    <span style={{marginRight: '5px'}}>Smart random</span>
+                    <span style={smartModeStyle}>{smartMode ? 'ON' : 'OFF'}</span>
                 </h2>
                 <h2 className={titleStyle}>{cardsCountDisplay}</h2>
                     <div className={style.card}>
