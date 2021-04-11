@@ -12,7 +12,10 @@ function AnswerButton({buttonId, answerId, color, answerHandler}: AnswerButtonPr
 
     const picked = buttonId === answerId
     const styling = `${style.answerButton} ${picked ? style.highlightAnswer : ''}`
-    const highlight = {border: picked? `2px solid ${color}` : 'default'}
+    const highlight = {
+        border: picked? `2px solid ${color}` : 'default',
+        color: picked? `#555` : 'default',
+    }
 
     return (
         <button disabled={!!answerId}

@@ -47,6 +47,7 @@
     min-width: 90%;
     min-height: 140px;
     border: 2px solid burlywood;
+    border-radius: 3px;
     box-shadow: 0 5px 10px rgba(50,30,30,0.7);
     background-color: #ffffff;
     display: flex;
