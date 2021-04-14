@@ -11,6 +11,7 @@ body {
 }
 
 .content {
+    overflow: auto;
     width: 100%;
     min-width: 850px;
     margin: 5px auto 0;
