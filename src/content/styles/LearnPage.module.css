@@ -106,10 +106,6 @@
     color: #868686;
 }
 
-.answerButton:hover {
-
-}
-
 .answerButton:disabled {
     cursor: default;
     border: 2px solid white;

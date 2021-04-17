@@ -54,14 +54,17 @@ export const packsReducer = (state: PageStateType = initialState, action: Action
             return {...state, totalPacksCount: action.totalPacksCount}
 
         case 'SET-SORT-PACKS':
-            return {...state,
-                params: {...state.params,
-                sortPacks: action.sort === 'created'
-                    ? state.params.sortPacks === '1created'
-                    ? '0created' : '1created'
-                    : state.params.sortPacks === '1updated'
-                    ? '0updated' : '1updated'
-                }}
+            return {
+                ...state,
+                params: {
+                    ...state.params,
+                    sortPacks: action.sort === 'created'
+                        ? state.params.sortPacks === '1created'
+                            ? '0created' : '1created'
+                        : state.params.sortPacks === '1updated'
+                            ? '0updated' : '1updated'
+                }
+            }
 
         default:
             return state
@@ -115,7 +118,7 @@ export const getPacksTC = (): AppThunk =>
             .finally(() => dispatch(setAppStatusAC('idle')))
     }
 
-        export const createPackTC = (name: string): AppThunk => (dispatch) => {
+export const createPackTC = (name: string): AppThunk => (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     packsAPI.createPack(name)
         .then(() => dispatch(getPacksTC()))
@@ -136,7 +139,7 @@ export const deletePackTC = (id: string): AppThunk => (dispatch) => {
         })
         .finally(() => dispatch(setAppStatusAC('idle')))
 }
-// fix newName
+
 export const updatePackTC = (id: string, newName: string = 'UPDATED Pack'): AppThunk => (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     packsAPI.updatePack(id, newName)

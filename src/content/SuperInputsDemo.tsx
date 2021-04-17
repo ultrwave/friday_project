@@ -8,10 +8,6 @@ import PaginationContainer from "../common/Pagination/PaginationContainer";
 import ModalContainer from "../common/modals/ModalContainer";
 import ModalQuestionContainer from '../common/modals/question/ModalQuestionContainer';
 
-type RegistrationPropsType = {
-    error?: string
-}
-
 function SuperInputsDemo() {
     const [text, setText] = useState<string>("");
     const error = text ? "" : "Field can't be empty";
@@ -58,9 +54,6 @@ function SuperInputsDemo() {
                 <div>Pagination:
                     <div style={{'border': 'solid 1px black'}}><PaginationContainer totalItems={50}/></div>
                 </div>
-                {/*<div>Sort:*/}
-                {/*    <div style={{'border': 'solid 1px black'}}><SortContainer/></div>*/}
-                {/*</div>*/}
                 <ModalContainer modalText={'Simple Modal'} buttonText={'Close it!'}/>
                 <ModalQuestionContainer isMine={true}/>
             </div>

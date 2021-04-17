@@ -150,7 +150,7 @@ export const deleteCardTC = (packId: string, cardId: string, pagination = true):
         })
         .finally(() => dispatch(setAppStatusAC('idle')))
 }
-// fix newName
+
 export const updateCardTC = (packId: string, cardId: string, question: string = 'updated', answer: string): AppThunk =>
     (dispatch) => {
         dispatch(setAppStatusAC('loading'))
