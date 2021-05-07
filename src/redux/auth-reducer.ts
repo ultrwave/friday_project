@@ -97,7 +97,7 @@ export const logOutTC = () => (dispatch: DispatchType) => {
         .then(response => {
             dispatch(setIsLoggedInAC(false))
         })
-        .catch(e => console.log('Error: ', {...e}))
+        .catch(e => console.log(e))
         .finally(() => dispatch(setAppStatusAC('idle')))
 }
 
@@ -107,6 +107,6 @@ export const setNewPasswordTC = (password: string, resetPasswordToken: string) =
         .then(response => {
             dispatch(setIsLoggedInAC(false))
         })
-        .catch(e => console.log('Error: ', {...e}))
+        .catch(e => console.log(e))
         .finally(() => dispatch(setAppStatusAC('idle')))
 }

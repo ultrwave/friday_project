@@ -35,7 +35,7 @@ export const toggleTimerAC = (timerIsOn: boolean) => ({
 // Thunks
 
 export const recoverPasswordTC = (email: string, baseUrl: string) => (dispatch: DispatchType) => {
-    const from = 'Administrator'
+    const from = 'Smart Cards App'
     const message =
         `<div style="background-color: lime; padding: 15px"> password recovery link:
          <a href='${baseUrl}/$token$'>link</a></div>`

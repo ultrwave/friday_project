@@ -41,7 +41,7 @@ export const registrationTC = (email: string, password: string) => (dispatch: Di
         .then((response) => {
              dispatch(setSuccessfullyRegisteredAC(true))
         })
-        .catch(e => console.log('Error: ', {...e}))
+        .catch(e => console.log(e))
         .finally(() => dispatch(setAppStatusAC('idle')))
 }
 
