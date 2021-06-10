@@ -17,6 +17,7 @@
     justify-content: center;
     background-image: url('common/images/background_pattern.png');
     background-repeat: repeat;
+    min-height: 100vh;
 }
 
 

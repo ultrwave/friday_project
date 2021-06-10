@@ -1,7 +1,7 @@
 {
   "name": "friday_project",
   "version": "0.1.0",
-  "homepage": "http://ultrwave.github.io/friday_project",
+  "homepage": "https://ultrwave.github.io/friday_project",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
