@@ -10,11 +10,6 @@ function RecoverTimer({getTime, hideTimer}: RecoverTimerPropsType) {
 
     const [timeMs, setTimeMs] = useState(getTime())
 
-    const tick = () => {
-        setTimeMs(getTime())
-        if (getTime() < 0) hideTimer(false)
-    }
-
     const convertMsToTime = (ms: number) => {
         const minutes = Math.floor(ms / 60000);
         const seconds = ((ms % 60000) / 1000);
@@ -22,9 +17,13 @@ function RecoverTimer({getTime, hideTimer}: RecoverTimerPropsType) {
     }
 
     useEffect(() => {
+        const tick = () => {
+            setTimeMs(getTime())
+            if (getTime() < 0) hideTimer(false)
+        }
         const timerID = setInterval(() => tick(), 1000);
         return () => clearInterval(timerID);
-    }, [])
+    }, )
 
     return (
         <span className={style.timer}>
